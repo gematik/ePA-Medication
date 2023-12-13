@@ -55,6 +55,12 @@ tags:
       
       ##### Profile:
       [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication)
+      
+      ##### Examples:
+      - [https://simplifier.net/epa-medication/example-epa-medication-1/~json](https://simplifier.net/epa-medication/example-epa-medication-1/~json)
+      - [https://simplifier.net/epa-medication/example-epa-medication-2/~json](https://simplifier.net/epa-medication/example-epa-medication-2/~json)
+      - [https://simplifier.net/epa-medication/example-epa-medication-ingredient/~json](https://simplifier.net/epa-medication/example-epa-medication-ingredient/~json)
+
 
       ***
       #### [MedicationRequest](https://hl7.org/fhir/R4/medicationrequest.html)

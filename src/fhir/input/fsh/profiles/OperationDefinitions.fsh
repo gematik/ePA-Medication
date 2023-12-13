@@ -66,7 +66,7 @@ Description: "The $provide-dispensation operation in the ePA Medication Service 
   * name = #RxDispensation
   * use = #in
   * min = 1
-  * max = "1"
+  * max = "*"
   * part[+]
     * name = #RxPrescriptionProcessIdentifier
     * type = #Identifier
