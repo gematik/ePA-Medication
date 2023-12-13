@@ -1,0 +1,81 @@
+@startuml operation.provide-prescription
+skinparam defaultTextAlignment center
+skinparam title {
+  backgroundColor SkyBlue
+  borderColor Gray
+} 
+title $provide-prescription
+start
+partition transaction {
+
+  repeat:Get next Item from Operation Parameter RxPrescription List;
+  
+  :Validate all <b>MedicationRequest</b>, <b>Medication</b>, <b>Organization</b> and <b>Practitioner</b> for the RxPrescription from Operation parameter;
+  
+  if (Validation successfull) then (yes)
+    
+    if(If <b>MedicationRequest</b> with <b>RxPrescriptionProcessIdentifier</b> exists in ePA) then (yes)
+      
+      #Pink:Return "OperationOutcome (duplicate failure)";
+      end   
+    
+    else (no)
+
+      fork
+        
+        :<< Create or Update >> 
+        <b>Organization</b>
+        ====
+        identifier[TelematikID] = TelematikID
+        ...;
+        
+        :<< Create or Update >> 
+        <b>Practitioner</b>
+        ====
+        identifier[TelematikID] = TelematikID
+        ...;
+        
+        :<< Create or Update >> 
+        <b>PractitionerRole</b>
+        ====
+        practitioner = Reference(<b>Practitioner</b>)
+        organization = Reference(<b>Organization</b>);
+
+      fork again
+        
+        :Generate Hash for <b>EPAMedicationUniqueIdentifier</b>;
+        
+        :<< Create >> 
+        <b>Medication</b>
+        ====
+        identifier[<b>EPAMedicationUniqueIdentifier</b>] = Value(Generated Hash)
+        extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
+        status = <b>inactive</b>
+        ...;
+        
+      end fork
+        
+      :<< Create >> 
+      <b>MedicationRequest</b>
+      ====
+      extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
+      status=<b>active</b>
+      subject=<b>IdentifierKvid10</b>
+      medicationReference = Reference(<b>Medication</b>)
+      requester = Reference(<b>PractitionerRole</b>);
+
+    endif
+
+  else (no)
+    
+    #Pink:Return "OperationOutcome (failure)";
+    end
+  
+  endif
+  
+  repeat while (If next Item in Operation Parameter RxPrescription List exists) is (yes) not (no)
+}   
+
+#PaleGreen:Return "OperationOutcome (success)";
+stop  
+@enduml

@@ -1,0 +1,39 @@
+@startuml medication.fhir.substitution
+skinparam fixCircleLabelOverlapping false 
+skinparam roundcorner 10
+skinparam object {
+    BackgroundColor #5c7aab
+    BorderColor Black
+    ArrowColor #5c7aab
+    FontSize 12
+    FontColor White
+    NoteBackgroundColor #3483eb
+    ArrowFontColor #777777
+}
+
+
+object "<< Verordnender LE >>\n**PractitionerDirectory**" as PrescribingPractitioner
+object "<< Verordnende LEI >>\n**OrganizationDirectory**" as PrescribingOrganization
+object "<< Abgebende LEI >>\n**OrganizationDirectory**" as PharmOrganization
+object "PractitionerRoleDirectory" as PractionerRole
+object "<< Medikation >>\n**EPAMedication**" as Medication
+object "<< Medikationsverordnung >>\n**EPAMedicationRequest**" as MedicationRequest {
+    + subject: Reference(Patient)
+}
+object "<< Substituierte Medikation >>\n**EPAMedication**" as AltMedication
+object "<< Dispensierinformation >>\n**EPAMedicationDispense**" as MedicationDispense {
+    + wasSubstituted: true
+}
+
+
+MedicationRequest -l-> Medication : medicationReference
+MedicationRequest -r-> PractionerRole : requester
+
+PractionerRole -d-> PrescribingPractitioner : practitioner
+PractionerRole -d-> PrescribingOrganization : organization
+
+MedicationDispense -l-> AltMedication : medicationReference
+MedicationDispense -d-> MedicationRequest : authorizingPrescription
+MedicationDispense -u-> PharmOrganization : perfomer.actor
+
+@enduml

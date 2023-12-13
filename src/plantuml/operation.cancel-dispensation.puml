@@ -1,0 +1,41 @@
+@startuml operation.cancel-dispensation
+skinparam defaultTextAlignment center
+skinparam title {
+  backgroundColor SkyBlue
+  borderColor Gray
+} 
+title $cancel-dispensation
+
+start
+partition transaction {
+
+  repeat:Get next <b>RxPrescriptionProcessIdentifier</b>;
+
+    if(If <b>MedicationDispense</b> with <b>RxPrescriptionProcessIdentifier</b> exists in Medication Service) then (yes)
+
+      :Set all <b>MedicationDispense</b> with the 
+      extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
+      to Status <b>cancelled</b>;
+
+      :Set all <b>Medication</b> with the 
+      extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
+      to Status <b>inactive</b>;
+
+      :Set <b>MedicationRequest</b> with the 
+      extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
+      to Status <b>active</b>;
+
+    else (no)
+
+      #Pink:Return "OperationOutcome (failure)";
+      end
+
+    endif
+
+  repeat while (If next <b>RxPrescriptionProcessIdentifier</b> exists) is (yes) not (no)
+
+}
+
+#palegreen:Return "OperationOutcome (success)";
+stop
+@enduml

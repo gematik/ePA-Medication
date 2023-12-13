@@ -1,0 +1,26 @@
+{
+  "resourceType": "OperationDefinition",
+  "id": "cancel-dispensation-OP",
+  "url": "https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-OP",
+  "title": "$cancel-dispensation Operation",
+  "description": "The $cancel-dispensation operation, used by the E-Rezept-Fachdienst, in the context of the ePA Medication Service, is applied to cancel or reverse information regarding the dispensation of a medication. This operation is necessary when a medication dispensation is cancelled by a pharmacist or when there is a return of the medication by the insurant. After the E-Rezept-Fachdienst performs this operation, the corresponding dispensation entry for the medication in the patient's ePA is marked as cancelled, which the goal in ensuring an accurate and up-to-date record of the patient's medication data.",
+  "version": "1.0.0",
+  "status": "active",
+  "publisher": "gematik GmbH",
+  "date": "2023-12-06",
+  "name": "Cancel Dispensation",
+  "kind": "operation",
+  "code": "cancel-dispensation",
+  "system": true,
+  "type": false,
+  "instance": false,
+  "parameter": [
+    {
+      "name": "RxPrescriptionProcessIdentifier",
+      "type": "Identifier",
+      "use": "in",
+      "min": 1,
+      "max": "*"
+    }
+  ]
+}

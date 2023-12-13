@@ -1,0 +1,11 @@
+{
+  "name": "de.gematik.fhir.epa.medication",
+  "version": "3.0.0",
+  "author": "gematik",
+  "fhirVersions": [
+    "4.0.1"
+  ],
+  "dependencies": {
+    "de.basisprofil.r4": " 1.3.2"
+  }
+}
