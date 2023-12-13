@@ -19,6 +19,9 @@
             "code": "active"
           },
           {
+            "code": "completed"
+          },
+          {
             "code": "cancelled"
           }
         ]

@@ -27,6 +27,7 @@ Title: "EPA Medication Request VS"
 Description: "Include all VS of KBV MedicationDarreichungsform Type"
 * insert Meta
 * medicationdispense-status#active
+* medicationdispense-status#completed
 * medicationdispense-status#cancelled
 
 ValueSet: OperationErrorCodesVS
