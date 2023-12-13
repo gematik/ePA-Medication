@@ -25,7 +25,7 @@ For resources related to ePA Document Management and Basic Services see further 
 [**ePA-Basic**](https://github.com/gematik/epa-basic/tree/ePA-3.0)
 
 Fhir profiles of the Medication Service are available on</br>
-[**Simplifier**](https://simplifier.net/)
+[**Simplifier**](https://simplifier.net/epa-medication)
 
 
 The current branch accompanies a particular release of specification documents of ePA version 3 (a set of normative specification documents for components, producttypes and vendortypes) published on [Fachportal Gematik](https://fachportal.gematik.de/) (see [Branchinformation.md](./Branchinformation.md)  for specific version information and links).

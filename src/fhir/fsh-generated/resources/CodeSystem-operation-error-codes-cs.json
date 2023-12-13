@@ -1,0 +1,33 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "OperationErrorCodesCS",
+  "id": "operation-error-codes-cs",
+  "title": "Operation Error Codes CS",
+  "description": "OperationErrorCodesCS",
+  "url": "https://gematik.de/fhir/epa-medication/CodeSystem/operation-error-codes-cs",
+  "concept": [
+    {
+      "code": "locked",
+      "display": "If the insurant objects to the medication process in the ePA system, the Medication Service gets locked."
+    },
+    {
+      "code": "invalidOid",
+      "display": "Requestor role is not in the list of allowed usergroups"
+    },
+    {
+      "code": "statusMismatch",
+      "display": "Health record is not in state ACTIVATED"
+    },
+    {
+      "code": "internalError",
+      "display": "Any other error"
+    }
+  ],
+  "version": "1.0.0",
+  "experimental": false,
+  "publisher": "gematik GmbH",
+  "date": "2023-12-06",
+  "count": 4
+}

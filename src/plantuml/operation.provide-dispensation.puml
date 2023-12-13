@@ -1,0 +1,92 @@
+@startuml operation.provide-dispensation
+skinparam defaultTextAlignment center
+skinparam title {
+  backgroundColor SkyBlue
+  borderColor Gray
+} 
+title $provide-dispensation
+
+start
+partition transaction {
+  repeat:Get next Item from Operation Parameter RxDispensation List;
+  
+    :Validate all <b>Medication</b>, <b>Organization</b> and <b>Practitioner</b> for the RxDispensation from Operation parameter;
+    
+    if (Validation successfull) then (yes)
+      
+      if(If <b>MedicationRequest</b> with <b>RxPrescriptionProcessIdentifier</b> exists in Medication Service) then (no)
+        
+        #Pink:Return "OperationOutcome (duplicate failure)";
+        end   
+      
+      else (yes)
+        
+        :Set all <b>MedicationDispense</b> with the 
+        extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b> from Item of the RxDispensation 
+        in the Medication Service to Status <b>declined</b>;
+
+        :Set all <b>Medication</b> with the 
+        extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
+        to Status <b>inactive</b>;
+
+        :<< Create or Update >> 
+        <b>Organization</b>
+        ====
+        identifier[TelematikID] = Value(TelematikID)
+        ...;
+
+        partition loop {
+          
+          repeat: Get next <b>MedicationDispense</b> from the RxDispensation
+
+          :Get the related <b>Medication</b> for the <b>MedicationDispense</b> from the RxDispensation;
+
+          :Generate Hash for <b>EPAMedicationUniqueIdentifier</b>;
+          
+          If(Verify whether there is a <b>Medication</b> with the <b>RxPrescriptionProcessIdentifier</b>\nand\n the generated hash for the <b>EPAMedicationUniqueIdentifier</b> in the Medication Service) then (yes)
+            
+            :Update <b>Medication</b> with <b>RxPrescriptionProcessIdentifier</b>
+            and <b>EPAMedicationUniqueIdentifier</b> to Status <b>active</b>;
+
+          else (no)
+
+            :<< Create >> 
+            <b>Medication</b>
+            ====
+            identifier[<b>EPAMedicationUniqueIdentifier</b>] = Value(Generated Hash)
+            extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
+            status = <b>active</b>
+            ...;
+
+          endif
+
+          :<< Create >>
+          <b>MedicationDispense</b>
+          =====
+          extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
+          medicationReference = Reference(<b>Medication</b>)
+          performer.actor = Reference(<b>Organization</b>)
+          authorizingPrescription = Reference(<b>MedicationRequest</b>)
+          status = <b>completed</b>;
+
+          repeat while (If next <b>MedicationDispense</b> in Operation Parameter List exists) is (yes) not (no)
+        }
+        
+        :Set <b>MedicationRequest</b> with <b>RxPrescriptionProcessIdentifier</b> 
+        to Status <b>completed</b>;
+     
+      endif
+
+    else (no)
+      
+      #Pink:Return "OperationOutcome (failure)";
+      end
+    
+    endif
+  
+  repeat while (If next Item in Operation Parameter RxDispensation List exists) is (yes) not (no)
+}
+
+#PaleGreen:Return "OperationOutcome (success)";
+stop    
+@enduml

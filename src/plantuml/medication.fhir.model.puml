@@ -1,0 +1,38 @@
+@startuml medication.fhir.model
+skinparam fixCircleLabelOverlapping false 
+skinparam roundcorner 10
+skinparam object {
+    BackgroundColor #5c7aab
+    BorderColor Black
+    ArrowColor #5c7aab
+    FontSize 12
+    FontColor White
+    NoteBackgroundColor #3483eb
+    ArrowFontColor #777777
+}
+
+
+object "<< Versicherter >>\n**Patient**" as Patient 
+object "<< Verordnender LE >>\n**PractitionerDirectory**" as PrescribingPractitioner
+object "<< Verordnende LEI >>\n**OrganizationDirectory**" as PrescribingOrganization
+object "<< Abgebende LEI >>\n**OrganizationDirectory**" as DispenserOrganization
+object "PractitionerRoleDirectory" as PractionerRole
+object "<< Medikation >>\n**EPAMedication**" as Medication
+object "<< Medikationsverordnung >>\n**EPAMedicationRequest**" as MedicationRequest {
+    + subject: Reference(Patient)
+}
+object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense
+
+
+MedicationRequest -u->  Patient : subject
+MedicationRequest -r-> Medication : medicationReference
+MedicationRequest -d-> PractionerRole : requester
+
+PractionerRole -u-> PrescribingPractitioner : practitioner
+PractionerRole -d-> PrescribingOrganization : organization
+
+MedicationDispense -u-> Medication : medicationReference
+MedicationDispense -l-> MedicationRequest : authorizingPrescription
+MedicationDispense -d-> DispenserOrganization : perfomer.actor
+
+@enduml

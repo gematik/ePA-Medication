@@ -1,0 +1,1 @@
+This folder contains the fish-input files that wil be used to generate files to Resources/fsh-generated/Resources.
