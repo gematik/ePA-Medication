@@ -706,13 +706,6 @@ paths:
           schema:
             type: string
             format: date
-        - name: whenhandedover
-          in: query
-          required: false
-          description: Returns dispenses handed over on this date
-          schema:
-            type: string
-            format: date
         - name: prescription
           in: query
           required: false
