@@ -29,6 +29,11 @@ info:
     not essentially required for the operation (e.g. raw-data collection), and
     may be considered for provider internal use. 
 
+    ### **Log-Entries**
+    
+    Whenever a _Postcondition_ mandates a log-entry, this entry shall contain
+    data as defined in A_24991*.
+
   contact:
     name: gematik GmbH
     email: epa@gematik.de
