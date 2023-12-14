@@ -2,8 +2,8 @@ openapi: 3.0.3
 info: 
   title: "eML Render Interface"
   description: |
-   **Prereqisites**:</br>
-    -
+    ### **Prereqisites**:
+    
     The Health Record System shall provide 
     - name
     - role ((profession-)oid)
@@ -15,19 +15,25 @@ info:
     and a valid ID-Token. If one of these conditions is not met, then the response
     of the (aborted) operation shall always be '403': 'notEntitled'. 
 
-    **Retry interval**:</br>
-    -
+    ### **Retry interval**:
+    
     The following retry intervals are suggested in case of an error response:<br>
     - '409' Conflict (statusMismatch).
       - approx. 24 hours
     - '500' Internal Error
       - approx. 10 minutes
 
-    **User Agent**:</br>
-    -
+    ### **User Agent**:
+    
     The user agent information (x-useragent) is part of any request, even if 
     not essentially required for the operation (e.g. raw-data collection), and
     may be considered for provider internal use. 
+
+    ### **Log-Entries**
+    
+    Whenever a _Postcondition_ mandates a log-entry, this entry shall contain
+    data as defined in A_24991*.
+
   contact:
     name: gematik GmbH
     email: epa@gematik.de
