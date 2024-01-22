@@ -7,7 +7,7 @@
   "title": "EPA MedicationRequest",
   "status": "active",
   "experimental": false,
-  "date": "2023-12-06",
+  "date": "2024-01-22",
   "publisher": "gematik GmbH",
   "description": "Defines the medication request resource for the Medication Service in the ePA system.",
   "fhirVersion": "4.0.1",
@@ -58,21 +58,34 @@
           "rules": "open",
           "description": "ePrescription identifier and overall transaction identifier",
           "ordered": false
-        },
-        "min": 1,
-        "mustSupport": true
+        }
       },
       {
-        "id": "MedicationRequest.identifier:rxPrescriptionProcessIdentifier",
+        "id": "MedicationRequest.identifier:RxPrescriptionProcessIdentifier",
         "path": "MedicationRequest.identifier",
-        "sliceName": "rxPrescriptionProcessIdentifier",
-        "min": 1,
+        "sliceName": "RxPrescriptionProcessIdentifier",
+        "min": 0,
         "max": "1",
         "type": [
           {
             "code": "Identifier",
             "profile": [
               "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "MedicationRequest.identifier:RxOriginatorProcessIdentifier",
+        "path": "MedicationRequest.identifier",
+        "sliceName": "RxOriginatorProcessIdentifier",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Identifier",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-originator-process-identifier"
             ]
           }
         ]
@@ -88,6 +101,8 @@
       {
         "id": "MedicationRequest.intent",
         "path": "MedicationRequest.intent",
+        "short": "filler-order",
+        "definition": "When data is synchronized with the E-Rezept-Fachdienst, the 'filler-order' code should be used here.",
         "mustSupport": true
       },
       {
@@ -143,7 +158,7 @@
           {
             "code": "Reference",
             "targetProfile": [
-              "https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory"
+              "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
             ]
           }
         ],

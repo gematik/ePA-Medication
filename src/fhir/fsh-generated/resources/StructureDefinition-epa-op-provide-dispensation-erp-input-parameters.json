@@ -1,0 +1,273 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "epa-op-provide-dispensation-erp-input-parameters",
+  "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters",
+  "version": "1.0.0",
+  "name": "EPAOpProvideDispensationERPInputParameters",
+  "title": "EPA Operation ProvideDispensationERP Input-Parameter",
+  "status": "active",
+  "experimental": false,
+  "date": "2024-01-22",
+  "publisher": "gematik GmbH",
+  "description": "EPA Operation ProvideDispensationERP Input-Parameter",
+  "fhirVersion": "4.0.1",
+  "mapping": [
+    {
+      "identity": "v2",
+      "uri": "http://hl7.org/v2",
+      "name": "HL7 v2 Mapping"
+    },
+    {
+      "identity": "rim",
+      "uri": "http://hl7.org/v3",
+      "name": "RIM Mapping"
+    }
+  ],
+  "kind": "resource",
+  "abstract": false,
+  "type": "Parameters",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Parameters",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Parameters.parameter",
+        "path": "Parameters.parameter",
+        "min": 1
+      },
+      {
+        "id": "Parameters.parameter.name",
+        "path": "Parameters.parameter.name",
+        "patternString": "RxDispensation",
+        "mustSupport": true
+      },
+      {
+        "id": "Parameters.parameter.value[x]",
+        "path": "Parameters.parameter.value[x]",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.resource",
+        "path": "Parameters.parameter.resource",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part",
+        "path": "Parameters.parameter.part",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 5,
+        "mustSupport": true
+      },
+      {
+        "id": "Parameters.parameter.part:PrescriptionId",
+        "path": "Parameters.parameter.part",
+        "sliceName": "PrescriptionId",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:PrescriptionId.name",
+        "path": "Parameters.parameter.part.name",
+        "patternString": "PrescriptionId",
+        "mustSupport": true
+      },
+      {
+        "id": "Parameters.parameter.part:PrescriptionId.value[x]",
+        "path": "Parameters.parameter.part.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "Identifier",
+            "profile": [
+              "https://gematik.de/fhir/erp/StructureDefinition/GEM_ERP_PR_PrescriptionId"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:PrescriptionId.resource",
+        "path": "Parameters.parameter.part.resource",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:PrescriptionId.part",
+        "path": "Parameters.parameter.part.part",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:authoredOn",
+        "path": "Parameters.parameter.part",
+        "sliceName": "authoredOn",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:authoredOn.name",
+        "path": "Parameters.parameter.part.name",
+        "patternString": "authoredOn",
+        "mustSupport": true
+      },
+      {
+        "id": "Parameters.parameter.part:authoredOn.value[x]",
+        "path": "Parameters.parameter.part.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "date"
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:authoredOn.resource",
+        "path": "Parameters.parameter.part.resource",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:authoredOn.part",
+        "path": "Parameters.parameter.part.part",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:MedicationDispense",
+        "path": "Parameters.parameter.part",
+        "sliceName": "MedicationDispense",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:MedicationDispense.name",
+        "path": "Parameters.parameter.part.name",
+        "patternString": "MedicationDispense",
+        "mustSupport": true
+      },
+      {
+        "id": "Parameters.parameter.part:MedicationDispense.value[x]",
+        "path": "Parameters.parameter.part.value[x]",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:MedicationDispense.resource",
+        "path": "Parameters.parameter.part.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "MedicationDispense",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:MedicationDispense.part",
+        "path": "Parameters.parameter.part.part",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:Medication",
+        "path": "Parameters.parameter.part",
+        "sliceName": "Medication",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:Medication.name",
+        "path": "Parameters.parameter.part.name",
+        "patternString": "Medication",
+        "mustSupport": true
+      },
+      {
+        "id": "Parameters.parameter.part:Medication.value[x]",
+        "path": "Parameters.parameter.part.value[x]",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:Medication.resource",
+        "path": "Parameters.parameter.part.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Medication",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:Medication.part",
+        "path": "Parameters.parameter.part.part",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:Organization",
+        "path": "Parameters.parameter.part",
+        "sliceName": "Organization",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:Organization.name",
+        "path": "Parameters.parameter.part.name",
+        "patternString": "Organization",
+        "mustSupport": true
+      },
+      {
+        "id": "Parameters.parameter.part:Organization.value[x]",
+        "path": "Parameters.parameter.part.value[x]",
+        "max": "0"
+      },
+      {
+        "id": "Parameters.parameter.part:Organization.resource",
+        "path": "Parameters.parameter.part.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Organization",
+            "profile": [
+              "https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Parameters.parameter.part:Organization.part",
+        "path": "Parameters.parameter.part.part",
+        "max": "0"
+      }
+    ]
+  }
+}

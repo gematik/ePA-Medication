@@ -1,0 +1,269 @@
+= Medication Service der "ePA für alle"
+:title-page:
+:title-logo-image: image:Gematik_Logo_Flag.svg[pdfwidth=4.25in,align=center]
+:imagesdir: ../images
+:pdf-themesdir: ./themes
+:pdf-theme: pdf
+:icons:
+:toc: macro
+:toc-title: Inhaltsverzeichnis
+ifdef::env-github[]
+:toc-placement: macro
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+ifndef::env-github[]
+:caution-caption: Achtung
+:important-caption: Wichtig
+:note-caption: Hinweis
+:tip-caption: Tip
+:warning-caption: Warnung
+:pdf-themesdir: ./themes
+:pdf-theme: pdf
+// --- PlantUML directories ---
+:plantumlsimages: plantuml
+:plantumlsdir: ../src/plantuml
+:chapterplantumlsdir: ../../src/plantuml
+endif::[]
+:xrefstyle: full
+:toclevels: 2
+:sectanchors:
+:numbered:
+:sectnums:
+
+// --- PDF theme options ---
+// :revdate: 22.01.2024
+:revnumber: 3.0 RC
+:document-title: Medication Service der "ePA für alle"
+:document-subtitle: gemKPT_ePAfuerAlleMedSvc
+:organization: gematik GmbH
+// :doctype: book
+:chapter-signifier:
+
+
+ifndef::backend-pdf[]
+image::Gematik_Logo_Flag.png[gematik,width=20%,float="right"]
+endif::[]
+
+ifdef::backend-pdf[]
+[.metadata]
+//Version: {revnumber}, 22.01.2024
+endif::[]
+
+
+[width="100%",cols="50%,50%", options="header",]
+|===
+|Version:
+|{revnumber}
+|Referenzierung:
+|{document-subtitle}
+|===
+
+
+[big]*Dokumentenhistorie*
+
+[width="100%",cols="11%,11%,7%,58%,13%",options="header",]
+|===
+|Version
+|Stand
+|Kap./ Seite
+|Grund der Änderung, besondere Hinweise
+|Bearbeitung
+
+|3.0 RC
+|22.01.2024
+|
+|Ersterstellung
+|gematik
+
+|===
+
+toc::[]
+
+
+== Medikationsprozess
+
+
+Der digital gestützte Medikationsprozess (dgMP) wird über eine kuratierbare, Elektronische Medikationsliste (eML) durch den Medication Service umgesetzt. In der initialen Ausbaustufe der "ePA für alle" ist diese Liste durch Leistungserbringer und Versicherte nur lesend verarbeitbar. Später folgt die Unterstützung weiterer Anwendungsfälle:
+
+* Kuratieren von Medikationslisteneinträgen durch Leistungserbringer:
+** Dosierung (Menge des Medikaments pro Einnahme)
+** Indikation (Einnahmegrund)
+** Einnahmezeitraum/-zeitpunkt
+** Applikationsart und -ort
+* Ergänzung von Vermerken zu einer Medikation durch den Versicherten mittels ePA-FdV
+* Eintragung einer Selbstmedikation des Versicherten mittels ePA-FdV
+* Ergänzung von verschreibungsfreien Medikamenten (OTC – over the counter)
+
+Basis für die eML sind Arzneimittelverordnungsdaten und Dispensierinformationen. Sofern der Versicherte dem dgMP nicht widersprochen hat, werden diese Daten bei Erzeugung durch Leistungserbringer über den E-Rezept-Fachdienst in den Medication Service übertragen. Diese Informationen stellen Medikationslisteneinträge der eML mittels des Fast Healthcare Interoperability Resources (FHIR) Standards dar.
+
+Da die im E-Rezept-Fachdienst verarbeiteten FHIR-Profile für die Rezeptverarbeitung optimiert sind und kein Kuratieren (z.B. die Ergänzung von Freitextfeldern für ergänzende Einnahmehinweise) und damit Unterstützung für die o.g. zukünftigen Anwendungsfälle zulassen, verarbeitet der Medication Service eigene FHIR-Profile. Im Zuge der Übertragung von Verordnungsdaten und Dispensierinformationen erzeugt der E-Rezept-Fachdienst daher die im Medication Service zulässigen FHIR-Ressourcen selbst. Medikationsdaten können in einer späteren Ausbaustufe des dgMP über die <<#https://hl7.org/fhir/R4/http.html, FHIR RESTful API>> manipuliert werden.
+
+
+=== Informationselemente zum Medication Service auf Basis von FHIR
+
+Der Medikationsprozess wird über die in der nachstehenden <<#fig:medication-model, Abbildung>> angewendeten FHIR-Ressourcen abgebildet. Dabei bedeuten die benannten Kanten die jeweilige Verknüpfung der FHIR-Ressourcen mit den in FHIR definierten FHIR-Elementen untereinander. Über eine standardardisierte FHIR-Schnittstelle können somit sämtliche Medikationen vollständig (und historisiert) abgefragt werden.
+
+ifndef::env-github[]
+
+[#fig:medication-model]
+[plantuml, "{diagramsdir}/medication.fhir.model", svg]
+[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen für die Abbildung eines Medikationslisteneintrags",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+....
+include::{plantumlsdir}/medication.fhir.model.puml[]
+....
+
+endif::[]
+ifdef::env-github[]
+
+image::plantuml/medication.fhir.model.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen für die Abbildung eines Medikationslisteneintrags",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+
+endif::[]
+
+
+
+Die folgenden Rahmenbedingungen hinsichtlich der FHIR-Spezifikation sind für den Medication Service festgelegt.
+
+* Der Medication Service empfängt vom E-Rezept-Fachdienst einzelne Verordnungen und Dispensierinformationen jeweils per separat definierter *<<#https://hl7.org/fhir/R4B/operationslist.html, FHIR Operations>>*.
+
+* Aufgrund der fehlenden Leseberechtigung des E-Rezept-Fachdienstes wird die Patient FHIR-Ressource ledgiglich per KVNR Identifier übertragen.
+* Das Löschen von Verordnungsdaten oder Dispensierinformationen innerhalb des E-Rezept-Fachdienstes werden im Medication Service über das Ändern eines Status (d.h. Status = "cancelled") umgesetzt.
+* Für die FHIR Operations ist es erforderlich, dass eine Referenzierung der Ressourcen innerhalb der Parameters möglich ist.
+
+Für den Fall, dass die abgebende Apotheke verordnete Arzneimittel substituiert (und/oder eine Verordnung in mehrere Dispensierinformationen aufteilt), werden die in der FHIR-Spezifikation üblichen Verknüpfungen angewendet. In diesem Fall werden separate Ressourcen *Medication* für ein verordnetes Arzneimittel registriert – für  *MedicationRequest* und für *MedicationDispense* (vgl. nachstehende Abbildung)
+
+ifndef::env-github[]
+
+[plantuml, "{diagramsdir}/medication.fhir.substitution", svg]
+[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen bei substituierten Arzneimitteln im Rahmen einer Dispensierung",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+....
+include::{plantumlsdir}/medication.fhir.substitution.puml[]
+....
+
+endif::[]
+ifdef::env-github[]
+
+image::plantuml/medication.fhir.substitution.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen bei substituierten Arzneimitteln im Rahmen einer Dispensierung",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+
+endif::[]
+
+
+=== Anwendungsfälle
+==== Verordnungsdaten einstellen
+Die *$provide-prescription-erp* Operation im Kontext der elektronischen Patientenakte (ePA), die vom E-Rezept-Fachdienst ausgeführt wird, ist eine spezielle Funktion, die dazu dient, bereits erstellte elektronische Verordnung in die Patientenakte zu übertragen. Sie beinhaltet nicht das Erstellen der Verordnungsdaten, sondern konzentriert sich darauf, ein bereits generiertes Verordnung sicher in die ePA des Patienten hochzuladen. Dies stellt sicher, dass die Verordnung sicher gespeichert und innerhalb der Patientenakte zugänglich ist, was eine bessere Medikamentenverwaltung und Koordination zwischen den Gesundheitsdienstleistern und den Patienten erleichtert.
+
+Die nachstehende Abbildung verdeutlicht die Kommunikationsflüsse für das Einstellen einer Verordnung in den Medication Service per FHIR Operation *$provide-prescription-erp*.
+
+ifndef::env-github[]
+[page-layout=landscape]
+
+[plantuml, "{diagramsdir}/medicationmanagement.request", svg]
+[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Anwendungsfall \"Verordnungsdaten in den Medication Service einstellen\"",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+....
+include::{plantumlsdir}/medicationmanagement.request.puml[]
+....
+[page-layout=portrait]
+endif::[]
+ifdef::env-github[]
+
+image::plantuml/medicationmanagement.request.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Anwendungsfall \"Verordnungsdaten in den Medication Service einstellen\"",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+
+endif::[]
+
+
+=== Verordnungsdaten löschen
+
+Die *$cancel-prescription-erp* Operation wird vom E-Rezept-Fachdienst verwendet, um ein bereits ausgestelltes elektronisches Rezept zu stornieren. Diese Funktion kommt zum Einsatz, wenn eine Verordnung aus verschiedenen Gründen, wie Änderungen in der Medikation oder Fehler bei der Ausstellung, nicht mehr benötigt wird. Nach der Stornierung durch den E-Rezept-Fachdienst wird diese Information an die elektronische Patientenakte (ePA) übermittelt, um dort die Verordnungsdaten zu invalidieren. Diese Vorgehensweise gewährleistet die Genauigkeit und Sicherheit in der Verwaltung von Medikationen.
+
+Die nachstehende Abbildung verdeutlicht die Kommunikationsflüsse für das Löschen einer Verordnung in den Medication Service per FHIR Operation. 
+
+*$cancel-prescription-erp*.
+ifndef::env-github[]
+[page-layout=landscape]
+
+[plantuml, "{diagramsdir}/medicationmanagement.cancel.request", svg]
+[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Anwendungsfall \"Verordnungsdaten im Medication Service stornieren\"",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+....
+include::{plantumlsdir}/medicationmanagement.cancel.request.puml[]
+....
+[page-layout=portrait]
+endif::[]
+ifdef::env-github[]
+image::plantuml/medicationmanagement.cancel.request.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Anwendungsfall \"Verordnungsdaten im Medication Service stornieren\"",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+endif::[]
+
+
+=== Dispensierinformationen einstellen
+
+Die *$provide-dispensation-erp* Operation in dem Medication Service dient dazu, Informationen über die Abgabe von Arzneimittel, die auf Basis einer Verordnung erfolgt, in den Medication Service einzutragen. Diese Operation wird von dem E-Rezept-Fachdienst verwendet, wenn ein Versicherter sein Arzneimittel in einer Apotheke erhält. Sie dokumentiert, dass die Medikation gemäß der Verordnung abgegeben wurde, einschließlich Details wie Menge, Abgabedatum und Informationen zur Apotheke. Dies hilft, einen vollständigen Überblick über die Medikation des Patienten zu behalten und trägt zur Sicherheit und Effektivität der medikamentösen Behandlung bei.
+
+Die nachstehende Abbildung verdeutlicht die Kommunikationsflüsse für das Einstellen einer Dispensierinformation in den Medication Service per FHIR Operation *$provide-dispensation-erp*.
+ifndef::env-github[]
+[page-layout=landscape]
+
+[plantuml, "{diagramsdir}/medicationmanagement.dispense", svg]
+[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Anwendungsfall \"Dispensierinformationen in den Medication Service einstellen\"",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+....
+include::{plantumlsdir}/medicationmanagement.dispense.puml[]
+....
+[page-layout=portrait]
+endif::[]
+ifdef::env-github[]
+image::plantuml/medicationmanagement.dispense.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Anwendungsfall \"Dispensierinformationen in den Medication Service einstellen\"",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+endif::[]
+
+
+
+=== Dispensierung löschen
+Die *$cancel-dispensation-erp* Operation, die vom E-Rezept-Fachdienst ausgeführt wird, ermöglicht das Stornieren oder Rückgängigmachen einer Arzneimittelabgabe im Medication Service. Diese Operation wird ausgeführt, wenn eine Medikamentenabgabe irrtümlich erfolgt ist oder wenn eine Aktualisierung in der Medikationshistorie des Patienten notwendig wird. Nachdem der E-Rezept-Fachdienst die Operation durchführt, wird die betreffende Abgabe im Medication Service des Versicherten als storniert oder rückgängig gemacht markiert, was zu einer genauen und aktuellen Erfassung der Medikationsdaten des Versicherten beiträgt.
+
+Die nachstehende Abbildung verdeutlicht die Kommunikationsflüsse für das Löschen einer Dispensierinformation in den Medication Service per FHIR Operation *$cancel-dispensation-erp*.
+ifndef::env-github[]
+[page-layout=landscape]
+
+[plantuml, "{diagramsdir}/medicationmanagement.cancel.dispense", svg]
+[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Anwendungsfall \"Dispensierinformationen im Medication Service stornieren\"",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+....
+include::{plantumlsdir}/medicationmanagement.cancel.dispense.puml[]
+....
+[page-layout=portrait]
+endif::[]
+ifdef::env-github[]
+image::plantuml/medicationmanagement.cancel.dispense.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="Anwendungsfall \"Dispensierinformationen im Medication Service stornieren\"",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+endif::[]
+
+
+=== Deduplizierung von FHIR-Ressourcen
+
+Eine zentrale Deduplizierung bei inhaltlich identischen Ressourcen im Medication Service ist von entscheidender Bedeutung, um sowohl den Nutzen als auch die Qualität der Daten im Medication Service zu gewährleisten. Durch den nachstehenden Ansatz wird vermieden, dass Client-Systeme eigene, möglicherweise unterschiedliche Aggregierungsalgorithmen dezentral entwickeln, was zu Inkonsistenzen in der Darstellung der eML führen könnte. Zusätzlich verbessert eine zentrale Deduplizierung die Verknüpfbarkeit und Integration der vorhandenen FHIR-Ressourcen, was nicht nur die Übersichtlichkeit und Benutzerfreundlichkeit erhöht, sondern auch im Einklang mit dem Prinzip der Datensparsamkeit steht. Dadurch wird sichergestellt, dass nur notwendige Daten gespeichert und verarbeitet werden, was sowohl die Effizienz als auch den Datenschutz fördert.
+
+Zur eindeutigen Identifizierung werden im Rahmen einer Verordnung und ihr zugeordneten Dispensierung die folgenden Identifier erzeugt und den notwendigen FHIR-Ressourcen hinzugefügt:
+
+* *RxPrescriptionProcessIdentifier*: Dieser im Medication Service erzeugte Identifier nach dem Schema (PrescriptionID + "_" + authoredOn[YYYYMMDD]) wird MedicationRequest-, MedicationDispense- sowie Medication-Ressourcen hinzugefügt.
+
+* *EPAMedicationUniqueIdentifier*: Dieser im Medication Service erzeugte Identifier an Medication-Ressourcen stellt die Eindeutigkeit anhand von Hashwerten über PZN, Wirkstoffe oder Freitext sicher. Von der Hashwertbildung ausgenommen sind die Elemente "id", "identifier", "meta", "amount", "batch", "status" sowie "extension".
+
+* *RxOriginatorProcessIdentifier*: Der im Medication Service Backend generierte RxOriginatorProcessIdentifier verknüpft jede PrescriptionID mit der ursprünglichen ResourceID des Erstellungssystems, um eine präzise Nachverfolgung und Koordination der Medikationsdaten zu gewährleisten. Die Erstellung erfolgt nach dem Schema ResourceId + "_" + PrescriptionID
+
+Die folgenden Nutzungsvorgaben für die im Medication Service verarbeiteten FHIR-Ressourcen bei systeminternen Vergleichen in den Geschäftslogiken sind festgelegt:
+
+
+* *MedicationRequest*/*MedicationDispense*: Mittels RxPrescriptionProcessIdentifier können diese Ressourcen bei Update-Operationen eindeutig identifiziert werden.
+* *Practitioner*/*Organization*: Diese Ressourcen werden anhand der Telematik-ID eindeutig identifiziert.
+* *PractitionerRole*: Diese Ressource ist konform der https://hl7.org/fhir/R4/practitionerrole.html[PractitionerRole]. Sie wird beim Aufruf von Operations API ggf. adhoc erstellt und bereitgestellt.
+* *Patient*: Hierbei handelt es sich um eine nach FHIR logische Referenz über eine KVNR.
+
+
+== Ausgabeformate einer Medikationsliste
+
+Der Medication Service unterstützt die aufbereitete Generierung einer eML in den Datenformaten xHTML und PDF/A (d.h. hier kein FHIR). Ein ePA-Client kann über die folgenden URL-Aufrufe diese Formate anfordern:
+
+[source]
+----
+GET <<FQDN des Aktensystems>>/medication/render/eml/xhtml
+GET <<FQDN des Aktensystems>>/medication/render/eml/pdf
+----

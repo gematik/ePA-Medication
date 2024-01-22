@@ -2,8 +2,12 @@
   "resourceType": "StructureDefinition",
   "id": "rx-prescription-process-identifier-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension",
+  "version": "1.0.0",
   "name": "RxPrescriptionProcessIdentifierExtension",
-  "status": "draft",
+  "status": "active",
+  "experimental": false,
+  "date": "2024-01-22",
+  "publisher": "gematik GmbH",
   "description": "Extension for attaching the Identifier profile for transaction of medication resources betweeen E-Rezept-Fachdienst and ePA system to prescription related resources",
   "fhirVersion": "4.0.1",
   "mapping": [

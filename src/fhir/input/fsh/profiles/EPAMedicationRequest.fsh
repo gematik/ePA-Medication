@@ -9,12 +9,16 @@ Description: "Defines the medication request resource for the Medication Service
 * identifier ^slicing.rules = #open
 * identifier ^slicing.description = "ePrescription identifier and overall transaction identifier"
 * identifier ^slicing.ordered = false
-* identifier 1.. MS
+* identifier 0..
 * identifier contains
-    rxPrescriptionProcessIdentifier 1..1
-* identifier[rxPrescriptionProcessIdentifier] only RxPrescriptionProcessIdentifier
+    RxPrescriptionProcessIdentifier 0..1 and
+    RxOriginatorProcessIdentifier 0..1
+* identifier[RxPrescriptionProcessIdentifier] only RxPrescriptionProcessIdentifier
+* identifier[RxOriginatorProcessIdentifier] only RxOriginatorProcessIdentifier
 * status from EPAMedicationRequestVS
 * intent MS
+* intent ^short = "filler-order"
+* intent ^definition = "When data is synchronized with the E-Rezept-Fachdienst, the 'filler-order' code should be used here."
 * subject 1..1 MS
   * identifier 1.. MS
   * identifier only IdentifierKvid10
@@ -22,7 +26,7 @@ Description: "Defines the medication request resource for the Medication Service
 * medicationReference MS
 * medicationReference only Reference(EPAMedication)
 * requester MS
-* requester only Reference(PractitionerRoleDirectory)
+* requester only Reference(PractitionerRole)
 * medication[x] 1.. MS
 * medication[x] only Reference(EPAMedication)
   * reference 1.. MS

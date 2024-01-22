@@ -7,7 +7,7 @@
   "title": "EPA Medication Unique Identifier",
   "status": "active",
   "experimental": false,
-  "date": "2023-12-06",
+  "date": "2024-01-22",
   "publisher": "gematik GmbH",
   "description": "This unique identifier is generated within the ePA system. It is either a hash derived from a specific set of data elements of the Medication resource or a direct repetition of a single data element. This identifier ensures the distinct identification of Medication resources across the ePA system.",
   "fhirVersion": "4.0.1",

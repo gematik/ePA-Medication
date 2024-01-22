@@ -16,7 +16,7 @@ object "<< Versicherter >>\n**Patient**" as Patient
 object "<< Verordnender LE >>\n**PractitionerDirectory**" as PrescribingPractitioner
 object "<< Verordnende LEI >>\n**OrganizationDirectory**" as PrescribingOrganization
 object "<< Abgebende LEI >>\n**OrganizationDirectory**" as DispenserOrganization
-object "PractitionerRoleDirectory" as PractionerRole
+object "PractitionerRole" as PractionerRole
 object "<< Medikation >>\n**EPAMedication**" as Medication
 object "<< Medikationsverordnung >>\n**EPAMedicationRequest**" as MedicationRequest {
     + subject: Reference(Patient)
