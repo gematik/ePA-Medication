@@ -1,8 +1,8 @@
 openapi: 3.0.3
-info: 
+info:
   title: ePA Medication Service (FHIR R4)
   description: |
-    ### **Prereqisites**:
+    ### **Prerequisites**:
   
     The Health Record System shall provide 
     - name
@@ -11,7 +11,7 @@ info:
     - indication of a valid entitlement 
     of the current user (requestor) for evaluation in operations.
 
-    Operations mandating a valid entitlement implicitely mandate use of a VAU-channel
+    Operations mandating a valid entitlement implicitly mandate use of a VAU-channel
     and a valid ID-Token. If one of these conditions is not met, then the response
     of the (aborted) operation shall always be '403': 'notEntitled'. 
 
@@ -43,9 +43,9 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 0.0.1
+  version: 1.0.0
 servers:
-  - url: 'https://epa-hst1.prod.epa4all.de/api'
+  - url: 'https://epa-hst1.prod.epa4all.de'
 
 tags:
   - name: Resources
@@ -59,7 +59,7 @@ tags:
       medication information sharing.
       
       ##### Profile:
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.0)
       
       ##### Examples:
       - [https://simplifier.net/epa-medication/example-epa-medication-1/~json](https://simplifier.net/epa-medication/example-epa-medication-1/~json)
@@ -73,7 +73,7 @@ tags:
       details about the prescribed medication, the insurant to whom it's prescribed, the prescribing healthcare provider, 
       and instructions for use.
       ##### Profile: 
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.0)
 
       ***
       #### [MedicationDispense](https://hl7.org/fhir/R4/medicationdispense.html)
@@ -81,16 +81,16 @@ tags:
       information about the dispensed medication, the insurant receiving the medication, the healthcare professional 
       who dispensed it, and details about the quantity and timing of the dispensation.
       ##### Profile:
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense](https://gematik.de/fhir/epa-medication/StructureDefinition/emap-medication-dispense)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/emap-medication-dispense|1.0.0)
 
       ***
       #### [Organization](https://hl7.org/fhir/R4/organization.html)
       The Organization Resource is designed to represent information about organizations, primarily 
       in the context of healthcare. It typically includes details like the organization's name, type and contact.
-      The Medication Service utilizes the [VZD-FHIR-Directory](https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory) Organization Profile.
+      The Medication Service utilizes the [VZD-FHIR-Directory](https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2) Organization Profile.
 
       ##### Profile: 
-      [https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory](https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory)
+      [https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2](https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2)
 
       ##### Examples:
       - [https://simplifier.net/VZD-FHIR-Directory/OrganizationExample001/~json](https://simplifier.net/VZD-FHIR-Directory/OrganizationExample001/~json)
@@ -101,10 +101,10 @@ tags:
       The Practitioner resource is used to represent individuals who are directly or indirectly involved in 
       the delivery of healthcare services. This includes information about their identity, qualifications, and specific roles 
       or functions within the healthcare system, such as doctors or pharmacists.
-      The Medication Service utilizes the [VZD-FHIR-Directory](https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectoryy) Practitioner Profile.
+      The Medication Service utilizes the [VZD-FHIR-Directory](https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2) Practitioner Profile.
 
       ##### Profile: 
-      [https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory](https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory)
+      [https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2](https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2)
 
       ##### Example:
       - [https://simplifier.net/VZD-FHIR-Directory/TIPractitionerExample001/~json](https://simplifier.net/VZD-FHIR-Directory/TIPractitionerExample001/~json)
@@ -114,11 +114,6 @@ tags:
       The PractitionerRole resource represents specific roles, positions, 
       or jobs that a healthcare practitioner may hold in a healthcare organization.
 
-      ##### Profile: 
-      [https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory](https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory)
-
-      ##### Example:
-      - [https://simplifier.net/VZD-FHIR-Directory/PractitionerRoleExample/~json](https://simplifier.net/VZD-FHIR-Directory/PractitionerRoleExample/~json)
 
       ***
       ### **Pagination**
@@ -141,19 +136,19 @@ tags:
 
       **Example**: Request for 10 elements of resource type Medication, starting with element 20 of the list:
       ```
-      GET [BASE]/medication/v1/fhir/Medication?_count=10&_offset=20
+      GET [BASE]/epa/medication/api/v1/fhir/Medication?_count=10&_offset=20
       ```
       ***
 
       **Example**: Request for the first 5 elements:
       ```
-      GET [BASE]/medication/v1/fhir/Medication?_count=5
+      GET [BASE]/epa/medication/api/v1/fhir/Medication?_count=5
       ```
       ***
 
       **Example**: Requesting only the total count of entries:
       ```
-      GET [BASE]/medication/v1/fhir/Medication?_count=0&_total=accurate
+      GET [BASE]/epa/medication/api/v1/fhir/Medication?_count=0&_total=accurate
       ```
       ***
 
@@ -173,34 +168,33 @@ tags:
       ```
       {
         "resourceType": "Bundle",
-        "id": "86604fc1-b356-57e3-8738-8ef36c8d608c",
         "type": "searchset",
         "total": 100,
         "link": [
           {
             "relation": "self",
-            "url": "https://epa-hst1.prod.epa4all.de/api/medication/v1/fhir/Medication?_count=10&_offset=20"
+            "url": "https://epa-hst1.prod.epa4all.de/epa/medication/api/v1/fhir/Medication?_count=10&_offset=20"
           },
           {
             "relation": "first",
-            "url": "https://epa-hst1.prod.epa4all.de/api/medication/v1/fhir/Medication?_count=10&_offset=0"
+            "url": "https://epa-hst1.prod.epa4all.de/epa/medication/api/v1/fhir/Medication?_count=10&_offset=0"
           },
           {
             "relation": "previous",
-            "url": "https://epa-hst1.prod.epa4all.de/api/medication/v1/fhir/Medication?_count=10&_offset=10"
+            "url": "https://epa-hst1.prod.epa4all.de/epa/medication/api/v1/fhir/Medication?_count=10&_offset=10"
           },
           {
             "relation": "next",
-            "url": "https://epa-hst1.prod.epa4all.de/api/medication/v1/fhir/Medication?_count=10&_offset=30"
+            "url": "https://epa-hst1.prod.epa4all.de/epa/medication/api/v1/fhir/Medication?_count=10&_offset=30"
           },
           {
             "relation": "last",
-            "url": "https://epa-hst1.prod.epa4all.de/api/medication/v1/fhir/Medication?_count=10&_offset=90"
+            "url": "https://epa-hst1.prod.epa4all.de/epa/medication/api/v1/fhir/Medication?_count=10&_offset=90"
           }
         ],
         "entry": [
           {
-            "fullUrl": "https://epa-hst1.prod.epa4all.de/api/medication/v1/fhir/Medication/5abff610-a1ad-450d-aa63-a60622b1052e",
+            "fullUrl": "https://epa-hst1.prod.epa4all.de/epa/medication/api/v1/fhir/Medication/5abff610-a1ad-450d-aa63-a60622b1052e",
             "resource": {
               "resourceType": "Medication",
               "id": "5abff610-a1ad-450d-aa63-a60622b1052e",
@@ -223,12 +217,12 @@ tags:
 
       ***_id***: Refers to the logical id of the resource
       ###### Example
-      ``GET [base]/medication/v1/fhir/MedicationRequest?_id=ea01ccbc-aa5d-4c34-8292-d95678d52c98``
+      ``GET [base]/epa/medication/api/v1/fhir/MedicationRequest?_id=ea01ccbc-aa5d-4c34-8292-d95678d52c98``
       ***
 
       ***_lastUpdated***: Can be used to select resources based on the last time they were changed
       ###### Example
-      ``GET [base]/medication/v1/fhir/MedicationRequest?_lastUpdated=2025-15-01``
+      ``GET [base]/epa/medication/api/v1/fhir/MedicationRequest?_lastUpdated=2025-15-01``
       ***
 
       #### Including other resources in result
@@ -248,7 +242,7 @@ tags:
       ###### Example:
 
       ```
-      GET [base]/medication/v1/fhir/MedicationRequest?_include=MedicationRequest:medication
+      GET [base]/epa/medication/api/v1/fhir/MedicationRequest?_include=MedicationRequest:medication
       ```
       In this query:
       1. ``MedicationRequest`` is the resource type being queried.
@@ -258,7 +252,7 @@ tags:
 
       This query returns a bundle containing all **MedicationRequest** resources available in the server's database, along with the 
       **Medication** resources linked to these requests. Note that this could potentially return a large amount of data, depending 
-      on how many **MedicationReques**t records are stored on the server.
+      on how many **MedicationRequest** records are stored on the server.
       ***
 
       ##### *_revinclude*: 
@@ -273,7 +267,7 @@ tags:
       ###### Example:
 
       ```
-      GET [base]/medication/v1/fhir/MedicationRequest?_revinclude=MedicationDispense:authorizingPrescription
+      GET [base]/epa/medication/api/v1/fhir/MedicationRequest?_revinclude=MedicationDispense:authorizingPrescription
 
       ```
       In this query:
@@ -331,13 +325,13 @@ tags:
       ###### Examples:
       *All MedicationRequests updated before January 15, 2025.*
       ```
-      GET [base]/medication/v1/fhir/MedicationRequest?_lastUpdated=lt2025-15-01 
+      GET [base]/epa/medication/api/v1/fhir/MedicationRequest?_lastUpdated=lt2025-15-01 
       ```
       *All MedicationDispense that have been dispensed after January 15, 2025.*
       ```
-      GET [base]/medication/v1/fhir/MedicationDispense?whenhandedover=gt2025-15-01 
+      GET [base]/epa/medication/api/v1/fhir/MedicationDispense?whenhandedover=gt2025-15-01 
       ```
- 
+
   - name: Operations
     description: |
       ### **FHIR Prescription and Dispensation Operations**
@@ -347,10 +341,10 @@ tags:
       specific business logic that go beyond the basic CRUD (Create, Read, Update, Delete) operations.
 
       The Medication Service of the ePA provides the following four operations for the E-Rezept-Fachdienst: 
-      **$provide-prescription**, **$provide-dispensation**, **$cancel-prescription** and **$cancel-dispensation**. 
+      **$provide-prescription-erp**, **$provide-dispensation-erp**, **$cancel-prescription-erp** and **$cancel-dispensation-erp**. 
 
 paths:
-  /medication/v1/fhir/Medication:
+  /epa/medication/api/v1/fhir/Medication:
     get:
       tags:
         - Resources
@@ -363,7 +357,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -372,7 +366,7 @@ paths:
 
         ***
 
-        #### **Medication-Specific Search Parameterss**
+        #### **Medication-Specific Search Parameters**
         | Name | Type | Description | Expression |
         |------|------|-------------|------------|
         | identifier | [token](https://hl7.org/fhir/R4/search.html#token) | Return medications with this external identifier | Medication.identifier |
@@ -388,10 +382,15 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
@@ -434,7 +433,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/Medication/{id}:
+  /epa/medication/api/v1/fhir/Medication/{id}:
     get:
       summary: Get a Medication by its ID
       operationId: getMedicationById_MedicationSvc
@@ -446,7 +445,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -463,11 +462,16 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Resource is not known | 404 | | OperationOutcome |
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Resources
       parameters:
@@ -494,7 +498,7 @@ paths:
         '500':
           $ref: '#/components/responses/Error500InternalError'
 
-  /medication/v1/fhir/MedicationRequest:
+  /epa/medication/api/v1/fhir/MedicationRequest:
     get:
       tags:
         - Resources
@@ -507,7 +511,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -516,7 +520,7 @@ paths:
 
         ***
 
-        #### **MedicationRequest-Specific Search Parameterss**
+        #### **MedicationRequest-Specific Search Parameters**
         | Name | Type | Description | Expression |
         |------|------|-------------|------------|
         | identifier | [token](https://hl7.org/fhir/R4/search.html#token) | Return medication requests with this external identifier | MedicationRequest.identifier |
@@ -534,10 +538,14 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -588,7 +596,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/MedicationRequest/{id}:
+  /epa/medication/api/v1/fhir/MedicationRequest/{id}:
     get:
       summary: Get a MedicationRequest by its ID
       operationId: getMedicationRequestById_MedicationSvc
@@ -600,7 +608,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -617,11 +625,16 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Resource is not known | 404 | | OperationOutcome |
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Resources
       parameters:
@@ -649,7 +662,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/MedicationDispense:
+  /epa/medication/api/v1/fhir/MedicationDispense:
     get:
       tags:
         - Resources
@@ -662,7 +675,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -671,13 +684,13 @@ paths:
 
         ***
 
-        #### **MedicationDispense-Specific Search Parameterss**
+        #### **MedicationDispense-Specific Search Parameters**
         | Name | Type | Description | Expression |
         |------|------|-------------|------------|
         | identifier | [token](https://hl7.org/fhir/R4/search.html#token) | Return medication dispenses with this external identifier | MedicationDispense.identifier |
         | whenhandedover | [date](https://hl7.org/fhir/R4/search.html#date) | Returns dispenses handed over on this date | MedicationDispense.whenHandedOver |
         | prescription | [reference](https://hl7.org/fhir/R4/search.html#reference) | The identity of a prescription to list dispenses from |MedicationDispense.authorizingPrescription (MedicationRequest) |
-        | performer | [reference](https://hl7.org/fhir/R4/search.html#reference) | Returns dispenses performed by a specific individual | 	MedicationDispense.performer.actor (PratitionerRole) |
+        | performer | [reference](https://hl7.org/fhir/R4/search.html#reference) | Returns dispenses performed by a specific individual | 	MedicationDispense.performer.actor (PractitionerRole) |
         | status | [token](https://hl7.org/fhir/R4/search.html#token) | Returns dispenses with a specified dispense status | 	MedicationDispense.status |
 
         ***
@@ -690,10 +703,14 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -750,10 +767,10 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/MedicationDispense/{id}:
+  /epa/medication/api/v1/fhir/MedicationDispense/{id}:
     get:
       summary: Get a MedicationDispense by its ID
-      operationId: getMedicationDispensetById_MedicationSvc
+      operationId: getMedicationDispenseById_MedicationSvc
       description: |
         #### **Allowed user groups [professionOID]**
         * oid_versicherter
@@ -762,7 +779,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -779,11 +796,16 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Resource is not known | 404 | | OperationOutcome |
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Resources
       parameters:
@@ -811,7 +833,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/Organization:
+  /epa/medication/api/v1/fhir/Organization:
     get:
       tags:
         - Resources
@@ -824,7 +846,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -833,7 +855,7 @@ paths:
 
         ***
 
-        #### **Organization-Specific Search Parameterss**
+        #### **Organization-Specific Search Parameters**
         | Name | Type | Description | Expression |
         |------|------|-------------|------------|
         | identifier | [token](https://hl7.org/fhir/R4/search.html#token) | Return organizations with this external identifier | Organization.identifier |
@@ -848,10 +870,14 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -861,7 +887,7 @@ paths:
         - $ref: '#/components/parameters/_total'
         - $ref: '#/components/parameters/_id'
         - $ref: '#/components/parameters/_lastUpdated'
-        - $ref: '#/components/parameters/identifier'    
+        - $ref: '#/components/parameters/identifier'
         - name: name
           in: query
           description: Organization's name or alias.
@@ -889,7 +915,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/Organization/{id}:
+  /epa/medication/api/v1/fhir/Organization/{id}:
     get:
       summary: Get a Organization by its ID
       operationId: getOrganizationByIdInMedicationSvc
@@ -901,7 +927,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -917,11 +943,16 @@ paths:
         | If the insurant objects to the medication process in the ePA system, the Medication Service gets locked. | 423 | locked ||
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Resource is not known | 404 | | OperationOutcome |
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Resources
       parameters:
@@ -949,7 +980,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/Practitioner:
+  /epa/medication/api/v1/fhir/Practitioner:
     get:
       tags:
         - Resources
@@ -962,7 +993,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -971,7 +1002,7 @@ paths:
 
         ***
 
-        #### **Practitioner-Specific Search Parameterss**
+        #### **Practitioner-Specific Search Parameters**
         | Name | Type | Description | Expression |
         |------|------|-------------|------------|
         | identifier | [token](https://hl7.org/fhir/R4/search.html#token) | Return practitioners with this external identifier | Practitioner.identifier |
@@ -987,10 +1018,14 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -1028,7 +1063,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/Practitioner/{id}:
+  /epa/medication/api/v1/fhir/Practitioner/{id}:
     get:
       summary: Get a Practitioner by its ID
       operationId: getPractitionerById_MedicationSvc
@@ -1040,7 +1075,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -1057,11 +1092,16 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Resource is not known | 404 | | OperationOutcome |
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Resources
       parameters:
@@ -1089,7 +1129,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/PractitionerRole:
+  /epa/medication/api/v1/fhir/PractitionerRole:
     get:
       tags:
         - Resources
@@ -1102,7 +1142,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -1111,7 +1151,7 @@ paths:
 
         ***
 
-        #### **PractitionerRole-Specific Search Parameterss**
+        #### **PractitionerRole-Specific Search Parameters**
         | Name | Type | Description | Expression |
         |------|------|-------------|------------|
         | identifier | [token](https://hl7.org/fhir/R4/search.html#token) | Return the practitioner roles with this external identifier | PractitionerRole.identifier |
@@ -1127,10 +1167,15 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -1174,7 +1219,7 @@ paths:
           $ref: '#/components/responses/Error500InternalError'
 
 
-  /medication/v1/fhir/PractitionerRole/{id}:
+  /epa/medication/api/v1/fhir/PractitionerRole/{id}:
     get:
       summary: Get a PractitionerRole by its ID
       operationId: getPractitionerRoleById_MedicationSvc
@@ -1186,7 +1231,7 @@ paths:
         * oid_institution-vorsorge-reha
         * oid_zahnarztpraxis 
         * oid_praxis_psychotherapeut
-        * oid_institution-oeg
+        * oid_institution-oegd
         * oid_öffentliche_apotheke
         * oid_institution-pflege
         * oid_institution-geburtshilfe
@@ -1203,11 +1248,16 @@ paths:
         | Unknown search parameter | 400 | | OperationOutcome | 
         | Invalid query parameter(s) | 400 | | OperationOutcome | 
         | Invalid request | 400 | | OperationOutcome | 
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Resource is not known | 404 | | OperationOutcome |
         | Unknown resource type | 404 | | OperationOutcome |
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Resources
       parameters:
@@ -1234,31 +1284,36 @@ paths:
         '500':
           $ref: '#/components/responses/Error500InternalError'
 
-  /medication/v1/fhir/$provide-prescription:
+  /epa/medication/api/v1/fhir/$provide-prescription-erp:
     post:
       operationId: operation:providePrescription_MedicationSvc
       summary: ""
       description: |
-        The **$provide-prescription** operation in the ePA MedicationService is used to add electronic prescriptions to a 
+        The **$provide-prescription-erp** operation in the ePA MedicationService is used to add electronic prescriptions to a 
         patient's record. These prescriptions are already made by the E-Rezept-Fachdienst. This operation does not create 
         new patient prescriptions; it just puts the ones made by the E-Rezept-Fachdienst into the patient's ePA, making 
         sure they are stored safely and can be easily accessed.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-OP](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-OP)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.0](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.0)
 
         #### **Allowed user groups [professionOID]**
-        * oid_erezept
+        * oid_erp-vau
 
         #### **Error Handling**
         | Conditions | Status code | Error code | Remarks |
         |------------|-------------|------------|---------|
-        | Successful operation | 200 |||
+        | Successful operation | 200 || OperationOutcome |
         | An Operation Error | 400 | | OperationOutcome | 
-        | If the insurant objects to the medication process in the ePA system, the Medication Service gets locked. | 423 | locked ||
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | If the insurant objects to the submission of prescription and dispensation data into the ePA system, the Medication Service rejects the submission. | 403 | Forbidden ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Operations
       parameters:
@@ -1269,12 +1324,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/ProvidePrescriptionOperation'
+              $ref: '#/components/schemas/EPAOpProvidePrescriptionERPInputParameters'
       responses:
         '200':
-          $ref: '#/components/responses/OperationOutcome200MSG_CREATED'
-        '400':
-          $ref: '#/components/responses/OperationOutcome400OperationsError'
+          description: EPAOpRxPrescriptionERPOutputParameters
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/EPAOpRxPrescriptionERPOutputParameters'
         '403':
           $ref: '#/components/responses/Error403Forbidden'
         '409':
@@ -1284,32 +1341,37 @@ paths:
         '500':
           $ref: '#/components/responses/Error500InternalError'
 
-  /medication/v1/fhir/$provide-dispensation:
+  /epa/medication/api/v1/fhir/$provide-dispensation-erp:
     post:
       operationId: operation:provideDispensation_MedicationSvc
       summary: ""
       description: |
-        The **$provide-dispensation** operation in the ePA Medication Service is used to record information about
+        The **$provide-dispensation-erp** operation in the ePA Medication Service is used to record information about
         the dispensing of medications based on an electronic prescription in the patient's record. This operation comes
         into play when a patient receives their medication from a pharmacy. It documents that the medication has been 
         dispensed as per the prescription, including details like the quantity, date of dispensing, and pharmacy 
-        information. This helps maintain a comprehensive overview of the patient's medication history.
+        information. This helps maintaining a comprehensive overview of the patient's medication history.
         
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-OP](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-OP)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.0](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.0)
 
         #### **Allowed user groups [professionOID]**
-        * oid_erezept
+        * oid_erp-vau
 
         #### **Error Handling**
         | Conditions | Status code | Error code | Remarks |
         |------------|-------------|------------|---------|
-        | Successful operation | 200 |||
+        | Successful operation | 200 || OperationOutcome |
         | An Operation Error | 400 | | OperationOutcome | 
-        | If the insurant objects to the medication process in the ePA system, the Medication Service gets locked. | 423 | locked ||
-        | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
+        | If the insurant objects to the submission of prescription and dispensation data into the ePA system, the Medication Service rejects the submission. | 403 | Forbidden ||
+        | Requestor role is not in the list of allowed user groups | 403 | invalidOid ||
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Operations
       parameters:
@@ -1320,12 +1382,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/ProvideDispensationOperation'
+              $ref: '#/components/schemas/EPAOpProvideDispensationERPInputParameters'
       responses:
         '200':
-          $ref: '#/components/responses/OperationOutcome200MSG_CREATED'
-        '400':
-          $ref: '#/components/responses/OperationOutcome400OperationsError'
+          description: EPAOpRxDispensationERPOutputParameters
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/EPAOpRxDispensationERPOutputParameters'
         '403':
           $ref: '#/components/responses/Error403Forbidden'
         '409':
@@ -1335,12 +1399,12 @@ paths:
         '500':
           $ref: '#/components/responses/Error500InternalError'
 
-  /medication/v1/fhir/$cancel-prescription:
+  /epa/medication/api/v1/fhir/$cancel-prescription-erp:
     post:
       operationId: operation:cancelPrescription_MedicationSvc
       summary: ""
       description: |
-        The **$cancel-prescription** operation is used by the E-Rezept-Fachdienst to cancel 
+        The **$cancel-prescription-erp** operation is used by the E-Rezept-Fachdienst to cancel 
         an already issued electronic prescription. This function is applied when a prescription is no longer needed 
         for various reasons, such as changes in medication or errors in the initial issuance. After cancellation 
         by the E-Rezept-Fachdienst, this information is transmitted to the ePA Medication Service,
@@ -1348,20 +1412,25 @@ paths:
         ensures accuracy and safety in the management of medications.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-OP](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-OP)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.0](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.0)
 
         #### **Allowed user groups [professionOID]**
-        * oid_erezept
+        * oid_erp-vau
 
         #### **Error Handling**
         | Conditions | Status code | Error code | Remarks |
         |------------|-------------|------------|---------|
-        | Successful operation | 200 |||
+        | Successful operation | 200 || OperationOutcome |
         | An Operation Error | 400 | | OperationOutcome | 
-        | If the insurant objects to the medication process in the ePA system, the Medication Service gets locked. | 423 | locked ||
+        | If the insurant objects to the submission of prescription and dispensation data into the ePA system, the Medication Service rejects the cancellation. | 403 | Forbidden ||
         | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Operations
       parameters:
@@ -1372,12 +1441,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/CancelPrescriptionOperation'
+              $ref: '#/components/schemas/EPAOpCancelPrescriptionERPInputParameters'
       responses:
         '200':
-          $ref: '#/components/responses/OperationOutcome200MSG_UPDATED'
-        '400':
-          $ref: '#/components/responses/OperationOutcome400OperationsError'
+          description: EPAOpRxPrescriptionERPOutputParameters
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/EPAOpRxPrescriptionERPOutputParameters'
         '403':
           $ref: '#/components/responses/Error403Forbidden'
         '409':
@@ -1387,12 +1458,12 @@ paths:
         '500':
           $ref: '#/components/responses/Error500InternalError'
 
-  /medication/v1/fhir/$cancel-dispensation:
+  /epa/medication/api/v1/fhir/$cancel-dispensation-erp:
     post:
       operationId: operation:cancelDispensation_MedicationSvc
       summary: ""
       description: |
-        The **$cancel-dispensation** operation, used by the E-Rezept-Fachdienst, in the context  of the ePA Medication
+        The **$cancel-dispensation-erp** operation, used by the E-Rezept-Fachdienst, in the context  of the ePA Medication
         Service, is applied to cancel or reverse information regarding the dispensation of a medication. This operation
         is necessary when a medication dispensation is cancelled by a pharmacist or when there is a return of the 
         medication by the insurant. After the E-Rezept-Fachdienst performs this operation, the corresponding dispensation 
@@ -1400,20 +1471,25 @@ paths:
         up-to-date record of the patient's medication data.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-OP](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-OP)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.0](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.0)
 
         #### **Allowed user groups [professionOID]**
-        * oid_erezept
+        * oid_erp-vau
 
         #### **Error Handling**
         | Conditions | Status code | Error code | Remarks |
         |------------|-------------|------------|---------|
-        | Successful operation | 200 |||
+        | Successful operation | 200 || OperationOutcome |
         | An Operation Error | 400 | | OperationOutcome | 
-        | If the insurant objects to the medication process in the ePA system, the Medication Service gets locked. | 423 | locked ||
+        | If the insurant objects to the submission of prescription and dispensation data into the ePA system, the Medication Service rejects the cancellation. | 403 | Forbidden ||
         | Requestor role is not in the list of allowed usergroups | 403 | invalidOid ||
         | Health record is not in state ACTIVATED | 409 | statusMismatch | (see 'Retry interval') |
         | Any other error | 500 | internalError | (see 'Retry interval') |
+
+        #### **OperationOutcome**
+        ##### Profile: 
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+
       tags:
         - Operations
       parameters:
@@ -1424,10 +1500,14 @@ paths:
         content:
           application/fhir+json:
             schema:
-              $ref: '#/components/schemas/CancelDispensationOperation'
+              $ref: '#/components/schemas/EPAOpCancelDispensationERPInputParameters'
       responses:
         '200':
-          $ref: '#/components/responses/OperationOutcome200MSG_UPDATED'
+          description: EPAOpRxDispensationERPOutputParameters
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/EPAOpRxDispensationERPOutputParameters'
         '403':
           $ref: '#/components/responses/Error403Forbidden'
         '409':
@@ -1491,34 +1571,46 @@ components:
               summary: Unknown search parameter
               value:
                 resourceType: OperationOutcome
+                meta:
+                  profile:
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
                 issue:
                   - severity: error
                     code: processing
                     details:
-                        system: http://terminology.hl7.org/CodeSystem/operation-outcome
-                        code: MSG_PARAM_UNKNOWN
+                      coding:
+                        - system: http://terminology.hl7.org/CodeSystem/operation-outcome
+                          code: MSG_PARAM_UNKNOWN
                     diagnostic: "Unknown search parameter"
             invalid_query_parameter:
               summary: Invalid query parameter(s)
               value:
                 resourceType: OperationOutcome
+                meta:
+                  profile:
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
                 issue:
                   - severity: error
                     code: processing
                     details:
-                        system: http://terminology.hl7.org/CodeSystem/operation-outcome
-                        code: MSG_BAD_SYNTAX
+                      coding:
+                        - system: http://terminology.hl7.org/CodeSystem/operation-outcome
+                          code: MSG_BAD_SYNTAX
                     diagnostic: "Invalid query parameter(s)"
             invalid_request:
               summary: Invalid request
               value:
                 resourceType: OperationOutcome
+                meta:
+                  profile:
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
                 issue:
                   - severity: error
                     code: not-supported
                     details:
-                        system: http://terminology.hl7.org/CodeSystem/operation-outcome
-                        code: MSG_BAD_FORMAT
+                      coding:
+                        - system: http://terminology.hl7.org/CodeSystem/operation-outcome
+                          code: MSG_BAD_FORMAT
                     diagnostic: "Invalid request"
           schema:
             $ref: '#/components/schemas/OperationOutcome'
@@ -1532,23 +1624,31 @@ components:
               summary: Resource is not known
               value:
                 resourceType: OperationOutcome
+                meta:
+                  profile:
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
                 issue:
                   - severity: error
                     code: processing
                     details:
-                        system: http://terminology.hl7.org/CodeSystem/operation-outcome
-                        code: MSG_RESOURCE_ID_FAIL
+                      coding:
+                        - system: http://terminology.hl7.org/CodeSystem/operation-outcome
+                          code: MSG_RESOURCE_ID_FAIL
                     diagnostic: "Resource is not known"
             unknown_resource_type:
               summary: Unknown resource type
               value:
                 resourceType: OperationOutcome
+                meta:
+                  profile:
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
                 issue:
                   - severity: error
                     code: processing
                     details:
-                        system: http://terminology.hl7.org/CodeSystem/operation-outcome
-                        code: MSG_UNKNOWN_TYPE
+                      coding:
+                        - system: http://terminology.hl7.org/CodeSystem/operation-outcome
+                          code: MSG_UNKNOWN_TYPE
                     diagnostic: "Unknown resource type"
           schema:
             $ref: '#/components/schemas/OperationOutcome'
@@ -1560,41 +1660,6 @@ components:
           schema:
             $ref: '#/components/schemas/OperationOutcome'
 
-    OperationOutcome200MSG_CREATED:
-      description: MSG_CREATED
-      content:
-        application/json:
-          examples:
-            MSG_CREATED:
-              summary: MSG_CREATED
-              value:
-                resourceType: OperationOutcome
-                issue:
-                  - severity: information
-                    code: informational
-                    details:
-                      system: http://terminology.hl7.org/CodeSystem/operation-outcome
-                      code: MSG_CREATED
-          schema:
-            $ref: '#/components/schemas/OperationOutcome'
-
-    OperationOutcome200MSG_UPDATED:
-      description: MSG_UPDATED
-      content:
-        application/json:
-          examples:
-            MSG_CREATED:
-              summary: MSG_UPDATED
-              value:
-                resourceType: OperationOutcome
-                issue:
-                  - severity: information
-                    code: informational
-                    details:
-                      system: http://terminology.hl7.org/CodeSystem/operation-outcome
-                      code: MSG_UPDATED
-          schema:
-            $ref: '#/components/schemas/OperationOutcome'
 
 
   parameters:
@@ -1665,7 +1730,7 @@ components:
       description: Returns resources with this external identifier
       schema:
         type: string
-  
+
   schemas:
     InsurantIdType:
       type: string
@@ -1723,6 +1788,18 @@ components:
         resourceType:
           type: string
           example: OperationOutcome
+        meta:
+          description: The metadata about the resource. This is content that is maintained
+            by the infrastructure. Changes to the content may not always be associated
+            with version changes to the resource.
+          properties:
+            profile:
+              description: A list of profiles (references to [[[StructureDefinition]]]
+                resources) that this resource claims to conform to. The URL is a reference
+                to [[[StructureDefinition.url]]].
+              type: array
+              items:
+                type: string
         issue:
           type: array
           items:
@@ -1737,47 +1814,6 @@ components:
               diagnostic:
                 type: string
 
-    Meta:
-      description: The metadata about a resource. This is content in the resource
-        that is maintained by the infrastructure. Changes to the content may not always
-        be associated with version changes to the resource.
-      properties:
-        versionId:
-          description: The version specific identifier, as it appears in the version
-            portion of the URL. This values changes when the resource is created,
-            updated, or deleted.
-          type: string
-          pattern: "[A-Za-z0-9\\-\\.]{1,64}"
-          example: "1"
-
-        lastUpdated:
-          description: When the resource last changed - e.g. when the version changed.
-          type: string
-          format: date-time
-        profile:
-          description: A list of profiles (references to [[[StructureDefinition]]]
-            resources) that this resource claims to conform to. The URL is a reference
-            to [[[StructureDefinition.url]]].
-          type: array
-          items:
-            type: string
-
-    FHIRResource:
-      description: This is the base resource type for everything.
-      type: object
-      properties:
-        id:
-          description: The logical id of the resource, as used in the URL for the
-            resource. Once assigned, this value never changes.
-          type: string
-          pattern: "[A-Za-z0-9\\-\\.]{1,64}"
-          example: "86604fc1-b356-57e3-8738-8ef36c8d608c"
-        meta:
-          description: The metadata about the resource. This is content that is maintained
-            by the infrastructure. Changes to the content may not always be associated
-            with version changes to the resource.
-          $ref: "#/components/schemas/Meta"
-
     SearchSet_Bundle:
       description: "Contains a collection of resources + Rule: entry.search only when a search"
       type: object
@@ -1786,19 +1822,6 @@ components:
           type: string
           enum:
           - Bundle
-        id:
-          description: The logical id of the resource, as used in the URL for the
-            resource. Once assigned, this value never changes.
-          type: string
-          pattern: "[A-Za-z0-9\\-\\.]{1,64}"
-          example: "86604fc1-b356-57e3-8738-8ef36c8d608c"
-        meta:
-          type: object
-          properties:
-            lastUpdated:
-              description: When the resource last changed - e.g. when the version changed.
-              type: string
-              format: date-time
         type:
           type: string
           enum:
@@ -1833,7 +1856,7 @@ components:
                 type: string
                 description: "URI for resource (Absolute URL server address or URI for UUID/OID)"
               resource:
-                $ref: '#/components/schemas/FHIRResource'
+                type: object
               search:
                 type: object
                 description: Search related information
@@ -1849,8 +1872,8 @@ components:
 
     Medication:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.0
 
     MedicationList:
       allOf:
@@ -1867,8 +1890,8 @@ components:
 
     MedicationRequest:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.0
 
     MedicationRequestList:
       allOf:
@@ -1885,8 +1908,8 @@ components:
 
     MedicationDispense:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.0
 
     MedicationDispenseList:
       allOf:
@@ -1903,8 +1926,8 @@ components:
 
     Organization:
       type: object
-      description: 'https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory'
-      example: --> https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory
+      description: 'https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2'
+      example: --> https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2
 
     OrganizationList:
       allOf:
@@ -1921,9 +1944,9 @@ components:
 
     Practitioner:
       type: object
-      description: 'https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory'
-      example: --> https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory
-   
+      description: 'https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2'
+      example: --> https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2
+
     PractitionerList:
       allOf:
       - $ref: "#/components/schemas/SearchSet_Bundle"
@@ -1939,8 +1962,8 @@ components:
 
     PractitionerRole:
       type: object
-      description: 'https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory'
-      example: --> https://gematik.de/fhir/directory/StructureDefinition/PractitionerRoleDirectory
+      description: 'https://hl7.org/fhir/R4/practitionerrole.html'
+      example: --> https://hl7.org/fhir/R4/practitionerrole.html
 
     PractitionerRoleList:
       allOf:
@@ -1955,22 +1978,32 @@ components:
                 resource:
                   $ref: '#/components/schemas/PractitionerRole'
 
-    ProvidePrescriptionOperation:
+    EPAOpProvidePrescriptionERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-OP'
-      example: --> https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-OP
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.0
 
-    ProvideDispensationOperation:
+    EPAOpProvideDispensationERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-OP'
-      example: --> https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-OP
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.0
 
-    CancelPrescriptionOperation:
+    EPAOpCancelPrescriptionERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-OP'
-      example: --> https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-OP
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.0
 
-    CancelDispensationOperation:
+    EPAOpCancelDispensationERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-OP'
-      example: --> https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-OP
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.0
+
+    EPAOpRxDispensationERPOutputParameters:
+      type: object
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.0
+
+    EPAOpRxPrescriptionERPOutputParameters:
+      type: object
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.0'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.0

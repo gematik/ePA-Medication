@@ -8,17 +8,21 @@
   },
   "extension": [
     {
-      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension",
       "valueIdentifier": {
         "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
-        "value": "23569"
-      }
+        "value": "160.153.303.257.459_20240122"
+      },
+      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension"
     }
   ],
   "identifier": [
     {
       "system": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier",
       "value": "8F6E41946E798D9C89384A0D2C9C7D9E4F6F0A2DE9EF62B7A4A26A329400735F"
+    },
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier",
+      "value": "6ae6a7ca-c9b5-46bf-9411-2ba49d96f988_160.153.303.257.459"
     }
   ],
   "ingredient": [
@@ -45,12 +49,6 @@
             "display": "Doxorubicin"
           }
         ]
-      },
-      "isActive": true
-    },
-    {
-      "itemReference": {
-        "reference": "Medication/example-epa-medication-ingredient"
       },
       "isActive": true
     }

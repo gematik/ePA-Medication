@@ -1,8 +1,8 @@
 openapi: 3.0.3
-info: 
+info:
   title: "eML Render Interface"
   description: |
-    ### **Prereqisites**:
+    ### **Prerequisites**:
     
     The Health Record System shall provide 
     - name
@@ -11,7 +11,7 @@ info:
     - indication of a valid entitlement 
     of the current user (requestor) for evaluation in operations.
 
-    Operations mandating a valid entitlement implicitely mandate use of a VAU-channel
+    Operations mandating a valid entitlement implicitly mandate use of a VAU-channel
     and a valid ID-Token. If one of these conditions is not met, then the response
     of the (aborted) operation shall always be '403': 'notEntitled'. 
 
@@ -43,9 +43,9 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 0.0.1
+  version: 1.0.0
 servers:
-  - url: 'https://epa-hst1.prod.epa4all.de/api'
+  - url: 'https://epa-hst1.prod.epa4all.de'
 
 tags:
   - name: xHTML
@@ -54,7 +54,7 @@ tags:
     description: medication list (eML) in PDF
 
 paths:
-  /medication/v1/render/eml/xhtml:
+  /epa/medication/render/v1/eml/xhtml:
     get:
       tags:
         - xHTML
@@ -101,7 +101,7 @@ paths:
         '500':
           $ref: '#/components/responses/Error500InternalError'
 
-  /medication/v1/render/eml/pdf:
+  /epa/medication/render/v1/eml/pdf:
     get:
       tags:
         - PDF

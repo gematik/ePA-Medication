@@ -1,0 +1,68 @@
+@startuml
+
+skinparam Shadowing false
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+skinparam sequence {
+    ArrowColor DodgerBlue
+    ActorBorderColor DodgerBlue
+    LifeLineBorderColor Blue
+
+    ParticipantBackgroundColor #3483eb
+    ParticipantBorderColor #3483eb
+    ParticipantFontSize 14
+    ParticipantFontColor White
+
+    ActorBackgroundColor #3483eb
+    ActorFontSize 14
+    NoteBackgroundColor #3483eb
+}
+
+hide footbox
+autonumber
+
+participant "PVS/KIS" as PVS
+participant "E-Rezept-Fachdienst" as ERFD
+
+box "ePA-Aktensystem" #LightGray
+    participant "Information Service" as IS
+end box
+
+box "ePA-Aktensystem / VAU" #Beige
+    participant "VAU \nSession \nManagement" as VAU #eb5e34
+    participant "Medication Service" as EPA
+end box
+
+PVS -> ERFD: Anfrage: Verordnungsdaten übermitteln
+ERFD -> ERFD: Durchführen der standardmäßigen Workflow-Logik des E-Rezept-Fachdienstes
+ERFD --> PVS: Antwort: Erfolg
+
+ERFD -> ERFD: Persistieren der Verordnungsdaten in einer Warteschlange\nfür die asynchrone Übertragung
+
+ref over ERFD, IS: Lokalisierung der Service-Endpunkte der ePA und der Akte eines Versicherten (s. Abschn. 4.1, 4.2)
+
+ERFD -> IS: Anfrage: Widerspruchsinformationen zu Versorgungsprozessen
+IS --> ERFD: Antwort: Widerspruchsinformationen
+
+alt Widerspruch zum Versorgungsprozess dgMP vorhanden
+    ERFD -> ERFD: Abbruch. Löschen der Verordnungsdaten aus der Warteschlange
+else Kein Widerspruch zum Versorgungsprozess dgMP
+
+    ref over ERFD, VAU: Login in die Akte des Versicherten (siehe. Abschn. 4.3)
+
+    ERFD -> ERFD: Erzeugen des verordnungsweiten Business Identifer rxPrescriptionProcessIdentifier (PrescriptionID + YYYY-MM-DD)
+    ERFD -> ERFD: Erzeugen der FHIR-Ressourcen MedicationRequest, Medication, Practitioner, Organization\nauf Grundlage der Verordnungsdaten sowie rxPrescriptionProcessIdentifier
+    ERFD -> EPA: Übermittlung der erzeugten FHIR-Ressourcen als FHIR Operation per HTTP POST
+    EPA -> EPA: FHIR-Ressourcen\npersistieren
+
+    alt successful case
+        EPA --> ERFD: Antwort: Transaktion erfolgreich
+        ERFD -> ERFD: Löschen der Verordnungsdaten aus der Warteschlange
+    else
+        ERFD -> ERFD: Abbruch. Die Verordnungsdaten bleiben in der Warteschlange für eine spätere Übertragung
+    end
+
+end
+
+@enduml

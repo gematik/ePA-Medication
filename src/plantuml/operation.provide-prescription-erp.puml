@@ -1,0 +1,91 @@
+@startuml operation.provide-prescription-erp
+skinparam defaultTextAlignment center
+skinparam title {
+  backgroundColor SkyBlue
+  borderColor Gray
+} 
+title $provide-prescription-erp
+start
+
+
+repeat:Get next <b>RxPrescription</b> from the <b>Input-Parameters</b>;
+
+:Validate <b>MedicationRequest</b>, <b>Medication</b>, <b>Organization</b> and <b>Practitioner</b> from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part;
+
+if (Validation successfull) then (yes)
+  
+  :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and the \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PresciptionId</b>;;
+
+  if(Check if there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> \n and \n the status <b>active</b> or <b>completed</b> already in the Medication Service) then (yes)
+    
+    #Pink:Add error <b>OperationOutcome</b> (NO_EXIST or STATUS) to the <b>Output-Parameters</b>; 
+  
+  else (no)
+
+    partition transaction {
+        
+      :<< Create or Update >> 
+      <b>Organization</b>
+      <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b></i>
+      ====
+      identifier[TelematikID] = TelematikID
+      ...;
+        
+      :<< Create or Update >> 
+      <b>Practitioner</b>
+      <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b></i>
+      ====
+      identifier[TelematikID] = TelematikID
+      ...;
+        
+      :<< Create or Update >> 
+      <b>PractitionerRole</b>
+      ====
+      practitioner = Reference(<b>Practitioner</b>)
+      organization = Reference(<b>Organization</b>);
+
+      :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
+      <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>.Id and the Input-<b>PresciptionId</b>;
+
+      :Generate for <b>EPAMedicationUniqueIdentifier</b> from the hashed <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>;
+        
+      :<< Create >>
+      <b>Medication</b>
+      <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b></i>
+      ====
+      identifier[<b>EPAMedicationUniqueIdentifier</b>] = Value(EPAMedicationUniqueIdentifier)
+      identifier[<b>RxOriginatorProcessIdentifier</b>] = Value(RxOriginatorProcessIdentifier)
+      extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
+      status = <b>inactive</b>
+      ...;
+        
+      :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
+      <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>MedicationRequest</b>.Id 
+      and the <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PresciptionId</b>;
+
+      :<< Create >>
+      <b>MedicationRequest</b>
+      <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>MedicationRequest</b></i>
+      ====
+      identifier[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
+      identifier[<b>RxOriginatorProcessIdentifier</b>] = Value(RxOriginatorProcessIdentifier)
+      status=<b>active</b>
+      intent=<b>filler-order</b>
+      subject=<b>IdentifierKvid10</b>
+      medicationReference = Reference(<b>Medication</b>)
+      requester = Reference(<b>PractitionerRole</b>);
+
+      #PaleGreen:Add information <b>OperationOutcome</b> (SUCCESS) to the <b>Output-Parameters</b>;
+    }
+
+  endif
+
+else (no)
+  #Pink:Add error <b>OperationOutcome</b> (NO_VALID_STRUCTURE) to the <b>Output-Parameters</b>;
+endif
+
+repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)
+  
+:Return "<b>Output-Parameters</b>";
+stop  
+@enduml

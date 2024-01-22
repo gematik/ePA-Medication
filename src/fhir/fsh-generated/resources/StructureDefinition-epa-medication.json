@@ -7,7 +7,7 @@
   "title": "EPA Medication",
   "status": "active",
   "experimental": false,
-  "date": "2023-12-06",
+  "date": "2024-01-22",
   "publisher": "gematik GmbH",
   "description": "Defines the medication resource for the Medication Service in the ePA system.",
   "fhirVersion": "4.0.1",
@@ -65,14 +65,13 @@
           ],
           "ordered": false,
           "rules": "open"
-        },
-        "min": 1
+        }
       },
       {
         "id": "Medication.extension:RxPrescriptionProcessIdentifier",
         "path": "Medication.extension",
         "sliceName": "RxPrescriptionProcessIdentifier",
-        "min": 1,
+        "min": 0,
         "max": "1",
         "type": [
           {
@@ -81,8 +80,7 @@
               "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension"
             ]
           }
-        ],
-        "mustSupport": true
+        ]
       },
       {
         "id": "Medication.identifier",
@@ -96,21 +94,34 @@
           ],
           "rules": "open",
           "ordered": false
-        },
-        "min": 1,
-        "mustSupport": true
+        }
       },
       {
-        "id": "Medication.identifier:ePAMedicationUniqueIdentifier",
+        "id": "Medication.identifier:EPAMedicationUniqueIdentifier",
         "path": "Medication.identifier",
-        "sliceName": "ePAMedicationUniqueIdentifier",
-        "min": 1,
+        "sliceName": "EPAMedicationUniqueIdentifier",
+        "min": 0,
         "max": "1",
         "type": [
           {
             "code": "Identifier",
             "profile": [
               "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-unique-identifier"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.identifier:RxOriginatorProcessIdentifier",
+        "path": "Medication.identifier",
+        "sliceName": "RxOriginatorProcessIdentifier",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Identifier",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-originator-process-identifier"
             ]
           }
         ]
@@ -628,20 +639,12 @@
               "http://hl7.org/fhir/StructureDefinition/Medication"
             ]
           }
-        ],
-        "mustSupport": true
-      },
-      {
-        "id": "Medication.ingredient.item[x]:itemReference.reference",
-        "path": "Medication.ingredient.item[x].reference",
-        "min": 1,
-        "mustSupport": true
+        ]
       },
       {
         "id": "Medication.ingredient.isActive",
         "path": "Medication.ingredient.isActive",
-        "short": "handelt es sich um einen aktiven Bestandteil?",
-        "mustSupport": true
+        "short": "handelt es sich um einen aktiven Bestandteil?"
       },
       {
         "id": "Medication.ingredient.strength",
