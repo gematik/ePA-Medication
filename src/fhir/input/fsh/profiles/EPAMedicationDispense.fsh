@@ -15,10 +15,9 @@ Description: "Defines the medication dispense resource for the Medication Servic
     RxOriginatorProcessIdentifier 0..1
 * identifier[RxOriginatorProcessIdentifier] only RxOriginatorProcessIdentifier
 * status from EPAMedicationDispenseVS
-* medication[x] 1.. MS
-* medication[x] only Reference(EPAMedication)
-* medicationReference
-  * reference 1..1 MS
+* medication[x] only Reference
+* medicationReference MS
+* medicationReference only Reference(EPAMedication)
 * subject 1..1 MS
   * identifier 1.. MS
   * identifier only IdentifierKvid10

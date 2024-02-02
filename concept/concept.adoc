@@ -1,4 +1,4 @@
-= Medication Service der "ePA für alle"
+= Grobkonzept der "ePA für alle": Medication Service
 :title-page:
 :title-logo-image: image:Gematik_Logo_Flag.svg[pdfwidth=4.25in,align=center]
 :imagesdir: ../images
@@ -36,8 +36,8 @@ endif::[]
 :sectnums:
 
 // --- PDF theme options ---
-// :revdate: 22.01.2024
-:revnumber: 3.0 RC
+// :revdate: 30.01.2024
+:revnumber: 3.0
 :document-title: Medication Service der "ePA für alle"
 :document-subtitle: gemKPT_ePAfuerAlleMedSvc
 :organization: gematik GmbH
@@ -51,7 +51,7 @@ endif::[]
 
 ifdef::backend-pdf[]
 [.metadata]
-//Version: {revnumber}, 22.01.2024
+//Version: {revnumber}, 30.01.2024
 endif::[]
 
 
@@ -78,6 +78,12 @@ endif::[]
 |22.01.2024
 |
 |Ersterstellung
+|gematik
+
+|3.0
+|30.01.2024
+|
+|Veröffentlichung
 |gematik
 
 |===
@@ -179,9 +185,7 @@ endif::[]
 
 Die *$cancel-prescription-erp* Operation wird vom E-Rezept-Fachdienst verwendet, um ein bereits ausgestelltes elektronisches Rezept zu stornieren. Diese Funktion kommt zum Einsatz, wenn eine Verordnung aus verschiedenen Gründen, wie Änderungen in der Medikation oder Fehler bei der Ausstellung, nicht mehr benötigt wird. Nach der Stornierung durch den E-Rezept-Fachdienst wird diese Information an die elektronische Patientenakte (ePA) übermittelt, um dort die Verordnungsdaten zu invalidieren. Diese Vorgehensweise gewährleistet die Genauigkeit und Sicherheit in der Verwaltung von Medikationen.
 
-Die nachstehende Abbildung verdeutlicht die Kommunikationsflüsse für das Löschen einer Verordnung in den Medication Service per FHIR Operation. 
-
-*$cancel-prescription-erp*.
+Die nachstehende Abbildung verdeutlicht die Kommunikationsflüsse für das Löschen einer Verordnung in den Medication Service per FHIR Operation *$cancel-prescription-erp*.
 ifndef::env-github[]
 [page-layout=landscape]
 
@@ -267,3 +271,77 @@ Der Medication Service unterstützt die aufbereitete Generierung einer eML in de
 GET <<FQDN des Aktensystems>>/medication/render/eml/xhtml
 GET <<FQDN des Aktensystems>>/medication/render/eml/pdf
 ----
+
+
+[#_glossar]
+== Abkürzungsverzeichnis und Glossar
+
+//*A*
+
+//*B*
+
+//*C*
+
+*D*
+
+* dgMP – digital gestützter Medikationsprozess – Gesamtheit aller möglichen Teilprozesse des Medikationsprozesses, die ganz oder in Teilen mit strukturierten Daten elektronisch unterstützt werden
+
+*E*
+
+* eML – Elektronische Medikationsliste – Neben dem eMP die Basis für den dgMP
+
+* eMP – Elektronischer Medikationsplan
+
+*F*
+
+* FHIR – Fast Healthcare Interoperability Resources – International etablierter IT-Standard für die Beschreibung von u.a. medizinischen Daten
+
+//*G*
+
+//*H*
+
+//*I*
+
+//*J*
+
+*K*
+
+* KVNR – Krankenversicherungsnummer
+
+*L*
+
+* LE – Leistungserbringer
+
+* LEI – Leistungserbringerinstitution
+
+//*M*
+
+//*N*
+
+*O*
+
+* OTC – Over the Counter
+
+*P*
+
+* PZN – Pharmazentralnummer
+
+// *Q*
+
+//*R*
+
+//*S*
+
+//*T*
+
+//*U*
+
+//*V*
+
+//*W*
+
+//*X*
+
+//*Y*
+
+//*Z*

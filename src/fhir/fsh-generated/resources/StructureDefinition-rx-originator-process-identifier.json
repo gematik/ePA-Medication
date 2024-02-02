@@ -6,7 +6,7 @@
   "name": "RxOriginatorProcessIdentifier",
   "status": "active",
   "experimental": false,
-  "date": "2024-01-22",
+  "date": "2024-01-30",
   "publisher": "gematik GmbH",
   "description": "The RxOriginatorProcessIdentifier, generated within the Medication Service Backend, links the prescriptionID from the E-Rezept-Fachdienst with the original input FHIR resource ID, facilitating accurate tracking and utilization of medication data in operational processes within digital healthcare systems.",
   "fhirVersion": "4.0.1",

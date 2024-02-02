@@ -16,12 +16,12 @@ header:
   height: 50
   recto:
     left:
-      content: '*Grobkonzept der "ePA für alle"*'
+      content: '*Grobkonzept der "ePA für alle" – Medication Service*'
     right:
       content: image:../../images/Gematik_Logo_Flag.svg[width=100]
   verso:
     left:
-      content: '*Grobkonzept der "ePA für alle"*'
+      content: '*Grobkonzept der "ePA für alle" – Medication Service*'
     right:
       content: image:../../images/Gematik_Logo_Flag.svg[width=100]
 footer:
@@ -29,12 +29,12 @@ footer:
   recto:
     left:
       content: |
-        gemKPT_ePAfuerAlleMedSvc_V3.0RC.pdf +
+        gemKPT_ePAfuerAlleMedSvc_V3.0.pdf +
         Version: {revnumber}
     right:
       content: |
         Seite {page-number} von {page-count} +
-        Stand: 22.01.2024
+        Stand: 30.01.2024
     center:
       content: |
         Übergreifendes Konzept +
@@ -42,12 +42,12 @@ footer:
   verso:
     left:
       content: |
-        gemKPT_ePAfuerAlleMedSvcV3.0RC.pdf +
+        gemKPT_ePAfuerAlleMedSvcV3.0.pdf +
         Version: {revnumber}
     right:
       content: |
         Seite {page-number} von {page-count} +
-        Stand: 22.01.2024
+        Stand: 30.01.2024
     center:
       content: |
         Übergreifendes Konzept +

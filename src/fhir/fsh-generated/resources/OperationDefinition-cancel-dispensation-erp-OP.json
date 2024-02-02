@@ -7,7 +7,7 @@
   "version": "1.0.0",
   "status": "active",
   "publisher": "gematik GmbH",
-  "date": "2024-01-22",
+  "date": "2024-01-30",
   "name": "Cancel Dispensation eRP",
   "kind": "operation",
   "code": "cancel-dispensation-erp",
