@@ -27,9 +27,6 @@ Description: "Defines the medication request resource for the Medication Service
 * medicationReference only Reference(EPAMedication)
 * requester MS
 * requester only Reference(PractitionerRole)
-* medication[x] 1.. MS
-* medication[x] only Reference(EPAMedication)
-  * reference 1.. MS
 * authoredOn 1.. MS
 * authoredOn ^short = "Ausstellungsdatum"
 * authoredOn ^definition = "Ausstellungsdatum der Verordnung"

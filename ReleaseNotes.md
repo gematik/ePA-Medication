@@ -1,6 +1,12 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
+## Release 3.0.0
+- release ePA-3.0
+### changes
+- editorial changes
+- fixes in epa medication resources
+- added sha256 for hash in epa medication guide
 ## Release 3.0.0 RC
 - release candidate ePA-3.0
 ## Release 0.0.3

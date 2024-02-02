@@ -169,7 +169,7 @@ The following usage specifications for the FHIR medication resources processed w
     Ingredient_N = Medication.ingredient[x].item[x]
     Strength_N = Medication.ingredient[x].strength
     Alphabetically sorted by Ingredient + Strength
-    EPAMedicationUniqueIdentifier = hash<Code, CodeText, Form, Ingredient_1 + Strength_1, Ingredient_2 + Strength_2, ..., Ingredient_N + Strength_N>
+    EPAMedicationUniqueIdentifier = hash.sha256(Code, CodeText, Form, Ingredient_1 + Strength_1, Ingredient_2 + Strength_2, ..., Ingredient_N + Strength_N)
 
 
 ### Other FHIR Resources
