@@ -1,0 +1,218 @@
+[
+  {
+    "outputFile": "CodeSystem-epa-ms-operation-outcome-codes-cs.json",
+    "fshName": "EPAMSOperationOutcomeCS",
+    "fshType": "CodeSystem",
+    "fshFile": "codesystems/EPAMSOperationOutcomeCS.fsh",
+    "startLine": 1,
+    "endLine": 13
+  },
+  {
+    "outputFile": "Medication-example-epa-medication-1.json",
+    "fshName": "ExampleEpaMedication1",
+    "fshType": "Instance",
+    "fshFile": "examples/ExampleEpaMedication1.fsh",
+    "startLine": 1,
+    "endLine": 12
+  },
+  {
+    "outputFile": "Medication-example-epa-medication-2.json",
+    "fshName": "ExampleEpaMedication2",
+    "fshType": "Instance",
+    "fshFile": "examples/ExampleEpaMedication2.fsh",
+    "startLine": 1,
+    "endLine": 30
+  },
+  {
+    "outputFile": "Medication-example-epa-medication-3.json",
+    "fshName": "ExampleEpaMedication3",
+    "fshType": "Instance",
+    "fshFile": "examples/ExampleEpaMedication3.fsh",
+    "startLine": 1,
+    "endLine": 10
+  },
+  {
+    "outputFile": "OperationDefinition-cancel-dispensation-erp-OP.json",
+    "fshName": "CancelDispensationERPOP",
+    "fshType": "Instance",
+    "fshFile": "operationdefinitions/CancelDispensationERPOP.fsh",
+    "startLine": 1,
+    "endLine": 56
+  },
+  {
+    "outputFile": "OperationDefinition-cancel-prescription-erp-OP.json",
+    "fshName": "CancelPrescriptionERPOP",
+    "fshType": "Instance",
+    "fshFile": "operationdefinitions/CancelPrescriptionERPOP.fsh",
+    "startLine": 1,
+    "endLine": 56
+  },
+  {
+    "outputFile": "OperationDefinition-provide-dispensation-erp-OP.json",
+    "fshName": "ProvideDispensationERPOP",
+    "fshType": "Instance",
+    "fshFile": "operationdefinitions/ProvideDispensationERPOP.fsh",
+    "startLine": 1,
+    "endLine": 74
+  },
+  {
+    "outputFile": "OperationDefinition-provide-prescription-erp-OP.json",
+    "fshName": "ProvidePrescriptionERPOP",
+    "fshType": "Instance",
+    "fshFile": "operationdefinitions/ProvidePrescriptionERPOP.fsh",
+    "startLine": 1,
+    "endLine": 80
+  },
+  {
+    "outputFile": "StructureDefinition-epa-erp-prescription-id.json",
+    "fshName": "EPAeRPPrescriptionId",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAeRPPrescriptionId.fsh",
+    "startLine": 1,
+    "endLine": 10
+  },
+  {
+    "outputFile": "StructureDefinition-epa-medication-dispense.json",
+    "fshName": "EPAMedicationDispense",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAMedicationDispense.fsh",
+    "startLine": 1,
+    "endLine": 34
+  },
+  {
+    "outputFile": "StructureDefinition-epa-medication-request.json",
+    "fshName": "EPAMedicationRequest",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAMedicationRequest.fsh",
+    "startLine": 1,
+    "endLine": 107
+  },
+  {
+    "outputFile": "StructureDefinition-epa-medication-unique-identifier.json",
+    "fshName": "EPAMedicationUniqueIdentifier",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAMedicationUniqueIdentifier.fsh",
+    "startLine": 1,
+    "endLine": 9
+  },
+  {
+    "outputFile": "StructureDefinition-epa-medication.json",
+    "fshName": "EPAMedication",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAMedication.fsh",
+    "startLine": 1,
+    "endLine": 169
+  },
+  {
+    "outputFile": "StructureDefinition-epa-ms-operation-outcome.json",
+    "fshName": "EPAMSOperationOutcome",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAMSOperationOutcome.fsh",
+    "startLine": 1,
+    "endLine": 10
+  },
+  {
+    "outputFile": "StructureDefinition-epa-op-cancel-dispensation-erp-input-parameters.json",
+    "fshName": "EPAOpCancelDispensationERPInputParameters",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAOpCancelDispensationERPInputParameters.fsh",
+    "startLine": 1,
+    "endLine": 32
+  },
+  {
+    "outputFile": "StructureDefinition-epa-op-cancel-prescription-erp-input-parameters.json",
+    "fshName": "EPAOpCancelPrescriptionERPInputParameters",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAOpCancelPrescriptionERPInputParameters.fsh",
+    "startLine": 1,
+    "endLine": 32
+  },
+  {
+    "outputFile": "StructureDefinition-epa-op-provide-dispensation-erp-input-parameters.json",
+    "fshName": "EPAOpProvideDispensationERPInputParameters",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAOpProvideDispensationERPInputParameters.fsh",
+    "startLine": 1,
+    "endLine": 56
+  },
+  {
+    "outputFile": "StructureDefinition-epa-op-provide-prescription-erp-input-parameters.json",
+    "fshName": "EPAOpProvidePrescriptionERPInputParameters",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAOpProvidePrescriptionERPInputParameters.fsh",
+    "startLine": 1,
+    "endLine": 64
+  },
+  {
+    "outputFile": "StructureDefinition-epa-op-rx-dispensation-erp-output-parameters.json",
+    "fshName": "EPAOpRxDispensationERPOutputParameters",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAOpRxDispensationERPOutputParameters.fsh",
+    "startLine": 1,
+    "endLine": 40
+  },
+  {
+    "outputFile": "StructureDefinition-epa-op-rx-prescription-erp-output-parameters.json",
+    "fshName": "EPAOpRxPrescriptionERPOutputParameters",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAOpRxPrescriptionERPOutputParameters.fsh",
+    "startLine": 1,
+    "endLine": 40
+  },
+  {
+    "outputFile": "StructureDefinition-multiple-prescription-extension.json",
+    "fshName": "MultiplePrescriptionExtension",
+    "fshType": "Extension",
+    "fshFile": "extensions/MultiplePrescriptionExtension.fsh",
+    "startLine": 1,
+    "endLine": 64
+  },
+  {
+    "outputFile": "StructureDefinition-rx-originator-process-identifier.json",
+    "fshName": "RxOriginatorProcessIdentifier",
+    "fshType": "Profile",
+    "fshFile": "profiles/RxOriginatorProcessIdentifier.fsh",
+    "startLine": 1,
+    "endLine": 8
+  },
+  {
+    "outputFile": "StructureDefinition-rx-prescription-process-identifier-extension.json",
+    "fshName": "RxPrescriptionProcessIdentifierExtension",
+    "fshType": "Extension",
+    "fshFile": "extensions/RxPrescriptionProcessIdentifierExtension.fsh",
+    "startLine": 1,
+    "endLine": 6
+  },
+  {
+    "outputFile": "StructureDefinition-rx-prescription-process-identifier.json",
+    "fshName": "RxPrescriptionProcessIdentifier",
+    "fshType": "Profile",
+    "fshFile": "profiles/RxPrescriptionProcessIdentifier.fsh",
+    "startLine": 1,
+    "endLine": 8
+  },
+  {
+    "outputFile": "ValueSet-epa-medication-dispense-vs.json",
+    "fshName": "EPAMedicationDispenseVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets/EPAMedicationDispenseVS.fsh",
+    "startLine": 1,
+    "endLine": 8
+  },
+  {
+    "outputFile": "ValueSet-epa-medication-request-vs.json",
+    "fshName": "EPAMedicationRequestVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets/EPAMedicationRequestVS.fsh",
+    "startLine": 1,
+    "endLine": 8
+  },
+  {
+    "outputFile": "ValueSet-epa-ms-operation-outcome-vs.json",
+    "fshName": "EPAMSOperationOutcomeVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets/EPAMSOperationOutcomeVS.fsh",
+    "startLine": 1,
+    "endLine": 7
+  }
+]

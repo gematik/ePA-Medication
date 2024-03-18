@@ -7,7 +7,7 @@
   "version": "1.0.0",
   "status": "active",
   "publisher": "gematik GmbH",
-  "date": "2024-01-30",
+  "date": "2024-03-18",
   "name": "Cancel Dispensation eRP",
   "kind": "operation",
   "code": "cancel-dispensation-erp",
@@ -18,13 +18,13 @@
   "outputProfile": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters",
   "parameter": [
     {
-      "name": "RxDispensation",
+      "name": "rxDispensation",
       "use": "in",
       "min": 1,
       "max": "*",
       "part": [
         {
-          "name": "PrescriptionId",
+          "name": "prescriptionId",
           "type": "Identifier",
           "use": "in",
           "min": 1,
@@ -40,13 +40,13 @@
       ]
     },
     {
-      "name": "RxDispensation",
+      "name": "rxDispensation",
       "use": "out",
       "min": 1,
       "max": "*",
       "part": [
         {
-          "name": "PrescriptionId",
+          "name": "prescriptionId",
           "type": "Identifier",
           "use": "out",
           "min": 1,
@@ -60,7 +60,7 @@
           "max": "1"
         },
         {
-          "name": "OperationOutcome",
+          "name": "operationOutcome",
           "type": "OperationOutcome",
           "use": "out",
           "min": 1,

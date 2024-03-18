@@ -2,7 +2,7 @@
 skinparam fixCircleLabelOverlapping false 
 skinparam roundcorner 10
 skinparam object {
-    BackgroundColor #5c7aab
+    BackgroundColor DimGrey
     BorderColor Black
     ArrowColor #5c7aab
     FontSize 12
@@ -10,22 +10,23 @@ skinparam object {
     NoteBackgroundColor #3483eb
     ArrowFontColor #777777
 }
+skinparam LegendBackgroundColor White
 
-
-object "<< Verordnender LE >>\n**PractitionerDirectory**" as PrescribingPractitioner
-object "<< Verordnende LEI >>\n**OrganizationDirectory**" as PrescribingOrganization
+object "<< Versicherter >>\n**Patient**" as Patient 
+object "<< Verschreibender LE >>\n**PractitionerDirectory**" as PrescribingPractitioner
+object "<< Verschreibende LEI >>\n**OrganizationDirectory**" as PrescribingOrganization
 object "<< Abgebende LEI >>\n**OrganizationDirectory**" as PharmOrganization
 object "PractitionerRole" as PractionerRole
-object "<< Medikation >>\n**EPAMedication**" as Medication
-object "<< Medikationsverordnung >>\n**EPAMedicationRequest**" as MedicationRequest {
+object "<< Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen
+object "<< Arzneimittelverschreibung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen {
     + subject: Reference(Patient)
 }
-object "<< Substituierte Medikation >>\n**EPAMedication**" as AltMedication
-object "<< Dispensierinformation >>\n**EPAMedicationDispense**" as MedicationDispense {
+object "<< Substituiertes Arzneimittel >>\n**EPAMedication**" as AltMedication #DarkSeaGreen
+object "<< Dispensierinformation >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen {
     + wasSubstituted: true
 }
 
-
+MedicationRequest -d->  Patient : subject
 MedicationRequest -l-> Medication : medicationReference
 MedicationRequest -r-> PractionerRole : requester
 
@@ -36,4 +37,9 @@ MedicationDispense -l-> AltMedication : medicationReference
 MedicationDispense -d-> MedicationRequest : authorizingPrescription
 MedicationDispense -u-> PharmOrganization : perfomer.actor
 
+legend left
+    | Color | Data |
+    |<#DarkSeaGreen>| Prescription Data |
+    |<#DimGrey>| Actors |
+endlegend
 @enduml

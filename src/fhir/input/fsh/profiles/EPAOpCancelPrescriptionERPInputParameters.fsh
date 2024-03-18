@@ -1,26 +1,26 @@
 Profile: EPAOpCancelPrescriptionERPInputParameters
 Parent: Parameters
 Id: epa-op-cancel-prescription-erp-input-parameters
-Title: "EPA Operation CancelPrescriptionERP Input-Parameter"
-Description: "EPA Operation CancelPrescriptionERP Input-Parameter"
+Title: "EPA Operation CancelPrescription ERP Input-Parameters"
+Description: "EPA Operation CancelPrescription ERP Input-Parameters"
 * insert Meta
 * parameter 1..
   * name MS
-  * name = "RxPrescription"
+  * name = "rxPrescription"
   * value[x] 0..0
   * resource 0..0
   * part 2..2 MS
     * ^slicing.discriminator.type = #pattern
-    * ^slicing.discriminator.path = "$this"
+    * ^slicing.discriminator.path = "name"
     * ^slicing.rules = #open
   * part contains
-    PrescriptionId 1..1 and
+    prescriptionId 1..1 and
     authoredOn 1..1
-  * part[PrescriptionId]
+  * part[prescriptionId]
     * name MS
-    * name = "PrescriptionId"
+    * name = "prescriptionId"
     * value[x] 1..1
-    * value[x] only GEM_ERP_PR_PrescriptionId
+    * value[x] only EPAeRPPrescriptionId
     * resource 0..0
     * part 0..0 
   * part[authoredOn]

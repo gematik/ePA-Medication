@@ -1,7 +1,7 @@
 ValueSet: EPAMedicationRequestVS
 Id: epa-medication-request-vs
-Title: "EPA Medication Request VS"
-Description: "Include all VS of KBV MedicationDarreichungsform Type"
+Title: "EPA Medication Request ValueSet"
+Description: "EPA Medication Request ValueSet"
 * insert Meta
 * medicationrequest-status#active
 * medicationrequest-status#completed

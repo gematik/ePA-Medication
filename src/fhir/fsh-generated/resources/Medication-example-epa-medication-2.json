@@ -18,7 +18,7 @@
   "identifier": [
     {
       "system": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier",
-      "value": "8F6E41946E798D9C89384A0D2C9C7D9E4F6F0A2DE9EF62B7A4A26A329400735F"
+      "value": "F5559CCEBF31CDCC373F75B8FA9398B8AD6532134B231A15A25F353961BDD761"
     },
     {
       "system": "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier",

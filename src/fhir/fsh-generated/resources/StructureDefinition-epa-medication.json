@@ -7,7 +7,7 @@
   "title": "EPA Medication",
   "status": "active",
   "experimental": false,
-  "date": "2024-01-30",
+  "date": "2024-03-18",
   "publisher": "gematik GmbH",
   "description": "Defines the medication resource for the Medication Service in the ePA system.",
   "fhirVersion": "4.0.1",
@@ -47,7 +47,7 @@
           {
             "key": "epa-med-1",
             "severity": "error",
-            "human": "Medikamenten-Code, -Bezeichnung oder Inhaltsstoffe müssen angegeben werden.",
+            "human": "Medication code, name, or ingredients must be specified",
             "expression": "code.exists() or ingredient.exists()",
             "source": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication"
           }
@@ -68,9 +68,9 @@
         }
       },
       {
-        "id": "Medication.extension:RxPrescriptionProcessIdentifier",
+        "id": "Medication.extension:rxPrescriptionProcessIdentifier",
         "path": "Medication.extension",
-        "sliceName": "RxPrescriptionProcessIdentifier",
+        "sliceName": "rxPrescriptionProcessIdentifier",
         "min": 0,
         "max": "1",
         "type": [
@@ -109,7 +109,10 @@
               "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-unique-identifier"
             ]
           }
-        ]
+        ],
+        "patternIdentifier": {
+          "system": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier"
+        }
       },
       {
         "id": "Medication.identifier:RxOriginatorProcessIdentifier",
@@ -124,7 +127,10 @@
               "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-originator-process-identifier"
             ]
           }
-        ]
+        ],
+        "patternIdentifier": {
+          "system": "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier"
+        }
       },
       {
         "id": "Medication.code",
@@ -147,9 +153,9 @@
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:PZN",
+        "id": "Medication.code.coding:pzn",
         "path": "Medication.code.coding",
-        "sliceName": "PZN",
+        "sliceName": "pzn",
         "min": 0,
         "max": "1",
         "patternCoding": {
@@ -158,132 +164,129 @@
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:PZN.system",
+        "id": "Medication.code.coding:pzn.system",
         "path": "Medication.code.coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:PZN.code",
+        "id": "Medication.code.coding:pzn.code",
         "path": "Medication.code.coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:PZN.display",
+        "id": "Medication.code.coding:pzn.display",
         "path": "Medication.code.coding.display",
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:ATC-DE",
+        "id": "Medication.code.coding:atc-de",
         "path": "Medication.code.coding",
-        "sliceName": "ATC-DE",
+        "sliceName": "atc-de",
         "min": 0,
-        "max": "1",
+        "max": "*",
         "patternCoding": {
           "system": "http://fhir.de/CodeSystem/bfarm/atc"
         },
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:ATC-DE.system",
+        "id": "Medication.code.coding:atc-de.system",
         "path": "Medication.code.coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:ATC-DE.code",
+        "id": "Medication.code.coding:atc-de.code",
         "path": "Medication.code.coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:ATC-DE.display",
+        "id": "Medication.code.coding:atc-de.display",
         "path": "Medication.code.coding.display",
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:ASK",
+        "id": "Medication.code.coding:ask",
         "path": "Medication.code.coding",
-        "sliceName": "ASK",
+        "sliceName": "ask",
         "min": 0,
-        "max": "1",
+        "max": "*",
         "patternCoding": {
           "system": "http://fhir.de/CodeSystem/ask"
         },
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:ASK.system",
+        "id": "Medication.code.coding:ask.system",
         "path": "Medication.code.coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:ASK.code",
+        "id": "Medication.code.coding:ask.code",
         "path": "Medication.code.coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:ASK.display",
+        "id": "Medication.code.coding:ask.display",
         "path": "Medication.code.coding.display",
         "mustSupport": true
       },
       {
-        "id": "Medication.code.coding:WG14",
+        "id": "Medication.code.coding:wg14",
         "path": "Medication.code.coding",
-        "sliceName": "WG14",
+        "sliceName": "wg14",
         "min": 0,
-        "max": "1",
+        "max": "*",
         "patternCoding": {
           "system": "http://fhir.de/CodeSystem/abdata/wg14"
-        },
-        "mustSupport": true
-      },
-      {
-        "id": "Medication.code.coding:WG14.system",
-        "path": "Medication.code.coding.system",
-        "min": 1,
-        "mustSupport": true
-      },
-      {
-        "id": "Medication.code.coding:WG14.code",
-        "path": "Medication.code.coding.code",
-        "min": 1,
-        "mustSupport": true
-      },
-      {
-        "id": "Medication.code.coding:WG14.display",
-        "path": "Medication.code.coding.display",
-        "mustSupport": true
-      },
-      {
-        "id": "Medication.code.coding:verordnungskategorieCode",
-        "path": "Medication.code.coding",
-        "sliceName": "verordnungskategorieCode",
-        "min": 0,
-        "max": "1",
-        "mustSupport": true
-      },
-      {
-        "id": "Medication.code.coding:verordnungskategorieCode.system",
-        "path": "Medication.code.coding.system",
-        "min": 1,
-        "mustSupport": true
-      },
-      {
-        "id": "Medication.code.coding:verordnungskategorieCode.code",
-        "path": "Medication.code.coding.code",
-        "min": 1,
-        "mustSupport": true,
-        "binding": {
-          "strength": "required",
-          "valueSet": "https://gematik.de/fhir/epa-medication/ValueSet/kbv-medication-type-vs"
         }
       },
       {
-        "id": "Medication.code.coding:verordnungskategorieCode.display",
+        "id": "Medication.code.coding:wg14.system",
+        "path": "Medication.code.coding.system",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.code.coding:wg14.code",
+        "path": "Medication.code.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.code.coding:wg14.display",
+        "path": "Medication.code.coding.display",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.code.coding:snomed",
+        "path": "Medication.code.coding",
+        "sliceName": "snomed",
+        "min": 0,
+        "max": "*",
+        "patternCoding": {
+          "system": "http://snomed.info/sct"
+        }
+      },
+      {
+        "id": "Medication.code.coding:snomed.system",
+        "path": "Medication.code.coding.system",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.code.coding:snomed.code",
+        "path": "Medication.code.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.code.coding:snomed.display",
         "path": "Medication.code.coding.display",
         "mustSupport": true
       },
@@ -295,15 +298,14 @@
       {
         "id": "Medication.status",
         "path": "Medication.status",
-        "short": "Status der Medikamenteninformation",
-        "min": 1,
+        "short": "Status of Medication Information",
         "mustSupport": true
       },
       {
         "id": "Medication.manufacturer",
         "path": "Medication.manufacturer",
-        "short": "Hersteller des Medikaments",
-        "comment": "Hier kann der tatsächliche Hersteller des Medikaments benannt werden, vornehmlich im Fall von Wirkstoffmischungen (Rezepturen), beispielsweise die Krankenhausapotheke. Zu beachten ist, dass die zulassende Organisation, wie sie z.B. in den Daten zur PZN benannt ist, nicht als Hersteller gilt.",
+        "short": "Manufacturer of the Medication",
+        "comment": "Here, the actual manufacturer of the medication can be named, primarily in the case of active ingredient mixtures (compounding prescriptions), such as the hospital pharmacy. It is important to note that the licensing organization, as mentioned in the PZN (Pharmaceutical Central Number) data, is not considered the manufacturer.",
         "mustSupport": true
       },
       {
@@ -315,7 +317,7 @@
       {
         "id": "Medication.form",
         "path": "Medication.form",
-        "short": "Abgabeform",
+        "short": "Form of Dispensing",
         "mustSupport": true
       },
       {
@@ -333,60 +335,93 @@
         "mustSupport": true
       },
       {
-        "id": "Medication.form.coding:EDQM",
+        "id": "Medication.form.coding:edqm",
         "path": "Medication.form.coding",
-        "sliceName": "EDQM",
+        "sliceName": "edqm",
         "min": 0,
-        "max": "1",
+        "max": "*",
+        "patternCoding": {
+          "system": "http://standardterms.edqm.eu"
+        },
         "mustSupport": true,
         "binding": {
-          "strength": "required",
+          "strength": "preferred",
           "valueSet": "http://hl7.org/fhir/uv/ips/ValueSet/medicine-doseform"
         }
       },
       {
-        "id": "Medication.form.coding:EDQM.system",
+        "id": "Medication.form.coding:edqm.system",
         "path": "Medication.form.coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.form.coding:EDQM.code",
+        "id": "Medication.form.coding:edqm.code",
         "path": "Medication.form.coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.form.coding:EDQM.display",
+        "id": "Medication.form.coding:edqm.display",
         "path": "Medication.form.coding.display",
         "mustSupport": true
       },
       {
-        "id": "Medication.form.coding:KBVDarreichungsform",
+        "id": "Medication.form.coding:snomed",
         "path": "Medication.form.coding",
-        "sliceName": "KBVDarreichungsform",
+        "sliceName": "snomed",
         "min": 0,
-        "max": "1",
-        "mustSupport": true,
-        "binding": {
-          "strength": "required",
-          "valueSet": "https://gematik.de/fhir/epa-medication/ValueSet/kbv-medication-darreichungsform-vs"
+        "max": "*",
+        "patternCoding": {
+          "system": "http://snomed.info/sct"
         }
       },
       {
-        "id": "Medication.form.coding:KBVDarreichungsform.system",
+        "id": "Medication.form.coding:snomed.system",
         "path": "Medication.form.coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.form.coding:KBVDarreichungsform.code",
+        "id": "Medication.form.coding:snomed.code",
         "path": "Medication.form.coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.form.coding:KBVDarreichungsform.display",
+        "id": "Medication.form.coding:snomed.display",
+        "path": "Medication.form.coding.display",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.form.coding:kbvDarreichungsform",
+        "path": "Medication.form.coding",
+        "sliceName": "kbvDarreichungsform",
+        "min": 0,
+        "max": "*",
+        "patternCoding": {
+          "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_DARREICHUNGSFORM"
+        },
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.kbv.de/CodeSystem/KBV_VS_SFHIR_KBV_DARREICHUNGSFORM"
+        }
+      },
+      {
+        "id": "Medication.form.coding:kbvDarreichungsform.system",
+        "path": "Medication.form.coding.system",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.form.coding:kbvDarreichungsform.code",
+        "path": "Medication.form.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.form.coding:kbvDarreichungsform.display",
         "path": "Medication.form.coding.display",
         "mustSupport": true
       },
@@ -398,7 +433,6 @@
       {
         "id": "Medication.amount.numerator",
         "path": "Medication.amount.numerator",
-        "min": 1,
         "patternQuantity": {
           "system": "http://unitsofmeasure.org"
         },
@@ -407,7 +441,6 @@
       {
         "id": "Medication.amount.numerator.value",
         "path": "Medication.amount.numerator.value",
-        "min": 1,
         "mustSupport": true
       },
       {
@@ -418,13 +451,11 @@
       {
         "id": "Medication.amount.numerator.system",
         "path": "Medication.amount.numerator.system",
-        "min": 1,
         "mustSupport": true
       },
       {
         "id": "Medication.amount.numerator.code",
         "path": "Medication.amount.numerator.code",
-        "min": 1,
         "mustSupport": true
       },
       {
@@ -438,7 +469,6 @@
       {
         "id": "Medication.amount.denominator.value",
         "path": "Medication.amount.denominator.value",
-        "min": 1,
         "mustSupport": true
       },
       {
@@ -449,19 +479,17 @@
       {
         "id": "Medication.amount.denominator.system",
         "path": "Medication.amount.denominator.system",
-        "min": 1,
         "mustSupport": true
       },
       {
         "id": "Medication.amount.denominator.code",
         "path": "Medication.amount.denominator.code",
-        "min": 1,
         "mustSupport": true
       },
       {
         "id": "Medication.ingredient",
         "path": "Medication.ingredient",
-        "short": "Informationen zu Bestandteilen (Rezeptur)",
+        "short": "Information on Components (Rezeptur)",
         "mustSupport": true
       },
       {
@@ -476,13 +504,14 @@
           ],
           "ordered": false,
           "rules": "open"
-        }
+        },
+        "mustSupport": true
       },
       {
         "id": "Medication.ingredient.item[x]:itemCodeableConcept",
         "path": "Medication.ingredient.item[x]",
         "sliceName": "itemCodeableConcept",
-        "short": "Bestandteil in codierter Form oder ggf. als Freitext",
+        "short": "Component in coded form or, if necessary, as free text",
         "min": 0,
         "max": "1",
         "type": [
@@ -504,118 +533,143 @@
           ],
           "rules": "open"
         },
-        "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ASK",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ask",
         "path": "Medication.ingredient.item[x].coding",
-        "sliceName": "ASK",
+        "sliceName": "ask",
         "min": 0,
-        "max": "1",
+        "max": "*",
         "patternCoding": {
           "system": "http://fhir.de/CodeSystem/ask"
         },
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ASK.system",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ask.system",
         "path": "Medication.ingredient.item[x].coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ASK.code",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ask.code",
         "path": "Medication.ingredient.item[x].coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ASK.display",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ask.display",
         "path": "Medication.ingredient.item[x].coding.display",
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ATC-DE",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:atc-de",
         "path": "Medication.ingredient.item[x].coding",
-        "sliceName": "ATC-DE",
+        "sliceName": "atc-de",
         "min": 0,
-        "max": "1",
+        "max": "*",
         "patternCoding": {
           "system": "http://fhir.de/CodeSystem/bfarm/atc"
         },
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ATC-DE.system",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:atc-de.system",
         "path": "Medication.ingredient.item[x].coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ATC-DE.code",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:atc-de.code",
         "path": "Medication.ingredient.item[x].coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:ATC-DE.display",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:atc-de.display",
         "path": "Medication.ingredient.item[x].coding.display",
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:PZN",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:pzn",
         "path": "Medication.ingredient.item[x].coding",
-        "sliceName": "PZN",
+        "sliceName": "pzn",
         "min": 0,
-        "max": "1",
+        "max": "*",
         "patternCoding": {
           "system": "http://fhir.de/CodeSystem/ifa/pzn"
         },
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:PZN.system",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:pzn.system",
         "path": "Medication.ingredient.item[x].coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:PZN.code",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:pzn.code",
         "path": "Medication.ingredient.item[x].coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:PZN.display",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:pzn.display",
         "path": "Medication.ingredient.item[x].coding.display",
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:WG14",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:wg14",
         "path": "Medication.ingredient.item[x].coding",
-        "sliceName": "WG14",
+        "sliceName": "wg14",
         "min": 0,
-        "max": "1",
+        "max": "*",
         "patternCoding": {
           "system": "http://fhir.de/CodeSystem/abdata/wg14"
-        },
-        "mustSupport": true
+        }
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:WG14.system",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:wg14.system",
         "path": "Medication.ingredient.item[x].coding.system",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:WG14.code",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:wg14.code",
         "path": "Medication.ingredient.item[x].coding.code",
         "min": 1,
         "mustSupport": true
       },
       {
-        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:WG14.display",
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:wg14.display",
+        "path": "Medication.ingredient.item[x].coding.display",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:snomed",
+        "path": "Medication.ingredient.item[x].coding",
+        "sliceName": "snomed",
+        "min": 0,
+        "max": "*",
+        "patternCoding": {
+          "system": "http://snomed.info/sct"
+        }
+      },
+      {
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:snomed.system",
+        "path": "Medication.ingredient.item[x].coding.system",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:snomed.code",
+        "path": "Medication.ingredient.item[x].coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:snomed.display",
         "path": "Medication.ingredient.item[x].coding.display",
         "mustSupport": true
       },
@@ -628,7 +682,7 @@
         "id": "Medication.ingredient.item[x]:itemReference",
         "path": "Medication.ingredient.item[x]",
         "sliceName": "itemReference",
-        "short": "Bestandteil (Referenz auf ein anderes Medikament)",
+        "short": "Component (reference to another medication)",
         "min": 0,
         "max": "1",
         "type": [
@@ -644,12 +698,12 @@
       {
         "id": "Medication.ingredient.isActive",
         "path": "Medication.ingredient.isActive",
-        "short": "handelt es sich um einen aktiven Bestandteil?"
+        "short": "Is it an active ingredient?"
       },
       {
         "id": "Medication.ingredient.strength",
         "path": "Medication.ingredient.strength",
-        "short": "Stärke",
+        "short": "Strength",
         "mustSupport": true
       },
       {
@@ -718,13 +772,13 @@
       {
         "id": "Medication.batch",
         "path": "Medication.batch",
-        "short": "Angaben zur Charge",
+        "short": "Batch Information",
         "mustSupport": true
       },
       {
         "id": "Medication.batch.lotNumber",
         "path": "Medication.batch.lotNumber",
-        "short": "Chargennummer",
+        "short": "Batch Number",
         "mustSupport": true
       }
     ]

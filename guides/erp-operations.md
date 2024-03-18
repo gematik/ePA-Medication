@@ -185,3 +185,8 @@ The following usage specifications for the FHIR medication resources processed w
 #### Information Elements for the Medication Service Based on FHIR
 
 ![Medication FHIR Model](/images/plantuml/medication.fhir.model.png)
+
+
+## Uniqueness of FHIR Resources
+
+The Medication Service MUST soley use time-based *Universally Unique IDentifier*s (UUID) according to [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.2) for logical IDs (i.e FHIR element *Resource.id*). 

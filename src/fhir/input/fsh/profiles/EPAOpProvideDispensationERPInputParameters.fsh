@@ -1,29 +1,29 @@
 Profile: EPAOpProvideDispensationERPInputParameters
 Parent: Parameters
 Id: epa-op-provide-dispensation-erp-input-parameters
-Title: "EPA Operation ProvideDispensationERP Input-Parameter"
-Description: "EPA Operation ProvideDispensationERP Input-Parameter"
+Title: "EPA Operation ProvideDispensation ERP Input-Parameters"
+Description: "EPA Operation ProvideDispensation ERP Input-Parameters"
 * insert Meta
 * parameter 1..
   * name MS
-  * name = "RxDispensation"
+  * name = "rxDispensation"
   * value[x] 0..0
   * resource 0..0
-  * part 5.. MS
+  * part 4.. MS
     * ^slicing.discriminator.type = #pattern
-    * ^slicing.discriminator.path = "$this"
+    * ^slicing.discriminator.path = "name"
     * ^slicing.rules = #open
   * part contains
-    PrescriptionId 1..1 and
+    prescriptionId 1..1 and
     authoredOn 1..1 and
-    MedicationDispense 1.. and
-    Medication 1.. and
-    Organization 1..1
-  * part[PrescriptionId]
+    medicationDispense 1.. and
+    medication 0.. and
+    organization 1..1
+  * part[prescriptionId]
     * name MS
-    * name = "PrescriptionId"
+    * name = "prescriptionId"
     * value[x] 1..1
-    * value[x] only GEM_ERP_PR_PrescriptionId
+    * value[x] only EPAeRPPrescriptionId
     * resource 0..0
     * part 0..0 
   * part[authoredOn]
@@ -33,23 +33,23 @@ Description: "EPA Operation ProvideDispensationERP Input-Parameter"
     * value[x] only date
     * resource 0..0
     * part 0..0 
-  * part[MedicationDispense]
+  * part[medicationDispense]
     * name MS
-    * name = "MedicationDispense"
+    * name = "medicationDispense"
     * value[x] 0..0
     * resource 1..1
     * resource only EPAMedicationDispense
     * part 0..0 
-  * part[Medication]
+  * part[medication]
     * name MS
-    * name = "Medication"
+    * name = "medication"
     * value[x] 0..0
     * resource 1..1
     * resource only EPAMedication
     * part 0..0 
-  * part[Organization]
+  * part[organization]
     * name MS
-    * name = "Organization"
+    * name = "organization"
     * value[x] 0..0
     * resource 1..1
     * resource only OrganizationDirectory

@@ -3,13 +3,13 @@
   "status": "active",
   "name": "EPAMedicationRequestVS",
   "id": "epa-medication-request-vs",
-  "title": "EPA Medication Request VS",
-  "description": "Include all VS of KBV MedicationDarreichungsform Type",
+  "title": "EPA Medication Request ValueSet",
+  "description": "EPA Medication Request ValueSet",
   "url": "https://gematik.de/fhir/epa-medication/ValueSet/epa-medication-request-vs",
   "version": "1.0.0",
   "experimental": false,
   "publisher": "gematik GmbH",
-  "date": "2024-01-30",
+  "date": "2024-03-18",
   "compose": {
     "include": [
       {
