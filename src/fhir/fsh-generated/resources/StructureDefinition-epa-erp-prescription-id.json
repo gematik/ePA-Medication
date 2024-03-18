@@ -1,15 +1,15 @@
 {
   "resourceType": "StructureDefinition",
-  "id": "epa-medication-unique-identifier",
-  "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-unique-identifier",
+  "id": "epa-erp-prescription-id",
+  "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-erp-prescription-id",
   "version": "1.0.0",
-  "name": "EPAMedicationUniqueIdentifier",
-  "title": "EPA Medication Unique Identifier",
+  "name": "EPAeRPPrescriptionId",
+  "title": "EPA Identifier Profile for eRP Prescription IDs",
   "status": "active",
   "experimental": false,
   "date": "2024-03-18",
   "publisher": "gematik GmbH",
-  "description": "This unique identifier is generated within the Medication Service. It is either a hash derived from a specific set of data elements of the Medication resource or a direct repetition of a single data element. This identifier ensures the distinct identification of Medication resources across the ePA system.",
+  "description": "The prescriptionID is an generated and not changeable sequence of numbers seperated by dots. The first three numbers define the type of the prescription. The next twelve numbers are the generated unique and consecutive sequence of the prescription. The last two digits are the check numbers according to ISO 7064.",
   "fhirVersion": "4.0.1",
   "mapping": [
     {
@@ -36,10 +36,15 @@
   "differential": {
     "element": [
       {
+        "id": "Identifier.use",
+        "path": "Identifier.use",
+        "fixedCode": "official"
+      },
+      {
         "id": "Identifier.system",
         "path": "Identifier.system",
         "min": 1,
-        "patternUri": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier",
+        "fixedUri": "https://gematik.de/fhir/erp/NamingSystem/GEM_ERP_NS_PrescriptionId",
         "mustSupport": true
       },
       {

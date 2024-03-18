@@ -2,7 +2,7 @@
 skinparam fixCircleLabelOverlapping false 
 skinparam roundcorner 10
 skinparam object {
-    BackgroundColor #5c7aab
+    BackgroundColor DimGrey
     BorderColor Black
     ArrowColor #5c7aab
     FontSize 12
@@ -10,18 +10,18 @@ skinparam object {
     NoteBackgroundColor #3483eb
     ArrowFontColor #777777
 }
-
+skinparam LegendBackgroundColor White
 
 object "<< Versicherter >>\n**Patient**" as Patient 
-object "<< Verordnender LE >>\n**PractitionerDirectory**" as PrescribingPractitioner
-object "<< Verordnende LEI >>\n**OrganizationDirectory**" as PrescribingOrganization
+object "<< Verschreibender LE >>\n**PractitionerDirectory**" as PrescribingPractitioner
+object "<< Verschreibende LEI >>\n**OrganizationDirectory**" as PrescribingOrganization
 object "<< Abgebende LEI >>\n**OrganizationDirectory**" as DispenserOrganization
 object "PractitionerRole" as PractionerRole
-object "<< Medikation >>\n**EPAMedication**" as Medication
-object "<< Medikationsverordnung >>\n**EPAMedicationRequest**" as MedicationRequest {
+object "<< Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen 
+object "<< Arzneimittelverschreibung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen  {
     + subject: Reference(Patient)
 }
-object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense
+object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen 
 
 
 MedicationRequest -u->  Patient : subject
@@ -35,4 +35,10 @@ MedicationDispense -u-> Medication : medicationReference
 MedicationDispense -l-> MedicationRequest : authorizingPrescription
 MedicationDispense -d-> DispenserOrganization : perfomer.actor
 
+
+legend right
+    | Color | Data |
+    |<#DarkSeaGreen>| Prescription Data |
+    |<#DimGrey>| Actor |
+endlegend
 @enduml

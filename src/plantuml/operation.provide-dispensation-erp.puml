@@ -12,16 +12,16 @@ start
   
     :Validate all <b>Medication</b>, <b>Organization</b> and <b>MedicationDispense</b> from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part;
 
-    if (Validation successfull) then (yes)
+    if (\rValidation successfull\r) then (yes)
       
       :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of 
       <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>authoredOn</b> and the 
-      <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>PresciptionId</b>;
+      <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>PrescriptionId</b>;
 
 
-      if(Check if there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> \n and \n the status NOT <b>completed</b> exists in the Medication Service) then (yes)
+      if(\rCheck if there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> \n and \n the status NOT <b>completed</b> exists in the Medication Service\r) then (no)
         
-        #Pink:Add error <b>OperationOutcome</b> (NO_EXIST or STATUS) to the <b>Output-Parameters</b>; 
+        #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_PRESCRIPTION_NO_EXIST) \nor (MEDICATIONSVC_PRESCRIPTION_STATUS) to the <b>Output-Parameters</b>; 
       
       else (yes)
 
@@ -45,35 +45,43 @@ start
           partition loop {
             
             repeat: Get next <b>MedicationDispense</b> from the current <b>RxDispensation</b> <b>Input-Parameters</b> part list;
-
-            :Get the <b>Medication</b> Resource referenced by the <b>MedicationDispense</b> from the <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part;
-
-            :Generate for <b>EPAMedicationUniqueIdentifier</b> from the hashed Input-<b>Medication</b>;
             
-            If(Verify whether there is a <b>Medication</b> with the <b>RxPrescriptionProcessIdentifier</b> extension \nand\n the generated hash for the <b>EPAMedicationUniqueIdentifier</b> in the Medication Service) then (yes)
+            If(\rCheck if the <b>MedicationDispense</b> from the \n <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part in medication[x] \n uses a <b>Data Absent Reason Extension</b>. \n This indicates that the <b>MedicationDispense</b> does not \n reference any <b>Medication</b>\r) then (<b>NOT USE</b> a <b>Data Absent Reason Extension</b>)
+
+              :\rGet the <b>Medication</b> resource referenced by the <b>MedicationDispense</b> \n from the <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part\r;
+
+              :Generate for <b>EPAMedicationUniqueIdentifier</b> from the hashed Input-<b>Medication</b>;
               
-              :Update <b>Medication</b> with <b>RxPrescriptionProcessIdentifier</b> extenstion
-              and <b>EPAMedicationUniqueIdentifier</b> to Status <b>active</b>;
+              If(\rVerify whether there is a <b>Medication</b> with the <b>RxPrescriptionProcessIdentifier</b> extension \nand\n the generated hash for the <b>EPAMedicationUniqueIdentifier</b> in the Medication Service\r) then (yes)
+                
+                :Update <b>Medication</b> with <b>RxPrescriptionProcessIdentifier</b> extenstion
+                and <b>EPAMedicationUniqueIdentifier</b> to Status <b>active</b>;
 
-            else (no)
+              else (no)
 
-              :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
-              <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Medication</b>.Id and the Input-<b>PresciptionId</b>;
+                :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
+                <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Medication</b>.Id and the Input-<b>PrescriptionId</b>;
 
-              :<< Create >> 
-              <b>Medication</b>
-              <i>from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Medication</b></i>
-              ====
-              identifier[<b>EPAMedicationUniqueIdentifier</b>] = Value(EPAMedicationUniqueIdentifier)
-              identifier[<b>RxOriginatorProcessIdentifier</b>] = Value(RxOriginatorProcessIdentifier)
-              extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
-              status = <b>active</b>
-              ...;
+                :<< Create >> 
+                <b>Medication</b>
+                <i>from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Medication</b></i>
+                ====
+                identifier[<b>EPAMedicationUniqueIdentifier</b>] = Value(EPAMedicationUniqueIdentifier)
+                identifier[<b>RxOriginatorProcessIdentifier</b>] = Value(RxOriginatorProcessIdentifier)
+                extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
+                status = <b>active</b>
+                ...;
+
+              endif
+
+            else (<b>USE</b> a <b>Data Absent Reason Extension</b>)
+
+              :Use of the <b>Medication</b> instance referenced by the <b>MedicationRequest</b> \n instance with the <b>RxPrescriptionProcessIdentifier</b>;
 
             endif
 
             :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
-            <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>MedicationDispense</b>.Id and the Input-<b>PresciptionId</b>;
+            <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>MedicationDispense</b>.Id and the Input-<b>PrescriptionId</b>;
 
             :<< Create >>
             <b>MedicationDispense</b>
@@ -86,13 +94,13 @@ start
             authorizingPrescription = Reference(<b>MedicationRequest</b>)
             status = <b>completed</b>;
 
-            repeat while (If next <b>MedicationDispense</b> in <b>Input-Paramerters</b> <b>RxDispensation</b> part list exists) is (yes) not (no)
+            repeat while (\rIf next <b>MedicationDispense</b> in <b>Input-Parameters</b> <b>RxDispensation</b> part list exists\r) is (yes) not (no)
           }
           
           :Set <b>MedicationRequest</b> with <b>RxPrescriptionProcessIdentifier</b> 
           to Status <b>completed</b>;
 
-          #PaleGreen:Add information <b>OperationOutcome</b> (SUCCESS) to the <b>Output-Parameters</b>;
+          #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to the <b>Output-Parameters</b>;
      
         }
       endif

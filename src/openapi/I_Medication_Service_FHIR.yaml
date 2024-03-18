@@ -562,7 +562,7 @@ paths:
           description: Return prescriptions written on this date
           schema:
             type: string
-            format: date
+            format: date-time
         - name: status
           in: query
           required: false
@@ -727,7 +727,7 @@ paths:
           description: Returns dispenses handed over on this date
           schema:
             type: string
-            format: date
+            format: date-time
         - name: prescription
           in: query
           required: false
@@ -1722,7 +1722,7 @@ components:
       description: Can be used to select resources based on the last time they were changed
       schema:
         type: string
-        format: date
+        format: date-time
     identifier:
       name: identifier
       in: query
@@ -1740,10 +1740,10 @@ components:
       pattern: '^[A-Z]{1}\d{9}$'
       example: Z123456789
     UserAgentType:
+      description: "Information about client software with: ClientId(20 characters) + / + VersionNumber (1 to 15 characters)."
       type: string
-      pattern: '[a-zA-Z0-9_\-\+\.: \(\)]{1,20}\/[a-zA-Z0-9_\-\+\.: \(\)]{1,23}\/[a-zA-Z0-9_\-\+\.: \(\)]{1,20}'
-      description: Information about client software.
-      example: "Softwareprodukt XYZ/2.4.6/Hersteller ABC"
+      pattern: '^[a-zA-Z0-9]{20}\/[a-zA-Z0-9\-\.]{1,15}$'
+      example: CLIENTID1234567890AB/2.1.12-45
     ErrorType:
       description: Error object with additional information about the occurred error
       type: object

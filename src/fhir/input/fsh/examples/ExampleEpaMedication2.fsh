@@ -2,8 +2,8 @@ Instance: ExampleEpaMedication2
 InstanceOf: EPAMedication
 Usage: #example
 * id = "example-epa-medication-2"
-* extension[RxPrescriptionProcessIdentifier].valueIdentifier.value = "160.153.303.257.459_20240122"
-* identifier[EPAMedicationUniqueIdentifier].value = "8F6E41946E798D9C89384A0D2C9C7D9E4F6F0A2DE9EF62B7A4A26A329400735F"
+* extension[rxPrescriptionProcessIdentifier].valueIdentifier.value = "160.153.303.257.459_20240122"
+* identifier[EPAMedicationUniqueIdentifier].value = "F5559CCEBF31CDCC373F75B8FA9398B8AD6532134B231A15A25F353961BDD761"
 * identifier[RxOriginatorProcessIdentifier].value = "6ae6a7ca-c9b5-46bf-9411-2ba49d96f988_160.153.303.257.459"
 * code.text = "Infusion bestehend aus 85mg Doxorubicin aufgeloest zur Verabreichung in 250ml 5-%iger (50 mg/ml) Glucose-Infusionsloesung"
 * status = #active

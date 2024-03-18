@@ -15,12 +15,12 @@ Description: "The $cancel-prescription-erp operation is used by the E-Rezept-Fac
 * inputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters)
 * outputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters)
 * parameter[+]
-  * name = #RxPrescription
+  * name = #rxPrescription
   * use = #in
   * min = 1
   * max = "*"
   * part[+]
-    * name = #PrescriptionId
+    * name = #prescriptionId
     * type = #Identifier
     * use = #in
     * min = 1
@@ -32,12 +32,12 @@ Description: "The $cancel-prescription-erp operation is used by the E-Rezept-Fac
     * min = 1
     * max = "1"
 * parameter[+]
-  * name = #RxPrescription
+  * name = #rxPrescription
   * use = #out
   * min = 1
   * max = "*"
   * part[+]
-    * name = #PrescriptionId
+    * name = #prescriptionId
     * type = #Identifier
     * use = #out
     * min = 1
@@ -49,7 +49,7 @@ Description: "The $cancel-prescription-erp operation is used by the E-Rezept-Fac
     * min = 1
     * max = "1"
   * part[+]
-    * name = #OperationOutcome
+    * name = #operationOutcome
     * type = #OperationOutcome
     * use = #out
     * min = 1

@@ -4,12 +4,12 @@
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensation-erp-input-parameters",
   "version": "1.0.0",
   "name": "EPAOpCancelDispensationERPInputParameters",
-  "title": "EPA Operation CancelDispensationERP Input-Parameter",
+  "title": "EPA Operation CancelDispensation ERP Input-Parameters",
   "status": "active",
   "experimental": false,
-  "date": "2024-01-30",
+  "date": "2024-03-18",
   "publisher": "gematik GmbH",
-  "description": "EPA Operation CancelDispensationERP Input-Parameter",
+  "description": "EPA Operation CancelDispensation ERP Input-Parameters",
   "fhirVersion": "4.0.1",
   "mapping": [
     {
@@ -38,7 +38,7 @@
       {
         "id": "Parameters.parameter.name",
         "path": "Parameters.parameter.name",
-        "patternString": "RxDispensation",
+        "patternString": "rxDispensation",
         "mustSupport": true
       },
       {
@@ -58,7 +58,7 @@
           "discriminator": [
             {
               "type": "pattern",
-              "path": "$this"
+              "path": "name"
             }
           ],
           "rules": "open"
@@ -68,9 +68,9 @@
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId",
+        "id": "Parameters.parameter.part:prescriptionId",
         "path": "Parameters.parameter.part",
-        "sliceName": "PrescriptionId",
+        "sliceName": "prescriptionId",
         "min": 1,
         "max": "1",
         "type": [
@@ -80,31 +80,31 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId.name",
+        "id": "Parameters.parameter.part:prescriptionId.name",
         "path": "Parameters.parameter.part.name",
-        "patternString": "PrescriptionId",
+        "patternString": "prescriptionId",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId.value[x]",
+        "id": "Parameters.parameter.part:prescriptionId.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "min": 1,
         "type": [
           {
             "code": "Identifier",
             "profile": [
-              "https://gematik.de/fhir/erp/StructureDefinition/GEM_ERP_PR_PrescriptionId"
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-erp-prescription-id"
             ]
           }
         ]
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId.resource",
+        "id": "Parameters.parameter.part:prescriptionId.resource",
         "path": "Parameters.parameter.part.resource",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId.part",
+        "id": "Parameters.parameter.part:prescriptionId.part",
         "path": "Parameters.parameter.part.part",
         "max": "0"
       },

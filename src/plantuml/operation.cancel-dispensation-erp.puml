@@ -13,9 +13,9 @@ start
 
     :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of 
     <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>authoredOn</b> and the 
-    <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>PresciptionId</b>;
+    <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>PrescriptionId</b>;
 
-    if(Check if there is at least one <b>MedicationDispense </b> with the <b>RxPrescriptionProcessIdentifier</b> already in the Medication Service) then (yes)
+    if(\rCheck if there is at least one <b>MedicationDispense </b> with the <b>RxPrescriptionProcessIdentifier</b> already in the Medication Service\r) then (yes)
 
       partition transaction {
 
@@ -31,13 +31,13 @@ start
         identifier[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
         to Status <b>active</b>;
 
-        #PaleGreen:Add information <b>OperationOutcome</b> (SUCCESS) to the <b>Output-Parameters</b>;
+        #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to the <b>Output-Parameters</b>;
 
       }
 
     else (no)
 
-      #Pink:Add error <b>OperationOutcome</b> (NO_EXIST) \n to the <b>Output-Parameters</b>; 
+      #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_DISPENSATION_NO_EXIST) or (MEDICATIONSVC_DISPENSATION_STATUS) \n to the <b>Output-Parameters</b>; 
 
     endif
 

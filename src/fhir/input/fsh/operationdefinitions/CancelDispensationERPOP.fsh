@@ -15,12 +15,12 @@ Description: "The $cancel-dispensation-erp operation, used by the E-Rezept-Fachd
 * inputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensation-erp-input-parameters)
 * outputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters)
 * parameter[+]
-  * name = #RxDispensation
+  * name = #rxDispensation
   * use = #in
   * min = 1
   * max = "*"
   * part[+]
-    * name = #PrescriptionId
+    * name = #prescriptionId
     * type = #Identifier
     * use = #in
     * min = 1
@@ -32,12 +32,12 @@ Description: "The $cancel-dispensation-erp operation, used by the E-Rezept-Fachd
     * min = 1
     * max = "1"
 * parameter[+]
-  * name = #RxDispensation
+  * name = #rxDispensation
   * use = #out
   * min = 1
   * max = "*"
   * part[+]
-    * name = #PrescriptionId
+    * name = #prescriptionId
     * type = #Identifier
     * use = #out
     * min = 1
@@ -49,7 +49,7 @@ Description: "The $cancel-dispensation-erp operation, used by the E-Rezept-Fachd
     * min = 1
     * max = "1"
   * part[+]
-    * name = #OperationOutcome
+    * name = #operationOutcome
     * type = #OperationOutcome
     * use = #out
     * min = 1

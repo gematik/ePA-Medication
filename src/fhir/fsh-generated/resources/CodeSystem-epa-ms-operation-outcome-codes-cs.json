@@ -13,24 +13,24 @@
       "display": "Invalid Data Structure in Medication Service"
     },
     {
-      "code": "MEDICATIONSVC_PRESCIPTION_NO_EXIST",
+      "code": "MEDICATIONSVC_PRESCRIPTION_NO_EXIST",
       "display": "Prescription Not Found in Medication Service"
     },
     {
-      "code": "MEDICATIONSVC_PRESCIPTION_DUPLICATE",
+      "code": "MEDICATIONSVC_PRESCRIPTION_DUPLICATE",
       "display": "Duplicate Prescription Detected in Medication Service"
     },
     {
-      "code": "MEDICATIONSVC_PRESCIPTION_STATUS",
-      "display": "Operation Not Permissible on Current Prescription status"
+      "code": "MEDICATIONSVC_PRESCRIPTION_STATUS",
+      "display": "Operation Not Permitted on Current Prescription Status"
     },
     {
-      "code": "MEDICATIONSVC_DIPENSATION_NO_EXIST",
+      "code": "MEDICATIONSVC_DISPENSATION_NO_EXIST",
       "display": "Dispensation Not Found in Medication Service"
     },
     {
-      "code": "MEDICATIONSVC_DIPENSATION_STATUS",
-      "display": "Operation Not Permissible on Current Dispensation status"
+      "code": "MEDICATIONSVC_DISPENSATION_STATUS",
+      "display": "Operation Not Permitted on Current Dispensation Status"
     },
     {
       "code": "MEDICATIONSVC_OPERATION_SUCCESS",
@@ -44,6 +44,6 @@
   "version": "1.0.0",
   "experimental": false,
   "publisher": "gematik GmbH",
-  "date": "2024-01-30",
+  "date": "2024-03-18",
   "count": 8
 }

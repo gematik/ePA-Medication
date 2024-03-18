@@ -4,12 +4,12 @@
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters",
   "version": "1.0.0",
   "name": "EPAOpProvidePrescriptionERPInputParameters",
-  "title": "EPA Operation ProvidePrescriptionERP Input-Parameter",
+  "title": "EPA Operation ProvidePrescription ERP Input-Parameters",
   "status": "active",
   "experimental": false,
-  "date": "2024-01-30",
+  "date": "2024-03-18",
   "publisher": "gematik GmbH",
-  "description": "EPA Operation ProvidePrescriptionERP Input-Parameter",
+  "description": "EPA Operation ProvidePrescription ERP Input-Parameters",
   "fhirVersion": "4.0.1",
   "mapping": [
     {
@@ -38,7 +38,7 @@
       {
         "id": "Parameters.parameter.name",
         "path": "Parameters.parameter.name",
-        "patternString": "RxPrescription",
+        "patternString": "rxPrescription",
         "mustSupport": true
       },
       {
@@ -58,7 +58,7 @@
           "discriminator": [
             {
               "type": "pattern",
-              "path": "$this"
+              "path": "name"
             }
           ],
           "rules": "open"
@@ -68,9 +68,9 @@
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId",
+        "id": "Parameters.parameter.part:prescriptionId",
         "path": "Parameters.parameter.part",
-        "sliceName": "PrescriptionId",
+        "sliceName": "prescriptionId",
         "min": 1,
         "max": "1",
         "type": [
@@ -80,31 +80,31 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId.name",
+        "id": "Parameters.parameter.part:prescriptionId.name",
         "path": "Parameters.parameter.part.name",
-        "patternString": "PrescriptionId",
+        "patternString": "prescriptionId",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId.value[x]",
+        "id": "Parameters.parameter.part:prescriptionId.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "min": 1,
         "type": [
           {
             "code": "Identifier",
             "profile": [
-              "https://gematik.de/fhir/erp/StructureDefinition/GEM_ERP_PR_PrescriptionId"
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-erp-prescription-id"
             ]
           }
         ]
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId.resource",
+        "id": "Parameters.parameter.part:prescriptionId.resource",
         "path": "Parameters.parameter.part.resource",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:PrescriptionId.part",
+        "id": "Parameters.parameter.part:prescriptionId.part",
         "path": "Parameters.parameter.part.part",
         "max": "0"
       },
@@ -147,9 +147,9 @@
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:MedicationRequest",
+        "id": "Parameters.parameter.part:medicationRequest",
         "path": "Parameters.parameter.part",
-        "sliceName": "MedicationRequest",
+        "sliceName": "medicationRequest",
         "min": 1,
         "max": "1",
         "type": [
@@ -159,18 +159,18 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:MedicationRequest.name",
+        "id": "Parameters.parameter.part:medicationRequest.name",
         "path": "Parameters.parameter.part.name",
-        "patternString": "MedicationRequest",
+        "patternString": "medicationRequest",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:MedicationRequest.value[x]",
+        "id": "Parameters.parameter.part:medicationRequest.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:MedicationRequest.resource",
+        "id": "Parameters.parameter.part:medicationRequest.resource",
         "path": "Parameters.parameter.part.resource",
         "min": 1,
         "type": [
@@ -183,14 +183,14 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:MedicationRequest.part",
+        "id": "Parameters.parameter.part:medicationRequest.part",
         "path": "Parameters.parameter.part.part",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:Medication",
+        "id": "Parameters.parameter.part:medication",
         "path": "Parameters.parameter.part",
-        "sliceName": "Medication",
+        "sliceName": "medication",
         "min": 1,
         "max": "1",
         "type": [
@@ -200,18 +200,18 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:Medication.name",
+        "id": "Parameters.parameter.part:medication.name",
         "path": "Parameters.parameter.part.name",
-        "patternString": "Medication",
+        "patternString": "medication",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:Medication.value[x]",
+        "id": "Parameters.parameter.part:medication.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:Medication.resource",
+        "id": "Parameters.parameter.part:medication.resource",
         "path": "Parameters.parameter.part.resource",
         "min": 1,
         "type": [
@@ -224,14 +224,14 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:Medication.part",
+        "id": "Parameters.parameter.part:medication.part",
         "path": "Parameters.parameter.part.part",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:Organization",
+        "id": "Parameters.parameter.part:organization",
         "path": "Parameters.parameter.part",
-        "sliceName": "Organization",
+        "sliceName": "organization",
         "min": 1,
         "max": "1",
         "type": [
@@ -241,18 +241,18 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:Organization.name",
+        "id": "Parameters.parameter.part:organization.name",
         "path": "Parameters.parameter.part.name",
-        "patternString": "Organization",
+        "patternString": "organization",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:Organization.value[x]",
+        "id": "Parameters.parameter.part:organization.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:Organization.resource",
+        "id": "Parameters.parameter.part:organization.resource",
         "path": "Parameters.parameter.part.resource",
         "min": 1,
         "type": [
@@ -265,14 +265,14 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:Organization.part",
+        "id": "Parameters.parameter.part:organization.part",
         "path": "Parameters.parameter.part.part",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:Practitioner",
+        "id": "Parameters.parameter.part:practitioner",
         "path": "Parameters.parameter.part",
-        "sliceName": "Practitioner",
+        "sliceName": "practitioner",
         "min": 1,
         "max": "1",
         "type": [
@@ -282,18 +282,18 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:Practitioner.name",
+        "id": "Parameters.parameter.part:practitioner.name",
         "path": "Parameters.parameter.part.name",
-        "patternString": "Practitioner",
+        "patternString": "practitioner",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:Practitioner.value[x]",
+        "id": "Parameters.parameter.part:practitioner.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:Practitioner.resource",
+        "id": "Parameters.parameter.part:practitioner.resource",
         "path": "Parameters.parameter.part.resource",
         "min": 1,
         "type": [
@@ -306,7 +306,7 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:Practitioner.part",
+        "id": "Parameters.parameter.part:practitioner.part",
         "path": "Parameters.parameter.part.part",
         "max": "0"
       }

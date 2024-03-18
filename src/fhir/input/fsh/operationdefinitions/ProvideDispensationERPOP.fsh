@@ -15,12 +15,12 @@ Description: "The $provide-dispensation-erp operation in the ePA Medication Serv
 * inputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters)
 * outputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters)
 * parameter[+]
-  * name = #RxDispensation
+  * name = #rxDispensation
   * use = #in
   * min = 1
   * max = "*"
   * part[+]
-    * name = #PrescriptionId
+    * name = #prescriptionId
     * type = #Identifier
     * use = #in
     * min = 1
@@ -32,30 +32,30 @@ Description: "The $provide-dispensation-erp operation in the ePA Medication Serv
     * min = 1
     * max = "1"
   * part[+]
-    * name = #MedicationDispense
+    * name = #medicationDispense
     * type = #MedicationDispense
     * use = #in
     * min = 1
     * max = "*"
   * part[+]
-    * name = #Medication
+    * name = #medication
     * type = #Medication
     * use = #in
-    * min = 1
+    * min = 0
     * max = "*"
   * part[+]
-    * name = #Organization
+    * name = #organization
     * type = #Organization
     * use = #in
     * min = 1
     * max = "1"
 * parameter[+]
-  * name = #RxDispensation
+  * name = #rxDispensation
   * use = #out
   * min = 1
   * max = "*"
   * part[+]
-    * name = #PrescriptionId
+    * name = #prescriptionId
     * type = #Identifier
     * use = #out
     * min = 1
@@ -67,7 +67,7 @@ Description: "The $provide-dispensation-erp operation in the ePA Medication Serv
     * min = 1
     * max = "1"
   * part[+]
-    * name = #OperationOutcome
+    * name = #operationOutcome
     * type = #OperationOutcome
     * use = #out
     * min = 1

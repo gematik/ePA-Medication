@@ -4,17 +4,17 @@
 
 |This branch||
 |:----|----|
-| Context| __ePA 3.0 (ePA für Alle)__|
-| Designation  | __Release 3.0.0__  |
-| Current status | __released__ |
-| Release date   | __2024-02-02__  |
-| Specifications| [Fachportal gematik: ePA 3.0.0: ePA für alle](https://fachportal.gematik.de/schnelleinstieg/downloadcenter/releases#c7655)|
-| Previous release| __Release 2.6.0__|
-| Previous branch | [**ePA-2.6**](https://github.com/gematik/api-ePA/tree/ePA-2.6)|
-| Follow-up | not yet defined |
+| Context| __ePA 3.0 (ePA für alle)__|
+| Designation  | __Release 3.0.1__  |
+| Current status | __pre-released (3.0.1 RC - 2024-03-18)__ |
+| Release date   | __estimated end of march 2024__  |
+| Specifications| [Vorabverffentlichung ePA 3.0.1](https://fachportal.gematik.de/schnelleinstieg/downloadcenter/vorabveroeffentlichungen#c9332)|
+| Previous release| __Release 3.0.0__|
+| Previous branch | [**ePA-3.0.0**](https://github.com/gematik/epa-medication/tree/ePA-3.0)|
+| Follow-up | ePA-3.1.0 (planned)|
 | Associated repositories:||
-| Basic Services | [**ePA-Basic**](https://github.com/gematik/epa-basic/tree/ePA-3.0) |
-| XDS Document Service | [**ePA-XDS-Document**](https://github.com/gematik/epa-xds-document/tree/ePA-3.0) |
+| Basic Services | [**ePA-Basic (3.0.1)**](https://github.com/gematik/epa-basic/tree/ePA-3.0.1) |
+| XDS Document Service | [**ePA-XDS-Document (3.0.1)**](https://github.com/gematik/epa-xds-document/tree/ePA-3.0.1) |
 | Fhir Resources | [**Simplifier**](https://simplifier.net/epa-medication) |
 
 </br>

@@ -14,11 +14,11 @@ repeat:Get next <b>RxPrescription</b> from the <b>Input-Parameters</b>;
 
 if (Validation successfull) then (yes)
   
-  :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and the \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PresciptionId</b>;;
+  :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and the \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;;
 
-  if(Check if there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> \n and \n the status <b>active</b> or <b>completed</b> already in the Medication Service) then (yes)
+  if(\rCheck if there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> \n and \n the status <b>active</b> or <b>completed</b> already in the Medication Service\r) then (yes)
     
-    #Pink:Add error <b>OperationOutcome</b> (NO_EXIST or STATUS) to the <b>Output-Parameters</b>; 
+    #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_PRESCRIPTION_DUPLICATE) \nor (MEDICATIONSVC_PRESCRIPTION_STATUS) to the <b>Output-Parameters</b>; 
   
   else (no)
 
@@ -45,7 +45,7 @@ if (Validation successfull) then (yes)
       organization = Reference(<b>Organization</b>);
 
       :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
-      <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>.Id and the Input-<b>PresciptionId</b>;
+      <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>.Id and the Input-<b>PrescriptionId</b>;
 
       :Generate for <b>EPAMedicationUniqueIdentifier</b> from the hashed <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>;
         
@@ -61,7 +61,7 @@ if (Validation successfull) then (yes)
         
       :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
       <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>MedicationRequest</b>.Id 
-      and the <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PresciptionId</b>;
+      and the <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;
 
       :<< Create >>
       <b>MedicationRequest</b>
@@ -75,13 +75,13 @@ if (Validation successfull) then (yes)
       medicationReference = Reference(<b>Medication</b>)
       requester = Reference(<b>PractitionerRole</b>);
 
-      #PaleGreen:Add information <b>OperationOutcome</b> (SUCCESS) to the <b>Output-Parameters</b>;
+      #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to the <b>Output-Parameters</b>;
     }
 
   endif
 
 else (no)
-  #Pink:Add error <b>OperationOutcome</b> (NO_VALID_STRUCTURE) to the <b>Output-Parameters</b>;
+  #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_NO_VALID_STRUCTURE) to the <b>Output-Parameters</b>;
 endif
 
 repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)

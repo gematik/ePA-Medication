@@ -4,7 +4,9 @@ Id: epa-medication
 Title: "EPA Medication"
 Description: "Defines the medication resource for the Medication Service in the ePA system."
 * insert Meta
-* extension contains RxPrescriptionProcessIdentifierExtension named RxPrescriptionProcessIdentifier 0..1
+* extension contains 
+    RxPrescriptionProcessIdentifierExtension named rxPrescriptionProcessIdentifier 0..1
+* extension[rxPrescriptionProcessIdentifier].value[x]
 * obeys epa-med-1
 * identifier ^slicing.discriminator.type = #pattern
 * identifier ^slicing.discriminator.path = "$this"
@@ -15,123 +17,140 @@ Description: "Defines the medication resource for the Medication Service in the 
     EPAMedicationUniqueIdentifier 0..1 and
     RxOriginatorProcessIdentifier 0..1
 * identifier[EPAMedicationUniqueIdentifier] only EPAMedicationUniqueIdentifier
+* identifier[EPAMedicationUniqueIdentifier] ^patternIdentifier.system = "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier"
 * identifier[RxOriginatorProcessIdentifier] only RxOriginatorProcessIdentifier
-* code MS
+* identifier[RxOriginatorProcessIdentifier] ^patternIdentifier.system = "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier"
+* code 0..1 MS
   * ^short = "Medication in coded form or as free text if necessary"
   * coding MS
     * ^slicing.discriminator.type = #pattern
     * ^slicing.discriminator.path = "$this"
     * ^slicing.rules = #open
   * coding contains
-      PZN 0..1 MS and
-      ATC-DE 0..1 MS and
-      ASK 0..1 MS and
-      WG14 0..1 MS and
-      verordnungskategorieCode 0..1 MS
-  * coding[PZN]
+      pzn 0..1 MS and
+      atc-de 0.. MS and
+      ask 0.. MS and
+      wg14 0.. and
+      snomed 0..
+  * coding[pzn]
     * ^patternCoding.system = $cs-pzn
     * system 1..1 MS
     * code 1..1 MS
     * display MS
-  * coding[ATC-DE]
+  * coding[atc-de]
     * ^patternCoding.system = $cs-atc-de
     * system 1..1 MS
     * code 1..1 MS
     * display MS
-  * coding[ASK]
+  * coding[ask]
     * ^patternCoding.system = $cs-ask
     * system 1..1 MS
     * code 1..1 MS
     * display MS
-  * coding[WG14]
+  * coding[wg14]
     * ^patternCoding.system = $cs-wg14
     * system 1..1 MS
     * code 1..1 MS
     * display MS
-  * coding[verordnungskategorieCode]
+  * coding[snomed]
+    * ^patternCoding.system = $snomed-sct
     * system 1..1 MS
     * code 1..1 MS
-    * code from KBVMedicationTypeVS
     * display MS
   * text MS
-* status 1..1 MS
-  * ^short = "Status der Medikamenteninformation"
+* status 0..1 MS
+  * ^short = "Status of Medication Information"
 * manufacturer MS
-  * ^short = "Hersteller des Medikaments"
-  * ^comment = "Hier kann der tatsächliche Hersteller des Medikaments benannt werden, vornehmlich im Fall von Wirkstoffmischungen (Rezepturen), beispielsweise die Krankenhausapotheke. Zu beachten ist, dass die zulassende Organisation, wie sie z.B. in den Daten zur PZN benannt ist, nicht als Hersteller gilt."
+  * ^short = "Manufacturer of the Medication"
+  * ^comment = "Here, the actual manufacturer of the medication can be named, primarily in the case of active ingredient mixtures (compounding prescriptions), such as the hospital pharmacy. It is important to note that the licensing organization, as mentioned in the PZN (Pharmaceutical Central Number) data, is not considered the manufacturer."
   * display 1..1 MS
 * form MS
-  * ^short = "Abgabeform"
+  * ^short = "Form of Dispensing"
 * form
   * coding MS
     * ^slicing.discriminator.type = #pattern
     * ^slicing.discriminator.path = "$this"
     * ^slicing.rules = #open
   * coding contains
-      EDQM 0..1 MS and
-      KBVDarreichungsform 0..1 MS
-  * coding[EDQM] from $vs-edqm-doseform (required)
+      edqm 0.. MS and
+      snomed 0.. and
+      kbvDarreichungsform 0.. MS
+  * coding[edqm] from $vs-edqm-doseform (preferred)
+    * ^patternCoding.system = $cs-edqm
     * system 1..1 MS
     * code 1..1 MS
     * display MS
-  * coding[KBVDarreichungsform] from KBVMedicationDarreichungsformVS (required)
+  * coding[snomed]
+    * ^patternCoding.system = $snomed-sct
     * system 1..1 MS
     * code 1..1 MS
     * display MS
-* amount MS
-  * numerator 1..1 MS
+  * coding[kbvDarreichungsform] from $vs-kbv-medication-darreichungsform (required)
+    * ^patternCoding.system = $cs-kbv-medication-darreichungsform
+    * system 1..1 MS
+    * code 1..1 MS
+    * display MS
+* amount 0..1 MS
+  * numerator 0..1 MS
     * ^patternQuantity.system = $cs-ucum
-    * value 1..1 MS
+    * value 0..1 MS
     * unit MS
-    * system 1..1 MS
-    * code 1..1 MS
+    * system 0..1 MS
+    * code 0..1 MS
   * denominator MS
     * ^patternQuantity.system = $cs-ucum
-    * value 1..1 MS
+    * value 0..1 MS
     * unit MS
-    * system 1..1 MS
-    * code 1..1 MS
+    * system 0..1 MS
+    * code 0..1 MS
 * ingredient MS
-  * ^short = "Informationen zu Bestandteilen (Rezeptur)"
+  * ^short = "Information on Components (Rezeptur)"
+  * item[x] 1..1 MS
   * itemCodeableConcept MS
-    * ^short = "Bestandteil in codierter Form oder ggf. als Freitext"
-    * coding 1.. MS
+    * ^short = "Component in coded form or, if necessary, as free text"
+    * coding 0.. MS
       * ^slicing.discriminator.type = #pattern
       * ^slicing.discriminator.path = "$this"
       * ^slicing.rules = #open
     * coding contains
-        ASK 0..1 MS and
-        ATC-DE 0..1 MS and
-        PZN 0..1 MS and
-        WG14 0..1 MS
-    * coding[ASK]
+        ask 0.. MS and
+        atc-de 0.. MS and
+        pzn 0.. MS and
+        wg14 0.. and
+        snomed 0..
+    * coding[ask]
       * ^patternCoding.system = $cs-ask
       * system 1..1 MS
       * code 1..1 MS
       * display MS
-    * coding[ATC-DE]
+    * coding[atc-de]
       * ^patternCoding.system = $cs-atc-de
       * system 1..1 MS
       * code 1..1 MS
       * display MS
-    * coding[PZN]
+    * coding[pzn]
       * ^patternCoding.system = $cs-pzn
       * system 1..1 MS
       * code 1..1 MS
       * display MS
-    * coding[WG14]
+    * coding[wg14]
       * ^patternCoding.system = $cs-wg14
+      * system 1..1 MS
+      * code 1..1 MS
+      * display MS
+    * coding[snomed]
+      * ^patternCoding.system = $snomed-sct
       * system 1..1 MS
       * code 1..1 MS
       * display MS
     * text MS
   * itemReference
-    * ^short = "Bestandteil (Referenz auf ein anderes Medikament)"
+    * ^short = "Component (reference to another medication)"
     * reference 0..1
   * isActive
-    * ^short = "handelt es sich um einen aktiven Bestandteil?"
+    * ^short = "Is it an active ingredient?"
   * strength MS
-    * ^short = "Stärke"
+    * ^short = "Strength"
     * numerator 1..1 MS
       * ^patternQuantity.system = $cs-ucum
       * value 1..1 MS
@@ -145,11 +164,11 @@ Description: "Defines the medication resource for the Medication Service in the 
       * system 1..1 MS
       * code 1..1 MS
 * batch MS
-  * ^short = "Angaben zur Charge"
+  * ^short = "Batch Information"
   * lotNumber MS
-    * ^short = "Chargennummer"
+    * ^short = "Batch Number"
 
 Invariant: epa-med-1
-Description: "Medikamenten-Code, -Bezeichnung oder Inhaltsstoffe müssen angegeben werden."
+Description: "Medication code, name, or ingredients must be specified"
 Severity: #error
 Expression: "code.exists() or ingredient.exists()"

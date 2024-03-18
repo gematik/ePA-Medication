@@ -3,13 +3,13 @@
   "status": "active",
   "name": "EPAMedicationDispenseVS",
   "id": "epa-medication-dispense-vs",
-  "title": "EPA Medication Dispense VS",
-  "description": "Include all VS of KBV MedicationDarreichungsform Type",
+  "title": "EPA Medication Dispense ValueSet",
+  "description": "EPA Medication Dispense ValueSet",
   "url": "https://gematik.de/fhir/epa-medication/ValueSet/epa-medication-dispense-vs",
   "version": "1.0.0",
   "experimental": false,
   "publisher": "gematik GmbH",
-  "date": "2024-01-30",
+  "date": "2024-03-18",
   "compose": {
     "include": [
       {
