@@ -105,7 +105,7 @@ Der digital gestützte Medikationsprozess (dgMP) wird über eine kuratierbare, E
 * Eintragung einer Selbstmedikation des Versicherten mittels ePA-FdV
 * Ergänzung von verschreibungsfreien Medikamenten (OTC – over the counter)
 
-Basis für die eML sind Arzneimittelverordnungsdaten und Dispensierinformationen. Sofern der Versicherte dem dgMP nicht widersprochen hat, werden diese Daten bei Erzeugung durch Leistungserbringer über den E-Rezept-Fachdienst in den Medication Service übertragen. Diese Informationen stellen Medikationslisteneinträge der eML mittels des Fast Healthcare Interoperability Resources (FHIR) Standards dar.
+Basis für die eML sind Arzneimittelverordnungsdaten und Dispensierinformationen. Sofern der Versicherte dem Einstellen dieser Daten in den Medication Service nicht widersprochen hat, werden diese Daten bei Erzeugung durch Leistungserbringer über den E-Rezept-Fachdienst in den Medication Service übertragen. Diese Informationen stellen Medikationslisteneinträge der eML mittels des Fast Healthcare Interoperability Resources (FHIR) Standards dar.
 
 Da die im E-Rezept-Fachdienst verarbeiteten FHIR-Profile für die Rezeptverarbeitung optimiert sind und kein Kuratieren (z.B. die Ergänzung von Freitextfeldern für ergänzende Einnahmehinweise) und damit Unterstützung für die o.g. zukünftigen Anwendungsfälle zulassen, verarbeitet der Medication Service eigene FHIR-Profile. Im Zuge der Übertragung von Verordnungsdaten und Dispensierinformationen erzeugt der E-Rezept-Fachdienst daher die im Medication Service zulässigen FHIR-Ressourcen selbst. Medikationsdaten können in einer späteren Ausbaustufe des dgMP über die <<#https://hl7.org/fhir/R4/http.html, FHIR RESTful API>> manipuliert werden.
 

@@ -92,13 +92,13 @@ Description: "Defines the medication resource for the Medication Service in the 
     * display MS
 * amount 0..1 MS
   * numerator 0..1 MS
-    * ^patternQuantity.system = $cs-ucum
+  * numerator from $hl7-vs-ucum-units (preferred)
     * value 0..1 MS
     * unit MS
     * system 0..1 MS
     * code 0..1 MS
   * denominator MS
-    * ^patternQuantity.system = $cs-ucum
+  * denominator from $hl7-vs-ucum-units (preferred)
     * value 0..1 MS
     * unit MS
     * system 0..1 MS
@@ -152,13 +152,13 @@ Description: "Defines the medication resource for the Medication Service in the 
   * strength MS
     * ^short = "Strength"
     * numerator 1..1 MS
-      * ^patternQuantity.system = $cs-ucum
+    * numerator from $hl7-vs-ucum-units (preferred)
       * value 1..1 MS
       * unit MS
       * system 1..1 MS
       * code 1..1 MS
     * denominator MS
-      * ^patternQuantity.system = $cs-ucum
+    * denominator from $hl7-vs-ucum-units (preferred)
       * value 1..1 MS
       * unit MS
       * system 1..1 MS

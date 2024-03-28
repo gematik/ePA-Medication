@@ -1,6 +1,12 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
+## Release 3.0.1
+- release ePA-3.0.1
+- (all changes from changelist 'ePAfueralle_3.0.1' and final review)
+### changes
+- changed profile and operations EPAMedication
+- fixed binding for 'kbvDarreichungsform'
 ## Release 3.0.1 RC
 - release candidate ePA-3.0.1
 ### changes

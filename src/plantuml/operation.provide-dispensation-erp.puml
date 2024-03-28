@@ -35,12 +35,27 @@ start
           extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
           to Status <b>inactive</b>;
 
-          :<< Create or Update >> 
-          <b>Organization</b>
-          <i>from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Organization</b></i>
-          ====
-          identifier[TelematikID] = Value(TelematikID)
+          :Check for Existing <b>Organization</b> with TelematikId from the \n <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Organization</b>;
+
+          if (<b>Organization</b> exists?) then (yes)
+
+            :<<Update >> 
+            <b>Organization</b>
+            <i>from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Organization</b></i>
+            
+            identifier[TelematikID] = Value(TelematikID)
           ...;
+
+          else (no)
+
+            :<< Create >> 
+            <b>Organization</b>
+            <i>from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Organization</b></i>
+           
+            identifier[TelematikID] = Value(TelematikID)
+            ...;
+
+          endif
 
           partition loop {
             

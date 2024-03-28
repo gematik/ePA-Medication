@@ -11,28 +11,6 @@
   "publisher": "gematik GmbH",
   "description": "Defines the medication resource for the Medication Service in the ePA system.",
   "fhirVersion": "4.0.1",
-  "mapping": [
-    {
-      "identity": "script10.6",
-      "uri": "http://ncpdp.org/SCRIPT10_6",
-      "name": "Mapping to NCPDP SCRIPT 10.6"
-    },
-    {
-      "identity": "rim",
-      "uri": "http://hl7.org/v3",
-      "name": "RIM Mapping"
-    },
-    {
-      "identity": "w5",
-      "uri": "http://hl7.org/fhir/fivews",
-      "name": "FiveWs Pattern Mapping"
-    },
-    {
-      "identity": "v2",
-      "uri": "http://hl7.org/v2",
-      "name": "HL7 v2 Mapping"
-    }
-  ],
   "kind": "resource",
   "abstract": false,
   "type": "Medication",
@@ -405,7 +383,7 @@
         "mustSupport": true,
         "binding": {
           "strength": "required",
-          "valueSet": "https://fhir.kbv.de/CodeSystem/KBV_VS_SFHIR_KBV_DARREICHUNGSFORM"
+          "valueSet": "https://fhir.kbv.de/ValueSet/KBV_VS_SFHIR_KBV_DARREICHUNGSFORM"
         }
       },
       {
@@ -433,10 +411,11 @@
       {
         "id": "Medication.amount.numerator",
         "path": "Medication.amount.numerator",
-        "patternQuantity": {
-          "system": "http://unitsofmeasure.org"
-        },
-        "mustSupport": true
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "http://hl7.org/fhir/ValueSet/ucum-units"
+        }
       },
       {
         "id": "Medication.amount.numerator.value",
@@ -461,10 +440,11 @@
       {
         "id": "Medication.amount.denominator",
         "path": "Medication.amount.denominator",
-        "patternQuantity": {
-          "system": "http://unitsofmeasure.org"
-        },
-        "mustSupport": true
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "http://hl7.org/fhir/ValueSet/ucum-units"
+        }
       },
       {
         "id": "Medication.amount.denominator.value",
@@ -710,10 +690,11 @@
         "id": "Medication.ingredient.strength.numerator",
         "path": "Medication.ingredient.strength.numerator",
         "min": 1,
-        "patternQuantity": {
-          "system": "http://unitsofmeasure.org"
-        },
-        "mustSupport": true
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "http://hl7.org/fhir/ValueSet/ucum-units"
+        }
       },
       {
         "id": "Medication.ingredient.strength.numerator.value",
@@ -741,10 +722,11 @@
       {
         "id": "Medication.ingredient.strength.denominator",
         "path": "Medication.ingredient.strength.denominator",
-        "patternQuantity": {
-          "system": "http://unitsofmeasure.org"
-        },
-        "mustSupport": true
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "http://hl7.org/fhir/ValueSet/ucum-units"
+        }
       },
       {
         "id": "Medication.ingredient.strength.denominator.value",

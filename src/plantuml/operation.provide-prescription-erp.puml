@@ -24,25 +24,63 @@ if (Validation successfull) then (yes)
 
     partition transaction {
         
-      :<< Create or Update >> 
-      <b>Organization</b>
-      <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b></i>
-      ====
-      identifier[TelematikID] = TelematikID
-      ...;
+      :Check for Existing <b>Organization</b> with TelematikId from the \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b>;
+
+      if (<b>Organization</b> exists?) then (yes)
+
+        :<<Update >> 
+        <b>Organization</b>
+        <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b></i>
         
-      :<< Create or Update >> 
-      <b>Practitioner</b>
-      <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b></i>
-      ====
-      identifier[TelematikID] = TelematikID
+        identifier[TelematikID] = Value(TelematikID)
       ...;
+
+      else (no)
+
+        :<< Create >> 
+        <b>Organization</b>
+        <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b></i>
         
-      :<< Create or Update >> 
-      <b>PractitionerRole</b>
-      ====
-      practitioner = Reference(<b>Practitioner</b>)
-      organization = Reference(<b>Organization</b>);
+        identifier[TelematikID] = Value(TelematikID)
+        ...;
+
+      endif
+
+      :Check for Existing <b>Practitioner</b> with TelematikId from the \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b>;
+
+      if (<b>Practitioner</b> exists?) then (yes)
+
+        :<<Update >> 
+        <b>Practitioner</b>
+        <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b></i>
+        
+        identifier[TelematikID] = Value(TelematikID)
+      ...;
+
+      else (no)
+
+        :<< Create >> 
+        <b>Practitioner</b>
+        <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b></i>
+        
+        identifier[TelematikID] = Value(TelematikID)
+        ...;
+
+      endif
+
+      :Check for Existing <b>PractitionerRole</b> with references to specific <b>Organization</b> and <b>Practitioner</b>;
+
+      if (<b>PractitionerRole</b> exists?) then (yes)
+
+      else (no)
+        
+        :<< Create >> 
+        <b>PractitionerRole</b>
+        ====
+        practitioner = Reference(<b>Practitioner</b>)
+        organization = Reference(<b>Organization</b>);
+
+      endif
 
       :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
       <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>.Id and the Input-<b>PrescriptionId</b>;
