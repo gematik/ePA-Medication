@@ -179,7 +179,7 @@ The following usage specifications for the FHIR medication resources processed w
     * OrganizationDirectory: https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2
     * PractitionerDirectory: https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2
 * *PractitionerRole*: This resource conforms to [PractitionerRole](https://hl7.org/fhir/R4/practitionerrole.html). It may be created and provided ad hoc when the operation is being executed.
-* *Patient*: This is a logical FHIR reference via a KVNR (German "Krankenversicherungsnummer").
+* *Patient*: This is a logical FHIR reference via a KVNR (German "Krankenversicherungsnummer"). The E-Rezept-Fachdienst shall ensure and the Medication Service shall verify the FHIR elements MedicationRequest.subject.identifier and MedicationDispense.subject.identifier are bound to the identifier http://fhir.de/StructureDefinition/identifier-kvid-10 defined by HL7 Deutschland e.V.
 
 
 #### Information Elements for the Medication Service Based on FHIR
@@ -190,3 +190,7 @@ The following usage specifications for the FHIR medication resources processed w
 ## Uniqueness of FHIR Resources
 
 The Medication Service MUST soley use time-based *Universally Unique IDentifier*s (UUID) according to [RFC 4122](https://datatracker.ietf.org/doc/html/rfc4122#section-4.2) for logical IDs (i.e FHIR element *Resource.id*). 
+
+## KBV and ePA Medication Profile Comparison
+
+A summary of the differences between the KBV E-Rezept profiles and the ePA Medication profile can be found [here](https://gematik.github.io/api-erp/erp_epa_mapping_details/).

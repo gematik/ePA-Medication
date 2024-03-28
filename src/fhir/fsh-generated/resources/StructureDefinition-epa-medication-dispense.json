@@ -11,33 +11,6 @@
   "publisher": "gematik GmbH",
   "description": "Defines the medication dispense resource for the Medication Service in the ePA system.",
   "fhirVersion": "4.0.1",
-  "mapping": [
-    {
-      "identity": "workflow",
-      "uri": "http://hl7.org/fhir/workflow",
-      "name": "Workflow Pattern"
-    },
-    {
-      "identity": "rim",
-      "uri": "http://hl7.org/v3",
-      "name": "RIM Mapping"
-    },
-    {
-      "identity": "w5",
-      "uri": "http://hl7.org/fhir/fivews",
-      "name": "FiveWs Pattern Mapping"
-    },
-    {
-      "identity": "rx-dispense-rmim",
-      "uri": "http://www.hl7.org/v3/PORX_RM020070UV",
-      "name": "V3 Pharmacy Dispense RMIM"
-    },
-    {
-      "identity": "v2",
-      "uri": "http://hl7.org/v2",
-      "name": "HL7 v2 Mapping"
-    }
-  ],
   "kind": "resource",
   "abstract": false,
   "type": "MedicationDispense",
