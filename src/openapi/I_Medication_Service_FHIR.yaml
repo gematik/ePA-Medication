@@ -29,6 +29,10 @@ info:
     not essentially required for the operation (e.g. raw-data collection), and
     may be considered for provider internal use. 
 
+    ### **Request-ID**
+
+    Unique ID given by the ePA-Client to identify the request message. The server must return this ID in the response message.
+
     ### **Log-Entries**
     
     Whenever a _Postcondition_ mandates a log-entry, this entry shall contain
@@ -59,12 +63,12 @@ tags:
       medication information sharing.
       
       ##### Profile:
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.0)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.1)
       
       ##### Examples:
-      - [https://simplifier.net/epa-medication/example-epa-medication-1/~json](https://simplifier.net/epa-medication/example-epa-medication-1/~json)
-      - [https://simplifier.net/epa-medication/example-epa-medication-2/~json](https://simplifier.net/epa-medication/example-epa-medication-2/~json)
-      - [https://simplifier.net/epa-medication/example-epa-medication-ingredient/~json](https://simplifier.net/epa-medication/example-epa-medication-ingredient/~json)
+      - [https://simplifier.net/epa-medication/4f9ab221-0eef-4e46-a8a9-38302e0488b1/~json](https://simplifier.net/4f9ab221-0eef-4e46-a8a9-38302e0488b1/~json)
+      - [https://simplifier.net/epa-medication/3b990824-3814-4d75-80b1-e2935827f8f0/~json](https://simplifier.net/3b990824-3814-4d75-80b1-e2935827f8f0/~json)
+      - [https://simplifier.net/epa-medication/4bfef107-7d81-4d36-8aa0-7ea937969046/~json](https://simplifier.net/epa-medication/4bfef107-7d81-4d36-8aa0-7ea937969046/~json)
 
 
       ***
@@ -73,7 +77,7 @@ tags:
       details about the prescribed medication, the insurant to whom it's prescribed, the prescribing healthcare provider, 
       and instructions for use.
       ##### Profile: 
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.0)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.1)
 
       ***
       #### [MedicationDispense](https://hl7.org/fhir/R4/medicationdispense.html)
@@ -81,16 +85,16 @@ tags:
       information about the dispensed medication, the insurant receiving the medication, the healthcare professional 
       who dispensed it, and details about the quantity and timing of the dispensation.
       ##### Profile:
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/emap-medication-dispense|1.0.0)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/emap-medication-dispense|1.0.1)
 
       ***
       #### [Organization](https://hl7.org/fhir/R4/organization.html)
       The Organization Resource is designed to represent information about organizations, primarily 
       in the context of healthcare. It typically includes details like the organization's name, type and contact.
-      The Medication Service utilizes the [VZD-FHIR-Directory](https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2) Organization Profile.
+      The Medication Service utilizes the [VZD-FHIR-Directory](https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.11.7) Organization Profile.
 
       ##### Profile: 
-      [https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2](https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2)
+      [https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.11.7](https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.11.7)
 
       ##### Examples:
       - [https://simplifier.net/VZD-FHIR-Directory/OrganizationExample001/~json](https://simplifier.net/VZD-FHIR-Directory/OrganizationExample001/~json)
@@ -101,10 +105,10 @@ tags:
       The Practitioner resource is used to represent individuals who are directly or indirectly involved in 
       the delivery of healthcare services. This includes information about their identity, qualifications, and specific roles 
       or functions within the healthcare system, such as doctors or pharmacists.
-      The Medication Service utilizes the [VZD-FHIR-Directory](https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2) Practitioner Profile.
+      The Medication Service utilizes the [VZD-FHIR-Directory](https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.11.7) Practitioner Profile.
 
       ##### Profile: 
-      [https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2](https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2)
+      [https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.11.7](https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2)
 
       ##### Example:
       - [https://simplifier.net/VZD-FHIR-Directory/TIPractitionerExample001/~json](https://simplifier.net/VZD-FHIR-Directory/TIPractitionerExample001/~json)
@@ -157,12 +161,14 @@ tags:
       
       These include:
       - **self**: A link to the current page of results, representing the query that generated these results.
-      - **first**: Directs to the first page of search results, allowing quick navigation to the start of a result set.
-      - **last**: Takes the user to the last page of results, useful for moving to the end of a large dataset.
+      - **first**: Directs to the first page of search results, allowing quick navigation to the start of a result set. **[optional]**
+      - **last**: Takes the user to the last page of results, useful for moving to the end of a large dataset. **[optional]**
       - **next**: Used for moving forward to the next page of results, following the set pagination.
       - **previous**: Allows going back to the previous set of results, facilitating backward navigation through pages.
 
       Each link comes with a URL to fetch the corresponding set of results, dynamically generated based on the search query and pagination parameters like **_count** and **_offset**. These links simplify client navigation through large data sets by eliminating the need for manual adjustment of query parameters.
+
+      In addition to standard pagination parameters such as ``_count`` and ``_offset``, each link may also contain other parameters that facilitate pagination within the Medication Service. One example is the parameter ``stateid``, which represents the current state of the result list. This enables the Medication Service to efficiently manage navigation through the results by preserving the context or state of the search. This is particularly useful when ePA clients navigate through large or complexly structured result sets.
 
       ###### **Example**:
       ```
@@ -389,11 +395,12 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/_count'
         - $ref: '#/components/parameters/_offset'
         - $ref: '#/components/parameters/_total'
@@ -477,6 +484,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/resourceid'
       responses:
         '200':
@@ -545,11 +553,12 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/_count'
         - $ref: '#/components/parameters/_offset'
         - $ref: '#/components/parameters/_total'
@@ -633,13 +642,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Resources
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/resourceid'
       responses:
         '200':
@@ -710,11 +720,12 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/_count'
         - $ref: '#/components/parameters/_offset'
         - $ref: '#/components/parameters/_total'
@@ -804,13 +815,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Resources
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/resourceid'
       responses:
         '200':
@@ -877,11 +889,12 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/_count'
         - $ref: '#/components/parameters/_offset'
         - $ref: '#/components/parameters/_total'
@@ -951,13 +964,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Resources
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/resourceid'
       responses:
         '200':
@@ -1025,11 +1039,12 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/_count'
         - $ref: '#/components/parameters/_offset'
         - $ref: '#/components/parameters/_total'
@@ -1100,13 +1115,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Resources
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/resourceid'
       responses:
         '200':
@@ -1174,12 +1190,13 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/_count'
         - $ref: '#/components/parameters/_offset'
         - $ref: '#/components/parameters/_total'
@@ -1256,13 +1273,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Resources
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
         - $ref: '#/components/parameters/resourceid'
       responses:
         '200':
@@ -1295,7 +1313,7 @@ paths:
         sure they are stored safely and can be easily accessed.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.0](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.0)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.1](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.1)
 
         #### **Allowed user groups [professionOID]**
         * oid_erp-vau
@@ -1312,13 +1330,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Operations
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
       requestBody:
         required: true
         content:
@@ -1332,6 +1351,8 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/EPAOpRxPrescriptionERPOutputParameters'
+        '400':
+          $ref: '#/components/responses/OperationOutcome400OperationsError'
         '403':
           $ref: '#/components/responses/Error403Forbidden'
         '409':
@@ -1353,7 +1374,7 @@ paths:
         information. This helps maintaining a comprehensive overview of the patient's medication history.
         
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.0](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.0)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.1](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.1)
 
         #### **Allowed user groups [professionOID]**
         * oid_erp-vau
@@ -1370,13 +1391,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Operations
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
       requestBody:
         required: true
         content:
@@ -1390,6 +1412,8 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/EPAOpRxDispensationERPOutputParameters'
+        '400':
+          $ref: '#/components/responses/OperationOutcome400OperationsError'
         '403':
           $ref: '#/components/responses/Error403Forbidden'
         '409':
@@ -1412,7 +1436,7 @@ paths:
         ensures accuracy and safety in the management of medications.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.0](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.0)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.1](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.1)
 
         #### **Allowed user groups [professionOID]**
         * oid_erp-vau
@@ -1429,13 +1453,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Operations
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
       requestBody:
         required: true
         content:
@@ -1449,6 +1474,8 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/EPAOpRxPrescriptionERPOutputParameters'
+        '400':
+          $ref: '#/components/responses/OperationOutcome400OperationsError'
         '403':
           $ref: '#/components/responses/Error403Forbidden'
         '409':
@@ -1471,7 +1498,7 @@ paths:
         up-to-date record of the patient's medication data.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.0](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.0)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.1](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.1)
 
         #### **Allowed user groups [professionOID]**
         * oid_erp-vau
@@ -1488,13 +1515,14 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
 
       tags:
         - Operations
       parameters:
         - $ref: '#/components/parameters/insurantid'
         - $ref: '#/components/parameters/useragent'
+        - $ref: '#/components/parameters/requestid'
       requestBody:
         required: true
         content:
@@ -1508,6 +1536,8 @@ paths:
             application/fhir+json:
               schema:
                 $ref: '#/components/schemas/EPAOpRxDispensationERPOutputParameters'
+        '400':
+          $ref: '#/components/responses/OperationOutcome400OperationsError'
         '403':
           $ref: '#/components/responses/Error403Forbidden'
         '409':
@@ -1573,7 +1603,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
                 issue:
                   - severity: error
                     code: processing
@@ -1588,7 +1618,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
                 issue:
                   - severity: error
                     code: processing
@@ -1603,7 +1633,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
                 issue:
                   - severity: error
                     code: not-supported
@@ -1626,7 +1656,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
                 issue:
                   - severity: error
                     code: processing
@@ -1641,7 +1671,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.0
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
                 issue:
                   - severity: error
                     code: processing
@@ -1654,9 +1684,25 @@ components:
             $ref: '#/components/schemas/OperationOutcome'
 
     OperationOutcome400OperationsError:
-      description: Error.
+      description: Bad Request
       content:
         application/json:
+          examples:
+            invalid_request:
+              summary: Invalid request
+              value:
+                resourceType: OperationOutcome
+                meta:
+                  profile:
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
+                issue:
+                  - severity: error
+                    code: not-supported
+                    details:
+                      coding:
+                        - system: http://terminology.hl7.org/CodeSystem/operation-outcome
+                          code: MSG_BAD_FORMAT
+                    diagnostic: "Invalid request"
           schema:
             $ref: '#/components/schemas/OperationOutcome'
 
@@ -1677,6 +1723,13 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/UserAgentType'
+    requestid:
+      name: X-Request-ID
+      in: header
+      description: UUID of the request message
+      required: true
+      schema:
+        $ref: '#/components/schemas/RequestIDType'
     resourceid:
       name: id
       in: path
@@ -1744,6 +1797,11 @@ components:
       type: string
       pattern: '^[a-zA-Z0-9]{20}\/[a-zA-Z0-9\-\.]{1,15}$'
       example: CLIENTID1234567890AB/2.1.12-45
+    RequestIDType:
+      description: "Unique ID given by the ePA-Client to identify the request message. The server must return this ID in the response message."
+      type: string
+      format: uuid
+      example: c3ab12eb-f78d-450b-a56f-a65369cec4cb
     ErrorType:
       description: Error object with additional information about the occurred error
       type: object
@@ -1872,8 +1930,8 @@ components:
 
     Medication:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.1
 
     MedicationList:
       allOf:
@@ -1890,8 +1948,8 @@ components:
 
     MedicationRequest:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.1
 
     MedicationRequestList:
       allOf:
@@ -1908,8 +1966,8 @@ components:
 
     MedicationDispense:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.1
 
     MedicationDispenseList:
       allOf:
@@ -1926,8 +1984,8 @@ components:
 
     Organization:
       type: object
-      description: 'https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2'
-      example: --> https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.10.2
+      description: 'https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.11.7'
+      example: --> https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.11.7
 
     OrganizationList:
       allOf:
@@ -1944,8 +2002,8 @@ components:
 
     Practitioner:
       type: object
-      description: 'https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2'
-      example: --> https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.10.2
+      description: 'https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.11.7'
+      example: --> https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.11.7
 
     PractitionerList:
       allOf:
@@ -1980,30 +2038,30 @@ components:
 
     EPAOpProvidePrescriptionERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.1
 
     EPAOpProvideDispensationERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.1
 
     EPAOpCancelPrescriptionERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.1
 
     EPAOpCancelDispensationERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.1
 
     EPAOpRxDispensationERPOutputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.1
 
     EPAOpRxPrescriptionERPOutputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.0'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.0
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.1

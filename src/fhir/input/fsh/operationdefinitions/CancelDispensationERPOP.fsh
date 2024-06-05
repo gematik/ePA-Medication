@@ -12,8 +12,8 @@ Description: "The $cancel-dispensation-erp operation, used by the E-Rezept-Fachd
 * system = true
 * type = false
 * instance = false
-* inputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensation-erp-input-parameters)
-* outputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters)
+* inputProfile = Canonical(EPAOpCancelDispensationERPInputParameters)
+* outputProfile = Canonical(EPAOpRxDispensationERPOutputParameters)
 * parameter[+]
   * name = #rxDispensation
   * use = #in

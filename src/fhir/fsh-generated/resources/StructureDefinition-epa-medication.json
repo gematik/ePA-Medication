@@ -2,12 +2,12 @@
   "resourceType": "StructureDefinition",
   "id": "epa-medication",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "EPAMedication",
   "title": "EPA Medication",
   "status": "active",
   "experimental": false,
-  "date": "2024-03-18",
+  "date": "2024-05-31",
   "publisher": "gematik GmbH",
   "description": "Defines the medication resource for the Medication Service in the ePA system.",
   "fhirVersion": "4.0.1",
@@ -32,18 +32,19 @@
         ]
       },
       {
-        "id": "Medication.extension",
-        "path": "Medication.extension",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "value",
-              "path": "url"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        }
+        "id": "Medication.meta",
+        "path": "Medication.meta",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.meta.versionId",
+        "path": "Medication.meta.versionId",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.meta.lastUpdated",
+        "path": "Medication.meta.lastUpdated",
+        "mustSupport": true
       },
       {
         "id": "Medication.extension:rxPrescriptionProcessIdentifier",
@@ -59,6 +60,172 @@
             ]
           }
         ]
+      },
+      {
+        "id": "Medication.extension:isVaccine",
+        "path": "Medication.extension",
+        "sliceName": "isVaccine",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-id-vaccine-extension"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.extension:isVaccine.value[x]",
+        "path": "Medication.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:isVaccine.value[x]:valueBoolean",
+        "path": "Medication.extension.value[x]",
+        "sliceName": "valueBoolean",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:drugCategory",
+        "path": "Medication.extension",
+        "sliceName": "drugCategory",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/drug-category-extension"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.extension:drugCategory.value[x]",
+        "path": "Medication.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:drugCategory.value[x]:valueCoding",
+        "path": "Medication.extension.value[x]",
+        "sliceName": "valueCoding",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:drugCategory.value[x]:valueCoding.system",
+        "path": "Medication.extension.value[x].system",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:drugCategory.value[x]:valueCoding.code",
+        "path": "Medication.extension.value[x].code",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:normSizeCode",
+        "path": "Medication.extension",
+        "sliceName": "normSizeCode",
+        "short": "Package size according to N-designation",
+        "definition": "Description of the therapy-appropriate package size (e.g., N1)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://fhir.de/StructureDefinition/normgroesse"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.extension:normSizeCode.value[x]",
+        "path": "Medication.extension.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:packaging",
+        "path": "Medication.extension",
+        "sliceName": "packaging",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-formulation-packaging-extension"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.extension:packaging.value[x]",
+        "path": "Medication.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:packaging.value[x]:valueString",
+        "path": "Medication.extension.value[x]",
+        "sliceName": "valueString",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:manufacturingInstructions",
+        "path": "Medication.extension",
+        "sliceName": "manufacturingInstructions",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-manufacturing-instructions-extension"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.extension:manufacturingInstructions.value[x]",
+        "path": "Medication.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.extension:manufacturingInstructions.value[x]:valueString",
+        "path": "Medication.extension.value[x]",
+        "sliceName": "valueString",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
       },
       {
         "id": "Medication.identifier",
@@ -145,6 +312,11 @@
         "id": "Medication.code.coding:pzn.system",
         "path": "Medication.code.coding.system",
         "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.code.coding:pzn.version",
+        "path": "Medication.code.coding.version",
         "mustSupport": true
       },
       {
@@ -258,6 +430,11 @@
         "mustSupport": true
       },
       {
+        "id": "Medication.code.coding:snomed.version",
+        "path": "Medication.code.coding.version",
+        "mustSupport": true
+      },
+      {
         "id": "Medication.code.coding:snomed.code",
         "path": "Medication.code.coding.code",
         "min": 1,
@@ -361,6 +538,11 @@
         "mustSupport": true
       },
       {
+        "id": "Medication.form.coding:snomed.version",
+        "path": "Medication.form.coding.version",
+        "mustSupport": true
+      },
+      {
         "id": "Medication.form.coding:snomed.code",
         "path": "Medication.form.coding.code",
         "min": 1,
@@ -418,6 +600,68 @@
         }
       },
       {
+        "id": "Medication.amount.numerator.extension:packagingSize",
+        "path": "Medication.amount.numerator.extension",
+        "sliceName": "packagingSize",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-packaging-size-extension"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.amount.numerator.extension:packagingSize.value[x]",
+        "path": "Medication.amount.numerator.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.amount.numerator.extension:packagingSize.value[x]:valueString",
+        "path": "Medication.amount.numerator.extension.value[x]",
+        "sliceName": "valueString",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.amount.numerator.extension:totalQuantity",
+        "path": "Medication.amount.numerator.extension",
+        "sliceName": "totalQuantity",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-total-quantity-formulation-extension"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.amount.numerator.extension:totalQuantity.value[x]",
+        "path": "Medication.amount.numerator.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.amount.numerator.extension:totalQuantity.value[x]:valueString",
+        "path": "Medication.amount.numerator.extension.value[x]",
+        "sliceName": "valueString",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
         "id": "Medication.amount.numerator.value",
         "path": "Medication.amount.numerator.value",
         "mustSupport": true
@@ -470,6 +714,37 @@
         "id": "Medication.ingredient",
         "path": "Medication.ingredient",
         "short": "Information on Components (Rezeptur)",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.ingredient.extension:darreichungsform",
+        "path": "Medication.ingredient.extension",
+        "sliceName": "darreichungsform",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-ingredient-darreichungsform-extension"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.ingredient.extension:darreichungsform.value[x]",
+        "path": "Medication.ingredient.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.ingredient.extension:darreichungsform.value[x]:valueString",
+        "path": "Medication.ingredient.extension.value[x]",
+        "sliceName": "valueString",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
         "mustSupport": true
       },
       {
@@ -643,6 +918,11 @@
         "mustSupport": true
       },
       {
+        "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:snomed.version",
+        "path": "Medication.ingredient.item[x].coding.version",
+        "mustSupport": true
+      },
+      {
         "id": "Medication.ingredient.item[x]:itemCodeableConcept.coding:snomed.code",
         "path": "Medication.ingredient.item[x].coding.code",
         "min": 1,
@@ -684,6 +964,37 @@
         "id": "Medication.ingredient.strength",
         "path": "Medication.ingredient.strength",
         "short": "Strength",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.ingredient.strength.extension:amountText",
+        "path": "Medication.ingredient.strength.extension",
+        "sliceName": "amountText",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-ingredient-amount-extension"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Medication.ingredient.strength.extension:amountText.value[x]",
+        "path": "Medication.ingredient.strength.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Medication.ingredient.strength.extension:amountText.value[x]:valueString",
+        "path": "Medication.ingredient.strength.extension.value[x]",
+        "sliceName": "valueString",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
         "mustSupport": true
       },
       {
@@ -754,8 +1065,7 @@
       {
         "id": "Medication.batch",
         "path": "Medication.batch",
-        "short": "Batch Information",
-        "mustSupport": true
+        "short": "Batch Information"
       },
       {
         "id": "Medication.batch.lotNumber",

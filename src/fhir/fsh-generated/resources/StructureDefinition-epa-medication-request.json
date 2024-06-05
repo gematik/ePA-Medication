@@ -2,12 +2,12 @@
   "resourceType": "StructureDefinition",
   "id": "epa-medication-request",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "EPAMedicationRequest",
   "title": "EPA MedicationRequest",
   "status": "active",
   "experimental": false,
-  "date": "2024-03-18",
+  "date": "2024-05-31",
   "publisher": "gematik GmbH",
   "description": "Defines the medication request resource for the Medication Service in the ePA system.",
   "fhirVersion": "4.0.1",
@@ -19,17 +19,19 @@
   "differential": {
     "element": [
       {
-        "id": "MedicationRequest.extension",
-        "path": "MedicationRequest.extension",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "value",
-              "path": "url"
-            }
-          ],
-          "rules": "open"
-        }
+        "id": "MedicationRequest.meta",
+        "path": "MedicationRequest.meta",
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.meta.versionId",
+        "path": "MedicationRequest.meta.versionId",
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.meta.lastUpdated",
+        "path": "MedicationRequest.meta.lastUpdated",
+        "mustSupport": true
       },
       {
         "id": "MedicationRequest.extension:multiplePrescription",
@@ -50,11 +52,10 @@
       {
         "id": "MedicationRequest.extension:multiplePrescription.extension:indicator",
         "path": "MedicationRequest.extension.extension",
-        "sliceName": "indicator",
-        "mustSupport": true
+        "sliceName": "indicator"
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:indicator.value[x]",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:indicator.value[x]:valueBoolean",
         "path": "MedicationRequest.extension.extension.value[x]",
         "sliceName": "valueBoolean",
         "type": [
@@ -67,11 +68,10 @@
       {
         "id": "MedicationRequest.extension:multiplePrescription.extension:counter",
         "path": "MedicationRequest.extension.extension",
-        "sliceName": "counter",
-        "mustSupport": true
+        "sliceName": "counter"
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x]",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x]:valueRatio",
         "path": "MedicationRequest.extension.extension.value[x]",
         "sliceName": "valueRatio",
         "type": [
@@ -82,33 +82,32 @@
         "mustSupport": true
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x].numerator",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x]:valueRatio.numerator",
         "path": "MedicationRequest.extension.extension.value[x].numerator",
         "mustSupport": true
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x].numerator.value",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x]:valueRatio.numerator.value",
         "path": "MedicationRequest.extension.extension.value[x].numerator.value",
         "mustSupport": true
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x].denominator",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x]:valueRatio.denominator",
         "path": "MedicationRequest.extension.extension.value[x].denominator",
         "mustSupport": true
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x].denominator.value",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:counter.value[x]:valueRatio.denominator.value",
         "path": "MedicationRequest.extension.extension.value[x].denominator.value",
         "mustSupport": true
       },
       {
         "id": "MedicationRequest.extension:multiplePrescription.extension:period",
         "path": "MedicationRequest.extension.extension",
-        "sliceName": "period",
-        "mustSupport": true
+        "sliceName": "period"
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:period.value[x]",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:period.value[x]:valuePeriod",
         "path": "MedicationRequest.extension.extension.value[x]",
         "sliceName": "valuePeriod",
         "type": [
@@ -119,23 +118,22 @@
         "mustSupport": true
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:period.value[x].start",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:period.value[x]:valuePeriod.start",
         "path": "MedicationRequest.extension.extension.value[x].start",
         "mustSupport": true
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:period.value[x].end",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:period.value[x]:valuePeriod.end",
         "path": "MedicationRequest.extension.extension.value[x].end",
         "mustSupport": true
       },
       {
         "id": "MedicationRequest.extension:multiplePrescription.extension:id",
         "path": "MedicationRequest.extension.extension",
-        "sliceName": "id",
-        "mustSupport": true
+        "sliceName": "id"
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:id.value[x]",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:id.value[x]:valueIdentifier",
         "path": "MedicationRequest.extension.extension.value[x]",
         "sliceName": "valueIdentifier",
         "type": [
@@ -146,13 +144,45 @@
         "mustSupport": true
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:id.value[x].system",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:id.value[x]:valueIdentifier.system",
         "path": "MedicationRequest.extension.extension.value[x].system",
         "mustSupport": true
       },
       {
-        "id": "MedicationRequest.extension:multiplePrescription.extension:id.value[x].value",
+        "id": "MedicationRequest.extension:multiplePrescription.extension:id.value[x]:valueIdentifier.value",
         "path": "MedicationRequest.extension.extension.value[x].value",
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.extension:isBvg",
+        "path": "MedicationRequest.extension",
+        "sliceName": "isBvg",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://gematik.de/fhir/epa-medication/StructureDefinition/indicator-bvg-extension"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.extension:isBvg.value[x]",
+        "path": "MedicationRequest.extension.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationRequest.extension:isBvg.value[x]:valueBoolean",
+        "path": "MedicationRequest.extension.value[x]",
+        "sliceName": "valueBoolean",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
         "mustSupport": true
       },
       {
@@ -237,6 +267,14 @@
       {
         "id": "MedicationRequest.subject",
         "path": "MedicationRequest.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
         "mustSupport": true
       },
       {
@@ -256,7 +294,7 @@
         "id": "MedicationRequest.authoredOn",
         "path": "MedicationRequest.authoredOn",
         "short": "Issue Date",
-        "definition": "Issue Date of the Prescriptio",
+        "definition": "Issue Date of the Prescription",
         "min": 1,
         "mustSupport": true
       },

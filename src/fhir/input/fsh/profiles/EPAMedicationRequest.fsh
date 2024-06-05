@@ -4,6 +4,7 @@ Id: epa-medication-request
 Title: "EPA MedicationRequest"
 Description: "Defines the medication request resource for the Medication Service in the ePA system."
 * insert Meta
+* insert ProfileMeta
 * identifier ^slicing.discriminator.type = #pattern
 * identifier ^slicing.discriminator.path = "$this"
 * identifier ^slicing.rules = #open
@@ -21,59 +22,39 @@ Description: "Defines the medication request resource for the Medication Service
   * ^slicing.discriminator.type = #value
   * ^slicing.discriminator.path = "url"
   * ^slicing.rules = #open
-* extension contains 
-    MultiplePrescriptionExtension named multiplePrescription 0..1 MS
-* extension[medicationRequestLinkedStatement].value[x]
-* extension[multiplePrescription]
-  * extension 1..
-  * extension ^slicing.discriminator.type = #value
-  * extension ^slicing.discriminator.path = "url"
-  * extension ^slicing.rules = #closed
-  * extension[indicator]
-    * ^sliceName = "indicator"
-    * ^mustSupport = true
-    * value[x] MS
-    * valueBoolean MS
-    * valueBoolean 
-      * ^sliceName = "valueBoolean"
-  * extension[counter] 
-    * ^sliceName = "counter"
-    * ^min = 0
-    * ^mustSupport = true
-    * value[x] MS
-    * valueRatio MS
-      * ^sliceName = "valueRatio"
-      * numerator MS
-      * numerator
-        * value MS
-      * denominator MS
-      * denominator
-        * value MS
-  * extension[period] 
-    * ^sliceName = "period"
-    * ^min = 0
-    * ^mustSupport = true
-    * value[x] MS
-    * valuePeriod MS
-      * ^sliceName = "valuePeriod"
-      * start MS
-      * end MS
-  * extension[id]
-    * ^sliceName = "id"
-    * ^min = 0
-    * ^mustSupport = true
-    * value[x] MS
-    * valueIdentifier MS
-      * ^sliceName = "valueIdentifier"
-      * system MS
-      * value MS
+* extension contains
+    MultiplePrescriptionExtension named multiplePrescription 0..1 MS and
+    IndicatorBVGExtension named isBvg 0..1 MS
+
+* extension[isBvg].value[x] MS
+* extension[isBvg].valueBoolean MS
+* extension[isBvg].valueBoolean ^sliceName = "valueBoolean"
+
+* extension[multiplePrescription].extension[indicator].value[x] only boolean
+* extension[multiplePrescription].extension[indicator].valueBoolean MS
+
+* extension[multiplePrescription].extension[counter].value[x] only Ratio
+* extension[multiplePrescription].extension[counter].valueRatio MS
+* extension[multiplePrescription].extension[counter].valueRatio.numerator MS
+* extension[multiplePrescription].extension[counter].valueRatio.numerator.value MS
+* extension[multiplePrescription].extension[counter].valueRatio.denominator MS
+* extension[multiplePrescription].extension[counter].valueRatio.denominator.value MS
+
+* extension[multiplePrescription].extension[period].value[x] only Period
+* extension[multiplePrescription].extension[period].valuePeriod MS
+* extension[multiplePrescription].extension[period].valuePeriod.start MS
+* extension[multiplePrescription].extension[period].valuePeriod.end MS
+
+* extension[multiplePrescription].extension[id].value[x] only Identifier
+* extension[multiplePrescription].extension[id].valueIdentifier MS
+* extension[multiplePrescription].extension[id].valueIdentifier.system MS
+* extension[multiplePrescription].extension[id].valueIdentifier.value MS
+
 * status from EPAMedicationRequestVS
 * intent MS
 * intent ^short = "filler-order"
 * intent ^definition = "When data is synchronized with the E-Rezept-Fachdienst, the 'filler-order' code should be used here."
-* subject 1..1 MS
-  * identifier MS
-  * identifier only IdentifierKvid10
+* insert Subject
 * medication[x] only Reference
 * medicationReference MS
 * medicationReference only Reference(Medication)
@@ -81,7 +62,7 @@ Description: "Defines the medication request resource for the Medication Service
 * requester only Reference(PractitionerRole)
 * authoredOn 1.. MS
 * authoredOn ^short = "Issue Date"
-* authoredOn ^definition = "Issue Date of the Prescriptio"
+* authoredOn ^definition = "Issue Date of the Prescription"
 * note ..1 MS
 * note.text MS
 * note.text ^short = "Dispensing Note"

@@ -1,0 +1,30 @@
+<Medication xmlns="http://hl7.org/fhir">
+  <id value="2571d29b-e213-40ec-b817-a1490718a490" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2025-01-22T14:43:33.244Z" />
+    <profile value="https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication" />
+  </meta>
+  <extension url="https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension">
+    <valueIdentifier>
+      <system value="https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier" />
+      <value value="160.153.303.257.459_20250122" />
+    </valueIdentifier>
+  </extension>
+  <identifier>
+    <system value="https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier" />
+    <value value="A632B2AB4232C9787E0731E3824942350070FB492EB1005A4AFA00F4BACD8AA1" />
+  </identifier>
+  <identifier>
+    <system value="https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier" />
+    <value value="dc810e53-c26b-47bc-8c78-c7f79ea5f7ae_160.153.303.257.459" />
+  </identifier>
+  <code>
+    <coding>
+      <system value="http://fhir.de/CodeSystem/ask" />
+      <code value="5682" />
+      <display value="Ibuprofen" />
+    </coding>
+  </code>
+  <status value="active" />
+</Medication>

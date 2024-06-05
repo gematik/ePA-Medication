@@ -2,12 +2,12 @@
   "resourceType": "StructureDefinition",
   "id": "multiple-prescription-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/multiple-prescription-extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "MultiplePrescriptionExtension",
   "title": "MultiplePrescription",
   "status": "active",
   "experimental": false,
-  "date": "2024-03-18",
+  "date": "2024-05-31",
   "publisher": "gematik GmbH",
   "description": "This FHIR Extension for multiple prescriptions adds details such as repetition count and time intervals for repeated medication orders to FHIR resources.",
   "fhirVersion": "4.0.1",
@@ -42,14 +42,13 @@
           ],
           "description": "Extensions are always sliced by (at least) url",
           "rules": "closed"
-        },
-        "min": 1
+        }
       },
       {
         "id": "Extension.extension:indicator",
         "path": "Extension.extension",
         "sliceName": "indicator",
-        "min": 1,
+        "min": 0,
         "max": "1"
       },
       {
@@ -65,9 +64,30 @@
       {
         "id": "Extension.extension:indicator.value[x]",
         "path": "Extension.extension.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "closed"
+        },
+        "min": 1,
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:indicator.value[x]:valueBoolean",
+        "path": "Extension.extension.value[x]",
+        "sliceName": "valueBoolean",
         "short": "Multiple Prescription Indicator",
         "definition": "Indicator of whether the current prescription is part of a multiple prescription\r\n\r\ntrue - the current prescription is part of a multiple prescription \r\nfalse - the current prescription is not part of a multiple prescription",
         "min": 1,
+        "max": "1",
         "type": [
           {
             "code": "boolean"
@@ -94,6 +114,15 @@
       {
         "id": "Extension.extension:counter.value[x]",
         "path": "Extension.extension.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "closed"
+        },
         "min": 1,
         "type": [
           {
@@ -102,66 +131,78 @@
         ]
       },
       {
-        "id": "Extension.extension:counter.value[x].numerator",
+        "id": "Extension.extension:counter.value[x]:valueRatio",
+        "path": "Extension.extension.value[x]",
+        "sliceName": "valueRatio",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Ratio"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:counter.value[x]:valueRatio.numerator",
         "path": "Extension.extension.value[x].numerator",
         "min": 1
       },
       {
-        "id": "Extension.extension:counter.value[x].numerator.value",
+        "id": "Extension.extension:counter.value[x]:valueRatio.numerator.value",
         "path": "Extension.extension.value[x].numerator.value",
         "short": "Multiple Prescription Counter",
         "definition": "The field serves to indicate which number in a series of multiple prescriptions it is. Example: \"2\" in \"2 out of 4\"",
         "min": 1
       },
       {
-        "id": "Extension.extension:counter.value[x].numerator.comparator",
+        "id": "Extension.extension:counter.value[x]:valueRatio.numerator.comparator",
         "path": "Extension.extension.value[x].numerator.comparator",
         "max": "0"
       },
       {
-        "id": "Extension.extension:counter.value[x].numerator.unit",
+        "id": "Extension.extension:counter.value[x]:valueRatio.numerator.unit",
         "path": "Extension.extension.value[x].numerator.unit",
         "max": "0"
       },
       {
-        "id": "Extension.extension:counter.value[x].numerator.system",
+        "id": "Extension.extension:counter.value[x]:valueRatio.numerator.system",
         "path": "Extension.extension.value[x].numerator.system",
         "max": "0"
       },
       {
-        "id": "Extension.extension:counter.value[x].numerator.code",
+        "id": "Extension.extension:counter.value[x]:valueRatio.numerator.code",
         "path": "Extension.extension.value[x].numerator.code",
         "max": "0"
       },
       {
-        "id": "Extension.extension:counter.value[x].denominator",
+        "id": "Extension.extension:counter.value[x]:valueRatio.denominator",
         "path": "Extension.extension.value[x].denominator",
         "min": 1
       },
       {
-        "id": "Extension.extension:counter.value[x].denominator.value",
+        "id": "Extension.extension:counter.value[x]:valueRatio.denominator.value",
         "path": "Extension.extension.value[x].denominator.value",
         "short": "Denominator of Multiple Prescription Series",
         "definition": "The field serves to indicate the length of this series. Example: \"4\" in \"2 out of 4\"",
         "min": 1
       },
       {
-        "id": "Extension.extension:counter.value[x].denominator.comparator",
+        "id": "Extension.extension:counter.value[x]:valueRatio.denominator.comparator",
         "path": "Extension.extension.value[x].denominator.comparator",
         "max": "0"
       },
       {
-        "id": "Extension.extension:counter.value[x].denominator.unit",
+        "id": "Extension.extension:counter.value[x]:valueRatio.denominator.unit",
         "path": "Extension.extension.value[x].denominator.unit",
         "max": "0"
       },
       {
-        "id": "Extension.extension:counter.value[x].denominator.system",
+        "id": "Extension.extension:counter.value[x]:valueRatio.denominator.system",
         "path": "Extension.extension.value[x].denominator.system",
         "max": "0"
       },
       {
-        "id": "Extension.extension:counter.value[x].denominator.code",
+        "id": "Extension.extension:counter.value[x]:valueRatio.denominator.code",
         "path": "Extension.extension.value[x].denominator.code",
         "max": "0"
       },
@@ -169,7 +210,7 @@
         "id": "Extension.extension:period",
         "path": "Extension.extension",
         "sliceName": "period",
-        "short": "Redemption Period",
+        "short": "Zeitraum der Einlösefrist",
         "min": 0,
         "max": "1"
       },
@@ -186,7 +227,28 @@
       {
         "id": "Extension.extension:period.value[x]",
         "path": "Extension.extension.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "closed"
+        },
         "min": 1,
+        "type": [
+          {
+            "code": "Period"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:period.value[x]:valuePeriod",
+        "path": "Extension.extension.value[x]",
+        "sliceName": "valuePeriod",
+        "min": 1,
+        "max": "1",
         "type": [
           {
             "code": "Period"
@@ -210,14 +272,14 @@
         ]
       },
       {
-        "id": "Extension.extension:period.value[x].start",
+        "id": "Extension.extension:period.value[x]:valuePeriod.start",
         "path": "Extension.extension.value[x].start",
         "short": "Start Date of the Prescription Redemption Period",
         "definition": "Date from which the partial prescription of the multiple prescription can be redeemed",
         "min": 1
       },
       {
-        "id": "Extension.extension:period.value[x].end",
+        "id": "Extension.extension:period.value[x]:valuePeriod.end",
         "path": "Extension.extension.value[x].end",
         "short": "End Date of the Prescription Redemption Period",
         "definition": "Date of the last redemption day for the partial prescription within the multiple prescription series. \nThe issuer may specify a redemption period different from the one outlined in the Medicinal Products Prescription Ordinance (AMVV)"
@@ -242,6 +304,15 @@
       {
         "id": "Extension.extension:id.value[x]",
         "path": "Extension.extension.value[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "rules": "closed"
+        },
         "min": 1,
         "type": [
           {
@@ -250,34 +321,46 @@
         ]
       },
       {
-        "id": "Extension.extension:id.value[x].use",
+        "id": "Extension.extension:id.value[x]:valueIdentifier",
+        "path": "Extension.extension.value[x]",
+        "sliceName": "valueIdentifier",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:id.value[x]:valueIdentifier.use",
         "path": "Extension.extension.value[x].use",
         "max": "0"
       },
       {
-        "id": "Extension.extension:id.value[x].type",
+        "id": "Extension.extension:id.value[x]:valueIdentifier.type",
         "path": "Extension.extension.value[x].type",
         "max": "0"
       },
       {
-        "id": "Extension.extension:id.value[x].system",
+        "id": "Extension.extension:id.value[x]:valueIdentifier.system",
         "path": "Extension.extension.value[x].system",
         "short": "Specification as UUID",
         "fixedUri": "urn:ietf:rfc:3986"
       },
       {
-        "id": "Extension.extension:id.value[x].value",
+        "id": "Extension.extension:id.value[x]:valueIdentifier.value",
         "path": "Extension.extension.value[x].value",
         "short": "Multiple Prescription ID",
         "definition": "A unique ID that is identical across all partial prescriptions of a multiple prescription."
       },
       {
-        "id": "Extension.extension:id.value[x].period",
+        "id": "Extension.extension:id.value[x]:valueIdentifier.period",
         "path": "Extension.extension.value[x].period",
         "max": "0"
       },
       {
-        "id": "Extension.extension:id.value[x].assigner",
+        "id": "Extension.extension:id.value[x]:valueIdentifier.assigner",
         "path": "Extension.extension.value[x].assigner",
         "max": "0"
       },

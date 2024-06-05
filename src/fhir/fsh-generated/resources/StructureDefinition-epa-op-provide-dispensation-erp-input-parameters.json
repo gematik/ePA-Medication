@@ -2,12 +2,12 @@
   "resourceType": "StructureDefinition",
   "id": "epa-op-provide-dispensation-erp-input-parameters",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "EPAOpProvideDispensationERPInputParameters",
   "title": "EPA Operation ProvideDispensation ERP Input-Parameters",
   "status": "active",
   "experimental": false,
-  "date": "2024-03-18",
+  "date": "2024-05-31",
   "publisher": "gematik GmbH",
   "description": "EPA Operation ProvideDispensation ERP Input-Parameters",
   "fhirVersion": "4.0.1",
@@ -51,7 +51,7 @@
           ],
           "rules": "open"
         },
-        "min": 4,
+        "min": 5,
         "mustSupport": true
       },
       {
@@ -178,7 +178,7 @@
         "id": "Parameters.parameter.part:medication",
         "path": "Parameters.parameter.part",
         "sliceName": "medication",
-        "min": 0,
+        "min": 1,
         "max": "*",
         "type": [
           {

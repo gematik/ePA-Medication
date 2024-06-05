@@ -1,0 +1,57 @@
+<Medication xmlns="http://hl7.org/fhir">
+  <id value="3b990824-3814-4d75-80b1-e2935827f8f0" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2025-01-22T14:43:33.244Z" />
+    <profile value="https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication" />
+  </meta>
+  <extension url="https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension">
+    <valueIdentifier>
+      <system value="https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier" />
+      <value value="160.153.303.257.459_20250122" />
+    </valueIdentifier>
+  </extension>
+  <identifier>
+    <system value="https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier" />
+    <value value="E5A0DE886C10E6A7C044D39204A23FE945CFA4C93C694837F43A2C9DE7C858DF" />
+  </identifier>
+  <identifier>
+    <system value="https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier" />
+    <value value="ec4d55a0-dec1-46b7-96cc-096845b74c4b_160.153.303.257.459" />
+  </identifier>
+  <code>
+    <text value="Infusion bestehend aus 85mg Doxorubicin aufgeloest zur Verabreichung in 250ml 5-%iger (50 mg/ml) Glucose-Infusionsloesung" />
+  </code>
+  <status value="active" />
+  <form>
+    <coding>
+      <system value="http://standardterms.edqm.eu" />
+      <code value="11210000" />
+      <display value="Solution for infusion" />
+    </coding>
+  </form>
+  <ingredient>
+    <itemCodeableConcept>
+      <coding>
+        <system value="http://fhir.de/CodeSystem/bfarm/atc" />
+        <code value="L01DB01" />
+        <display value="Doxorubicin" />
+      </coding>
+    </itemCodeableConcept>
+    <isActive value="true" />
+    <strength>
+      <numerator>
+        <value value="85" />
+        <unit value="mg" />
+        <system value="http://unitsofmeasure.org" />
+        <code value="mg" />
+      </numerator>
+      <denominator>
+        <value value="250" />
+        <unit value="Milliliter" />
+        <system value="http://unitsofmeasure.org" />
+        <code value="mL" />
+      </denominator>
+    </strength>
+  </ingredient>
+</Medication>
