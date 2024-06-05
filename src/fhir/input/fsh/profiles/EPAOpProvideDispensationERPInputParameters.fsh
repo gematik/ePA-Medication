@@ -17,7 +17,7 @@ Description: "EPA Operation ProvideDispensation ERP Input-Parameters"
     prescriptionId 1..1 and
     authoredOn 1..1 and
     medicationDispense 1.. and
-    medication 0.. and
+    medication 1.. and
     organization 1..1
   * part[prescriptionId]
     * name MS

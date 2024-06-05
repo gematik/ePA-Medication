@@ -4,6 +4,7 @@ Id: epa-medication-dispense
 Title: "EPA MedicationDispense"
 Description: "Defines the medication dispense resource for the Medication Service in the ePA system."
 * insert Meta
+* insert ProfileMeta
 * extension contains RxPrescriptionProcessIdentifierExtension named rxPrescriptionProcessIdentifier 0..1
 * extension[rxPrescriptionProcessIdentifier].value[x]
 * identifier ^slicing.discriminator.type = #pattern
@@ -17,13 +18,9 @@ Description: "Defines the medication dispense resource for the Medication Servic
 * identifier[RxOriginatorProcessIdentifier] ^patternIdentifier.system = "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier"
 * status from EPAMedicationDispenseVS
 * medication[x] only Reference
-  * extension contains $data-absent-reason named dataAbsentReason 0..1 MS
-  * extension[dataAbsentReason].valueCode = #unsupported
 * medicationReference MS
 * medicationReference only Reference(Medication)
-* subject 1..1 MS
-  * identifier MS
-  * identifier only IdentifierKvid10
+* insert Subject
 * performer 1..1 MS
   * actor only Reference(Organization)
 * authorizingPrescription 0..

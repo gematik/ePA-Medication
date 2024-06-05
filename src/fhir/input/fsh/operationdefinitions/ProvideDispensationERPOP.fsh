@@ -4,6 +4,7 @@ Usage: #definition
 Title: "$provide-dispensation-erp Operation"
 Description: "The $provide-dispensation-erp operation in the ePA Medication Service is used to record information about the dispensing of medications based on an electronic prescription in the patient's record. This operation comes into play when a patient receives their medication from a pharmacy. It documents that the medication has been dispensed as per the prescription, including details like the quantity, date of dispensing, and pharmacy information. This helps maintain a comprehensive overview of the patient's medication history."
 * insert MetaInst
+
 * id = "provide-dispensation-erp-OP"
 * name = "Provide Dispensation eRP"
 * kind = #operation
@@ -12,8 +13,8 @@ Description: "The $provide-dispensation-erp operation in the ePA Medication Serv
 * system = true
 * type = false
 * instance = false
-* inputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters)
-* outputProfile = Canonical(https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters)
+* inputProfile = Canonical(EPAOpProvideDispensationERPInputParameters)
+* outputProfile = Canonical(EPAOpRxDispensationERPOutputParameters)
 * parameter[+]
   * name = #rxDispensation
   * use = #in
@@ -41,7 +42,7 @@ Description: "The $provide-dispensation-erp operation in the ePA Medication Serv
     * name = #medication
     * type = #Medication
     * use = #in
-    * min = 0
+    * min = 1
     * max = "*"
   * part[+]
     * name = #organization

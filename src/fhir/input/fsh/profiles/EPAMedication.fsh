@@ -4,15 +4,46 @@ Id: epa-medication
 Title: "EPA Medication"
 Description: "Defines the medication resource for the Medication Service in the ePA system."
 * insert Meta
+* insert ProfileMeta
 * extension contains 
-    RxPrescriptionProcessIdentifierExtension named rxPrescriptionProcessIdentifier 0..1
+    RxPrescriptionProcessIdentifierExtension named rxPrescriptionProcessIdentifier 0..1 and
+    MedicationIsVaccineExtension named isVaccine 0..1 and
+    DrugCategoryExtension named drugCategory 0..1 and
+    ExtensionNormgroesseDeBasis named normSizeCode 0..1 and
+    MedicationFormulationPackagingExtension named packaging 0..1 and
+    MedicationManufacturingInstructionsExtension named manufacturingInstructions 0..1
 * extension[rxPrescriptionProcessIdentifier].value[x]
+* extension[isVaccine]
+  * value[x] MS
+  * valueBoolean MS
+  * valueBoolean ^sliceName = "valueBoolean"
+* extension[drugCategory]
+  * value[x] MS
+  * valueCoding MS
+  * valueCoding ^sliceName = "valueCoding"
+    * system MS
+    * code MS
+* extension[normSizeCode] ^short = "Package size according to N-designation"
+* extension[normSizeCode] ^definition = "Description of the therapy-appropriate package size (e.g., N1)"
+  * value[x] 1.. MS
+    * ^slicing.discriminator.type = #type
+    * ^slicing.discriminator.path = "$this"
+    * ^slicing.rules = #open
+  * valueCode MS
+* extension[packaging]
+  * value[x] MS
+  * valueString MS
+  * valueString ^sliceName = "valueString"
+* extension[manufacturingInstructions]
+  * value[x] MS
+  * valueString MS
+  * valueString ^sliceName = "valueString"
 * obeys epa-med-1
-* identifier ^slicing.discriminator.type = #pattern
-* identifier ^slicing.discriminator.path = "$this"
-* identifier ^slicing.rules = #open
-* identifier ^slicing.ordered = false
 * identifier 0..
+  * ^slicing.discriminator.type = #pattern
+  * ^slicing.discriminator.path = "$this"
+  * ^slicing.rules = #open
+  * ^slicing.ordered = false
 * identifier contains
     EPAMedicationUniqueIdentifier 0..1 and
     RxOriginatorProcessIdentifier 0..1
@@ -36,6 +67,7 @@ Description: "Defines the medication resource for the Medication Service in the 
     * ^patternCoding.system = $cs-pzn
     * system 1..1 MS
     * code 1..1 MS
+    * version MS
     * display MS
   * coding[atc-de]
     * ^patternCoding.system = $cs-atc-de
@@ -53,9 +85,10 @@ Description: "Defines the medication resource for the Medication Service in the 
     * code 1..1 MS
     * display MS
   * coding[snomed]
-    * ^patternCoding.system = $snomed-sct
+    * ^patternCoding.system = $sct
     * system 1..1 MS
     * code 1..1 MS
+    * version MS
     * display MS
   * text MS
 * status 0..1 MS
@@ -81,9 +114,10 @@ Description: "Defines the medication resource for the Medication Service in the 
     * code 1..1 MS
     * display MS
   * coding[snomed]
-    * ^patternCoding.system = $snomed-sct
+    * ^patternCoding.system = $sct
     * system 1..1 MS
     * code 1..1 MS
+    * version MS
     * display MS
   * coding[kbvDarreichungsform] from $vs-kbv-medication-darreichungsform (required)
     * ^patternCoding.system = $cs-kbv-medication-darreichungsform
@@ -92,6 +126,21 @@ Description: "Defines the medication resource for the Medication Service in the 
     * display MS
 * amount 0..1 MS
   * numerator 0..1 MS
+    * extension
+      * ^slicing.discriminator.type = #value
+      * ^slicing.discriminator.path = "url"
+      * ^slicing.rules = #open  
+    * extension contains
+        MedicationPackagingSizeExtension named packagingSize 0..1 and
+        MedicationTotalQuantityFormulationExtension named totalQuantity 0..1
+    * extension[packagingSize]
+      * value[x] MS
+      * valueString MS
+      * valueString ^sliceName = "valueString"
+    * extension[totalQuantity]
+      * value[x] MS
+      * valueString MS
+      * valueString ^sliceName = "valueString"
   * numerator from $hl7-vs-ucum-units (preferred)
     * value 0..1 MS
     * unit MS
@@ -105,6 +154,16 @@ Description: "Defines the medication resource for the Medication Service in the 
     * code 0..1 MS
 * ingredient MS
   * ^short = "Information on Components (Rezeptur)"
+  * extension
+    * ^slicing.discriminator.type = #value
+    * ^slicing.discriminator.path = "url"
+    * ^slicing.rules = #open  
+  * extension contains
+      MedicationIngredientDarreichungsformExtension named darreichungsform 0..1
+  * extension[darreichungsform]
+    * value[x] MS
+    * valueString MS
+    * valueString ^sliceName = "valueString"
   * item[x] 1..1 MS
   * itemCodeableConcept MS
     * ^short = "Component in coded form or, if necessary, as free text"
@@ -139,9 +198,10 @@ Description: "Defines the medication resource for the Medication Service in the 
       * code 1..1 MS
       * display MS
     * coding[snomed]
-      * ^patternCoding.system = $snomed-sct
+      * ^patternCoding.system = $sct
       * system 1..1 MS
       * code 1..1 MS
+      * version MS
       * display MS
     * text MS
   * itemReference
@@ -151,6 +211,16 @@ Description: "Defines the medication resource for the Medication Service in the 
     * ^short = "Is it an active ingredient?"
   * strength MS
     * ^short = "Strength"
+    * extension
+      * ^slicing.discriminator.type = #value
+      * ^slicing.discriminator.path = "url"
+      * ^slicing.rules = #open  
+    * extension contains
+        MedicationIngredientAmountExtensions named amountText 0..1
+    * extension[amountText]
+      * value[x] MS
+      * valueString MS
+      * valueString ^sliceName = "valueString"
     * numerator 1..1 MS
     * numerator from $hl7-vs-ucum-units (preferred)
       * value 1..1 MS
@@ -163,12 +233,7 @@ Description: "Defines the medication resource for the Medication Service in the 
       * unit MS
       * system 1..1 MS
       * code 1..1 MS
-* batch MS
+* batch
   * ^short = "Batch Information"
   * lotNumber MS
     * ^short = "Batch Number"
-
-Invariant: epa-med-1
-Description: "Medication code, name, or ingredients must be specified"
-Severity: #error
-Expression: "code.exists() or ingredient.exists()"

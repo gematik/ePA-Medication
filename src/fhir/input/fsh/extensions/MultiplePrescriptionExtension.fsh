@@ -4,24 +4,36 @@ Title: "MultiplePrescription"
 Description: "This FHIR Extension for multiple prescriptions adds details such as repetition count and time intervals for repeated medication orders to FHIR resources."
 Context: MedicationRequest
 * insert Meta
-* value[x] 0..0
-* extension 1..
-  * ^slicing.discriminator.type = #value
-  * ^slicing.discriminator.path = "url"
-  * ^slicing.rules = #closed
+
+* extension ^slicing.discriminator.type = #value
+* extension ^slicing.discriminator.path = "url"
+* extension ^slicing.rules = #closed
 * extension contains
-    indicator 1..1 and 
+    indicator 0..1 and 
     counter 0..1 and
     period 0..1 and
     id 0..1
-* extension[indicator] 
+* extension[indicator]
+  * value[x] 1..
   * value[x] only boolean
+  * value[x] ^slicing.discriminator.type = #type
+  * value[x] ^slicing.discriminator.path = "$this"
+  * value[x] ^slicing.rules = #closed
+  * value[x] contains valueBoolean 1..1
   * valueBoolean 1..
+  * valueBoolean only boolean
   * valueBoolean ^short = "Multiple Prescription Indicator"
   * valueBoolean ^definition = "Indicator of whether the current prescription is part of a multiple prescription\r\n\r\ntrue - the current prescription is part of a multiple prescription \r\nfalse - the current prescription is not part of a multiple prescription"
-* extension[counter] 
+
+* extension[counter]
+  * value[x] 1..
   * value[x] only Ratio
+  * value[x] ^slicing.discriminator.type = #type
+  * value[x] ^slicing.discriminator.path = "$this"
+  * value[x] ^slicing.rules = #closed
+  * value[x] contains valueRatio 1..1
   * valueRatio 1..
+  * valueRatio only Ratio
   * valueRatio.numerator 1..
   * valueRatio.numerator.value 1..
   * valueRatio.numerator.value ^short = "Multiple Prescription Counter"
@@ -38,37 +50,37 @@ Context: MedicationRequest
   * valueRatio.denominator.unit ..0
   * valueRatio.denominator.system ..0
   * valueRatio.denominator.code ..0
-* extension[period]
-  * ^short = "Redemption Period"
+
+* extension[period] 
+  * ^short = "Zeitraum der Einlösefrist"
   * value[x] 1..
   * value[x] only Period
+  * value[x] ^slicing.discriminator.type = #type
+  * value[x] ^slicing.discriminator.path = "$this"
+  * value[x] ^slicing.rules = #closed
+  * value[x] contains valuePeriod 1..1
   * valuePeriod 1..
   * valuePeriod only Period
   * valuePeriod obeys -limitationDateStart and -limitationDateEnd
-    * start 1..
-    * start ^short = "Start Date of the Prescription Redemption Period"
-    * start ^definition = "Date from which the partial prescription of the multiple prescription can be redeemed"
-    * end ^short = "End Date of the Prescription Redemption Period"
-    * end ^definition = "Date of the last redemption day for the partial prescription within the multiple prescription series. \nThe issuer may specify a redemption period different from the one outlined in the Medicinal Products Prescription Ordinance (AMVV)"
+  * valuePeriod.start 1..
+  * valuePeriod.start ^short = "Start Date of the Prescription Redemption Period"
+  * valuePeriod.start ^definition = "Date from which the partial prescription of the multiple prescription can be redeemed"
+  * valuePeriod.end ^short = "End Date of the Prescription Redemption Period"
+  * valuePeriod.end ^definition = "Date of the last redemption day for the partial prescription within the multiple prescription series. \nThe issuer may specify a redemption period different from the one outlined in the Medicinal Products Prescription Ordinance (AMVV)"
+
 * extension[id]
   * value[x] 1..
   * value[x] only Identifier
+  * value[x] ^slicing.discriminator.type = #type
+  * value[x] ^slicing.discriminator.path = "$this"
+  * value[x] ^slicing.rules = #closed
+  * value[x] contains valueIdentifier 1..1
   * valueIdentifier only Identifier
-    * use ..0
-    * type ..0
-    * system = "urn:ietf:rfc:3986" (exactly)
-    * system ^short = "Specification as UUID"
-    * value ^short = "Multiple Prescription ID"
-    * value ^definition = "A unique ID that is identical across all partial prescriptions of a multiple prescription."
-    * period ..0
-    * assigner ..0
-
-Invariant: -limitationDateStart
-Description: "Limitation of the date format to 10 characters YYYY-MM-DD"
-* severity = #error
-* expression = "start.toString().length()=10"
-
-Invariant: -limitationDateEnd
-Description: "Limitation of the date format to 10 characters YYYY-MM-DD"
-* severity = #error
-* expression = "end.exists().not() or end.toString().length()=10"
+  * valueIdentifier.use ..0
+  * valueIdentifier.type ..0
+  * valueIdentifier.system = "urn:ietf:rfc:3986" (exactly)
+  * valueIdentifier.system ^short = "Specification as UUID"
+  * valueIdentifier.value ^short = "Multiple Prescription ID"
+  * valueIdentifier.value ^definition = "A unique ID that is identical across all partial prescriptions of a multiple prescription."
+  * valueIdentifier.period ..0
+  * valueIdentifier.assigner ..0

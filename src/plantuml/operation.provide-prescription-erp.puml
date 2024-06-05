@@ -8,23 +8,23 @@ title $provide-prescription-erp
 start
 
 
-repeat:Get next <b>RxPrescription</b> from the <b>Input-Parameters</b>;
+repeat:Get next <b>RxPrescription</b> from <b>Input-Parameters</b>;
 
 :Validate <b>MedicationRequest</b>, <b>Medication</b>, <b>Organization</b> and <b>Practitioner</b> from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part;
 
 if (Validation successfull) then (yes)
   
-  :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and the \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;;
+  :Generate <b>RxPrescriptionProcessIdentifier</b> from values of \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;
 
-  if(\rCheck if there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> \n and \n the status <b>active</b> or <b>completed</b> already in the Medication Service\r) then (yes)
+  if(\rCheck whether there is a <b>MedicationRequest</b> with  <b>RxPrescriptionProcessIdentifier</b>\r) then (yes)
     
-    #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_PRESCRIPTION_DUPLICATE) \nor (MEDICATIONSVC_PRESCRIPTION_STATUS) to the <b>Output-Parameters</b>; 
+    #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_PRESCRIPTION_DUPLICATE) \nor (MEDICATIONSVC_PRESCRIPTION_STATUS) to <b>Output-Parameters</b>; 
   
   else (no)
 
     partition transaction {
         
-      :Check for Existing <b>Organization</b> with TelematikId from the \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b>;
+      :Check for existing <b>Organization</b> with TelematikID from \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b>;
 
       if (<b>Organization</b> exists?) then (yes)
 
@@ -33,7 +33,7 @@ if (Validation successfull) then (yes)
         <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b></i>
         
         identifier[TelematikID] = Value(TelematikID)
-      ...;
+        <i>Replace all other elements with given resource instance</i>;
 
       else (no)
 
@@ -42,11 +42,11 @@ if (Validation successfull) then (yes)
         <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b></i>
         
         identifier[TelematikID] = Value(TelematikID)
-        ...;
+        <i>Set all other elements with given resource instance</i>;
 
       endif
 
-      :Check for Existing <b>Practitioner</b> with TelematikId from the \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b>;
+      :Check for Existing <b>Practitioner</b> with TelematikId from \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b>;
 
       if (<b>Practitioner</b> exists?) then (yes)
 
@@ -55,7 +55,7 @@ if (Validation successfull) then (yes)
         <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b></i>
         
         identifier[TelematikID] = Value(TelematikID)
-      ...;
+        <i>Replace all other elements with given resource instance</i>;
 
       else (no)
 
@@ -64,7 +64,7 @@ if (Validation successfull) then (yes)
         <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b></i>
         
         identifier[TelematikID] = Value(TelematikID)
-        ...;
+        <i>Set all other elements with given resource instance</i>;
 
       endif
 
@@ -82,10 +82,10 @@ if (Validation successfull) then (yes)
 
       endif
 
-      :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
-      <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>.Id and the Input-<b>PrescriptionId</b>;
+      :Generate for <b>RxOriginatorProcessIdentifier</b> from values of 
+      <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>.Id and Input-<b>PrescriptionId</b>;
 
-      :Generate for <b>EPAMedicationUniqueIdentifier</b> from the hashed <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>;
+      :Generate for <b>EPAMedicationUniqueIdentifier</b> from hashed <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>;
         
       :<< Create >>
       <b>Medication</b>
@@ -95,11 +95,11 @@ if (Validation successfull) then (yes)
       identifier[<b>RxOriginatorProcessIdentifier</b>] = Value(RxOriginatorProcessIdentifier)
       extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
       status = <b>inactive</b>
-      ...;
+      <i>Set all other elements with given resource instance</i>;
         
-      :Generate for <b>RxOriginatorProcessIdentifier</b> from the values of 
+      :Generate for <b>RxOriginatorProcessIdentifier</b> from values of 
       <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>MedicationRequest</b>.Id 
-      and the <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;
+      and <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;
 
       :<< Create >>
       <b>MedicationRequest</b>
@@ -113,13 +113,13 @@ if (Validation successfull) then (yes)
       medicationReference = Reference(<b>Medication</b>)
       requester = Reference(<b>PractitionerRole</b>);
 
-      #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to the <b>Output-Parameters</b>;
+      #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to <b>Output-Parameters</b>;
     }
 
   endif
 
 else (no)
-  #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_NO_VALID_STRUCTURE) to the <b>Output-Parameters</b>;
+  #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_NO_VALID_STRUCTURE) to <b>Output-Parameters</b>;
 endif
 
 repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)

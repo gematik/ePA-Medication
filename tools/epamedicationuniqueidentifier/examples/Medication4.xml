@@ -1,0 +1,102 @@
+<Medication xmlns="http://hl7.org/fhir">
+  <id value="4f9ab221-0eef-4e46-a8a9-38302e0488b1" />
+  <meta>
+    <versionId value="1" />
+    <lastUpdated value="2025-01-22T14:43:33.244Z" />
+    <profile value="https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication" />
+  </meta>
+  <extension url="https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension">
+    <valueIdentifier>
+      <system value="https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier" />
+      <value value="160.153.303.257.459_20250122" />
+    </valueIdentifier>
+  </extension>
+  <extension url="https://gematik.de/fhir/epa-medication/StructureDefinition/drug-category-extension">
+    <valueCoding>
+      <system value="https://gematik.de/fhir/epa-medication/CodeSystem/epa-drug-category-cs" />
+      <code value="00" />
+    </valueCoding>
+  </extension>
+  <extension url="http://fhir.de/StructureDefinition/normgroesse">
+    <valueCode value="N3" />
+  </extension>
+  <identifier>
+    <system value="https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier" />
+    <value value="B849184C973EA5FA7D9751E6FAA6AFCFFD100183596239F84DD2C0DB4C751D67" />
+  </identifier>
+  <identifier>
+    <system value="https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier" />
+    <value value="c7f34f27-7564-43ad-b13f-2be3c5d7fd3d_160.153.303.257.459" />
+  </identifier>
+  <code>
+    <coding>
+      <system value="http://fhir.de/CodeSystem/ifa/pzn" />
+      <code value="10019621" />
+      <display value="IBU-ratiopharm 400mg akut Schmerztabletten" />
+    </coding>
+    <coding>
+      <system value="http://fhir.de/CodeSystem/bfarm/atc" />
+      <version value="2022" />
+      <code value="M01AE01" />
+      <display value="Ibuprofen" />
+    </coding>
+  </code>
+  <status value="active" />
+  <form>
+    <coding>
+      <system value="https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_DARREICHUNGSFORM" />
+      <version value="1.10" />
+      <code value="TAB" />
+      <display value="Tabletten" />
+    </coding>
+    <coding>
+      <system value="http://standardterms.edqm.eu" />
+      <code value="12200" />
+      <display value="Tablet" />
+    </coding>
+    <coding>
+      <system value="http://snomed.info/sct" />
+      <version value="http://snomed.info/sct/900000000000207008/version/20240501" />
+      <code value="385055001" />
+      <display value="Tablet (basic dose form)" />
+    </coding>
+  </form>
+  <amount>
+    <numerator>
+      <value value="50" />
+      <unit value="Tablet" />
+      <system value="http://unitsofmeasure.org" />
+      <code value="{Tablet}" />
+    </numerator>
+    <denominator>
+      <value value="1" />
+      <unit value="Package" />
+      <system value="http://unitsofmeasure.org" />
+      <code value="{Package}" />
+    </denominator>
+  </amount>
+  <ingredient>
+    <itemCodeableConcept>
+      <coding>
+        <system value="http://snomed.info/sct" />
+        <version value="http://snomed.info/sct/900000000000207008/version/20240501" />
+        <code value="387207008" />
+        <display value="Ibuprofen (substance)" />
+      </coding>
+    </itemCodeableConcept>
+    <strength>
+      <numerator>
+        <value value="400" />
+        <unit value="MilliGram" />
+        <system value="http://unitsofmeasure.org" />
+        <code value="mg" />
+      </numerator>
+      <denominator>
+        <value value="1" />
+        <unit value="Tablet" />
+        <system value="http://unitsofmeasure.org" />
+        <code value="{Tablet}" />
+      </denominator>
+    </strength>
+  </ingredient>
+</Medication>

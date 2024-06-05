@@ -1,3 +1,5 @@
+Alias: $epa-version = 3.1.0
+
 Alias: $v2-0203 = http://terminology.hl7.org/CodeSystem/v2-0203
 Alias: $identifier-type-de-basis = http://fhir.de/CodeSystem/identifier-type-de-basis
 Alias: $data-absent-reason = http://hl7.org/fhir/StructureDefinition/data-absent-reason
@@ -15,11 +17,12 @@ Alias: $cs-ucum = http://unitsofmeasure.org
 Alias: $hl7-vs-ucum-units = http://hl7.org/fhir/ValueSet/ucum-units 
 Alias: $cs-edqm = http://standardterms.edqm.eu
 Alias: $vs-edqm-doseform = http://hl7.org/fhir/uv/ips/ValueSet/medicine-doseform
-Alias: $snomed-sct = http://snomed.info/sct
+Alias: $sct = http://snomed.info/sct
+Alias: $sct_20240501 = http://snomed.info/sct/900000000000207008/version/20240501
 
 Alias: $cs-operation-outcome = http://terminology.hl7.org/CodeSystem/operation-outcome
 
-
+Alias: $capabilitystatement-expectation = http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation
 
 // no support for PKV required; see https://hl7germany.sharepoint.com/:w:/s/TCFHIR/EeWdppXQMblMqL0OHsBlhswBN5zPMHh4g5B72EJoNOzd_A?e=KMIaYnc
 //Alias: $identifier-pkv = http://fhir.de/StructureDefinition/identifier-pkv

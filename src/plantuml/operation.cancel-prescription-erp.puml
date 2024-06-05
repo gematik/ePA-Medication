@@ -11,8 +11,8 @@ start
   repeat:Get next <b>RxPrescription</b> from the <b>Input-Parameters</b>;
 
     :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of 
-    <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>authoredOn</b> and the 
-    <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>PrescriptionId</b>;
+    <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and the 
+    <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;
 
     if(\rCheck if there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> and the status <b>active</b> already in the Medication Service\r) then (yes)
       

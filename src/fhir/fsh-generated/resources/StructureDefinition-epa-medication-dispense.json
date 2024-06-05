@@ -2,12 +2,12 @@
   "resourceType": "StructureDefinition",
   "id": "epa-medication-dispense",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "EPAMedicationDispense",
   "title": "EPA MedicationDispense",
   "status": "active",
   "experimental": false,
-  "date": "2024-03-18",
+  "date": "2024-05-31",
   "publisher": "gematik GmbH",
   "description": "Defines the medication dispense resource for the Medication Service in the ePA system.",
   "fhirVersion": "4.0.1",
@@ -19,18 +19,19 @@
   "differential": {
     "element": [
       {
-        "id": "MedicationDispense.extension",
-        "path": "MedicationDispense.extension",
-        "slicing": {
-          "discriminator": [
-            {
-              "type": "value",
-              "path": "url"
-            }
-          ],
-          "ordered": false,
-          "rules": "open"
-        }
+        "id": "MedicationDispense.meta",
+        "path": "MedicationDispense.meta",
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationDispense.meta.versionId",
+        "path": "MedicationDispense.meta.versionId",
+        "mustSupport": true
+      },
+      {
+        "id": "MedicationDispense.meta.lastUpdated",
+        "path": "MedicationDispense.meta.lastUpdated",
+        "mustSupport": true
       },
       {
         "id": "MedicationDispense.extension:rxPrescriptionProcessIdentifier",
@@ -101,30 +102,17 @@
         "mustSupport": true
       },
       {
-        "id": "MedicationDispense.medication[x].extension:dataAbsentReason",
-        "path": "MedicationDispense.medication[x].extension",
-        "sliceName": "dataAbsentReason",
-        "min": 0,
-        "max": "1",
-        "type": [
-          {
-            "code": "Extension",
-            "profile": [
-              "http://hl7.org/fhir/StructureDefinition/data-absent-reason"
-            ]
-          }
-        ],
-        "mustSupport": true
-      },
-      {
-        "id": "MedicationDispense.medication[x].extension:dataAbsentReason.value[x]",
-        "path": "MedicationDispense.medication[x].extension.value[x]",
-        "patternCode": "unsupported"
-      },
-      {
         "id": "MedicationDispense.subject",
         "path": "MedicationDispense.subject",
         "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
         "mustSupport": true
       },
       {

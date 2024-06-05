@@ -2,6 +2,6 @@ canonical: https://gematik.de/fhir/epa-medication
 fhirVersion: 4.0.1
 dependencies:
   hl7.fhir.r4.core: 4.0.1
-  de.basisprofil.r4: 1.4.0
-  de.gematik.fhir.directory: 0.10.2
+  de.basisprofil.r4: 1.5.0-ballot2
+  de.gematik.fhir.directory: 0.11.7 
 FSHOnly: true
