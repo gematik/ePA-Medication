@@ -2,11 +2,11 @@
   "resourceType": "StructureDefinition",
   "id": "drug-category-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/drug-category-extension",
-  "version": "1.0.1",
+  "version": "1.0.2-rc1",
   "name": "DrugCategoryExtension",
   "status": "active",
   "experimental": false,
-  "date": "2024-05-31",
+  "date": "2024-06-07",
   "publisher": "gematik GmbH",
   "description": "Extension for indicating the medication category.",
   "fhirVersion": "4.0.1",
@@ -14,8 +14,8 @@
   "abstract": false,
   "context": [
     {
-      "expression": "Medication",
-      "type": "element"
+      "type": "element",
+      "expression": "Element"
     }
   ],
   "type": "Extension",

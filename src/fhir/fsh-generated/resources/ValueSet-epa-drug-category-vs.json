@@ -5,11 +5,11 @@
   "id": "epa-drug-category-vs",
   "title": "EPA Drug Category ValueSet",
   "description": "The ValueSet for drug category.",
-  "version": "1.0.1",
+  "version": "1.0.2-rc1",
   "url": "https://gematik.de/fhir/epa-medication/ValueSet/epa-drug-category-vs",
   "experimental": false,
   "publisher": "gematik GmbH",
-  "date": "2024-05-31",
+  "date": "2024-06-07",
   "compose": {
     "include": [
       {

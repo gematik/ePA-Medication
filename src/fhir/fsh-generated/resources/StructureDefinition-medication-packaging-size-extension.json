@@ -2,11 +2,11 @@
   "resourceType": "StructureDefinition",
   "id": "medication-packaging-size-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-packaging-size-extension",
-  "version": "1.0.1",
+  "version": "1.0.2-rc1",
   "name": "MedicationPackagingSizeExtension",
   "status": "active",
   "experimental": false,
-  "date": "2024-05-31",
+  "date": "2024-06-07",
   "publisher": "gematik GmbH",
   "description": "Specification of the package size according to divided quantity (e.g., 100, 2x25), only appears in conjunction with \"unit\" (e.g., 100 Stück).",
   "fhirVersion": "4.0.1",
@@ -14,8 +14,8 @@
   "abstract": false,
   "context": [
     {
-      "expression": "Medication",
-      "type": "element"
+      "type": "element",
+      "expression": "Element"
     }
   ],
   "type": "Extension",

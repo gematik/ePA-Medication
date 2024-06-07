@@ -1,7 +1,6 @@
 Extension: MedicationTotalQuantityFormulationExtension
 Id: medication-total-quantity-formulation-extension
 Description: "Total quantity of the formulation (without the unit)."
-Context: Medication
 * insert Meta
 
 * value[x] only string

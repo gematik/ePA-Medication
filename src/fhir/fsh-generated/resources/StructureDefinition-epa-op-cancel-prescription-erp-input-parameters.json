@@ -2,12 +2,12 @@
   "resourceType": "StructureDefinition",
   "id": "epa-op-cancel-prescription-erp-input-parameters",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters",
-  "version": "1.0.1",
+  "version": "1.0.2-rc1",
   "name": "EPAOpCancelPrescriptionERPInputParameters",
   "title": "EPA Operation CancelPrescription ERP Input-Parameters",
   "status": "active",
   "experimental": false,
-  "date": "2024-05-31",
+  "date": "2024-06-07",
   "publisher": "gematik GmbH",
   "description": "EPA Operation CancelPrescription ERP Input-Parameters",
   "fhirVersion": "4.0.1",
@@ -21,26 +21,42 @@
       {
         "id": "Parameters.parameter",
         "path": "Parameters.parameter",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "name"
+            }
+          ],
+          "rules": "closed"
+        },
         "min": 1
       },
       {
-        "id": "Parameters.parameter.name",
+        "id": "Parameters.parameter:rxPrescription",
+        "path": "Parameters.parameter",
+        "sliceName": "rxPrescription",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Parameters.parameter:rxPrescription.name",
         "path": "Parameters.parameter.name",
-        "patternString": "rxPrescription",
+        "fixedString": "rxPrescription",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.value[x]",
+        "id": "Parameters.parameter:rxPrescription.value[x]",
         "path": "Parameters.parameter.value[x]",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.resource",
+        "id": "Parameters.parameter:rxPrescription.resource",
         "path": "Parameters.parameter.resource",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part",
+        "id": "Parameters.parameter:rxPrescription.part",
         "path": "Parameters.parameter.part",
         "slicing": {
           "discriminator": [
@@ -56,7 +72,7 @@
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:prescriptionId",
+        "id": "Parameters.parameter:rxPrescription.part:prescriptionId",
         "path": "Parameters.parameter.part",
         "sliceName": "prescriptionId",
         "min": 1,
@@ -68,13 +84,13 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:prescriptionId.name",
+        "id": "Parameters.parameter:rxPrescription.part:prescriptionId.name",
         "path": "Parameters.parameter.part.name",
         "patternString": "prescriptionId",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:prescriptionId.value[x]",
+        "id": "Parameters.parameter:rxPrescription.part:prescriptionId.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "min": 1,
         "type": [
@@ -87,17 +103,17 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:prescriptionId.resource",
+        "id": "Parameters.parameter:rxPrescription.part:prescriptionId.resource",
         "path": "Parameters.parameter.part.resource",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:prescriptionId.part",
+        "id": "Parameters.parameter:rxPrescription.part:prescriptionId.part",
         "path": "Parameters.parameter.part.part",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:authoredOn",
+        "id": "Parameters.parameter:rxPrescription.part:authoredOn",
         "path": "Parameters.parameter.part",
         "sliceName": "authoredOn",
         "min": 1,
@@ -109,13 +125,13 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:authoredOn.name",
+        "id": "Parameters.parameter:rxPrescription.part:authoredOn.name",
         "path": "Parameters.parameter.part.name",
         "patternString": "authoredOn",
         "mustSupport": true
       },
       {
-        "id": "Parameters.parameter.part:authoredOn.value[x]",
+        "id": "Parameters.parameter:rxPrescription.part:authoredOn.value[x]",
         "path": "Parameters.parameter.part.value[x]",
         "min": 1,
         "type": [
@@ -125,12 +141,12 @@
         ]
       },
       {
-        "id": "Parameters.parameter.part:authoredOn.resource",
+        "id": "Parameters.parameter:rxPrescription.part:authoredOn.resource",
         "path": "Parameters.parameter.part.resource",
         "max": "0"
       },
       {
-        "id": "Parameters.parameter.part:authoredOn.part",
+        "id": "Parameters.parameter:rxPrescription.part:authoredOn.part",
         "path": "Parameters.parameter.part.part",
         "max": "0"
       }

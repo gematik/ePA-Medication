@@ -1,7 +1,6 @@
 Extension: MedicationManufacturingInstructionsExtension
 Id: medication-manufacturing-instructions-extension
 Description: "Manufacturing instructions regarding the preparation of a formulation (Subscriptio)."
-Context: Medication
 * insert Meta
 
 * value[x] only string

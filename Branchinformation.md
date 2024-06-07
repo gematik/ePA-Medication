@@ -27,4 +27,3 @@ For related specification documents follow the link 'Specifications' above. For 
 The status of a release branch can either be 'pre-released' or 'released'. The content is subject to changes in state 'pre-released'. In 'released' state only minor and non-normative changes like editorial corrections, adding examples or additional information may apply.
 
 Normative changes to a released version will be covered by a follow-up version in a separate branch (see 'Follow-up' above). The ancestor of the current release is 'Previous release' (published in 'Previous branch')
-

@@ -1,7 +1,6 @@
 Extension: MedicationPackagingSizeExtension
 Id: medication-packaging-size-extension
 Description: "Specification of the package size according to divided quantity (e.g., 100, 2x25), only appears in conjunction with \"unit\" (e.g., 100 Stück)."
-Context: Medication
 * insert Meta
 
 * value[x] only string

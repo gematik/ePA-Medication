@@ -2,11 +2,11 @@
   "resourceType": "StructureDefinition",
   "id": "indicator-bvg-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/indicator-bvg-extension",
-  "version": "1.0.1",
+  "version": "1.0.2-rc1",
   "name": "IndicatorBVGExtension",
   "status": "active",
   "experimental": false,
-  "date": "2024-05-31",
+  "date": "2024-06-07",
   "publisher": "gematik GmbH",
   "description": "Indicator of whether this regulation is made in reference to the 'Bundesentschädigungsgesetz' or the 'Bundesversorgungsgesetz'.",
   "fhirVersion": "4.0.1",
@@ -14,8 +14,8 @@
   "abstract": false,
   "context": [
     {
-      "expression": "MedicationRequest",
-      "type": "element"
+      "type": "element",
+      "expression": "Element"
     }
   ],
   "type": "Extension",

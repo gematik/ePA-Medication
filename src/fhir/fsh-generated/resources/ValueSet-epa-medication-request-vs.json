@@ -5,11 +5,11 @@
   "id": "epa-medication-request-vs",
   "title": "EPA Medication Request ValueSet",
   "description": "EPA Medication Request ValueSet",
-  "version": "1.0.1",
+  "version": "1.0.2-rc1",
   "url": "https://gematik.de/fhir/epa-medication/ValueSet/epa-medication-request-vs",
   "experimental": false,
   "publisher": "gematik GmbH",
-  "date": "2024-05-31",
+  "date": "2024-06-07",
   "compose": {
     "include": [
       {

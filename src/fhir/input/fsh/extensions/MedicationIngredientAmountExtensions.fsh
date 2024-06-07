@@ -1,7 +1,6 @@
 Extension: MedicationIngredientAmountExtensions
 Id: medication-ingredient-amount-extension
 Description: "Free-text amount of the ingredient for classical Latin notations such as \"ad 100.0\" or \"quantum satis,\" including the unit."
-Context: Medication
 * insert Meta
 
 * value[x] only string

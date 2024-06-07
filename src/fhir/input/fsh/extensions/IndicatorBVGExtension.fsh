@@ -1,7 +1,6 @@
 Extension: IndicatorBVGExtension
 Id: indicator-bvg-extension
 Description: "Indicator of whether this regulation is made in reference to the 'Bundesentschädigungsgesetz' or the 'Bundesversorgungsgesetz'."
-Context: MedicationRequest
 * insert Meta
 
 * value[x] only boolean

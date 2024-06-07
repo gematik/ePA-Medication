@@ -5,8 +5,13 @@ Title: "EPA Operation CancelDispensation ERP Input-Parameters"
 Description: "EPA Operation CancelDispensation ERP Input-Parameters"
 * insert Meta
 * parameter 1..
+* parameter ^slicing.discriminator.type = #value
+* parameter ^slicing.discriminator.path = "name"
+* parameter ^slicing.rules = #closed
+* parameter contains rxDispensation 1..1
+* parameter[rxDispensation]
   * name MS
-  * name = "rxDispensation"
+  * name = "rxDispensation" (exactly)
   * value[x] 0..0
   * resource 0..0
   * part 2..2 MS
@@ -18,14 +23,14 @@ Description: "EPA Operation CancelDispensation ERP Input-Parameters"
     authoredOn 1..1
   * part[prescriptionId]
     * name MS
-    * name = "prescriptionId"
+    * name = "prescriptionId" (exactly)
     * value[x] 1..1
     * value[x] only EPAeRPPrescriptionId
     * resource 0..0
     * part 0..0 
   * part[authoredOn]
     * name MS
-    * name = "authoredOn"
+    * name = "authoredOn" (exactly)
     * value[x] 1..1
     * value[x] only date
     * resource 0..0
