@@ -1,7 +1,6 @@
 Extension: DrugCategoryExtension
 Id: drug-category-extension
 Description: "Extension for indicating the medication category."
-Context: Medication
 * insert Meta
 
 * value[x] only Coding

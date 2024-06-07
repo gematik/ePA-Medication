@@ -63,11 +63,11 @@ tags:
       medication information sharing.
       
       ##### Profile:
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.1)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.2-rc1)
       
       ##### Examples:
-      - [https://simplifier.net/epa-medication/4f9ab221-0eef-4e46-a8a9-38302e0488b1/~json](https://simplifier.net/4f9ab221-0eef-4e46-a8a9-38302e0488b1/~json)
-      - [https://simplifier.net/epa-medication/3b990824-3814-4d75-80b1-e2935827f8f0/~json](https://simplifier.net/3b990824-3814-4d75-80b1-e2935827f8f0/~json)
+      - [https://simplifier.net/epa-medication/4f9ab221-0eef-4e46-a8a9-38302e0488b1/~json](https://simplifier.net/epa-medication/4f9ab221-0eef-4e46-a8a9-38302e0488b1/~json)
+      - [https://simplifier.net/epa-medication/3b990824-3814-4d75-80b1-e2935827f8f0/~json](https://simplifier.net/epa-medication/3b990824-3814-4d75-80b1-e2935827f8f0/~json)
       - [https://simplifier.net/epa-medication/4bfef107-7d81-4d36-8aa0-7ea937969046/~json](https://simplifier.net/epa-medication/4bfef107-7d81-4d36-8aa0-7ea937969046/~json)
 
 
@@ -77,7 +77,7 @@ tags:
       details about the prescribed medication, the insurant to whom it's prescribed, the prescribing healthcare provider, 
       and instructions for use.
       ##### Profile: 
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.1)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.2-rc1)
 
       ***
       #### [MedicationDispense](https://hl7.org/fhir/R4/medicationdispense.html)
@@ -85,7 +85,7 @@ tags:
       information about the dispensed medication, the insurant receiving the medication, the healthcare professional 
       who dispensed it, and details about the quantity and timing of the dispensation.
       ##### Profile:
-      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/emap-medication-dispense|1.0.1)
+      [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/emap-medication-dispense|1.0.2-rc1)
 
       ***
       #### [Organization](https://hl7.org/fhir/R4/organization.html)
@@ -395,7 +395,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -553,7 +553,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -642,7 +642,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Resources
@@ -720,7 +720,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -815,7 +815,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Resources
@@ -889,7 +889,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -964,7 +964,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Resources
@@ -1039,7 +1039,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       parameters:
         - $ref: '#/components/parameters/insurantid'
@@ -1115,7 +1115,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Resources
@@ -1190,7 +1190,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
 
       parameters:
@@ -1273,7 +1273,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Resources
@@ -1313,7 +1313,7 @@ paths:
         sure they are stored safely and can be easily accessed.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.1](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.1)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.2-rc1](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.2-rc1)
 
         #### **Allowed user groups [professionOID]**
         * oid_erp-vau
@@ -1330,7 +1330,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Operations
@@ -1374,7 +1374,7 @@ paths:
         information. This helps maintaining a comprehensive overview of the patient's medication history.
         
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.1](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.1)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.2-rc1](https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.2-rc1)
 
         #### **Allowed user groups [professionOID]**
         * oid_erp-vau
@@ -1391,7 +1391,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Operations
@@ -1436,7 +1436,7 @@ paths:
         ensures accuracy and safety in the management of medications.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.1](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.1)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.2-rc1](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.2-rc1)
 
         #### **Allowed user groups [professionOID]**
         * oid_erp-vau
@@ -1453,7 +1453,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Operations
@@ -1498,7 +1498,7 @@ paths:
         up-to-date record of the patient's medication data.
 
         #### **OperationDefinition**
-        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.1](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.1)
+        [https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.2-rc1](https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.2-rc1)
 
         #### **Allowed user groups [professionOID]**
         * oid_erp-vau
@@ -1515,7 +1515,7 @@ paths:
 
         #### **OperationOutcome**
         ##### Profile: 
-        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1)
+        [https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1](https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1)
 
       tags:
         - Operations
@@ -1603,7 +1603,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1
                 issue:
                   - severity: error
                     code: processing
@@ -1618,7 +1618,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1
                 issue:
                   - severity: error
                     code: processing
@@ -1633,7 +1633,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1
                 issue:
                   - severity: error
                     code: not-supported
@@ -1656,7 +1656,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1
                 issue:
                   - severity: error
                     code: processing
@@ -1671,7 +1671,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1
                 issue:
                   - severity: error
                     code: processing
@@ -1694,7 +1694,7 @@ components:
                 resourceType: OperationOutcome
                 meta:
                   profile:
-                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.1
+                    - https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome|1.0.2-rc1
                 issue:
                   - severity: error
                     code: not-supported
@@ -1930,8 +1930,8 @@ components:
 
     Medication:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication|1.0.2-rc1
 
     MedicationList:
       allOf:
@@ -1948,8 +1948,8 @@ components:
 
     MedicationRequest:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request|1.0.2-rc1
 
     MedicationRequestList:
       allOf:
@@ -1966,8 +1966,8 @@ components:
 
     MedicationDispense:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense|1.0.2-rc1
 
     MedicationDispenseList:
       allOf:
@@ -2038,30 +2038,30 @@ components:
 
     EPAOpProvidePrescriptionERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.2-rc1
 
     EPAOpProvideDispensationERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.2-rc1
 
     EPAOpCancelPrescriptionERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.2-rc1
 
     EPAOpCancelDispensationERPInputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensationn-erp-input-parameters|1.0.2-rc1
 
     EPAOpRxDispensationERPOutputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.2-rc1
 
     EPAOpRxPrescriptionERPOutputParameters:
       type: object
-      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.1'
-      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.1
+      description: 'https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.2-rc1'
+      example: --> https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.2-rc1

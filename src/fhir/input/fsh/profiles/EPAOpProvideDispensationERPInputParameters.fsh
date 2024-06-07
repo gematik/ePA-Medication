@@ -5,11 +5,16 @@ Title: "EPA Operation ProvideDispensation ERP Input-Parameters"
 Description: "EPA Operation ProvideDispensation ERP Input-Parameters"
 * insert Meta
 * parameter 1..
+* parameter ^slicing.discriminator.type = #value
+* parameter ^slicing.discriminator.path = "name"
+* parameter ^slicing.rules = #closed
+* parameter contains rxDispensation 1..1
+* parameter[rxDispensation]
   * name MS
-  * name = "rxDispensation"
+  * name = "rxDispensation" (exactly)
   * value[x] 0..0
   * resource 0..0
-  * part 4.. MS
+  * part 5.. MS
     * ^slicing.discriminator.type = #pattern
     * ^slicing.discriminator.path = "name"
     * ^slicing.rules = #open

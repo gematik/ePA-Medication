@@ -2,7 +2,6 @@ Extension: MultiplePrescriptionExtension
 Id: multiple-prescription-extension
 Title: "MultiplePrescription"
 Description: "This FHIR Extension for multiple prescriptions adds details such as repetition count and time intervals for repeated medication orders to FHIR resources."
-Context: MedicationRequest
 * insert Meta
 
 * extension ^slicing.discriminator.type = #value

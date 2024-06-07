@@ -3,7 +3,7 @@ InstanceOf: EPAOpProvideDispensationERPInputParameters
 Usage: #example
 
 * id = "example-epa-op-provide-dispensation-erp-input-parameters-1"
-* parameter[+]
+* parameter[rxDispensation]
   * name = "rxDispensation"
   * part[prescriptionId]
     * name = "prescriptionId"
@@ -28,7 +28,7 @@ InstanceOf: EPAOpProvideDispensationERPInputParameters
 Usage: #example
 
 * id = "example-epa-op-provide-dispensation-erp-input-parameters-2"
-* parameter[+]
+* parameter[rxDispensation]
   * name = "rxDispensation"
   * part[prescriptionId]
     * name = "prescriptionId"
@@ -55,7 +55,7 @@ InstanceOf: EPAOpCancelDispensationERPInputParameters
 Usage: #example
 
 * id = "example-epa-op-cancel-dispensation-erp-input-parameters-1"
-* parameter[+]
+* parameter[rxDispensation]
   * name = "rxDispensation"
   * part[prescriptionId]
     * name = "prescriptionId"
@@ -73,7 +73,7 @@ InstanceOf: EPAOpRxDispensationERPOutputParameters
 Usage: #example
 
 * id = "example-epa-op-rx-dispensation-erp-output-parameters-1"
-* parameter[+]
+* parameter[rxDispensation]
   * name = "rxDispensation"
   * part[prescriptionId]
     * name = "prescriptionId"

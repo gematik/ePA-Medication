@@ -2,11 +2,11 @@
   "resourceType": "StructureDefinition",
   "id": "medication-ingredient-amount-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-ingredient-amount-extension",
-  "version": "1.0.1",
+  "version": "1.0.2-rc1",
   "name": "MedicationIngredientAmountExtensions",
   "status": "active",
   "experimental": false,
-  "date": "2024-05-31",
+  "date": "2024-06-07",
   "publisher": "gematik GmbH",
   "description": "Free-text amount of the ingredient for classical Latin notations such as \"ad 100.0\" or \"quantum satis,\" including the unit.",
   "fhirVersion": "4.0.1",
@@ -14,8 +14,8 @@
   "abstract": false,
   "context": [
     {
-      "expression": "Medication",
-      "type": "element"
+      "type": "element",
+      "expression": "Element"
     }
   ],
   "type": "Extension",

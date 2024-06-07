@@ -1,5 +1,5 @@
 {
-  "updated": "2024-06-05T15:12:28.6516338+02:00",
+  "updated": "2024-06-06T09:40:12.4896617+00:00",
   "dependencies": {
     "hl7.fhir.r4.core": "4.0.1",
     "de.basisprofil.r4": "1.5.0-ballot2",

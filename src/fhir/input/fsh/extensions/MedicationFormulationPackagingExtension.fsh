@@ -1,7 +1,6 @@
 Extension: MedicationFormulationPackagingExtension
 Id: medication-formulation-packaging-extension
 Description: "Information on the packaging of a formulation."
-Context: Medication
 * insert Meta
 
 * value[x] only string

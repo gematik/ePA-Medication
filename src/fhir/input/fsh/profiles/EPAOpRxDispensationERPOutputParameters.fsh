@@ -5,8 +5,13 @@ Title: "EPA Operation RxDispensation ERP Output-Parameters"
 Description: "EPA Operation RxDispensation ERP Output-Parameters"
 * insert Meta
 * parameter 1..
+* parameter ^slicing.discriminator.type = #value
+* parameter ^slicing.discriminator.path = "name"
+* parameter ^slicing.rules = #closed
+* parameter contains rxDispensation 1..1
+* parameter[rxDispensation]
   * name MS
-  * name = "rxDispensation"
+  * name = "rxDispensation" (exactly)
   * value[x] 0..0
   * resource 0..0
   * part 3..3 MS

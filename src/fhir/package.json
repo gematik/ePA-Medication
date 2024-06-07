@@ -1,6 +1,6 @@
 {
   "name": "de.gematik.epa.medication",
-  "version": "1.0.1",
+  "version": "1.0.2-rc1",
   "author": "gematik",
   "fhirVersions": [
     "4.0.1"

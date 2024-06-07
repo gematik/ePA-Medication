@@ -5,8 +5,13 @@ Title: "EPA Operation ProvidePrescription ERP Input-Parameters"
 Description: "EPA Operation ProvidePrescription ERP Input-Parameters"
 * insert Meta
 * parameter 1..
+* parameter ^slicing.discriminator.type = #value
+* parameter ^slicing.discriminator.path = "name"
+* parameter ^slicing.rules = #closed
+* parameter contains rxPrescription 1..1
+* parameter[rxPrescription]
   * name MS
-  * name = "rxPrescription"
+  * name = "rxPrescription" (exactly)
   * value[x] 0..0
   * resource 0..0
   * part 6..6 MS

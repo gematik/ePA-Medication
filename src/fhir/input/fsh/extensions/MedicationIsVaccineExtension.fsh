@@ -1,7 +1,6 @@
 Extension: MedicationIsVaccineExtension
 Id: medication-id-vaccine-extension
 Description: "Indicator of whether this is a vaccine."
-Context: Medication
 * insert Meta
 
 * value[x] only boolean

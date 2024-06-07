@@ -1,7 +1,6 @@
 Extension: MedicationIngredientDarreichungsformExtension
 Id: medication-ingredient-darreichungsform-extension
 Description: "Dosage form of an ingredient in a formulation."
-Context: Medication
 * insert Meta
 
 * value[x] only string

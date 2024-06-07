@@ -24,15 +24,15 @@ Firstly, this operation validates all incoming parameters. Secondly, it iterates
 <table>
     <tr>
         <td>OperationDefinition</td>
-        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.2-rc1</td>
     </tr>
     <tr>
         <td>Input-Parameter </td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.2-rc1</td>
     </tr>
     <tr>
         <td>Output-Paramter</td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.2-rc1</td>
     </tr>
 </table>
 
@@ -46,15 +46,15 @@ For each given prescriptions in the parameter *RxPrescription* an internal *RxPr
 <table>
     <tr>
         <td>OperationDefinition</td>
-        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.2-rc1</td>
     </tr>
     <tr>
         <td>Input-Parameter </td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.2-rc1</td>
     </tr>
     <tr>
         <td>Output-Paramter</td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.2-rc1</td>
     </tr>
 </table>
 
@@ -68,15 +68,15 @@ All incoming FHIR resources are validated. For each given dispensation in the pa
 <table>
     <tr>
         <td>OperationDefinition</td>
-        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.2-rc1</td>
     </tr>
     <tr>
         <td>Input-Parameter </td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.2-rc1</td>
     </tr>
     <tr>
         <td>Output-Paramter</td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.2-rc1</td>
     </tr>
 </table>
 
@@ -91,15 +91,15 @@ For each given dispensation in the parameter *RxDispensation* an internal *RxPre
 <table>
     <tr>
         <td>OperationDefinition</td>
-        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.2-rc1</td>
     </tr>
     <tr>
         <td>Input-Parameter </td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensation-erp-input-parameters|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensation-erp-input-parameters|1.0.2-rc1</td>
     </tr>
     <tr>
         <td>Output-Paramter</td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.2-rc1</td>
     </tr>
 </table>
 
@@ -129,7 +129,7 @@ _Example Extension:_
             "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
             "value": "160.153.303.257.459_20240117"
         },
-        "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension|1.0.1"
+        "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension|1.0.2-rc1"
     }
 
 
