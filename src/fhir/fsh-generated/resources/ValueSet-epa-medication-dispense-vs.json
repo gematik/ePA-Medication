@@ -5,7 +5,7 @@
   "id": "epa-medication-dispense-vs",
   "title": "EPA Medication Dispense ValueSet",
   "description": "EPA Medication Dispense ValueSet",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "url": "https://gematik.de/fhir/epa-medication/ValueSet/epa-medication-dispense-vs",
   "experimental": false,
   "publisher": "gematik GmbH",

@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "epa-op-provide-prescription-erp-input-parameters",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "EPAOpProvidePrescriptionERPInputParameters",
   "title": "EPA Operation ProvidePrescription ERP Input-Parameters",
   "status": "active",

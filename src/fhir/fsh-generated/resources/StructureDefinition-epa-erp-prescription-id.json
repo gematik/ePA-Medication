@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "epa-erp-prescription-id",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-erp-prescription-id",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "EPAeRPPrescriptionId",
   "title": "EPA Identifier Profile for eRP Prescription IDs",
   "status": "active",

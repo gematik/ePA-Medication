@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "epa-ms-operation-outcome",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-ms-operation-outcome",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "EPAMSOperationOutcome",
   "title": "EPA Medication Service OperationOutcome",
   "status": "active",

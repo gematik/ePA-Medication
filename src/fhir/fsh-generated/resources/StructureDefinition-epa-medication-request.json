@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "epa-medication-request",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-request",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "EPAMedicationRequest",
   "title": "EPA MedicationRequest",
   "status": "active",

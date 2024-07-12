@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "medication-formulation-packaging-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-formulation-packaging-extension",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "MedicationFormulationPackagingExtension",
   "status": "active",
   "experimental": false,

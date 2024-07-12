@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "medication-id-vaccine-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-id-vaccine-extension",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "MedicationIsVaccineExtension",
   "status": "active",
   "experimental": false,

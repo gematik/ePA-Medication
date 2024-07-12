@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "multiple-prescription-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/multiple-prescription-extension",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "MultiplePrescriptionExtension",
   "title": "MultiplePrescription",
   "status": "active",

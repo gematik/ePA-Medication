@@ -5,7 +5,7 @@
   "id": "epa-medication-type-product-vs",
   "title": "EPA Medication Type ValueSet for PZN-Medication",
   "description": "ValueSet of valid concepts for a PZN EPAMedication Product",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "url": "https://gematik.de/fhir/epa-medication/ValueSet/epa-medication-type-product-vs",
   "experimental": false,
   "publisher": "gematik GmbH",

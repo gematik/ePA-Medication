@@ -1,4 +1,4 @@
-Alias: $version = 1.0.2-rc1
+Alias: $version = 1.0.2
 RuleSet: Meta
 * ^version = $version
 * ^status = #active
