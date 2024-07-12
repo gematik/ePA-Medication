@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "epa-medication-pharmaceutical-product",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pharmaceutical-product",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "EPAMedicationPharmaceuticalProduct",
   "title": "EPA Pharmaceutical Product Medication",
   "status": "active",

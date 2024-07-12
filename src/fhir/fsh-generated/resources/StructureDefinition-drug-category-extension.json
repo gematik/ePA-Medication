@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "drug-category-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/drug-category-extension",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "DrugCategoryExtension",
   "status": "active",
   "experimental": false,

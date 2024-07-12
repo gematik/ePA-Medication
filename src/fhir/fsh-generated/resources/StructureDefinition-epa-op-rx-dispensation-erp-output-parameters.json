@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "epa-op-rx-dispensation-erp-output-parameters",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "EPAOpRxDispensationERPOutputParameters",
   "title": "EPA Operation RxDispensation ERP Output-Parameters",
   "status": "active",

@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "epa-op-cancel-dispensation-erp-input-parameters",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensation-erp-input-parameters",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "EPAOpCancelDispensationERPInputParameters",
   "title": "EPA Operation CancelDispensation ERP Input-Parameters",
   "status": "active",

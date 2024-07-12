@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "epa-medication-unique-identifier",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-unique-identifier",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "EPAMedicationUniqueIdentifier",
   "title": "EPA Medication Unique Identifier",
   "status": "active",

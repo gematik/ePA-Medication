@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "medication-total-quantity-formulation-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-total-quantity-formulation-extension",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "MedicationTotalQuantityFormulationExtension",
   "status": "active",
   "experimental": false,

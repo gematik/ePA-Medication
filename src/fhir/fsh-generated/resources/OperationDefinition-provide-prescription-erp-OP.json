@@ -4,7 +4,7 @@
   "url": "https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP",
   "title": "$provide-prescription-erp Operation",
   "description": "The $provide-prescription-erp operation in the ePA MedicationService is used to add electronic prescriptions to a patient's record. These prescriptions are already made by the E-Rezept-Fachdienst. This operation does not create new patient prescriptions; it just puts the ones made by the E-Rezept-Fachdienst into the patient's ePA, making sure they are stored safely and can be easily accessed.",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "status": "active",
   "publisher": "gematik GmbH",
   "date": "2024-06-07",

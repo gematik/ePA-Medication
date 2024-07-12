@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "rx-prescription-process-identifier-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "RxPrescriptionProcessIdentifierExtension",
   "status": "active",
   "experimental": false,

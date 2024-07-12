@@ -5,7 +5,7 @@
   "id": "epa-ms-operation-outcome-vs",
   "title": "EPA Medication Service OperationOutcome VS",
   "description": "Include all VS of EPAMSOperationOutcomeCS and Operation Outcome codes used by FHIR",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "url": "https://gematik.de/fhir/epa-medication/ValueSet/epa-ms-operation-outcome-vs",
   "experimental": false,
   "publisher": "gematik GmbH",

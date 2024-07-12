@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "medication-ingredient-amount-extension",
   "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-ingredient-amount-extension",
-  "version": "1.0.2-rc1",
+  "version": "1.0.2",
   "name": "MedicationIngredientAmountExtensions",
   "status": "active",
   "experimental": false,
