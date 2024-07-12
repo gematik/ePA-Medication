@@ -10,6 +10,15 @@
   },
   "extension": [
     {
+      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension",
+      "valueCoding": {
+        "code": "781405001",
+        "system": "http://snomed.info/sct",
+        "display": "Medicinal product package (product)",
+        "version": "http://snomed.info/sct/900000000000207008/version/20240201"
+      }
+    },
+    {
       "valueIdentifier": {
         "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
         "value": "160.153.303.257.459_20250122"
@@ -70,7 +79,7 @@
         "system": "http://snomed.info/sct",
         "code": "385055001",
         "display": "Tablet (basic dose form)",
-        "version": "http://snomed.info/sct/900000000000207008/version/20240501"
+        "version": "http://snomed.info/sct/900000000000207008/version/20240201"
       }
     ]
   },
@@ -94,7 +103,7 @@
       "itemCodeableConcept": {
         "coding": [
           {
-            "version": "http://snomed.info/sct/900000000000207008/version/20240501",
+            "version": "http://snomed.info/sct/900000000000207008/version/20240201",
             "code": "387207008",
             "system": "http://snomed.info/sct",
             "display": "Ibuprofen (substance)"

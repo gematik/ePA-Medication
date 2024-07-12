@@ -13,11 +13,11 @@ Usage: #example
 * link[2].url = "/epa/medication/api/v1/fhir/MedicationRequest?_offset=30&_count=10"
 
 // Include entries with a MedicationRequest
-* entry[0].fullUrl = "https://wwww.example.org/epa/medication/api/v1/fhir/MedicationRequest/bb91cde8-0426-4f4b-a766-5d818d0605bd"
+* entry[0].fullUrl = "https://epa-as-0.prod.epa4all.de/vau-cid-1234/epa/medication/api/v1/fhir/MedicationRequest/bb91cde8-0426-4f4b-a766-5d818d0605bd"
 * entry[0].resource = ExampleEpaMedicationRequest1
 * entry[0].search.mode = #match
 
-* entry[1].fullUrl = "https://wwww.example.org/epa/medication/api/v1/fhir/MedicationRequest/3d7252b4-7814-4d40-8ca2-2f731648f22d"
+* entry[1].fullUrl = "https://epa-as-0.prod.epa4all.de/vau-cid-1234/epa/medication/api/v1/fhir/MedicationRequest/3d7252b4-7814-4d40-8ca2-2f731648f22d"
 * entry[1].resource = ExampleEpaMedicationRequest2
 * entry[1].search.mode = #match
 

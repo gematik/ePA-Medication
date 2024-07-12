@@ -45,7 +45,7 @@
     "fshType": "Instance",
     "fshFile": "examples/ExampleEpaMedication1.fsh",
     "startLine": 1,
-    "endLine": 15
+    "endLine": 17
   },
   {
     "outputFile": "Medication-3b990824-3814-4d75-80b1-e2935827f8f0.json",
@@ -53,7 +53,7 @@
     "fshType": "Instance",
     "fshFile": "examples/ExampleEpaMedication2.fsh",
     "startLine": 1,
-    "endLine": 33
+    "endLine": 35
   },
   {
     "outputFile": "Medication-4bfef107-7d81-4d36-8aa0-7ea937969046.json",
@@ -61,7 +61,7 @@
     "fshType": "Instance",
     "fshFile": "examples/ExampleEpaMedication3.fsh",
     "startLine": 1,
-    "endLine": 15
+    "endLine": 17
   },
   {
     "outputFile": "Medication-4f9ab221-0eef-4e46-a8a9-38302e0488b1.json",
@@ -69,7 +69,15 @@
     "fshType": "Instance",
     "fshFile": "examples/ExampleEpaMedication4.fsh",
     "startLine": 1,
-    "endLine": 30
+    "endLine": 32
+  },
+  {
+    "outputFile": "Medication-CortisonDexpantenolMedicationPreparation.json",
+    "fshName": "CortisonDexpantenolMedicationPreparation",
+    "fshType": "Instance",
+    "fshFile": "examples/ExampleEpaMedicationZubereitung.fsh",
+    "startLine": 1,
+    "endLine": 41
   },
   {
     "outputFile": "Medication-SumatripanMedication.json",
@@ -77,7 +85,15 @@
     "fshType": "Instance",
     "fshFile": "examples/ExampleEpaMedication5.fsh",
     "startLine": 1,
-    "endLine": 23
+    "endLine": 25
+  },
+  {
+    "outputFile": "Medication-TabletSprayKombipackung.json",
+    "fshName": "TabletSprayKombipackung",
+    "fshType": "Instance",
+    "fshFile": "examples/ExampleEpaMedicationKombipackung.fsh",
+    "startLine": 1,
+    "endLine": 20
   },
   {
     "outputFile": "MedicationDispense-46865835-8c8f-4139-86ba-271bd3565250.json",
@@ -240,12 +256,36 @@
     "endLine": 31
   },
   {
+    "outputFile": "StructureDefinition-epa-medication-pharmaceutical-product.json",
+    "fshName": "EPAMedicationPharmaceuticalProduct",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAMedicationPharmaceuticalProduct.fsh",
+    "startLine": 1,
+    "endLine": 22
+  },
+  {
+    "outputFile": "StructureDefinition-epa-medication-pzn-ingredient.json",
+    "fshName": "EPAMedicationPZNIngredient",
+    "fshType": "Profile",
+    "fshFile": "profiles/EPAMedicationPZNIngredient.fsh",
+    "startLine": 1,
+    "endLine": 14
+  },
+  {
     "outputFile": "StructureDefinition-epa-medication-request.json",
     "fshName": "EPAMedicationRequest",
     "fshType": "Profile",
     "fshFile": "profiles/EPAMedicationRequest.fsh",
     "startLine": 1,
     "endLine": 88
+  },
+  {
+    "outputFile": "StructureDefinition-epa-medication-type-extension.json",
+    "fshName": "EPAMedicationTypeExtension",
+    "fshType": "Extension",
+    "fshFile": "extensions/EPAMedicationTypeExtension.fsh",
+    "startLine": 1,
+    "endLine": 8
   },
   {
     "outputFile": "StructureDefinition-epa-medication-unique-identifier.json",
@@ -261,7 +301,7 @@
     "fshType": "Profile",
     "fshFile": "profiles/EPAMedication.fsh",
     "startLine": 1,
-    "endLine": 239
+    "endLine": 10
   },
   {
     "outputFile": "StructureDefinition-epa-ms-operation-outcome.json",
@@ -436,6 +476,30 @@
     "fshName": "EPAMedicationRequestVS",
     "fshType": "ValueSet",
     "fshFile": "valuesets/EPAMedicationRequestVS.fsh",
+    "startLine": 1,
+    "endLine": 8
+  },
+  {
+    "outputFile": "ValueSet-epa-medication-type-pharmaceutical-product-vs.json",
+    "fshName": "EPAMedicationTypePharmaceuticalProductVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets/EPAMedicationTypePharmaceuticalProductVS.fsh",
+    "startLine": 1,
+    "endLine": 6
+  },
+  {
+    "outputFile": "ValueSet-epa-medication-type-product-vs.json",
+    "fshName": "EPAMedicationTypeProductVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets/EPAMedicationTypeProductVS.fsh",
+    "startLine": 1,
+    "endLine": 6
+  },
+  {
+    "outputFile": "ValueSet-epa-medication-type-vs.json",
+    "fshName": "EPAMedicationTypeVS",
+    "fshType": "ValueSet",
+    "fshFile": "valuesets/EPAMedicationTypeVS.fsh",
     "startLine": 1,
     "endLine": 8
   },

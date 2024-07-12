@@ -1,15 +1,15 @@
 {
   "resourceType": "StructureDefinition",
-  "id": "epa-medication",
-  "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication",
+  "id": "epa-medication-pzn-ingredient",
+  "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pzn-ingredient",
   "version": "1.0.2-rc1",
-  "name": "EPAMedication",
-  "title": "EPA Medication",
+  "name": "EPAMedicationPZNIngredient",
+  "title": "EPA Medication Ingredient",
   "status": "active",
   "experimental": false,
   "date": "2024-06-07",
   "publisher": "gematik GmbH",
-  "description": "Defines the medication resource for the Medication Service in the ePA system.",
+  "description": "Defines the medication resource for a PZN ingredient of a compounding medication for the Medication Service in the ePA system. These profiles are intended to inherit from EPAMedication, but due to tooling issues, this inheritance cannot currently be implemented.",
   "fhirVersion": "4.0.1",
   "kind": "resource",
   "abstract": false,
@@ -27,21 +27,21 @@
             "severity": "error",
             "human": "Medication code, name, or ingredients must be specified",
             "expression": "code.exists() or ingredient.exists()",
-            "source": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication"
+            "source": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pzn-ingredient"
           },
           {
             "key": "epa-med-2",
             "severity": "error",
             "human": "Extemporaneous preparation medications and 'Kombipackungen' have to reference their components via .ingredient.itemReference",
             "expression": "extension('https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension').value.where(code = '1208954007').exists() or form.coding.where(code = 'KPG').exists() implies ingredient.item.ofType(Reference).exists()",
-            "source": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication"
+            "source": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pzn-ingredient"
           },
           {
             "key": "epa-med-3",
             "severity": "error",
             "human": "Medicinal product medications (Fertigarzneimittel) are not allowed to reference other medications via .ingredient.itemReference",
             "expression": "extension('https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension').value.where(code = '781405001').exists() and form.coding.where(code = 'KPG').exists().not() implies ingredient.item.ofType(Reference).exists().not()",
-            "source": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication"
+            "source": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pzn-ingredient"
           }
         ]
       },
@@ -63,17 +63,7 @@
       {
         "id": "Medication.contained",
         "path": "Medication.contained",
-        "short": "Contains PZN Ingredients for Compounding Medications & PharmaceuticalProducts in case of a 'Kombipackung'",
-        "type": [
-          {
-            "code": "Medication",
-            "profile": [
-              "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pharmaceutical-product",
-              "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pzn-ingredient"
-            ]
-          }
-        ],
-        "mustSupport": true
+        "max": "0"
       },
       {
         "id": "Medication.extension:rxPrescriptionProcessIdentifier",
@@ -249,6 +239,14 @@
         "mustSupport": true
       },
       {
+        "id": "Medication.extension:type.value[x]",
+        "path": "Medication.extension.value[x]",
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://gematik.de/fhir/epa-medication/ValueSet/epa-medication-type-product-vs"
+        }
+      },
+      {
         "id": "Medication.identifier",
         "path": "Medication.identifier",
         "slicing": {
@@ -316,13 +314,14 @@
           ],
           "rules": "open"
         },
+        "min": 1,
         "mustSupport": true
       },
       {
         "id": "Medication.code.coding:pzn",
         "path": "Medication.code.coding",
         "sliceName": "pzn",
-        "min": 0,
+        "min": 1,
         "max": "1",
         "patternCoding": {
           "system": "http://fhir.de/CodeSystem/ifa/pzn"
@@ -875,9 +874,9 @@
         "id": "Medication.ingredient.item[x]:itemReference",
         "path": "Medication.ingredient.item[x]",
         "sliceName": "itemReference",
-        "short": "Restricted EPAMedicationPZNIngredient & EPAMedicationPharmaceuticalProduct only",
+        "short": "EPA Medication Ingredients can't have child Medications",
         "min": 0,
-        "max": "1",
+        "max": "0",
         "type": [
           {
             "code": "Reference",

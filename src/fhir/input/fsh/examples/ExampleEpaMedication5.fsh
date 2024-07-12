@@ -2,8 +2,10 @@ Instance: SumatripanMedication
 InstanceOf: EPAMedication
 Title:   "Sample Medication Sumatripan"
 Usage: #example
+* extension[type].valueCoding = $sct#781405001 "Medicinal product package (product)"
+  * version = $sct-version_20240201
 // Arzneimittelkategorie
-* extension[drugCategory].valueCoding.system = "https://gematik.de/fhir/dev-epa-medication/CodeSystem/epa-drug-category-cs"
+* extension[drugCategory].valueCoding.system = "https://gematik.de/fhir/epa-medication/CodeSystem/epa-drug-category-cs"
 * extension[drugCategory].valueCoding.code = #00
 
 // Impfstoff

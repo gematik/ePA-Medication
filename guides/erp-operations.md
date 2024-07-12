@@ -24,15 +24,15 @@ Firstly, this operation validates all incoming parameters. Secondly, it iterates
 <table>
     <tr>
         <td>OperationDefinition</td>
-        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/provide-prescription-erp-OP|1.0.2</td>
     </tr>
     <tr>
         <td>Input-Parameter </td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-prescription-erp-input-parameters|1.0.2</td>
     </tr>
     <tr>
         <td>Output-Paramter</td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.2</td>
     </tr>
 </table>
 
@@ -46,15 +46,15 @@ For each given prescriptions in the parameter *RxPrescription* an internal *RxPr
 <table>
     <tr>
         <td>OperationDefinition</td>
-        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-prescription-erp-OP|1.0.2</td>
     </tr>
     <tr>
         <td>Input-Parameter </td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-prescription-erp-input-parameters|1.0.2</td>
     </tr>
     <tr>
         <td>Output-Paramter</td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-prescription-erp-output-parameters|1.0.2</td>
     </tr>
 </table>
 
@@ -68,15 +68,15 @@ All incoming FHIR resources are validated. For each given dispensation in the pa
 <table>
     <tr>
         <td>OperationDefinition</td>
-        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/provide-dispensation-erp-OP|1.0.2</td>
     </tr>
     <tr>
         <td>Input-Parameter </td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-provide-dispensation-erp-input-parameters|1.0.2</td>
     </tr>
     <tr>
         <td>Output-Paramter</td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.2</td>
     </tr>
 </table>
 
@@ -91,15 +91,15 @@ For each given dispensation in the parameter *RxDispensation* an internal *RxPre
 <table>
     <tr>
         <td>OperationDefinition</td>
-        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/OperationDefinition/cancel-dispensation-erp-OP|1.0.2</td>
     </tr>
     <tr>
         <td>Input-Parameter </td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensation-erp-input-parameters|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-cancel-dispensation-erp-input-parameters|1.0.2</td>
     </tr>
     <tr>
         <td>Output-Paramter</td>
-        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.2-rc1</td>
+        <td>https://gematik.de/fhir/epa-medication/StructureDefinition/epa-op-rx-dispensation-erp-output-parameters|1.0.2</td>
     </tr>
 </table>
 
@@ -129,7 +129,7 @@ _Example Extension:_
             "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
             "value": "160.153.303.257.459_20240117"
         },
-        "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension|1.0.2-rc1"
+        "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension|1.0.2"
     }
 
 
@@ -157,27 +157,15 @@ _Example:_
 
 The following usage specifications for the FHIR medication resources processed whithin the Medication Service for internal system comparisons in the business logic are defined:
 
->
-    Code = Medication.code
-    CodeText = ""
-    IF Medication.code.text
-    {
-        CodeText = Trim(Medication.code.text)
-        CodeText = ToLower(CodeText)
-    }
-    Form = Medication.form
-    Ingredient_N = Medication.ingredient[x].item[x]
-    Strength_N = Medication.ingredient[x].strength
-    Alphabetically sorted by Ingredient + Strength
-    EPAMedicationUniqueIdentifier = hash.sha256(Code, CodeText, Form, Ingredient_1 + Strength_1, Ingredient_2 + Strength_2, ..., Ingredient_N + Strength_N)
-
+A sample implementation for generating the SHA-256 hash value is published on GitHub and available as a reference in this GitHub project.
+**[GitHub-Tool: MedicationUniqueIdentifier](https://github.com/gematik/ePA-Medication/tree/ePA-3.0.2/tools/epamedicationuniqueidentifier)** 
 
 ### Other FHIR Resources
 
 * *MedicationRequest*/*MedicationDispense*: Using *rxPrescriptionProcessIdentifier*, these resources can be clearly identified during update operations.
 * *Practitioner*/*Organization*: These resources are uniquely identified by means of a Telematik-ID. The Medication Service uses the VZD-FHIR-Directory profiles for this purpose.  
-    * OrganizationDirectory: https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.11.7
-    * PractitionerDirectory: https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.11.7
+    * OrganizationDirectory: https://gematik.de/fhir/directory/StructureDefinition/OrganizationDirectory|0.11.8
+    * PractitionerDirectory: https://gematik.de/fhir/directory/StructureDefinition/PractitionerDirectory|0.11.8
 * *PractitionerRole*: This resource conforms to [PractitionerRole](https://hl7.org/fhir/R4/practitionerrole.html). It may be created and provided ad hoc when the operation is being executed.
 * *Patient*: This is a logical FHIR reference via a KVNR (German "Krankenversicherungsnummer").
 

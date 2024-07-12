@@ -12,8 +12,7 @@
       "valueCoding": {
         "code": "781405001",
         "system": "http://snomed.info/sct",
-        "display": "Medicinal product package (product)",
-        "version": "http://snomed.info/sct/900000000000207008/version/20240201"
+        "display": "Medicinal product package"
       }
     },
     {

@@ -2,6 +2,8 @@ Instance: ExampleEpaMedication2
 InstanceOf: EPAMedication
 Usage: #example
 * id = "3b990824-3814-4d75-80b1-e2935827f8f0"
+* extension[type].valueCoding = $sct#781405001 "Medicinal product package (product)"
+  * version = $sct-version_20240201
 * meta
   * versionId = "1"
   * lastUpdated = "2025-01-22T14:43:33.244Z"

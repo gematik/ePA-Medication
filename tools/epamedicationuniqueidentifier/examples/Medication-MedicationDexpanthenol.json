@@ -1,0 +1,36 @@
+{
+  "resourceType": "Medication",
+  "id": "MedicationDexpanthenol",
+  "meta": {
+    "profile": [
+      "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pzn-ingredient"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/ifa/pzn",
+        "code": "16667195",
+        "display": "Dexpanthenol 5% Creme"
+      }
+    ]
+  },
+  "amount": {
+    "numerator": {
+      "extension": [
+        {
+          "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-total-quantity-formulation-extension",
+          "valueString": "100"
+        }
+      ],
+      "value": 50,
+      "unit": "g"
+    },
+    "denominator": {
+      "value": 1
+    }
+  },
+  "batch": {
+    "lotNumber": "0132456"
+  }
+}

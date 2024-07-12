@@ -3,42 +3,45 @@ Parent: Medication
 Id: epa-medication
 Title: "EPA Medication"
 Description: "Defines the medication resource for the Medication Service in the ePA system."
+* contained MS
+* contained only EPAMedicationPharmaceuticalProduct or EPAMedicationPZNIngredient
+  * ^short = "Contains PZN Ingredients for Compounding Medications & PharmaceuticalProducts in case of a 'Kombipackung'"
+//TODO: copy Ruleset contents into this resource as soon as the issue: https://github.com/hapifhir/org.hl7.fhir.core/issues/1670 is resolved
+* insert epaMedicationElements
+
+
+
+//TODO: This RuleSet was only created as a workaround for the java snapshotgenerator, as soon as the generator supports contained child profiles this ruleset should be removed.
+// zulip thread tracking this issue: https://chat.fhir.org/#narrow/stream/179167-hapi/topic/5.2E1.20Validation.20Detected.20circular.20dependency.20-.20StackOverflow
+// issue in fhir core: https://github.com/hapifhir/org.hl7.fhir.core/issues/1670
+
+RuleSet: epaMedicationElements
 * insert Meta
 * insert ProfileMeta
+* obeys epa-med-1
+* obeys epa-med-2
+* obeys epa-med-3
 * extension contains 
-    RxPrescriptionProcessIdentifierExtension named rxPrescriptionProcessIdentifier 0..1 and
-    MedicationIsVaccineExtension named isVaccine 0..1 and
-    DrugCategoryExtension named drugCategory 0..1 and
-    ExtensionNormgroesseDeBasis named normSizeCode 0..1 and
-    MedicationFormulationPackagingExtension named packaging 0..1 and
-    MedicationManufacturingInstructionsExtension named manufacturingInstructions 0..1
-* extension[rxPrescriptionProcessIdentifier].value[x]
+    RxPrescriptionProcessIdentifierExtension named rxPrescriptionProcessIdentifier 0..1 MS and
+    MedicationIsVaccineExtension named isVaccine 0..1 MS and
+    DrugCategoryExtension named drugCategory 0..1 MS and
+    ExtensionNormgroesseDeBasis named normSizeCode 0..1 MS and
+    MedicationFormulationPackagingExtension named packaging 0..1 MS and
+    MedicationManufacturingInstructionsExtension named manufacturingInstructions 0..1 MS and
+    EPAMedicationTypeExtension named type 0..1 MS
 * extension[isVaccine]
-  * value[x] MS
   * valueBoolean MS
-  * valueBoolean ^sliceName = "valueBoolean"
 * extension[drugCategory]
-  * value[x] MS
   * valueCoding MS
-  * valueCoding ^sliceName = "valueCoding"
     * system MS
     * code MS
 * extension[normSizeCode] ^short = "Package size according to N-designation"
 * extension[normSizeCode] ^definition = "Description of the therapy-appropriate package size (e.g., N1)"
-  * value[x] 1.. MS
-    * ^slicing.discriminator.type = #type
-    * ^slicing.discriminator.path = "$this"
-    * ^slicing.rules = #open
   * valueCode MS
 * extension[packaging]
-  * value[x] MS
   * valueString MS
-  * valueString ^sliceName = "valueString"
 * extension[manufacturingInstructions]
-  * value[x] MS
   * valueString MS
-  * valueString ^sliceName = "valueString"
-* obeys epa-med-1
 * identifier 0..
   * ^slicing.discriminator.type = #pattern
   * ^slicing.discriminator.path = "$this"
@@ -61,7 +64,6 @@ Description: "Defines the medication resource for the Medication Service in the 
       pzn 0..1 MS and
       atc-de 0.. MS and
       ask 0.. MS and
-      wg14 0.. and
       snomed 0..
   * coding[pzn]
     * ^patternCoding.system = $cs-pzn
@@ -76,11 +78,6 @@ Description: "Defines the medication resource for the Medication Service in the 
     * display MS
   * coding[ask]
     * ^patternCoding.system = $cs-ask
-    * system 1..1 MS
-    * code 1..1 MS
-    * display MS
-  * coding[wg14]
-    * ^patternCoding.system = $cs-wg14
     * system 1..1 MS
     * code 1..1 MS
     * display MS
@@ -126,21 +123,15 @@ Description: "Defines the medication resource for the Medication Service in the 
     * display MS
 * amount 0..1 MS
   * numerator 0..1 MS
-    * extension
-      * ^slicing.discriminator.type = #value
-      * ^slicing.discriminator.path = "url"
-      * ^slicing.rules = #open  
     * extension contains
         MedicationPackagingSizeExtension named packagingSize 0..1 and
         MedicationTotalQuantityFormulationExtension named totalQuantity 0..1
     * extension[packagingSize]
       * value[x] MS
       * valueString MS
-      * valueString ^sliceName = "valueString"
     * extension[totalQuantity]
       * value[x] MS
       * valueString MS
-      * valueString ^sliceName = "valueString"
   * numerator from $hl7-vs-ucum-units (preferred)
     * value 0..1 MS
     * unit MS
@@ -154,16 +145,8 @@ Description: "Defines the medication resource for the Medication Service in the 
     * code 0..1 MS
 * ingredient MS
   * ^short = "Information on Components (Rezeptur)"
-  * extension
-    * ^slicing.discriminator.type = #value
-    * ^slicing.discriminator.path = "url"
-    * ^slicing.rules = #open  
   * extension contains
       MedicationIngredientDarreichungsformExtension named darreichungsform 0..1
-  * extension[darreichungsform]
-    * value[x] MS
-    * valueString MS
-    * valueString ^sliceName = "valueString"
   * item[x] 1..1 MS
   * itemCodeableConcept MS
     * ^short = "Component in coded form or, if necessary, as free text"
@@ -174,9 +157,8 @@ Description: "Defines the medication resource for the Medication Service in the 
     * coding contains
         ask 0.. MS and
         atc-de 0.. MS and
-        pzn 0.. MS and
-        wg14 0.. and
-        snomed 0..
+        snomed 0.. and
+        pzn 0..0
     * coding[ask]
       * ^patternCoding.system = $cs-ask
       * system 1..1 MS
@@ -187,26 +169,18 @@ Description: "Defines the medication resource for the Medication Service in the 
       * system 1..1 MS
       * code 1..1 MS
       * display MS
-    * coding[pzn]
-      * ^patternCoding.system = $cs-pzn
-      * system 1..1 MS
-      * code 1..1 MS
-      * display MS
-    * coding[wg14]
-      * ^patternCoding.system = $cs-wg14
-      * system 1..1 MS
-      * code 1..1 MS
-      * display MS
     * coding[snomed]
       * ^patternCoding.system = $sct
       * system 1..1 MS
       * code 1..1 MS
       * version MS
       * display MS
+    * coding[pzn]
+      * ^patternCoding.system = $cs-pzn
     * text MS
-  * itemReference
-    * ^short = "Component (reference to another medication)"
-    * reference 0..1
+  * itemReference MS
+  * itemReference only Reference(Medication)
+    * ^short = "Restricted EPAMedicationPZNIngredient & EPAMedicationPharmaceuticalProduct only"
   * isActive
     * ^short = "Is it an active ingredient?"
   * strength MS
@@ -220,7 +194,6 @@ Description: "Defines the medication resource for the Medication Service in the 
     * extension[amountText]
       * value[x] MS
       * valueString MS
-      * valueString ^sliceName = "valueString"
     * numerator 1..1 MS
     * numerator from $hl7-vs-ucum-units (preferred)
       * value 1..1 MS

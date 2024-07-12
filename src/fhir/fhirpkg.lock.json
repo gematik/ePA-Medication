@@ -1,9 +1,9 @@
 {
-  "updated": "2024-06-06T09:40:12.4896617+00:00",
+  "updated": "2024-07-09T15:33:00.5203178+02:00",
   "dependencies": {
     "hl7.fhir.r4.core": "4.0.1",
-    "de.basisprofil.r4": "1.5.0-ballot2",
-    "de.gematik.fhir.directory": "0.11.7",
+    "de.basisprofil.r4": "1.5.0",
+    "de.gematik.fhir.directory": "0.11.8",
     "de.ihe-d.terminology": "3.0.0"
   },
   "missing": {}

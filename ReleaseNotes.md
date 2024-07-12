@@ -1,6 +1,13 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
+## Release 3.0.2
+- release ePA-3.0.2
+### changes
+- added error 409 for operation renderEMLAsHTML
+- bugfix parameter validation and context removed from extensions
+- additional FHIR Medication profiles
+- bugfix openAPI search parameters
 ## Release 3.0.2-alpha.1
 - pre-release ePA-3.0.2
 ### changes

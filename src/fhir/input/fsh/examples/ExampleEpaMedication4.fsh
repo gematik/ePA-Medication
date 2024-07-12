@@ -2,6 +2,8 @@ Instance: ExampleEpaMedication4
 InstanceOf: EPAMedication
 Usage: #example
 * id = "4f9ab221-0eef-4e46-a8a9-38302e0488b1"
+* extension[type].valueCoding = $sct#781405001 "Medicinal product package (product)"
+  * version = $sct-version_20240201
 * meta
   * versionId = "1"
   * lastUpdated = "2025-01-22T14:43:33.244Z"
@@ -20,11 +22,11 @@ Usage: #example
 * form.coding[kbvDarreichungsform] = $cs-kbv-medication-darreichungsform#TAB "Tabletten"
 * form.coding[kbvDarreichungsform].version = "1.10"
 * form.coding[snomed] = $sct#385055001 "Tablet (basic dose form)"
-* form.coding[snomed].version = $sct_20240501
+* form.coding[snomed].version = $sct-version_20240201
 * form.coding[edqm] = $cs-edqm#12200 "Tablet"
 * amount.numerator = 50 '{Tablet}' "Tablet"
 * amount.denominator = 1 '{Package}' "Package"
-* ingredient.itemCodeableConcept.coding.version = $sct_20240501
+* ingredient.itemCodeableConcept.coding.version = $sct-version_20240201
 * ingredient.itemCodeableConcept.coding = $sct#387207008 "Ibuprofen (substance)"
 * ingredient.strength.numerator = 400 'mg' "MilliGram"
 * ingredient.strength.denominator = 1 '{Tablet}' "Tablet"
