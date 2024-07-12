@@ -1,0 +1,64 @@
+{
+  "resourceType": "Medication",
+  "id": "NasenSpray",
+  "meta": {
+    "profile": [
+      "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pharmaceutical-product"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier",
+      "value": "FFE864A95C512A02207CDE2F38A0A21786FC5EC5E80491B2660C019CBC59ADA4"
+    }
+  ],
+  "extension": [
+    {
+      "valueCoding": {
+        "code": "373873005",
+        "system": "http://snomed.info/sct",
+        "display": "Pharmazeutisches/biologisches Produkt"
+      },
+      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension"
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/abdata/Komponentennummer",
+        "code": "01746517-2",
+        "display": "Nasenspray, Lösung"
+      }
+    ]
+  },
+  "ingredient": [
+    {
+      "itemCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://fhir.de/CodeSystem/bfarm/atc",
+            "code": "R01AC01",
+            "display": "Natriumcromoglicat"
+          }
+        ]
+      },
+      "strength": {
+        "numerator": {
+          "value": 2.8,
+          "unit": "mg",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg"
+        },
+        "denominator": {
+          "value": 1,
+          "unit": "Sprühstoß",
+          "system": "http://unitsofmeasure.org",
+          "code": "1"
+        }
+      }
+    }
+  ],
+  "batch": {
+    "lotNumber": "56498416854"
+  }
+}

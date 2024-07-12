@@ -1,0 +1,36 @@
+{
+  "resourceType": "Medication",
+  "id": "MedicationHydrocortison",
+  "meta": {
+    "profile": [
+      "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pzn-ingredient"
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/ifa/pzn",
+        "code": "03424249",
+        "display": "Hydrocortison 1% Creme"
+      }
+    ]
+  },
+  "amount": {
+    "numerator": {
+      "extension": [
+        {
+          "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-total-quantity-formulation-extension",
+          "valueString": "100"
+        }
+      ],
+      "value": 50,
+      "unit": "g"
+    },
+    "denominator": {
+      "value": 1
+    }
+  },
+  "batch": {
+    "lotNumber": "56498416854"
+  }
+}

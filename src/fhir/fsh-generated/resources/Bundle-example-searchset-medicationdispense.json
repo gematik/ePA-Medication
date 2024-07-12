@@ -19,7 +19,7 @@
   ],
   "entry": [
     {
-      "fullUrl": "https://wwww.example.org/epa/medication/api/v1/fhir/MedicationDispense/4e6e1623-778e-44a3-b208-8479f5339e43",
+      "fullUrl": "https://epa-as-0.prod.epa4all.de/vau-cid-1234/epa/medication/api/v1/fhir/MedicationDispense/4e6e1623-778e-44a3-b208-8479f5339e43",
       "resource": {
         "resourceType": "MedicationDispense",
         "id": "4e6e1623-778e-44a3-b208-8479f5339e43",
@@ -82,7 +82,7 @@
       }
     },
     {
-      "fullUrl": "https://wwww.example.org/epa/medication/api/v1/fhir/MedicationDispense/46865835-8c8f-4139-86ba-271bd3565250",
+      "fullUrl": "https://epa-as-0.prod.epa4all.de/vau-cid-1234/epa/medication/api/v1/fhir/MedicationDispense/46865835-8c8f-4139-86ba-271bd3565250",
       "resource": {
         "resourceType": "MedicationDispense",
         "id": "46865835-8c8f-4139-86ba-271bd3565250",

@@ -1,0 +1,64 @@
+{
+  "resourceType": "Medication",
+  "id": "Augentropfen",
+  "meta": {
+    "profile": [
+      "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-pharmaceutical-product"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier",
+      "value": "59F8B8EF490A2A6D49C66D8C02574AB1E7C2EA97AEB925343F86D32616365984"
+    }
+  ],
+  "extension": [
+    {
+      "valueCoding": {
+        "code": "373873005",
+        "system": "http://snomed.info/sct",
+        "display": "Pharmazeutisches/biologisches Produkt"
+      },
+      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension"
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/abdata/Komponentennummer",
+        "code": "01746517-1",
+        "display": "Augentropfen"
+      }
+    ]
+  },
+  "ingredient": [
+    {
+      "itemCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://fhir.de/CodeSystem/bfarm/atc",
+            "code": "R01AC01",
+            "display": "Natriumcromoglicat"
+          }
+        ]
+      },
+      "strength": {
+        "numerator": {
+          "value": 20,
+          "unit": "mg",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg"
+        },
+        "denominator": {
+          "value": 1,
+          "unit": "ml",
+          "system": "http://unitsofmeasure.org",
+          "code": "ml"
+        }
+      }
+    }
+  ],
+  "batch": {
+    "lotNumber": "0132456"
+  }
+}

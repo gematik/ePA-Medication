@@ -19,10 +19,14 @@ Alias: $cs-edqm = http://standardterms.edqm.eu
 Alias: $vs-edqm-doseform = http://hl7.org/fhir/uv/ips/ValueSet/medicine-doseform
 Alias: $sct = http://snomed.info/sct
 Alias: $sct_20240501 = http://snomed.info/sct/900000000000207008/version/20240501
+Alias: $sct_20240201 = http://snomed.info/sct|http://snomed.info/sct/900000000000207008/version/20240201
+Alias: $sct-version_20240201 = http://snomed.info/sct/900000000000207008/version/20240201
 
 Alias: $cs-operation-outcome = http://terminology.hl7.org/CodeSystem/operation-outcome
 
 Alias: $capabilitystatement-expectation = http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation
+
+Alias: $cs-product-key = https://terminologieserver.bfarm.de/fhir/CodeSystem/arzneimittel-referenzdaten-pharmazeutisches-produkt
 
 // no support for PKV required; see https://hl7germany.sharepoint.com/:w:/s/TCFHIR/EeWdppXQMblMqL0OHsBlhswBN5zPMHh4g5B72EJoNOzd_A?e=KMIaYnc
 //Alias: $identifier-pkv = http://fhir.de/StructureDefinition/identifier-pkv

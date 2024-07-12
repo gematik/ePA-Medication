@@ -6,16 +6,16 @@
 |:----|----|
 | Context| __ePA 3.0 (ePA für alle)__|
 | Designation  | __Release 3.0.2__  |
-| Current status | __pre-released__ |
-| Release date   | __July 2024 (planned final release 3.0.2)__  |
-| Specifications| [Fachportal gematik: Vorveröffentlichung ePA 3.0.2](https://fachportal.gematik.de/schnelleinstieg/downloadcenter/vorabveroeffentlichungen#c9332)|
+| Current status | __released__ |
+| Release date   | __2024-07-12__  |
+| Specifications| [Fachportal gematik: ePA 3.0.2](https://gemspec.gematik.de/releases/ePA_3_0_2/)|
 | Previous release| __Release 3.0.1__|
 | Previous branch | [**ePA-3.0.1**](https://github.com/gematik/epa-medication/tree/ePA-3.0.1)|
 | Follow-up | ePA-3.1.0 (planned)|
 | Associated repositories:||
 | Basic Services | [**ePA-Basic (3.0.2)**](https://github.com/gematik/epa-basic/tree/ePA-3.0.2) |
 | XDS Document Service | [**ePA-XDS-Document (3.0.2)**](https://github.com/gematik/epa-xds-document/tree/ePA-3.0.2) |
-| Fhir Resources | [**Simplifier**](https://simplifier.net/epa-medication) |
+| FHIR Resources | [**Simplifier**](https://simplifier.net/packages/de.gematik.epa.medication/1.0.2) |
 
 </br>
 </br>

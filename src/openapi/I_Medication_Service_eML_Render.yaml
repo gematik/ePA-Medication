@@ -60,7 +60,7 @@ paths:
         - xHTML
       operationId: renderEMLAsHTML
       description: |
-        This interface returns a medication list (eML) rendered in PDF/A file which shall be one of the allowed formats (A_25233*)..
+        This interface returns a medication list (eML) rendered in xHTML file which shall be one of the allowed formats (A_25233*).
 
         #### **Allowed user groups [professionOID]**
         * oid_versicherter
@@ -96,6 +96,8 @@ paths:
             text/html:
               schema:
                 type: string
+        '409':
+          $ref: '#/components/responses/Error409Conflict'
         '423':
           $ref: '#/components/responses/Error423Locked'
         '500':

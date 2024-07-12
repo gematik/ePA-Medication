@@ -19,7 +19,7 @@
   ],
   "entry": [
     {
-      "fullUrl": "https://wwww.example.org/epa/medication/api/v1/fhir/Medication/2571d29b-e213-40ec-b817-a1490718a490",
+      "fullUrl": "https://epa-as-0.prod.epa4all.de/vau-cid-1234/epa/medication/api/v1/fhir/Medication/2571d29b-e213-40ec-b817-a1490718a490",
       "resource": {
         "resourceType": "Medication",
         "id": "2571d29b-e213-40ec-b817-a1490718a490",
@@ -31,6 +31,15 @@
           ]
         },
         "extension": [
+          {
+            "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension",
+            "valueCoding": {
+              "code": "781405001",
+              "system": "http://snomed.info/sct",
+              "display": "Medicinal product package (product)",
+              "version": "http://snomed.info/sct/900000000000207008/version/20240201"
+            }
+          },
           {
             "valueIdentifier": {
               "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
@@ -65,7 +74,7 @@
       }
     },
     {
-      "fullUrl": "https://wwww.example.org/epa/medication/api/v1/fhir/Medication/3b990824-3814-4d75-80b1-e2935827f8f0",
+      "fullUrl": "https://epa-as-0.prod.epa4all.de/vau-cid-1234/epa/medication/api/v1/fhir/Medication/3b990824-3814-4d75-80b1-e2935827f8f0",
       "resource": {
         "resourceType": "Medication",
         "id": "3b990824-3814-4d75-80b1-e2935827f8f0",
@@ -77,6 +86,15 @@
           ]
         },
         "extension": [
+          {
+            "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension",
+            "valueCoding": {
+              "code": "781405001",
+              "system": "http://snomed.info/sct",
+              "display": "Medicinal product package (product)",
+              "version": "http://snomed.info/sct/900000000000207008/version/20240201"
+            }
+          },
           {
             "valueIdentifier": {
               "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
@@ -142,7 +160,7 @@
       }
     },
     {
-      "fullUrl": "https://wwww.example.org/epa/medication/api/v1/fhir/Medication/4bfef107-7d81-4d36-8aa0-7ea937969046",
+      "fullUrl": "https://epa-as-0.prod.epa4all.de/vau-cid-1234/epa/medication/api/v1/fhir/Medication/4bfef107-7d81-4d36-8aa0-7ea937969046",
       "resource": {
         "resourceType": "Medication",
         "id": "4bfef107-7d81-4d36-8aa0-7ea937969046",
@@ -154,6 +172,15 @@
           ]
         },
         "extension": [
+          {
+            "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension",
+            "valueCoding": {
+              "code": "781405001",
+              "system": "http://snomed.info/sct",
+              "display": "Medicinal product package (product)",
+              "version": "http://snomed.info/sct/900000000000207008/version/20240201"
+            }
+          },
           {
             "valueIdentifier": {
               "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
@@ -189,7 +216,7 @@
       }
     },
     {
-      "fullUrl": "https://wwww.example.org/epa/medication/api/v1/fhir/Medication/4f9ab221-0eef-4e46-a8a9-38302e0488b1",
+      "fullUrl": "https://epa-as-0.prod.epa4all.de/vau-cid-1234/epa/medication/api/v1/fhir/Medication/4f9ab221-0eef-4e46-a8a9-38302e0488b1",
       "resource": {
         "resourceType": "Medication",
         "id": "4f9ab221-0eef-4e46-a8a9-38302e0488b1",
@@ -201,6 +228,15 @@
           ]
         },
         "extension": [
+          {
+            "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension",
+            "valueCoding": {
+              "code": "781405001",
+              "system": "http://snomed.info/sct",
+              "display": "Medicinal product package (product)",
+              "version": "http://snomed.info/sct/900000000000207008/version/20240201"
+            }
+          },
           {
             "valueIdentifier": {
               "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
@@ -262,7 +298,7 @@
               "system": "http://snomed.info/sct",
               "code": "385055001",
               "display": "Tablet (basic dose form)",
-              "version": "http://snomed.info/sct/900000000000207008/version/20240501"
+              "version": "http://snomed.info/sct/900000000000207008/version/20240201"
             }
           ]
         },
@@ -286,7 +322,7 @@
             "itemCodeableConcept": {
               "coding": [
                 {
-                  "version": "http://snomed.info/sct/900000000000207008/version/20240501",
+                  "version": "http://snomed.info/sct/900000000000207008/version/20240201",
                   "code": "387207008",
                   "system": "http://snomed.info/sct",
                   "display": "Ibuprofen (substance)"
