@@ -1,0 +1,115 @@
+@startuml medication.fhir.emp.dispensation.model
+
+skinparam fixCircleLabelOverlapping false
+skinparam roundcorner 10
+skinparam object {
+    BackgroundColor DimGrey
+    BorderColor Black
+    ArrowColor #5c7aab
+    FontSize 12
+    FontColor automatic
+    NoteBackgroundColor #3483eb
+    ArrowFontColor #777777
+    ArrowFontSize 11
+}
+skinparam LegendBackgroundColor White
+ 
+object "<< Arzt >>\n**PractitionerDirectory**" as Practitioner
+object "<< Organisation >>\n**OrganizationDirectory**" as Organization
+object "<< Apotheke >>\n**OrganizationDirectory**" as DispenserOrganization
+object "PractitionerRole" as PractitionerRole
+
+object "<< Körpergröße (EPAObservationBodyHeight)>>\n<< Körpergewicht(EPAObservationBodyWeight)>>\n<< Stillstatus (EPAObservationBreastfeedingStatus)>>\n<< Serumkreatinin-Wert (EPAObservationCreatinine)>>\n<< Schwangerschaftsstatus (EPAObservationPregnancyStatus)>>\n<< Entbindungstermin (EPAObservationEstimatedDateOfDelivery)>>\n<< Glomeruläre Filtrationsrate (GFR) (EPAObservationGFR)>>\n**EPAObservation**" as Observation #LightSeaGreen {
+    + performer: Reference(PractitionerRole)
+}
+object "<< Übergreifender Hinweis >>\n**EPAObservationMedicationManagementNote**" as ManagementNote #LightSeaGreen {
+    + performer: Reference(PractitionerRole)
+}
+
+object "<< Allergie oder Intoleranz >>\n**EPAAllergyIntolerance**" as AllergyIntolerance #LightSeaGreen {
+    + patient: Reference(Patient)
+    + recorder: Reference(PractitionerRole)
+}
+
+
+object "<< Herkunftsnachweis >>\n<< Verifizierung >>\n**EPAProvenance**" as Provenance #LightSeaGreen {
+    + activity = CREATE | UPDATE
+    + agent.type = enterer | performer | author | informant
+    ------
+    + activity = VRF
+    + agent.type = verifier
+}
+
+object "<< Medikamentzusatzinformation >>\n**EPAMedicationStatement**" as MedicationStatement #LightSeaGreen  {
+    + subject: Reference(Patient)
+    + informationSource: Reference(PractitionerRole)
+}
+object "<< Medikament >>\n**EPAMedication**" as PlanMedication #LightSeaGreen
+object "<< Medikamentzusatzinformation >>\n**EPAMedicationList**" as MedicationList #Ivory
+object "<< Allergien / Unverträglichkeiten >>\n**EPAAllergyIntoleranceList**" as AllergyIntoleranceList #Ivory
+object "<< Beobachtungen >>\n**EPAObservationList**" as ObservationList #Ivory
+object "//Interne Versionskontrolle für den Plan//\n<< eMP-Ausgabe >>\n**EPAPlanComposition**" as Composition #Ivory {
+    + author: Reference(Device)
+}
+
+object "<< verschriebenes Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen
+object "<< Arzneimittelverschreibung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen {
+    + subject: Reference(Patient)
+}
+object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen {
+    ' + wasSubstituted: true
+    ' 
+}
+object "<< Substituiertes Arzneimittel >>\n**EPAMedication**" as AltMedication #DarkSeaGreen
+
+object "<< Verschreibungsfreies Arzneimittel >>\n**EPAMedication**" as WithoutPrescriptionMedication #Coral
+object "<< Verschreibungsfreiee Dispensierung >>\n**EPAMedicationDispense**" as WithoutPrescriptionMedicationDispense #Coral
+
+Provenance -d-> ManagementNote : "target \n [versioned reference]"
+Provenance -d-> Observation : "target \n [versioned reference]"
+Provenance -d-> AllergyIntolerance : "target \n [versioned reference]"
+Provenance -r-> MedicationStatement : "target \n [versioned reference]"
+Provenance -u-> PractitionerRole : "agent[].who"
+Provenance -u-> Organization : "agent[].who"
+Provenance -u-> Practitioner : "agent[].who"
+
+MedicationStatement -r-> PlanMedication : "medicationReference"
+MedicationStatement -l-> PractitionerRole : informationSource
+
+MedicationList -u-> MedicationStatement : "entry[].item \n [versioned reference]"
+AllergyIntoleranceList -u-> AllergyIntolerance : "entry[].item \n [versioned reference]"
+ObservationList -u-> Observation : "entry[].item \n [versioned reference]"
+
+Composition -u-> ManagementNote : "section[].entry \n [versioned reference]"
+Composition -u-> MedicationList : "section[].entry \n [versioned reference]"
+Composition -u-> AllergyIntoleranceList : "section[].entry \n [versioned reference]"
+Composition -u-> ObservationList : "section[].entry \n [versioned reference]"
+
+MedicationRequest -u-> Medication : "medicationReference"
+MedicationRequest -d-> PractitionerRole : "requester"
+MedicationRequest -d-> MedicationStatement : "MedicationRequestLinkedStatement\n(Extension)"
+ 
+MedicationDispense -u-> Medication : "medicationReference"
+MedicationDispense -u-> AltMedication : "medicationReference"
+MedicationDispense -l-> MedicationRequest : "authorizingPrescription"
+MedicationDispense -r-> DispenserOrganization : "perfomer.actor"
+
+PractitionerRole -u-> Practitioner : "practitioner"
+PractitionerRole -u-> Organization : "organization"
+
+WithoutPrescriptionMedicationDispense -u-> WithoutPrescriptionMedication : "medicationReference"
+WithoutPrescriptionMedicationDispense -l-> DispenserOrganization : "perfomer.actor"
+Provenance -u-> WithoutPrescriptionMedicationDispense : "target \n [versioned reference]"
+
+
+legend right
+    | Farbe | Datenherkunft |
+    |<#DarkSeaGreen>| Verschreibung/Dispensierung |
+    |<#Coral>| Verschreibungsfreier Dispensierung |
+    |<#LightSeaGreen>| Medikationsplanung |
+    |<#Ivory>| Medikationsplanung (intern) |
+    |<#DimGrey>| Akteur |
+endlegend
+ 
+ 
+@enduml

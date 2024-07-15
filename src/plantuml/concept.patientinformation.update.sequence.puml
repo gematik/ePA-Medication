@@ -1,0 +1,58 @@
+@startuml concept.patientinformation.update.sequence
+
+skinparam Shadowing false
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+skinparam sequence {
+    ArrowColor DodgerBlue
+    ActorBorderColor DodgerBlue
+    LifeLineBorderColor Blue
+
+    ParticipantBackgroundColor #3483eb
+    ParticipantBorderColor #3483eb
+    ParticipantFontSize 14
+    ParticipantFontColor White
+
+    ActorBackgroundColor #3483eb
+    ActorFontSize 14
+    NoteBackgroundColor #3483eb
+}
+
+hide footbox
+' autonumber
+
+participant "Kostenträger" as KTR
+participant "Primärsystem" as PS
+
+
+box "ePA-Aktensystem / VAU" #Beige
+    participant "VAU\n<< Patient-Information >>" as PI #eb5e34
+    participant "VAU\n<< Medication Service >>" as MS #eb5e34
+end box
+
+group Übermittlung demografische Versichertendaten
+
+KTR -> PI : Aktuelle demografische Daten für den Versicherten
+activate PI
+PI --> KTR : Aktuelle demografische Daten für den Versicherten wurden eingespielt
+deactivate PI
+
+end
+
+
+group Abrufen des Medikationsplan-Dokuments
+
+PS -> MS : Abrufen des eMP
+activate MS
+MS -> PI : Anfrage aktuelle demografische Daten für den Versicherten
+activate PI
+PI --> MS : Aktuelle demografische Daten für den Versicherten
+deactivate PI
+MS -> MS : Erstellung des eMP FHIR Document\nmit den aktuellen demografischen\nVersichertendaten
+MS -> PS : eMP FHIR Document
+deactivate MS
+
+end
+
+@enduml
