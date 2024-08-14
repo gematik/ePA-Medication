@@ -1,6 +1,10 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
+## Release 3.1.0
+- release ePA-3.1.0
+### changes
+- incorporation of review comments
 ## Release 3.1.0 RC
 - release candidate ePA-3.1.0
 ### changes
@@ -8,7 +12,7 @@
 - support for dispensation without prescription
 - medication management
 - AMTS-rZI management
-- FHIR Operation eML
+- FHIR Operation eML / eMP
 - added example for the prescription process
 - moved IG to simplifier
 - moved FHIR R4 profiles to simplifier.net

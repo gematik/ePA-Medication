@@ -30,7 +30,7 @@ ifndef::env-github[]
 :chapterplantumlsdir: ../../src/plantuml
 endif::[]
 :xrefstyle: full
-:toclevels: 3
+:toclevels: 4
 :sectnumlevels: 5
 :sectanchors:
 :numbered:
@@ -38,7 +38,7 @@ endif::[]
 
 // --- PDF theme options ---
 // :revdate: 30.01.2024
-:revnumber: 3.1.0 Release Candidate
+:revnumber: 3.1.0
 :document-title: Medication Service der "ePA für alle"
 :document-subtitle: gemKPT_ePAfuerAlleMedSvc
 :organization: gematik GmbH
@@ -99,11 +99,11 @@ endif::[]
 |Einarbeitung Kommentare; Konsistenzherstellung bzgl. aktueller Spezifikation, Veröffentlichung zur Kommentierung
 |gematik
 
-// |3.1.0
-// |01.08.2024
-// |
-// |Veröffentlichung
-// |gematik
+|3.1.0
+|14.08.2024
+|
+|Veröffentlichung
+|gematik
 
 |===
 
@@ -112,14 +112,14 @@ toc::[]
 
 == Der digital gestützte Medikationsprozess
 
-Mit der Unterstützung von Data Services über den *Fast Healthcare Interoperability Resources* (*FHIR*) Standard Release R4 (v4.0.1) in der _ePA für alle_ erweitert sich das über den link:https://github.com/gematik/ePA-XDS-Document/tree/ePA-3.0.2/concept[XDS Document Service] umgesetzte, dokumentenbasierte Verarbeitungsparadigma um eine servicebasierte Datenverarbeitung. Das bedeutet, dass bei den FHIR-basierten Services keine Dokumente im eigentlichen Sinn direkt bearbeitet oder gar eingestellt werden, sondern durch sie Management-Funktionen bereitgestellt werden, um medizinische Daten direkt im Service zu erfassen und zu aktualisieren. Die Bereitstellung von erzeugten (Snapshot-)Dokumenten aus diesen Daten erfolgt additiv.
+Mit der Unterstützung von Data Services über den *Fast Healthcare Interoperability Resources* (*FHIR*) Standard Release R4 (v4.0.1) in der _ePA für alle_ erweitert sich das über den link:https://github.com/gematik/ePA-XDS-Document/tree/ePA-3.1.0/concept[XDS Document Service] umgesetzte, dokumentenbasierte Verarbeitungsparadigma um eine servicebasierte Datenverarbeitung. Das bedeutet, dass bei den FHIR-basierten Services keine Dokumente im eigentlichen Sinn direkt bearbeitet oder gar eingestellt werden, sondern durch sie Management-Funktionen bereitgestellt werden, um medizinische Daten direkt im Service zu erfassen und zu aktualisieren. Die Bereitstellung von erzeugten (Snapshot-)Dokumenten aus diesen Daten erfolgt additiv.
 
 Die _ePA für alle_ stärkt den *digital gestützten Medikationsprozess (dgMP)* durch den Medication Service als Ausprägung eines spezialisierten FHIR Data Service. Dieser Service ermöglicht die Übergabe von Medikationsinformationen an den Versorgungsschnittstellen für die Medikationsanalyse und das Medikationsmanagement. Zu den Kernfunktionalitäten dieses Services gehören:
 
-* *Verwaltung aller Medikationsdaten*: Sämtliche Medikationen aus Verschreibungs- und Dispensiervorgängen, Planungen, Abgaben von verschreibungsfreien Medikamente als auch Selbstmedikationen werden in einer Historie zusammengefasst. Registrierte Medikationen außerhalb einer Verschreibung oder Dispensierung können mit Zusatzinformationen (Dauermedikament, Bedarfsmedikation, Nicht-Einnahme-Status etc.) versehen werden.
+* *Verwaltung aller erfassten Medikationsdaten*: Sämtliche Medikationen aus digitalen Verschreibungs- und Dispensiervorgängen, Planungen, Abgaben von verschreibungsfreien Medikamente als auch Selbstmedikationen werden in einer Historie zusammengefasst. Registrierte Medikationen außerhalb einer Verschreibung oder Dispensierung über das E-Rezept können mit Zusatzinformationen (Dauermedikament, Bedarfsmedikation, Nicht-Einnahme-Status etc.) versehen werden.
 * *Automatische Befüllung mit verordneten Arzneimitteln und Abgabedaten*: Jede Verschreibung und Abgabe über den E-Rezept-Fachdienst wird mit dem jeweiligen Aktenkonto der versicherten Person in der _ePA für alle_ synchronisiert.
-* *Planungsfunktionalität für einzunehmende und zu verordnende Medikamente*: Neben der Zusammenfassung aller Medikamente können diese in einer übersichtlichen Planung verwaltet werden, welche diejenigen Medikamente als kuratierten Stand darstellen, die versicherte Person aktuell einnimmt. Diese Funktionalität kann erst nach entsprechender Anspruchsvoraussetzung durch ein Primärsystem genutzt werden. Im niedergelassenen Bereich gilt dies gemäß § 31a SGB V bei der dauerhaften Anwendung von mindestens drei systemisch wirkenden, zu Lasten der gesetzlichen Krankenversicherung verschriebenen Arzneimitteln wohingegen im Rahmen des Entlassmanagements aus einem Krankenhaus gemäß § 29 BMV dies bereits ab einem Arzneimittel angewendet werden darf.
-* *Speichern arzneimitteltherapiesicherheitsrelevanter Zusatzinformationen (AMTS-rZI)*: Arzneimitteltherapiesicherheitsrelevante Zusatzinformationen wie bspw. Körpergröße, Gewicht, Kreatininwert, Allergien und Unverträglichkeiten unterstützen AMTS-Systeme auf Seiten der Primärsysteme und verbessern medizinisch-pflegerische Medikationsprozesse
+* *Planungsfunktionalität für einzunehmende und zu verordnende Medikamente*: Neben der Zusammenfassung aller Medikamente können diese in einer übersichtlichen Planung verwaltet werden, welche diejenigen Medikamente als kuratierten Stand darstellen, die die versicherte Person anwenden soll. Diese Funktionalität kann bei gesetzlich versicherten Personen erst nach entsprechender Anspruchsvoraussetzung durch ein Primärsystem genutzt werden. Im niedergelassenen Bereich gilt dies gemäß § 31a SGB V bei der dauerhaften Anwendung von mindestens drei systemisch wirkenden, zu Lasten der gesetzlichen Krankenversicherung verschriebenen Arzneimitteln wohingegen im Rahmen des Entlassmanagements aus einem Krankenhaus gemäß § 29 BMV dies bereits ab einem Arzneimittel angewendet werden darf.
+* *Speichern arzneimitteltherapiesicherheitsrelevanter Zusatzinformationen (AMTS-rZI)*: Arzneimitteltherapiesicherheitsrelevante Zusatzinformationen wie bspw. Körpergröße, Gewicht, Kreatininwert, Allergien und Unverträglichkeiten unterstützen AMTS-Systeme auf Seiten der Primärsysteme und können medizinisch-pflegerische Medikationsprozesse verbessern.
 
 _Hinweis: In der aktuellen Ausbaustufe des dgMP wird die Eintragung von Selbstmedikationen als auch Ergänzungen von Vermerken zu einer Medikation durch den Versicherten über das "ePA-Frontend des Versicherten" ((ePA-FdV)) nicht unterstützt. Ferner ist die Kennzeichnung einer Nicht-Einnahme zu einem verschriebenen Medikament ebenso noch nicht vorgesehen._
 
@@ -129,7 +129,7 @@ _Hinweis: In der aktuellen Ausbaustufe des dgMP wird die Eintragung von Selbstme
 === Kontextbezogene Sichten für die Prozessunterstützung
 :sectnums:
 
-In einer Medikationshistorie hält der Medication Service sämtliche Medikationen vor. Über die elektronische Medikationsliste (eML) kann durch optionale Eingabe eines Datumsbereichs eine verlaufsbasierte Einsicht auf diese Daten vorgenommen werden. Planungsmäßig erfasste Medikationen und AMTS-rZI können weiterhin durch die Erzeugung eines versionierten und optional verifizierten Medikationsplanungsdokuments mit aktuellen Medikationsinformationen (kurz "Medikationsplan") eingesehen werden.
+In einer Medikationshistorie hält der Medication Service sämtliche Medikationen vor. Über die elektronische Medikationsliste (eML) kann durch optionale Eingabe eines Datumsbereichs eine verlaufsbasierte Einsicht auf diese Daten vorgenommen werden. Planungsmäßig erfasste Medikationen und AMTS-rZI können weiterhin durch die Erzeugung eines versionierten und optional verifizierten Medikationsplanungsdokuments mit aktuellen Medikationsinformationen (kurz "Medikationsplan" — eMP) eingesehen werden. Die AMTS-rZI ergänzen bei Bedarf den eMP als auch die eML (insbesondere bei Personen ohne eMP-Anspruch).
 
 Basis für die eML sind primär Arzneimittelverordnungsdaten (nachfolgend Verschreibungsdaten) sowie Dispensierinformationen, welche ein Apothekenverwaltungssystem (AVS) dem E-Rezept-Fachdienst zur Verfügung stellt. Sofern der Versicherte dem Einstellen dieser Daten in den Medication Service nicht widersprochen hat, werden diese Daten bei Erzeugung durch Leistungserbringer über den E-Rezept-Fachdienst in den Medication Service automatisiert übertragen. Einträge der Medikationsplanung können von einem Primärsystem über dedizierte Management-Operationen gelesen oder auch manipuliert werden.
 
@@ -139,9 +139,9 @@ Basis für die eML sind primär Arzneimittelverordnungsdaten (nachfolgend Versch
 ==== Verarbeitung mittels FHIR
 :sectnums:
 
-Aus Sicht der automatisierten eML-Befüllung durch den E-Rezept-Fachdienst werden medication-service-eigene FHIR-Profile erzeugt, um zukünftige Anwendungsfälle zuzulassen. Der Medication Service implementiert in Teilen die <<#https://hl7.org/fhir/R4/http.html, FHIR RESTful API>>, was es generell erlaubt, Medikationsdaten direkt im Service zu manipulieren. Für sämtliche Schreiboperationen wird im Detail auf das Konzept von <<#https://hl7.org/fhir/R4B/operationslist.html, FHIR Operations>> zurückgegriffen, welche geprüfte Geschäftslogiken implementieren. Zum Lesen aller Medikationsdaten steht die FHIR Standard API zur Verfügung.Datenmanipulationen werden für den Versicherten im Zugriffsprotokoll festgehalten. Diese sind über das ePA-FdV einsehbar.
+Aus Sicht der automatisierten eML-Befüllung durch den E-Rezept-Fachdienst werden medication-service-eigene FHIR-Profile erzeugt, um zukünftige Anwendungsfälle zuzulassen. Der Medication Service implementiert in Teilen die <<#https://hl7.org/fhir/R4/http.html, FHIR RESTful API>>, was es generell erlaubt, Medikationsdaten direkt im Service zu manipulieren. Für sämtliche Schreiboperationen wird im Detail auf das Konzept von <<#https://hl7.org/fhir/R4/operationslist.html, FHIR Operations>> zurückgegriffen, welche geprüfte Geschäftslogiken implementieren. Zum Lesen aller Medikationsdaten steht die FHIR Standard API zur Verfügung.Datenmanipulationen werden für den Versicherten im Zugriffsprotokoll festgehalten. Diese sind über das ePA-FdV einsehbar.
 
-
+[discrete]
 === Widerspruchsoptionen des Versicherten
 
 Die _ePA für alle_ unterstützt diverse Widerspruchsoptionen, u.a. für Versorgungsprozesse. Die versicherte Person kann mit den folgenden Auswirkungen wie folgt widersprechen:
@@ -152,6 +152,7 @@ Die _ePA für alle_ unterstützt diverse Widerspruchsoptionen, u.a. für Versorg
 
 Neben diesen Widerspruchsmöglichkeiten hat der Versicherte die Möglichkeit, institutionsspezifisch den Zugriff auf Daten des Medication Service und damit die Ausführung des dgMP in Leistungserbringerumgebungen individuell zu sperren.
 
+<<<
 
 == Verschreibungs- und Dispensierdaten
 
@@ -303,6 +304,7 @@ Die folgenden Nutzungsvorgaben für die im Medication Service verarbeiteten FHIR
 * *Practitioner*/*Organization*: Diese Ressourcen werden anhand der Telematik-ID eindeutig identifiziert.
 * *Patient*: Bei eingestellten medizinischen Daten wird stets der Versicherte per KVNR referenziert. Im Medication Service selbst liegt eine korrespondierende Instanz der FHIR-Ressource Patient vor, sodass bei Abruf von medizinischen Daten eine Auflösung erfolgen kann.
 
+<<<
 
 == Medikationsplanung
 
@@ -316,38 +318,8 @@ Im Medication Service gespeicherte Verschreibungs- und Dispensierdaten, verschre
 ifndef::env-github[]
 
 [#fig:emp-model]
-[plantuml, "{diagramsdir}/medication.fhir.emp.dispensation.plain.model", svg]
-[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen für die Abbildung von Medikationsplanungsdaten, Verschreibungs- und Dispensierdaten, sowie verschreibungsfreie Abgaben (externe Sicht)",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
-....
-include::{plantumlsdir}/medication.fhir.emp.dispensation.plain.model.puml[]
-....
-
-endif::[]
-ifdef::env-github[]
-
-image::plantuml/medication.fhir.emp.dispensation.plain.model.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen für die Abbildung von Medikationsplanungsdaten, Verschreibungs- und Dispensierdaten, sowie verschreibungsfreie Abgaben (externe Sicht)",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
-
-endif::[]
-
-
-:sectnums!:
-[discrete]
-==== Management der Medikationsplanung durch interne FHIR-Ressourcen
-:sectnums:
-
-Der Medication Service nutzt interne FHIR-Ressourcen wie *Composition* oder *List* für das Management der aktuellen Medikationsplanung. Diese Ressourcen dienen als zentrale Komponenten im System, um zusammengefasste Informationen und Aufzeichnungen über die Medikation eines Versicherten bereitzustellen. Die Handhabung und Aktualisierung dieser Ressourcen erfolgen ausschließlich über spezifizierte FHIR-Operationen, die eine strukturierte und sichere Manipulation der Daten ermöglichen.
-
-Im Design des Medication Service ist die direkte Abfrage der Composition- oder List-Ressourcen über die FHIR API nicht vorgesehen. Stattdessen liegt der Fokus auf der Nutzung dieser Ressourcen im Hintergrund, um integrierte und konsistente Datenbestände für medizinische Dokumentationen und Medikationspläne zu gewährleisten. Durch die Beschränkung des direkten Zugriffs auf diese Ressourcen und die Steuerung über FHIR-Operationen wird die Integrität der Daten gewahrt und gleichzeitig die Komplexität für die Client-Systeme reduziert.
-
-Die genannten Ressourcen spielen eine entscheidende Rolle, wenn es darum geht, Leistungserbringern oder Versicherten einen dokumentierten Snapshot des aktuellen Medikationsplans bereitzustellen. Beispielsweise können im Rahmen spezifischer FHIR-Operationen, wie das Erstellen oder Aktualisieren des Medikationsplans, Composition- oder List-Ressourcen automatisch generiert oder modifiziert werden, um einen aktuellen und umfassenden Überblick über die Medikation des Versicherten zu bieten. Diese Snapshots können dann in Form von Dokumenten oder Berichten für die medizinische Nutzung oder zur Informationsübermittlung an den Versicherten und andere beteiligte Parteien zur Verfügung gestellt werden (bspw. den eMP).
-
-Durch die Verwendung von Composition- und List-Ressourcen im Hintergrund und die Steuerung über FHIR-Operationen ermöglicht der Medication Service eine effiziente, sichere und zentralisierte Verwaltung von Medikationsinformationen. Die nachstehende <<#fig:emp-model-intern, Abbildung>> komplettiert das zuvor gezeigte Modell:
-
-ifndef::env-github[]
-
-[#fig:emp-model-intern]
 [plantuml, "{diagramsdir}/medication.fhir.emp.dispensation.model", svg]
-[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen für die Abbildung von Medikationsplanungsdaten, Verschreibungs- und Dispensierdaten, sowie verschreibungsfreie Abgaben (interne Sicht)",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen für die Abbildung von Medikationsplanungsdaten, Verschreibungs- und Dispensierdaten sowie verschreibungsfreie Abgaben",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
 ....
 include::{plantumlsdir}/medication.fhir.emp.dispensation.model.puml[]
 ....
@@ -355,11 +327,19 @@ include::{plantumlsdir}/medication.fhir.emp.dispensation.model.puml[]
 endif::[]
 ifdef::env-github[]
 
-image::plantuml/medication.fhir.emp.dispensation.model.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen für die Abbildung von Medikationsplanungsdaten, Verschreibungs- und Dispensierdaten, sowie verschreibungsfreie Abgaben (interne Sicht)",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
+image::plantuml/medication.fhir.emp.dispensation.model.svg[caption="Abbildung {counter:figure}: ", reftext="Abbildung {figure}", title="FHIR-Ressourcen für die Abbildung von Medikationsplanungsdaten, Verschreibungs- und Dispensierdaten sowie verschreibungsfreie Abgaben",width=100%, pdfwidth=100%,float="center",align="center",title-align="center"]
 
 endif::[]
 
-<<<
+
+
+
+Der Medication Service nutzt interne FHIR-Ressourcen wie *Composition* oder *List* für das Management der aktuellen Medikationsplanung. Diese Ressourcen dienen als zentrale Komponenten im System, um zusammengefasste Informationen und Aufzeichnungen über die Medikation eines Versicherten bereitzustellen. Die Handhabung und Aktualisierung dieser Ressourcen erfolgen ausschließlich über spezifizierte FHIR-Operationen, die eine strukturierte und sichere Manipulation der Daten ermöglichen.
+
+Im Design des Medication Service ist die direkte Abfrage der Composition- oder List-Ressourcen über die FHIR API nicht vorgesehen. Stattdessen liegt der Fokus auf der Nutzung dieser Ressourcen im Hintergrund, um integrierte und konsistente Datenbestände für medizinische Dokumentationen und Medikationspläne zu gewährleisten. Durch die Beschränkung des direkten Zugriffs auf diese Ressourcen und die Steuerung über FHIR-Operationen wird die Integrität der Daten gewahrt und gleichzeitig die Komplexität für die Client-Systeme reduziert.
+
+Die genannten Ressourcen spielen eine entscheidende Rolle, wenn es darum geht, Leistungserbringern oder Versicherten einen dokumentierten Snapshot des aktuellen Medikationsplans bereitzustellen. Beispielsweise können im Rahmen spezifischer FHIR-Operationen, wie das Erstellen oder Aktualisieren des Medikationsplans, Composition- oder List-Ressourcen automatisch generiert oder modifiziert werden, um einen aktuellen und umfassenden Überblick über die Medikation des Versicherten zu bieten. Diese Snapshots können dann — wie am Beispiel eMP — in Form von Dokumenten oder Berichten für die medizinische Nutzung oder zur Informationsübermittlung an den Versicherten und andere beteiligte Parteien zur Verfügung gestellt werden.
+
 
 === FHIR-Server-spezifische Festlegungen
 
@@ -369,6 +349,7 @@ Jede Änderung an einer FHIR-Ressource resultiert in einer neuen Version dieser 
 
 
 :sectnums!:
+[discrete]
 ===== HTTP GET-Anfrage
 :sectnums:
 
@@ -387,7 +368,7 @@ Dabei ist:
 
 *Beispiel*
 
-Um die 3. Version einer MedicationStatement-Instanz mit der ID "391fc0c6-e045-48d9-8af6-3ac2466beb88" vom Medication Service abzurufen – dessen Basis-URL https://FQDN-from-DNS-lookup:443/epa/medication/api/v1/fhir/ ist – muss die URL für die HTTP GET-Anfrage wie folgt aussehen:
+Um die 3. Version einer MedicationStatement-Instanz mit der ID "391fc0c6-e045-48d9-8af6-3ac2466beb88" abzurufen – dessen Basis-URL "https://epa-as-<ePA-Anbieter-Zahl>.prod.epa4all.de/<VAU-CID>" mit einem gültigen Pfadnamen eines VAU-Kanals ist – muss die URL für die HTTP GET-Anfrage wie folgt aussehen:
 
 [source]
 ----
@@ -448,7 +429,7 @@ Jeder Lese- und Schreibvorgang erfordert die Authentisierung der Leistungserbrin
 | informant ^| 0..1 | Person, die Informationen für die fachliche Änderung der Medikationsdaten zur Verfügung stellte
 |===
 
-_Hinweis: Sämtliche nachfolgend definierten Operationssignaturen stellen ausschließlich logische Beschreibungen dar. In der Spezifikation werden bestimmte Operationen auf Instanz-, FHIR Resource- oder Systemlevel ausgeführt, sodass Operationsnamen aufgrund des bereits bekannten Aufrufkontexts ggf. abweichen._
+**_Hinweis:_** _Sämtliche nachfolgend definierten Operationssignaturen stellen ausschließlich logische Beschreibungen dar. In der Spezifikation werden bestimmte Operationen auf Instanz-, FHIR Resource- oder Systemlevel ausgeführt, sodass Operationsnamen aufgrund des bereits bekannten Aufrufkontexts ggf. abweichen._
 
 ==== AMTS-rZI-Management
 
@@ -479,7 +460,7 @@ Das Primärsystem kann Allergien oder Intoleranzen sowie Beobachtungen/Messungen
 |===
 | Parametername | Kardinalität | Beschreibung
 3+h| Eingangsparameter
-| allergyIntolerance ^| 1..* | Fügt eine Allergie oder Intoleranz hinzu. Beim Hinzufügen prüft der Medication Service auf eine potentiell vorhandene Instanz mit dem AllergyIntolerance.code = {"http://snomed.info/sct", "716186003", "No known allergy"} und löscht diese gegebenenfalls. Wird selbst eine AMTS-rZI (AllergyIntolerance) mit diesem Code registriert, werden potentiell vorhandene Instanzen per "verificationStatus = refuted" invalidiert.
+| allergyIntolerance ^| 1..* | Fügt eine Allergie oder Intoleranz hinzu. Beim Hinzufügen prüft der Medication Service auf eine potentiell vorhandene Instanz mit dem AllergyIntolerance.code = {"http://snomed.info/sct", "716186003", "No known allergy"} und invalidiert diese gegebenenfalls. Wird selbst eine AMTS-rZI (AllergyIntolerance) mit diesem Code registriert, werden potentiell vorhandene Instanzen per "verificationStatus = refuted" invalidiert.
 3+e| Standardeingangsparameter, wie <<#_herkunfts-_und_verifizierungsnachweis, oben>> definiert
 |===
 
@@ -635,7 +616,7 @@ Die Operation $replace-medication ermöglicht es, eine Medication- bzw. Medicati
 
 ===== Medikationsliste abrufen
 
-Die Query-Operation *$medication-list* liefert die eML in Form eines FHIR 'searchSet' Bundles. Über die eML kann durch optionale Eingabe eines Datumsbereichs eine verlaufsbasierte Einsicht auf sämtliche Medikationen aus der Medikationshistorie vorgenommen werden. Auch planungsmäßig erfasste Medikationen mit aktuellen Medikationsinformationen sowie <<#_abgabe_und_stornierung_verschreibungsfreier_medikamente, verschreibungsfreie Abgaben>> sind Teil der eML und können somit eingesehen werden.
+Die Query-Operation *$medication-list* liefert die eML in Form eines FHIR SearchSet Bundles. Über die eML kann durch optionale Eingabe eines Datumsbereichs eine verlaufsbasierte Einsicht auf sämtliche Medikationen aus der Medikationshistorie vorgenommen werden. Auch planungsmäßig erfasste Medikationen mit aktuellen Medikationsinformationen sowie <<#_abgabe_und_stornierung_verschreibungsfreier_medikamente, verschreibungsfreie Abgaben>> sind Teil der eML und können somit eingesehen werden.
 
 [caption="Tabelle {counter:table-number}: "]
 .Operationsparameter *$get-medication-list*
@@ -743,7 +724,7 @@ Im Rahmen der Geschäftslogik von Operationen, die die Verwaltung und Aktualisie
 Durch die automatische Aktualisierung der Referenzen in *Composition* oder *List* auf die neuesten Versionen der *MedicationStatement*-Ressource, der *AllergyIntolerance*-Ressource oder *Observation*-Ressource, sobald diese aktualisiert werden, erhalten auch diese internen Ressourcen eine neue Version. Dieser Prozess ist entscheidend für die Aufrechterhaltung einer klaren und nachvollziehbaren Historie des Medikationsplans und der damit verbundenen Entscheidungen.
 
 
-==== Medikationsplanungsdaten mit Verschreibungs- und Dispensierdaten verlinken
+==== Verlinkung von Medikationsplanungsdaten mit Verschreibungs- und Dispensierdaten
 
 Das Hauptziel dieses Konzepts besteht darin, Verschreibungs- und Dispensierdaten mit der Medikationsplanung zu verlinken. Durch den Einsatz der FHIR Operation *$link-prescription-process* soll eine nahtlose Verbindung zwischen geplanten und tatsächlich verschriebenen Arzneimitteln ermöglicht werden. Dies dient der Verbesserung der Medikamentenmanagement- und Abgabepraktiken.
 
@@ -775,7 +756,7 @@ endif::[]
 
 ===== Verwendung einer Extension zur Verlinkung von MedicationRequest und MedicationStatement
 
-Die Entscheidung, eine spezielle Extension für die Verlinkung einer *MedicationRequest*-Instanz mit einer *MedicationStatement*-Instanz einzusetzen, anstelle auf das FHIR-Element *MedicationStatement.basedOn* zurückzugreifen, basiert sowohl auf technischen Überlegungen als auch auf einer fachlichen Logik: Im Ablauf basiert ein *MedicationStatement* nicht auf einer *MedicationRequest*. Tatsächlich ist es oft umgekehrt. Die Verschreibung (*MedicationRequest*) folgt auf die Medikamentenplanung, die in einem *MedicationStatement* festgehalten wird. Dies bedeutet, dass das *MedicationStatement* den Ausgangspunkt bildet, auf den hin eine Verschreibung erfolgt. Die *MedicationRequestLinkedStatementExtension* spiegelt diese fachliche Beziehung korrekt wider und stellt die Verbindung zwischen der Planung und der Verschreibung von Medikamenten präzise dar. Die spezifische Nutzung dieser Extension vermeidet potenzielle Konflikte oder Verwirrungen, die entstehen könnten, wenn allgemeinere Felder wie *MedicationStatement.basedOn* für spezielle Verlinkungszwecke verwendet werden.
+Die Entscheidung, eine spezielle Extension für die Verlinkung einer *MedicationRequest*-Instanz mit einer *MedicationStatement*-Instanz einzusetzen, anstelle auf das FHIR-Element *MedicationStatement.basedOn* zurückzugreifen, basiert sowohl auf technischen Überlegungen als auch auf einer fachlichen Logik: Im Ablauf basiert ein *MedicationStatement* nicht auf einem *MedicationRequest*. Tatsächlich ist es oft umgekehrt. Die Verschreibung (*MedicationRequest*) folgt auf die Medikamentenplanung, die in einem *MedicationStatement* festgehalten wird. Dies bedeutet, dass das *MedicationStatement* den Ausgangspunkt bildet, auf den hin eine Verschreibung erfolgt. Die *MedicationRequestLinkedStatementExtension* spiegelt diese fachliche Beziehung korrekt wider und stellt die Verbindung zwischen der Planung und der Verschreibung von Medikamenten präzise dar. Die spezifische Nutzung dieser Extension vermeidet potenzielle Konflikte oder Verwirrungen, die entstehen könnten, wenn allgemeinere Felder wie *MedicationStatement.basedOn* für spezielle Verlinkungszwecke verwendet werden.
 
 [#_link-prescription-process]
 ===== Asynchrone Verlinkung von Verschreibungsdaten mittels FHIR Resource Task
@@ -828,9 +809,11 @@ image::plantuml/concept.operation.link-prescription-process.in.erp.op.svg[captio
 
 endif::[]
 
-====== *Folgerung*
+
+====== Folgerung
 
 Die asynchrone Verlinkung von Verschreibungsdaten unter Verwendung der FHIR-Ressource *Task* bietet einen flexiblen Ansatz für das Medikamentenmanagement. Dieser Ansatz gewährleistet, dass Verschreibungsdaten korrekt verlinkt werden, selbst wenn sie zum Zeitpunkt des initialen Verlinkungsversuchs noch nicht verfügbar sind.
+
 
 ===== Automatisierte Löschung veralteter Task-Ressourcen im Medication Service
 
@@ -841,6 +824,23 @@ Um die Datenintegrität im Medication Service zu wahren, ist es notwendig, nicht
 
 . Der Status des *Task* ist *requested* und zeigt an, dass er nicht bearbeitet wurde.
 . Die *Task*-Ressource ist älter als ein Monat seit ihrer Erstellung oder dem letzten Update.
+
+
+===== Verlinkung zwischen Medikationsplanungsdaten und Verschreibungsdaten aufheben
+
+Nach Abschluss der Verlinkung kann sofern erforderlich das Entfernen einer fehlerhaften Verlinkung mit der Operation *$unlink-prescription* durchgeführt werden.
+
+[caption="Tabelle {counter:table-number}: "]
+.Operationsparameter *$unlink-prescription*
+[cols="3,2,10",options="header"]
+|===
+| Parametername | Kardinalität | Beschreibung
+3+h| Eingangsparameter
+| medicationRequestId ^| 1..1 | Resource-ID der Verschreibung, bei welcher die Verlinkung entfernt werden soll
+| medicationStatementId ^| 1..1 | Resource-ID der Zusatzinformationen, auf welche vor Operationsausführung verlinkt wurde
+| performer ^| 1..1 | Tätige Person und/oder Leistungserbringerinstitution/Organisation/Rolle, die die Verlinkung entfernt.
+|===
+
 
 <<<
 
@@ -881,6 +881,7 @@ Zusätzlich wird bei beiden Vorgängen – sowohl bei der Abgabe als auch bei de
 | reason ^| 0..1 | Grund für die Stornierung
 |===
 
+<<<
 
 == Versicherteninformationen
 
@@ -916,12 +917,12 @@ Der Medication Service unterstützt die aufbereitete Generierung einer eML in de
 
 [source]
 ----
-GET https://FQDN-from-DNS-lookup:443/epa/medication/render/eml/xhtml
-GET https://FQDN-from-DNS-lookup:443/epa/medication/render/eml/pdf
-GET https://FQDN-from-DNS-lookup:443/epa/medication/render/emp/pdf
+GET [base]/epa/medication/render/eml/xhtml
+GET [base]/epa/medication/render/eml/pdf
+GET [base]/epa/medication/render/emp/pdf
 ----
 
-Während die Medikationsplan-Ausgabe nicht parametrisierbar ist, können die Medikationen bei beiden eML-Ausgabeformaten hinsichtlich des Zeitraums beeinflusst werden. Die folgenden beiden, optionalen URL-Parameter im RFC3339-Format und UTC-Zeit schränken die Medikationsliste zeitlich ein. Werden keine weiteren Parameter verwendet, werden standardmäßig alle Medikationen der letzten 12 Monate berücksichtigt.
+Während die Medikationsplan-Ausgabe nicht parametrisierbar ist, können die Medikationen bei beiden eML-Ausgabeformaten hinsichtlich des Zeitraums beeinflusst werden. Die folgenden beiden optionalen URL-Parameter im RFC3339-Format und UTC-Zeit schränken die Medikationsliste zeitlich ein. Werden keine weiteren Parameter verwendet, werden standardmäßig alle Medikationen der letzten 12 Monate berücksichtigt.
 
 * lowerDateTime – Frühester Zeitpunkt zur Berücksichtigung der Medikationserstellung (z.B. 2025-01-151T00:00:00)
 * upperDateTime – Spätester Zeitpunkt zur Berücksichtigung der Medikationserstellung (z.B. 2025-01-15T23:59:59)
