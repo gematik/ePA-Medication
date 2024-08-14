@@ -15,13 +15,13 @@ skinparam object {
 skinparam LegendBackgroundColor White
  
 object "<< Medikamentzusatzinformation >>\n**MedicationStatement**" as MedicationStatement #LightSeaGreen  {
-    + subject: Reference(Patient)
+    + subject: Reference(EPAPatient)
 }
 object "<< Medikament >>\n**EPAMedication**" as PlanMedication #LightSeaGreen
 object "<< Verschriebenes Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen
 object "<< Arzneimittelverschreibung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen {
-    + subject: Reference(Patient)
-    + requester: Reference(PractitionerRole)
+    + subject: Reference(EPAPatient)
+    + requester: Reference(EPAPractitionerRole)
 }
 object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen {
     + perfomer.actor: Reference(OrganizationDirectory)
