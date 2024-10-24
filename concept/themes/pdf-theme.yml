@@ -29,26 +29,26 @@ footer:
   recto:
     left:
       content: |
-        gemKPT_ePAfuerAlleMedSvc_V3.1.0RC.pdf +
+        gemKPT_ePAfuerAlleMedSvc_V3.0.pdf +
         Version: {revnumber}
     right:
       content: |
         Seite {page-number} von {page-count} +
-        Stand: 15.07.2024
+        Stand: 30.01.2024
     center:
       content: |
         Übergreifendes Konzept +
-        (C) gematik – vertraulich
+        (C) gematik – öffentlich
   verso:
     left:
       content: |
-        gemKPT_ePAfuerAlleMedSvcV3.1.0RC.pdf +
+        gemKPT_ePAfuerAlleMedSvcV3.0.pdf +
         Version: {revnumber}
     right:
       content: |
         Seite {page-number} von {page-count} +
-        Stand: 15.07.2024
+        Stand: 30.01.2024
     center:
       content: |
         Übergreifendes Konzept +
-        (C) gematik – vertraulich
+        (C) gematik – öffentlich

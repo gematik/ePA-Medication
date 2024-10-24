@@ -1,0 +1,13 @@
+{
+  "updated": "2024-10-21T14:09:00.6541184+00:00",
+  "dependencies": {
+    "hl7.fhir.r4.core": "4.0.1",
+    "de.basisprofil.r4": "1.5.0",
+    "kbv.all.st": "1.4.0",
+    "de.gematik.fhir.directory": "0.11.12",
+    "de.ihe-d.terminology": "3.0.0",
+    "de.gematik.terminology": "1.0.1",
+    "de.gematik.epa": "1.1.0"
+  },
+  "missing": {}
+}
