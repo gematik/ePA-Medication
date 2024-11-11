@@ -1,6 +1,9 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
+## Release 3.0.3-1
+### changes
+- fixed x-useragent regex pattern in _I_Medication_Service_FHIR.yaml (C_12095)
 ## Release 3.0.3
 - release ePA-3.0.3
 ### changes
