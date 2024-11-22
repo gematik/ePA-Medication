@@ -47,10 +47,12 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 
-  version: 1.0.2
+  version: 1.0.3
 
   # version history:
   # ----------------
+  # version 1.0.3
+  #   - fixed missing medication search parameter 
   # version 1.0.2
   #   - fixed useragent regex pattern 
   # version 1.0.1
@@ -275,7 +277,7 @@ tags:
       resources, but also other resources that are related to them through a specified reference. This parameter is particularly 
       useful for retrieving linked resources in a single query, thereby reducing the need for subsequent requests.
 
-      For instance, , if you query for **MedicationRequest** with an *_include* parameter like **MedicationRequest:medication**, the server 
+      For instance, if you query for **MedicationRequest** with an *_include* parameter like **MedicationRequest:medication**, the server 
       will return the requested **MedicationRequest** resources along with the **Medication** resources that are referred to in these 
       MedicationRequest resources. This means you'll get a list of medication requests and, for each request, the specific medication that is being requested.
       This integrated query approach enhances the comprehensiveness of the search, providing a more connected view of the 
@@ -299,7 +301,7 @@ tags:
 
       ##### *_revinclude*: 
       
-      In FHIR , **_revinclude** is a search parameter that allows you to include 
+      In FHIR, **_revinclude** is a search parameter that allows you to include 
       resources that refer to the primary resources being retrieved in a search query. This feature is particularly 
       useful for fetching related resources in a single query, thereby reducing the need for multiple separate requests.
       
@@ -573,6 +575,7 @@ paths:
         | authoredon | [date](https://hl7.org/fhir/R4/search.html#date) | Return prescriptions written on this date | MedicationRequest.authoredOn |
         | status | [token](https://hl7.org/fhir/R4/search.html#token) | Returns medication requests for this status | MedicationRequest.status |
         | requester | [reference](https://hl7.org/fhir/R4/search.html#reference) | Returns prescriptions prescribed by this prescriber | 	MedicationRequest.requester (PractitionerRole) |
+        | medication | [reference](https://hl7.org/fhir/R4/search.html#reference) | Return prescriptions for this medication reference | MedicationRequest.medication as Reference |
 
         ***
 
@@ -622,6 +625,12 @@ paths:
           in: query
           required: false
           description: Returns prescriptions prescribed by this prescriber
+          schema:
+            type: string
+        - name: medication
+          in: query
+          required: false
+          description: Return prescriptions for this medication reference
           schema:
             type: string
       responses:
@@ -742,6 +751,7 @@ paths:
         | prescription | [reference](https://hl7.org/fhir/R4/search.html#reference) | The identity of a prescription to list dispenses from |MedicationDispense.authorizingPrescription (MedicationRequest) |
         | performer | [reference](https://hl7.org/fhir/R4/search.html#reference) | Returns dispenses performed by a specific individual | 	MedicationDispense.performer.actor (PractitionerRole) |
         | status | [token](https://hl7.org/fhir/R4/search.html#token) | Returns dispenses with a specified dispense status | 	MedicationDispense.status |
+        | medication | [reference](https://hl7.org/fhir/R4/search.html#reference) | Returns dispenses of this medicine resource | MedicationDispense.medication as Reference |
 
         ***
 
@@ -797,6 +807,12 @@ paths:
           in: query
           required: false
           description: Returns dispenses with a specified dispense status
+          schema:
+            type: string
+        - name: medication
+          in: query
+          required: false
+          description: Returns dispenses of this medicine resource
           schema:
             type: string
       responses:
@@ -1643,7 +1659,7 @@ components:
     OperationOutcome400BadRequest:
       description: Bad Request
       content:
-        application/json:
+        application/fhir+json::
           examples:
             unknown_search_parameter:
               summary: Unknown search parameter
@@ -1696,7 +1712,7 @@ components:
     OperationOutcome404NotFound:
       description: Not found.
       content:
-        application/json:
+        application/fhir+json::
           examples:
             resource_not_known:
               summary: Resource is not known
@@ -1734,7 +1750,7 @@ components:
     OperationOutcome400OperationsError:
       description: Bad Request
       content:
-        application/json:
+        application/fhir+json::
           examples:
             invalid_request:
               summary: Invalid request
