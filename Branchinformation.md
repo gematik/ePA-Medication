@@ -6,12 +6,11 @@
 |:----|----|
 | Context| __ePA 3.0 (ePA für alle)__|
 | Designation  | __Release 3.1.0__  |
-| Current status | __released__ |
+| Current status | __deprecated__ </br> ! Go back to 'previous release' and follow the link to the subsequent version! |
 | Release date   | __2024-08-14__  |
 | Specifications| [Spezifikation ePA für alle: ePA 3.1](https://fachportal.gematik.de/anwendungen/elektronische-patientenakte-fuer-alle#c10514)|
-| Previous release| __Release 3.0.2__|
-| Previous branch | [**ePA-3.0.2**](https://github.com/gematik/epa-medication/tree/ePA-3.0.2)|
-| Follow-up | not yet defined |
+| Previous Release | [**Release 3.0.3**](https://github.com/gematik/epa-medication/tree/ePA-3.0.3)|
+| Follow-up | ! Go back to 'previous release' and follow the link to the subsequent version ! |
 | Associated repositories:||
 | Basic Services | [**ePA-Basic (3.1.0)**](https://github.com/gematik/epa-basic/tree/ePA-3.1.0) |
 | XDS Document Service | [**ePA-XDS-Document (3.1.0)**](https://github.com/gematik/epa-xds-document/tree/ePA-3.1.0) |
