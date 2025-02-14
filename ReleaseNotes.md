@@ -1,22 +1,22 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
-## Release 3.1.0
-- release ePA-3.1.0
+## Release 3.0.5
+- release ePA-3.0.5
 ### changes
-- incorporation of review comments
-## Release 3.1.0 RC
-- release candidate ePA-3.1.0
+- administrative adjustment in concept
+- removed src/fhir resources (fhir packages on simplifier only)
+- removed src/openapi resources (replaced by implementation guidelines)
+## Release 3.0.3-2
 ### changes
-- eMP (medication plan) support
-- support for dispensation without prescription
-- medication management
-- AMTS-rZI management
-- FHIR Operation eML / eMP
-- added example for the prescription process
-- moved IG to simplifier
-- moved FHIR R4 profiles to simplifier.net
-
+- fixed missing medication search parameter in I_Medication_Service_FHIR.yaml 
+## Release 3.0.3-1
+### changes
+- fixed x-useragent regex pattern in I_Medication_Service_FHIR.yaml (C_12095)
+## Release 3.0.3
+- release ePA-3.0.3
+### changes
+- added details on the mandatory use of absolute URLs or UUID-based URIs in the fullUrl field of FHIR bundles, and disallowed the use of relative paths
 ## Release 3.0.2
 - release ePA-3.0.2
 ### changes
