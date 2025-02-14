@@ -1,0 +1,48 @@
+@startuml operation.cancel-dispensation-erp
+skinparam defaultTextAlignment center
+skinparam title {
+  backgroundColor SkyBlue
+  borderColor Gray
+} 
+title $cancel-dispensation-erp
+
+start
+
+
+  repeat:Get next <b>RxDispensation</b> from the <b>Input-Parameters</b>;
+
+    :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of 
+    <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>authoredOn</b> and the 
+    <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>PrescriptionId</b>;
+
+    if(\rCheck if there is at least one <b>MedicationDispense </b> with the <b>RxPrescriptionProcessIdentifier</b> already in the Medication Service\r) then (yes)
+
+      partition transaction {
+
+        :Set all <b>MedicationDispense</b> with the 
+        extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
+        to Status <b>cancelled</b>;
+
+        :Set all <b>Medication</b> with the 
+        extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
+        to Status <b>inactive</b>;
+
+        :Set <b>MedicationRequest</b> with the 
+        identifier[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
+        to Status <b>active</b>;
+
+        #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to the <b>Output-Parameters</b>;
+
+      }
+
+    else (no)
+
+      #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_DISPENSATION_NO_EXIST) or (MEDICATIONSVC_DISPENSATION_STATUS) \n to the <b>Output-Parameters</b>; 
+
+    endif
+
+  repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)
+
+:Return "<b>Output-Parameters</b>";
+stop
+@enduml

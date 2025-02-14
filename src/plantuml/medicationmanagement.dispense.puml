@@ -40,18 +40,18 @@ ERFD --> PVS: Antwort: Erfolg
 
 ERFD -> ERFD: Persistieren der Dispensierinformationen in einer Warteschlange\nfür die asynchrone Übertragung
 
-ref over ERFD, IS: Lokalisierung der Service-Endpunkte der ePA und der Akte eines Versicherten
+ref over ERFD, IS: Lokalisierung der Service-Endpunkte der ePA und der Akte eines Versicherten (s. Abschn. 4.1, 4.2)
 
-ERFD -> IS: Anfrage: Widerspruchsinformationen zum Einstellen durch E-Rezept-Fachdienst
+ERFD -> IS: Anfrage: Widerspruchsinformationen zu Versorgungsprozessen
 IS --> ERFD: Antwort: Widerspruchsinformationen
 
-alt Widerspruch zum Einstellen durch E-Rezept-Fachdienst vorhanden
+alt Widerspruch zum Versorgungsprozess dgMP vorhanden
     ERFD -> ERFD: Abbruch. Löschen der Dispensierinformationen aus der Warteschlange
-else Kein Widerspruch zum Einstellen durch E-Rezept-Fachdienst
+else Kein Widerspruch zum Versorgungsprozess dgMP
 
-    ref over ERFD, VAU: Login in die Akte des Versicherten
+    ref over ERFD, VAU: Login in die Akte des Versicherten (siehe. Abschn. 4.3)
 
-    ERFD -> ERFD: Erzeugen der FHIR-Ressourcen MedicationDispense, Medication, Organization\nauf Grundlage der Dispensierinformationen
+    ERFD -> ERFD: Erzeugen der FHIR-Ressourcen MedicationDispense, Medication, Organization\nauf Grundlage der Dispensierinformationen sowie rxPrescriptionProcessIdentifier
     ERFD -> EPA: Übermittlung der erzeugten FHIR-Ressourcen als FHIR Operation per HTTP POST
     EPA -> EPA: FHIR-Ressourcen\npersistieren
 

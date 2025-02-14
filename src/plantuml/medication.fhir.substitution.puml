@@ -12,14 +12,14 @@ skinparam object {
 }
 skinparam LegendBackgroundColor White
 
-object "<< Versicherter >>\n**EPAPatient**" as Patient 
+object "<< Versicherter >>\n**Patient**" as Patient 
 object "<< Verschreibender LE >>\n**PractitionerDirectory**" as PrescribingPractitioner
 object "<< Verschreibende LEI >>\n**OrganizationDirectory**" as PrescribingOrganization
 object "<< Abgebende LEI >>\n**OrganizationDirectory**" as PharmOrganization
-object "EPAPractitionerRole" as PractionerRole
+object "PractitionerRole" as PractionerRole
 object "<< Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen
 object "<< Arzneimittelverschreibung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen {
-    + subject: Reference(EPAPatient)
+    + subject: Reference(Patient)
 }
 object "<< Substituiertes Arzneimittel >>\n**EPAMedication**" as AltMedication #DarkSeaGreen
 object "<< Dispensierinformation >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen {
