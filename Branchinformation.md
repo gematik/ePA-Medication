@@ -9,8 +9,8 @@
 | Current status | __released__ |
 | Release date   | __2024-10-23__  |
 | Specifications| [Fachportal gematik: ePA 3.0.3](https://gemspec.gematik.de/releases/ePA_3_0_3/)|
-| Previous release | [**ePA-Medication (3.0.2)**](https://github.com/gematik/epa-medication/tree/ePA-3.0.2)|
-| Follow-up | [**ePA-Medication (3.1.0)**](https://github.com/gematik/epa-medication/tree/ePA-3.1.0) |
+| Previous Release | [**ePA-Medication (3.0.2)**](https://github.com/gematik/epa-medication/tree/ePA-3.0.2)|
+| Follow-up | [**ePA-Medication (3.0.5)**](https://github.com/gematik/epa-medication/tree/ePA-3.0.5) |
 | Associated repositories:||
 | Basic Services | [**ePA-Basic (3.0.3)**](https://github.com/gematik/epa-basic/tree/ePA-3.0.3) |
 | XDS Document Service | [**ePA-XDS-Document (3.0.3)**](https://github.com/gematik/epa-xds-document/tree/ePA-3.0.3) |
