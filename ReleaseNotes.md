@@ -1,7 +1,10 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
-## Release 3.0.5
+## Release 3.0.5-1
+### changes
+- editorial adjustments
+## Release 3.0.5-0
 - release ePA-3.0.5
 ### changes
 - administrative adjustment in concept
