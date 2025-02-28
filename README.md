@@ -16,18 +16,16 @@
 ## About ePA Medication
 This repository provides technical information for the Electronic Health Record (ePA) application as part of the Telematic Infrastructure (TI).
 
-This branch relates to a particular release in context of **ePA version 3** ('ePA für alle') 
-The provided content comprises normative and supplementary resources for the FHIR-based **Medication Service**.
+This branch relates to a specific release in the context of **ePA version 3** ("ePA für alle").
+The provided content includes supplementary resources for the FHIR-based **Medication Service**. All normative resources are made available through **Implementation Guides** and **FHIR packages** for the various profiles.
+OpenAPI specifications for the interface to the Medication Service are no longer available. These artifacts have been replaced by Implementation Guides.
 
-For resources related to ePA document management and basic services see further associated repositories:
-(follow links in [Branchinformation.md](./Branchinformation.md))
-- **ePA-Medication** medication related resources</br>
-- **ePA-XDS-Document** xds document related resources</br>
-- **Simplifier** all FHIR profiles for ePA 
+For normative medication service resources related to an ePA release follow the link to 'Release documents' in [Branchinformation.md](./Branchinformation.md) and find 
+- **Specification documents**</br>
+- **GitHub**-repositories with resources for xds document, medication and more</br>
+- **Implementation Guides (IG)** for operations, including the FHIR based profiles 
+</br>
 
-The current branch accompanies a particular release of specification documents of ePA version 3 (a set of normative specification documents for components, product types and vendor types) published on [Fachportal Gematik](https://fachportal.gematik.de/) (see [Branchinformation.md](./Branchinformation.md) for specific version information and links).
-The content in /src is normative in context of requirements defined by those specification documents and is essential for product approvals. Any other content is for information. Normative content here, the associated repositories and the documents together form a single product release of the Electronic Health Record system for an approval process.
-The affected and covered product types are **ePA-Aktensystem** and **ePA-Frontend des Versicherten**. 
 
 ## Release Notes
 See [ReleaseNotes.md](./ReleaseNotes.md) for all information regarding the releases.
