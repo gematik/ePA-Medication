@@ -1,0 +1,84 @@
+@startuml medicationuniqueidentifier
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+</style>
+
+title Medication_Hash_Generation
+
+:initialize Medication Resource;
+
+if (Medication.code and Medication.code.coding?) then (yes)
+    :code = concatenate Medication.code.coding;
+else (no)
+    :code = "";
+endif
+
+if (Medication.code and Medication.code.text?) then (yes)
+    :code_text = trim and toLower(Medication.code.text);
+else (no)
+    :code_text = "";
+endif
+
+if (Medication.form and Medication.form.coding?) then (yes)
+    :form = concatenate Medication.form.coding;
+else (no)
+    :form = "";
+endif
+
+if (medication.extension?) then (yes)
+    while (for each extension in Medication.extension)
+        if (extension.url is MEDICATION_MANUFACTURING_INSTRUCTIONS_EXTENSION_URL?) then (yes)
+            if (extension.valueString?) then (yes)
+                :ext_value = trim and toLower(extension.valueString);
+                :subhash = generate_hash(ext_value);
+                :add subhash to extensions list;
+            endif
+        endif
+    endwhile
+    :sort extensions list;
+endif
+
+if (Medication.ingredient?) then (yes)
+    while (for each ingredient in Medication.ingredient)
+        if (ingredient.itemReference?) then (yes)
+            :add ingredient.itemReference.reference to references list;
+
+        else
+            if (ingredient.itemCodeableConcept and ingredient.itemCodeableConcept.coding?) then (yes)
+                :ingredient_code = concatenate ingredient.itemCodeableConcept.coding;
+                :ingredient_text = trim and toLower(ingredient.itemCodeableConcept.text);
+            endif
+            if (ingredient.strength and ingredient.strength.numerator?) then (yes)
+                :ingredient_strength = concatenate numerator and denominator;
+            endif
+            :ingredient_value = concatenate ingredient_code, ingredient_text, and ingredient_strength;
+            :add ingredient_value to ingredients list;
+        endif
+    endwhile
+    :sort ingredients list;
+endif
+
+if (references not empty?) then (yes)
+    while (for each reference in references)
+        while (for each contained Medication in Medication.contained)
+            if (contained.id == reference?) then (yes)
+                :sub_hash = Medication_Hash_Generation(contained);
+                :add sub_hash to sub_hashes list;
+            endif
+        endwhile
+    endwhile
+    :sort sub_hashes list;
+endif
+
+#PaleGreen:MedicationUniqueIdentifierValue = generate_hash(concatenate code, code_text, form, ingredients, sub_hashes, and extensions);
+
+@enduml

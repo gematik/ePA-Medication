@@ -1,0 +1,58 @@
+@startuml operation.medication-plan-history
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+legend {
+  backgroundColor White
+}
+</style>
+title $medication-plan-history
+start
+
+if (\rCheck whether Composition for the medication plan instance exists\r) then (yes)
+
+  :Retrieve Composition history;
+
+  partition loop {
+
+    while (\rMore versions in history?\r) is (yes)
+
+        :Get Meta.version of the current Composition history version;
+        #PaleGreen:Add version information to the **Output-Parameters**.history[i].part[planVersionId];
+
+        :Get Meta.lastUpdated of the current Composition history version;
+        #PaleGreen:Add lastUpdated information to the **Output-Parameters**.history[i].part[lastUpdated];
+
+    endwhile (no)
+  }
+
+  #PaleGreen:Add information **OperationOutcome**
+  witdh details MEDICATIONSVC_OPERATION_SUCCESS
+  to **Output-Parameters**;
+
+  #PaleGreen:Return **Output-Parameters**;
+
+  stop
+
+else (no)
+  #Pink:Return **OperationOutcome**
+  with code not-found and details MSG_NO_MATCH;;;
+
+ stop
+endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+endlegend
+@enduml

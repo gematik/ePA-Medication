@@ -1,0 +1,177 @@
+@startuml operation.manage-medicationstatement
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title MedicationStatement/[id]/$manage
+start
+
+if (MedicationStatment instance exists?) then (yes)
+else (no)
+  #Pink:Return **OperationOutcome**
+  with code not-found and details MSG_RESOURCE_ID_FAIL;
+
+ stop
+endif
+
+
+  if (**MedicationStatement.status** is **inactive**) then (yes)
+
+    #Pink:Return error **OperationOutcome**
+    with code forbidden and details MSG_OP_NOT_ALLOWED;
+
+    stop
+
+  else (no)
+  endif
+
+    :Validate <b>Input-Parameters</b>;
+    if (\rValidation successful\r) then (yes)
+
+    else (no)
+        #Pink:Return error **OperationOutcome**
+        with code processing and details
+        MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+        stop
+    endif
+
+    if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst) \n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code forbidden and details
+      SVC_IDENTITY_MISMATCH;
+
+      stop
+
+    else (yes)
+
+
+
+      partition transaction {
+
+        :Get the **MedicationStatement**;
+
+        if (\nInput-Parameters.parameter:medicationStatement.resource.meta.versionId\nmatches the latest version of MedicationStatement\n) then (yes)
+        else (no)
+
+          #Pink:Return error **OperationOutcome**
+          with code processing and details
+          MSG_VERSION_AWARE_CONFLICT;
+
+          stop
+
+        endif
+
+        #APPLICATION:Initialize the Provenance Instance Based on the Input-Parameters;
+        note right
+
+          __Link for detailed description is below the diagram__;
+
+        end note
+
+        :<< UPDATE >>
+        **MedicationStatement**
+        //from **Input-Parameters**.parameter:**medicationStatement** //
+        ====
+        **Set all other elements with given resource instance**
+        **the medication[x], such as medicationReference, must NOT be overwritten.**;
+
+        if(\rCheck whether the MedicationStatement.status has changed.\r) then (yes)
+
+
+          if(\rIf the **status** changed to one of the following states: **completed**, **stopped**, **on-hold**, **not-taken**\r) then (yes)
+
+            :Get the referenced Medication-Instance;
+
+            if(\rCheck whether other MedicationStatement instances that reference \n this Medication instance also have one of the status values.\r) then (yes)
+
+              :Set the Medication.status to **inactive**.;
+
+              #APPLICATION:Reference the updated **Medication** in the Provenance
+              in the target parameter with a specific version;
+
+            endif
+
+          elseif(\rIf the **status** changed to **active**\r) then (yes)
+
+              :Get the referenced Medication-Instance;
+
+              :Set the Medication.status to **active**.;
+
+              #APPLICATION:Reference the updated **Medication** in the Provenance
+              in the target parameter with a specific version;
+
+          elseif(\rIf the **status** changed to **entered-in-error**\r) then (yes)
+
+            :Get the referenced Medication-Instance;
+
+            if(\rCheck whether the **Medication**-Instance was created by the performer\r) then (yes)
+
+                if(\rCheck whether the Medication instance involves \n prescription and dispense data by ensuring \n that no **MedicationRequest** or **MedicationDispense** \n references this Medication.\r) then (yes)
+
+                if(\rCheck whether other MedicationStatement instances that reference \n this Medication instance also have the status **entered-in-error**.\r) then (yes)
+
+                  :Set the Medication.status to **entered-in-error**.;
+
+                  #APPLICATION:Reference the updated **Medication** in the Provenance
+                  in the target parameter with a specific version;
+
+                endif
+
+              endif
+
+            endif
+          endif
+
+        endif
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType performer.\r) then (yes)
+          :Reference the PractitionerRole instance \n with the MedicationStatement.informationSource.;
+        else (no)
+          :Reference the Organization instance for \n ProvenanceParticipantType performer \n with MedicationStatement.informationSource.;
+        endif
+
+
+        #APPLICATION:Reference the updated **MedicationStatement** in the Provenance
+        in the target parameter with a specific version;
+
+        #APPLICATION:Save the Provenance-Instance with the activity **UPDATE**;
+
+        #PaleGreen:Add updated **MedicationStatment**-Instance to **Output-Parameters**;
+
+        #PaleGreen:Add information <b>OperationOutcome</b>
+        with details MEDICATIONSVC_OPERATION_SUCCESS
+        to <b>Output-Parameters</b>;
+
+      }
+
+        #PaleGreen:Return <b>Output-Parameters</b>;
+        stop
+
+      endif
+
+
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

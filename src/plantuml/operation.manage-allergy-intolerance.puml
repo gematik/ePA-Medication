@@ -1,0 +1,127 @@
+@startuml operation.manage-allergy-intolerance
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title AllergyIntolerance/[id]/$manage
+start
+
+:Check whether AllergyIntolerance instance exists;
+
+if (AllergyIntolerance instance exists?) then (yes)
+
+  :Validate <b>Input-Parameters</b>;
+  if (\rValidation successful\r) then (yes)
+
+    if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst) \n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code forbidden and details
+      SVC_IDENTITY_MISMATCH;
+
+      stop
+
+    else (yes)
+
+      partition transaction {
+
+        if (\nInput-Parameters.parameter:allergyIntolerance.resource.meta.versionId\nmatches the latest version of AllergyIntolerance\n) then (yes)
+        else (no)
+
+          #Pink:Return error **OperationOutcome**
+          with code processing and details
+          MSG_VERSION_AWARE_CONFLICT;
+
+          stop
+
+        endif
+
+        #APPLICATION:Initialize the Provenance Instance Based on the Input-Parameters;
+        note right
+
+          __Link for detailed description__
+          __is below the diagram__
+
+        end note
+
+        :<< UPDATE >>
+        **AllergyIntolerance** instance
+        ====
+        **Replace all other elements with given resource instance**;
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType **performer**.\r) then (yes)
+          :Reference the PractitionerRole instance
+          with the AllergyIntolerance.asserter.;
+        else (no)
+          :Reference the Organization instance for
+          ProvenanceParticipantType **performer**
+          with AllergyIntolerance.asserter.;
+        endif
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType **enterer**.\r) then (yes)
+          :Reference the PractitionerRole instance
+          with the AllergyIntolerance.recorder.;
+        else (no)
+          if(\rCheck whether a Organization has been instantiated \n for the ProvenanceParticipantType **enterer**.\r) then (yes)
+            :Reference the Organization instance for
+            ProvenanceParticipantType **enterer**
+            with AllergyIntolerance.recorder.;
+          endif
+        endif
+
+        #APPLICATION:Reference the updated **AllergyIntolerance** in the Provenance
+        in the target parameter with a specific version;
+
+        #APPLICATION:Save the Provenance-Instance with the activity **UPDATE**;
+
+        #PaleGreen:Add updated **AllergyIntolerance**-Instance to **Output-Parameters**;
+
+        #PaleGreen:Add information **OperationOutcome**
+        with details MEDICATIONSVC_OPERATION_SUCCESS
+        to **Output-Parameters**;
+
+      }
+
+      #PaleGreen:Return **Output-Parameters**;
+
+      stop
+    endif
+
+  else (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code processing and details
+      MEDICATIONSVC_NO_VALID_STRUCTURE;
+      stop
+  endif
+
+else (no)
+  #Pink:Return **OperationOutcome**
+  with code not-found and details
+  MSG_RESOURCE_ID_FAIL;
+
+ stop
+endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

@@ -1,0 +1,105 @@
+@startuml sub.operation.provenance.performer.enterer.author.unconfirmedAuthor
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+  FontSize 20
+}
+.inOutStyle {
+    FontSize 25
+    BackgroundColor #PaleGreen
+}
+</style>
+
+title Process the Input-Parameters for agent type (performer, enterer, author, unconfirmedAuthor)
+
+start
+partition performer/enterer/author/unconfirmedAuthor {
+
+    if(\rCheck whether \n **Input-Parameters**.parameter:<type>.part[**organization**] exists?\r) then (yes)
+
+        if(\rCheck whether a **Organization** instance from \n **Input-Parameters**.parameter:<type>.part[**organization**]\nwith TelematikID is already stored in the Medication Service.\r) then (yes)
+
+            #APPLICATION:<< Update >>
+            **Organization**
+            //from **Input-Parameters**.parameter:<type>.part[**organization**]//
+
+            //Replace all other elements with given resource instance//;
+
+        else (no)
+
+            #APPLICATION:<< Create >>
+            **Organization**
+            //from **Input-Parameters**.parameter:<type>.part[**organization**]//
+
+            especially set //identifier[TelematikID]//
+            //Set all other elements with given resource instance//;
+
+        endif
+    endif
+
+    if(\rCheck whether \n **Input-Parameters**.parameter:<type>.part[**practitioner**] exists?\r) then (yes)
+
+        if(\rCheck whether a **Practitioner** instance from \n **Input-Parameters**.parameter:<type>.part[**practitioner**]\n with TelematikID is already stored in the Medication Service.\r) then (yes)
+
+            #APPLICATION:<< Update >>
+            **Practitioner**
+            //from **Input-Parameters**.parameter:<type>.part[**practitioner**]</i>
+
+            //Replace all other elements with given resource instance</i>;
+
+        else (no)
+
+            #APPLICATION:<< Create >>
+            **Practitioner**
+            //from **Input-Parameters**.parameter:<type>.part[**practitioner**]//
+
+            especially set //identifier[TelematikID]//
+            //Set all other elements with given resource instance//;
+
+        endif
+    endif
+
+    if(\rCheck whether \n **Input-Parameters**.parameter:<type>.part[**practitionerRole**] exists?\r) then (yes)
+
+        if(\rCheck whether a **PractitionerRole** instance with the code, specialty and \n the references to specific **Organization** and **Practitioner** \n is already stored in the Medication Service.\r) then (yes)
+            #APPLICATION:Get and initialize the
+            corresponding **PractitionerRole**;
+        else (no)
+
+            #APPLICATION:<< Create >>
+            <b>PractitionerRole</b>
+            ====
+            practitioner = Reference(<b>Practitioner</b>)
+            organization = Reference(<b>Organization</b>)
+
+            <i>Set all other elements with given resource instance</i>;
+
+        endif
+
+        #APPLICATION:Reference the PractitionerRole in the Provenance instance
+        in agent with the corresponding ProvenanceParticipantType code;
+
+
+    else (no)
+
+        if(\rIf Organization for the \n corresponding ProvenanceParticipantType code exists?\r) then (yes)
+            #APPLICATION:Reference the Organization in the Provenance instance in agent
+            with the corresponding ProvenanceParticipantType code and set
+            identifier.display with corresponding ID-token.organizationName;
+        endif
+        if(\rIf Practitioner for the \n corresponding ProvenanceParticipantType code exists?\r) then (yes)
+            #APPLICATION:Reference the Practitioner in the Provenance instance in agent
+            with the corresponding ProvenanceParticipantType code and set
+            identifer.display with corresponding data from Practitioner instance;
+        endif
+    endif
+}
+end
+@enduml

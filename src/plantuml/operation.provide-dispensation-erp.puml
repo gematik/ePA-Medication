@@ -1,36 +1,58 @@
 @startuml operation.provide-dispensation-erp
 skinparam defaultTextAlignment center
-skinparam title {
+<style>
+title {
   backgroundColor SkyBlue
   borderColor Gray
-} 
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
 title $provide-dispensation-erp
 
 start
 
   repeat:Get next <b>RxDispensation</b> from <b>Input-Parameters</b>;
-  
+
     :Validate all <b>Medication</b>, <b>Organization</b> and <b>MedicationDispense</b> from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part;
 
     if (\rValidation successful\r) then (yes)
 
-      :Generate <b>RxPrescriptionProcessIdentifier</b> from values of 
-      <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>authoredOn</b> and  
+      :Generate <b>RxPrescriptionProcessIdentifier</b> from values of
+      <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>authoredOn</b> and
       <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>PrescriptionId</b>;
+      note right
+
+        The generation of the value for
+        the **RxPrescriptionProcessIdentifier**
+        is described below the diagram.
+
+      end note
 
       if (\rCheck whether there is a <b>MedicationRequest</b> with <b>RxPrescriptionProcessIdentifier</b> \n and \n status NOT <b>completed</b>\r) then (no)
-        
-        #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_PRESCRIPTION_NO_EXIST) \nor (MEDICATIONSVC_PRESCRIPTION_STATUS) to <b>Output-Parameters</b>; 
-      
+
+        #Pink:Add error <b>OperationOutcome</b>
+        with details MEDICATIONSVC_PRESCRIPTION_NO_EXIST or MEDICATIONSVC_PRESCRIPTION_STATUS
+        to <b>Output-Parameters</b>;
+
       else (yes)
 
         partition transaction {
-        
-          :Set all <b>MedicationDispense</b> with  
-          extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b> 
+
+          :Set all <b>MedicationDispense</b> with
+          extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
           in Medication Service to Status <b>declined</b>;
 
-          :Set all <b>Medication</b> with  
+          :Set all <b>Medication</b> with
           extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
           to Status <b>inactive</b>;
 
@@ -38,43 +60,53 @@ start
 
           if (<b>Organization</b> exists?) then (yes)
 
-            :<< Update >> 
+            :<< Update >>
             <b>Organization</b>
             <i>from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Organization</b></i>
-            
+
             identifier[TelematikID] = Value(TelematikID)
             <i>Replace all other elements with given resource instance</i>;
 
           else (no)
 
-            :<< Create >> 
+            :<< Create >>
             <b>Organization</b>
             <i>from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Organization</b></i>
-           
+
             identifier[TelematikID] = Value(TelematikID)
             <i>Set all other elements with given resource instance</i>;
 
           endif
 
           partition loop {
-            
+
             repeat: Get next <b>MedicationDispense</b> from current <b>RxDispensation</b> <b>Input-Parameters</b> part list;
 
             :\rGet <b>Medication</b> resource referenced by  <b>MedicationDispense</b> \n from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part\r;
 
             :Generate for <b>EPAMedicationUniqueIdentifier</b> from hashed Input-<b>Medication</b>;
-            
-            If(\rVerify whether there is a <b>Medication</b> with  <b>RxPrescriptionProcessIdentifier</b> extension \nand\n  generated hash for <b>EPAMedicationUniqueIdentifier</b> in the Medication Service\r) then (yes)
+            note right
+
+            __Link for detailed description__
+            __is below the diagram__
+
+            end note
+
+            if(\rCheck whether a **Medication** instance with the generated **EPAMedicationUniqueIdentifier** \n and \n the extension **RxPrescriptionProcessIdentifier** already exists in the Medication Service\r) then (yes)  
               
-              :Update <b>Medication</b> with <b>RxPrescriptionProcessIdentifier</b> extension
-              and <b>EPAMedicationUniqueIdentifier</b> to Status <b>active</b>;
+              :Upsert all elements of the **Medication** instance with <b>RxPrescriptionProcessIdentifier</b> extension
+              and <b>EPAMedicationUniqueIdentifier</b> with given input parameters Medication resource 
+              except the **EPAMedicationUniqueIdentifier** and **RxPrescriptionProcessIdentifier**;
+              
+              :Update **Medication** instance with <b>RxPrescriptionProcessIdentifier</b> extension
+              and <b>EPAMedicationUniqueIdentifier</b> to status <b>active</b>;
 
             else (no)
 
-              :Generate for <b>RxOriginatorProcessIdentifier</b> from values of 
+              :Generate for <b>RxOriginatorProcessIdentifier</b> from values of
               <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Medication</b>.Id and Input-<b>PrescriptionId</b>;
 
-              :<< Create >> 
+              :<< Create >>
               <b>Medication</b>
               <i>from <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>Medication</b></i>
               ====
@@ -86,7 +118,7 @@ start
 
             endif
 
-            :Generate for <b>RxOriginatorProcessIdentifier</b> from values of 
+            :Generate for <b>RxOriginatorProcessIdentifier</b> from values of
             <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.<b>MedicationDispense</b>.Id and Input-<b>PrescriptionId</b>;
 
             :<< Create >>
@@ -103,24 +135,37 @@ start
             repeat while (\rIf next <b>MedicationDispense</b> in <b>Input-Parameters</b> <b>RxDispensation</b> part list exists\r) is (yes) not (no)
           }
 
-                
-          :Set <b>MedicationRequest</b> with <b>RxPrescriptionProcessIdentifier</b> 
-          to Status <b>completed</b>;
+          if (\rCheck whether <b>Input-Parameters</b>[x].<b>RxDispensation</b>.part.status not exists or equals complete\r) then (yes)
 
+            :Set <b>MedicationRequest</b> with <b>RxPrescriptionProcessIdentifier</b>
+            to Status <b>completed</b>;
 
-          #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to <b>Output-Parameters</b>;
-     
+          endif
+
+          #PaleGreen:Add information <b>OperationOutcome</b>
+          with details MEDICATIONSVC_OPERATION_SUCCESS
+          to <b>Output-Parameters</b>;
+
         }
       endif
 
     else (no)
-      
-      #Pink:Add error <b>OperationOutcome</b> (NO_VALID_STRUCTURE) to  <b>Output-Parameters</b>;
-    
+
+      #Pink:Add error **OperationOutcome**
+      with code processing and details MEDICATIONSVC_NO_VALID_STRUCTURE
+      to **Output-Parameters**;
+
     endif
-  
+
   repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)
 
-:Return "<b>Output-Parameters</b>";
-stop    
+#PaleGreen:Return "<b>Output-Parameters</b>";
+stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+endlegend
 @enduml

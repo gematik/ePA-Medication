@@ -1,0 +1,268 @@
+@startuml
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title MedicationStatement/[id]/$replace
+start
+
+if (MedicationStatment instance exists?) then (yes)
+else (no)
+  #Pink:Return **OperationOutcome**
+  with code not-found and details
+  MSG_RESOURCE_ID_FAIL;
+
+ stop
+endif
+
+:Validate <b>Input-Parameters</b>;
+if (\rValidation successful\r) then (yes)
+else (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code processing and details
+    MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+    stop
+
+endif
+
+if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst) \n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+  #Pink:Return error **OperationOutcome**
+  with code forbidden and details
+  SVC_IDENTITY_MISMATCH;
+
+  stop
+
+else (no)
+endif
+
+if (**Input-Parameters**.parameters:**replacement**.part[**medication**]\n has extension:**type**.code == 781405001) then (yes)
+
+  #Pink:Return error **OperationOutcome**
+  with code processing and details
+  MEDICATIONSCV_MEDICINAL_PRODUCT_PACKAGE_NOT_ALLOWED;
+
+  stop
+
+else (yes)
+endif
+
+:Get the **MedicationStatement**-Instance for this operation;
+
+:Generate the **EPAMedicationUniqueIdentifier**
+from the Medication resource
+provided in the **Input-Parameters**.parameter:**replacement**.part[**medication**];
+note right
+
+  __Link for detailed description__
+  __is below the diagram__
+
+end note
+
+
+:Get the referenced Medication;
+
+:Check whether the EPAMedicationUniqueIdentifier
+value of the referenced Medication is the same
+as the EPAMedicationUniqueIdentifier value of
+the Medication resource in
+**Input-Parameters**.parameter:**replacement**.part[**medication**];
+
+if(\rIs the EPAMedicationUniqueIdentifier value equal?\r) then (yes)
+
+    partition transaction {
+
+        if (\nMachtes Input-Parameters.parameter:resourceVersionId the latest\nversion of the existing MedicationStatement instance\n) then (yes)
+        else (no)
+
+          #Pink:Return error **OperationOutcome**
+          with code processing and details
+          MSG_VERSION_AWARE_CONFLICT;
+
+          stop
+
+        endif
+
+        #APPLICATION:Initialize the Provenance-Instance Based on the Input-Parameters;
+        note right
+
+          __Link for detailed description__
+          __is below the diagram__
+
+        end note
+
+
+        :<< UPDATE >>
+        this **MedicationStatement**-Instance
+        //from **Input-Parameters**.parameter:replacement.part[**medicationStatement**] //
+        ====
+        **Replace all other elements with given resource instance**;
+
+        #APPLICATION:Reference the **MedicationStatement**-Instance in the Provenance
+        in the target parameter with a specific version;
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType performer.\r) then (yes)
+            :Reference the PractitionerRole instance \n with the MedicationStatement.informationSource.;
+        else (no)
+            :Reference the Organization instance for \n ProvenanceParticipantType performer \n with MedicationStatement.informationSource.;
+        endif
+
+        #APPLICATION:Save the Provenance-Instance with the activity **UPDATE**;
+
+        #PaleGreen:Add updated **MedicationStatment**-Instance to
+        **Output-Parameters**.parameters:**replaced**.part[medicationStatement];
+
+        #PaleGreen:Add updated **MedicationStatment**-Instance to
+        **Output-Parameters**.parameters:**new**.part[medicationStatement];
+
+        #PaleGreen:Add **Medication** instance referenced by **MedicationStatement** instance to
+        **Output-Parameters**.parameters:**replaced**.part[medication];
+
+        #PaleGreen:Add **Medication** instance referenced by **MedicationStatement** instance to
+        **Output-Parameters**.parameters:**new**.part[medication];
+
+
+    }
+
+else (no)
+
+    partition transaction {
+
+        if (\nMachtes Input-Parameters.parameter:resourceVersionId the latest\nversion of the existing MedicationStatement instance\n) then (yes)
+        else (no)
+
+          #Pink:Return error **OperationOutcome**
+          with code processing and details
+          MSG_VERSION_AWARE_CONFLICT;
+
+          stop
+
+        endif
+
+        #APPLICATION:Initialize the Provenance instance based on the
+        Input-Parameters for the replaced instances;
+        note right
+
+          __Link for detailed description__
+          __is below the diagram__
+
+        end note
+
+        :Set the **MedicationStatement**-Instance to **stopped**;
+
+        #APPLICATION:Reference the **MedicationStatement** instance
+        in the Provenance for the replaced instances
+        in the target parameter with a specific version;
+
+        :Check whether the Medication instance involves
+        prescription and dispense data by ensuring
+        that no **MedicationRequest** or **MedicationDispense**
+        references this **Medication**, which is referenced
+        by the **MedicationStatement** instance.;
+
+        if(Is the Medication NOT a prescription and dispense record?) then (yes)
+
+            if(\rCheck whether other MedicationStatement instances that reference \n this Medication instance also have one of the following states: \n **completed**\n **stopped**\n **on-hold** \n **not-taken**\r) then (yes)
+
+                :Set the **Medication**.status, which is
+                referenced by the **MedicationStatement** instance,
+                to **inactive**;
+
+                #APPLICATION:Reference the **Medication** instance
+                in the Provenance for the replaced instances
+                in the target parameter with a specific version;
+
+            endif
+
+        endif
+
+
+        #APPLICATION:Save the Provenance-Instance with the activity
+        **UPDATE** for the replaced instances.;
+
+        #PaleGreen:Add updated **MedicationStatment**-Instance to
+        **Output-Parameters**.parameters:**replaced**.part[medicationStatement];
+
+        #PaleGreen:Add the **Medication** instance, which is referenced by the
+        **MedicationStatement** instance to
+        **Output-Parameters**.parameters:**replaced**.part[medication];
+
+        #APPLICATION:Initialize the Provenance instance based on the
+        Input-Parameters for the replacement instances;
+        note right
+
+          __Link for detailed description__
+          __is below the diagram__
+
+        end note
+
+        :<< Create >>
+        Replacement **Medication**
+        //from **Input-Parameters**.parameter:replacement.part[**medication**] //
+        ====
+        identifier[**EPAMedicationUniqueIdentifier**] = Value(EPAMedicationUniqueIdentifier)
+        **Set all other elements with given resource instance**;
+
+        #APPLICATION:Reference the Replacement **Medication** in the Provenance
+        in the target parameter with a specific version;
+
+        :<< Create >>
+        Replacement **MedicationStatement**
+        //from **Input-Parameters**.parameter:replacement.part[**medicationStatement**] //
+        ====
+        extension.replaces = Reference(Replaced **MedicationStatement** instance)
+        medicationReference = Reference(Replaced **Medication** instance)
+        **Set all other elements with given resource instance**;
+
+        #APPLICATION:Reference the Replacement **MedicationStatement** in the Provenance
+        in the target parameter with a specific version;
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType performer.\r) then (yes)
+            :Reference the PractitionerRole instance
+            with the Replacement MedicationStatement.informationSource;
+        else (no)
+            :Reference the Organization instance for
+            ProvenanceParticipantType performer
+            with Replacement MedicationStatement.informationSource;
+        endif
+
+        #APPLICATION:Save the Provenance-Instance with the activity
+        **CREATE** for the replacement instances;
+
+        #PaleGreen:Add replacement **MedicationStatment**-Instance to
+        **Output-Parameters**.parameters:**new**.part[medicationStatement];
+
+        #PaleGreen:Add replacement **Medication**-Instance to
+        **Output-Parameters**.parameters:**new**.part[medication];
+
+    }
+
+endif
+
+#PaleGreen:Return <b>Output-Parameters</b>;
+stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

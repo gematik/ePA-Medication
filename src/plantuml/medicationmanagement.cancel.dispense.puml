@@ -40,16 +40,16 @@ ERFD --> PVS: Antwort: Erfolg
 
 ERFD -> ERFD: Persistieren der Resource ID der zu stornierenden Dispensierinformationen (aus MedicationDispense)\nin einer Warteschlange für die asynchrone Übertragung
 
-ref over ERFD, IS: Lokalisierung der Service-Endpunkte der ePA und der Akte eines Versicherten (s. Abschn. 4.1, 4.2)
+ref over ERFD, IS: Lokalisierung der Service-Endpunkte der ePA und der Akte eines Versicherten
 
-ERFD -> IS: Anfrage: Widerspruchsinformationen zu Versorgungsprozessen
+ERFD -> IS: Anfrage: Widerspruchsinformationen zum Einstellen durch E-Rezept-Fachdienst
 IS --> ERFD: Antwort: Widerspruchsinformationen
 
-alt Widerspruch zum Versorgungsprozess dgMP vorhanden
+alt Widerspruch zum Einstellen durch E-Rezept-Fachdienst vorhanden
     ERFD -> ERFD: Abbruch. Löschen der Resource ID der zu stornierenden Dispensierinformationen aus der Warteschlange
-else Kein Widerspruch zum Versorgungsprozess dgMP
+else Kein Widerspruch zum Einstellen durch E-Rezept-Fachdienst
 
-    ref over ERFD, VAU: Login in die Akte des Versicherten (siehe. Abschn. 4.3)
+    ref over ERFD, VAU: Login in die Akte des Versicherten
 
     ERFD -> EPA: Übermittlung des rxPrescriptionProcessIdentifier in der FHIR Operation per HTTP POST
     EPA -> EPA: MedicationDispense.status = "cancelled"\naktualisieren
