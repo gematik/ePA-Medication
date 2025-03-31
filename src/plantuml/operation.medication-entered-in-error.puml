@@ -1,0 +1,151 @@
+@startuml
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title Medication/[id]/$entered-in-error
+start
+
+:Check whether Medication instance exists;
+
+if (Medication instance exists?) then (yes)
+
+  :Validate <b>Input-Parameters</b>;
+  if (\rValidation successful\r) then (yes)
+
+    if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst).\r) then (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code forbidden and details
+      SVC_IDENTITY_MISMATCH;
+
+      stop
+
+    else (yes)
+
+
+      if(\rCheck whether the Medication instance involves \n prescription and dispense data by ensuring \n that no **MedicationRequest** or **MedicationDispense** \n references this Medication.\r) then (yes)
+
+
+        #Pink:Return error **OperationOutcome**
+        with code forbidden and details MSG_OP_NOT_ALLOWED;
+
+        stop
+
+      else (no)
+
+        partition transaction {
+
+          if (\nInput-Parameters.parameter:resourceVersionId\nmatches the latest version of Medication\n) then (yes)
+          else (no)
+
+            #Pink:Return error **OperationOutcome**
+            with code processing and details
+            MSG_VERSION_AWARE_CONFLICT;
+
+            stop
+
+          endif
+
+          #APPLICATION:Initialize the Provenance Instance Based on the Input-Parameters;
+          note right
+
+            __Link for detailed description is below the diagram__;
+
+          end note
+
+          if(\rCheck whether the **Medication**-Instance was created by the performer\r) then (yes)
+
+            :<< UPDATE >>
+            **Medication** instance
+            ====
+            status = entered-in-error;
+
+          else (no)
+
+            #Pink:Perform a rollback. No instances should be created or updated;
+
+            #Pink:Return error **OperationOutcome**
+            with code forbidden and details
+            MSG_OP_NOT_ALLOWED;
+
+            stop
+
+          endif
+
+
+          :Iterate over all MedicationStatement instances that reference this Medication instance.;
+
+          repeat:Next MedicationStatement instance;
+
+              :Set the MedicationStatement instance to the status entered-in-error.;
+
+              if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType performer.\r) then (yes)
+                :Reference the PractitionerRole instance \n with the MedicationStatement.informationSource.;
+              else (no)
+                :Reference the Organization instance for \n ProvenanceParticipantType performer \n with MedicationStatement.informationSource.;
+              endif
+
+              :Save updated MedicationStatement;
+
+              #APPLICATION:Reference the updated **MedicationStatement** in the Provenance
+              in the target parameter with a specific version;
+
+          repeat while (If next MedicationStatement instance exists) is (yes) not (no)
+
+
+          #APPLICATION:Reference the updated **Medication** in the Provenance
+          in the target parameter with a specific version;
+
+          #APPLICATION:Save the Provenance-Instance with the activity **UPDATE**;
+
+
+        }
+
+        #PaleGreen:Return information **OperationOutcome**
+        witdh details MEDICATIONSVC_OPERATION_SUCCESS;
+
+        stop
+
+      endif
+
+    endif
+
+  else (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code processing and details
+      MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+      stop
+  endif
+
+else (no)
+  #Pink:Return **OperationOutcome**
+  with code not-found and details MSG_RESOURCE_ID_FAIL;
+
+ stop
+endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

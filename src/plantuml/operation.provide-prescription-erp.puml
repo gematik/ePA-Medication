@@ -1,9 +1,22 @@
 @startuml operation.provide-prescription-erp
 skinparam defaultTextAlignment center
-skinparam title {
+<style>
+title {
   backgroundColor SkyBlue
   borderColor Gray
-} 
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
 title $provide-prescription-erp
 start
 
@@ -13,34 +26,43 @@ repeat:Get next <b>RxPrescription</b> from <b>Input-Parameters</b>;
 :Validate <b>MedicationRequest</b>, <b>Medication</b>, <b>Organization</b> and <b>Practitioner</b> from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part;
 
 if (Validation successfull) then (yes)
-  
-  :Generate <b>RxPrescriptionProcessIdentifier</b> from values of \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;
+
+  :Generate <b>RxPrescriptionProcessIdentifier</b> from values of
+  <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and
+  <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>rescriptionId</b>;
+  note right
+
+    The generation of the value for
+    the **RxPrescriptionProcessIdentifier**
+    is described below the diagram.
+
+  end note
 
   if(\rCheck whether there is a <b>MedicationRequest</b> with  <b>RxPrescriptionProcessIdentifier</b>\r) then (yes)
-    
-    #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_PRESCRIPTION_DUPLICATE) \nor (MEDICATIONSVC_PRESCRIPTION_STATUS) to <b>Output-Parameters</b>; 
-  
+
+    #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_PRESCRIPTION_DUPLICATE) \nor (MEDICATIONSVC_PRESCRIPTION_STATUS) to <b>Output-Parameters</b>;
+
   else (no)
 
     partition transaction {
-        
+
       :Check for existing <b>Organization</b> with TelematikID from \n <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b>;
 
       if (<b>Organization</b> exists?) then (yes)
 
-        :<<Update >> 
+        :<<Update >>
         <b>Organization</b>
         <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b></i>
-        
+
         identifier[TelematikID] = Value(TelematikID)
         <i>Replace all other elements with given resource instance</i>;
 
       else (no)
 
-        :<< Create >> 
+        :<< Create >>
         <b>Organization</b>
         <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Organization</b></i>
-        
+
         identifier[TelematikID] = Value(TelematikID)
         <i>Set all other elements with given resource instance</i>;
 
@@ -50,19 +72,19 @@ if (Validation successfull) then (yes)
 
       if (<b>Practitioner</b> exists?) then (yes)
 
-        :<<Update >> 
+        :<<Update >>
         <b>Practitioner</b>
         <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b></i>
-        
+
         identifier[TelematikID] = Value(TelematikID)
         <i>Replace all other elements with given resource instance</i>;
 
       else (no)
 
-        :<< Create >> 
+        :<< Create >>
         <b>Practitioner</b>
         <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Practitioner</b></i>
-        
+
         identifier[TelematikID] = Value(TelematikID)
         <i>Set all other elements with given resource instance</i>;
 
@@ -73,8 +95,8 @@ if (Validation successfull) then (yes)
       if (<b>PractitionerRole</b> exists?) then (yes)
 
       else (no)
-        
-        :<< Create >> 
+
+        :<< Create >>
         <b>PractitionerRole</b>
         ====
         practitioner = Reference(<b>Practitioner</b>)
@@ -82,11 +104,17 @@ if (Validation successfull) then (yes)
 
       endif
 
-      :Generate for <b>RxOriginatorProcessIdentifier</b> from values of 
+      :Generate for <b>RxOriginatorProcessIdentifier</b> from values of
       <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>.Id and Input-<b>PrescriptionId</b>;
 
       :Generate for <b>EPAMedicationUniqueIdentifier</b> from hashed <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b>;
-        
+      note right
+
+        __Link for detailed description__
+        __is below the diagram__
+
+      end note
+
       :<< Create >>
       <b>Medication</b>
       <i>from <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>Medication</b></i>
@@ -96,9 +124,9 @@ if (Validation successfull) then (yes)
       extension[<b>RxPrescriptionProcessIdentifier</b>] = Value(RxPrescriptionProcessIdentifier)
       status = <b>inactive</b>
       <i>Set all other elements with given resource instance</i>;
-        
-      :Generate for <b>RxOriginatorProcessIdentifier</b> from values of 
-      <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>MedicationRequest</b>.Id 
+
+      :Generate for <b>RxOriginatorProcessIdentifier</b> from values of
+      <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>MedicationRequest</b>.Id
       and <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;
 
       :<< Create >>
@@ -113,17 +141,54 @@ if (Validation successfull) then (yes)
       medicationReference = Reference(<b>Medication</b>)
       requester = Reference(<b>PractitionerRole</b>);
 
-      #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to <b>Output-Parameters</b>;
+      partition Link planning data {
+
+        if(\rIf a **Task**-Instance exists with \n **input[prescription].valueIdentifier** \n matching the **RxPrescriptionProcessIdentifier**\r) then (yes)
+
+          :Get this **Task**-Instance;
+
+          :Set the reference value of
+          **MedicationRequest.extension[medicationRequestLinkedStatement].value**
+          to the reference from **Task.input[statement].value**,
+          thereby linking to the corresponding
+          **MedicationStatement** instance;
+
+          #APPLICATION:<< Create >>
+          <b>Provenance</b>
+          =====
+          target = [version specific Reference(**MedicationRequest**)] 
+          agent.type = <b>#performer</b>
+          agent.who = **Task**-Instance.**requester**
+          activity = **#UPDATE**;
+
+          :Delete the **Task**-Instance
+          using the **Hard-Delete** function;
+
+        endif
+      }
+      #PaleGreen:Add information <b>OperationOutcome</b>
+      with details MEDICATIONSVC_OPERATION_SUCCESS
+      to <b>Output-Parameters</b>;
     }
 
   endif
 
 else (no)
-  #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_NO_VALID_STRUCTURE) to <b>Output-Parameters</b>;
+  #Pink:Add error **OperationOutcome**
+  with code processing and details MEDICATIONSVC_NO_VALID_STRUCTURE
+  to **Output-Parameters**;
 endif
 
 repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)
-  
-:Return "<b>Output-Parameters</b>";
-stop  
+
+#PaleGreen:Return <b>Output-Parameters</b>;
+stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
 @enduml

@@ -1,0 +1,113 @@
+@startuml operation.add-medication-information
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title Medication/[id]/$add-medication-information
+start
+
+:Check whether Medication instance exists;
+
+if (Medication instance exists?) then (yes)
+else (no)
+
+  #Pink:Return **OperationOutcome**
+  with code not-found and details MSG_RESOURCE_ID_FAIL;
+
+ stop
+
+endif
+
+:Validate <b>Input-Parameters</b>;
+if (\rValidation successful\r) then (yes)
+else (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code processing and details MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+    stop
+endif
+
+if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst) \n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+  #Pink:Return error **OperationOutcome**
+  with code forbidden and details
+  SVC_IDENTITY_MISMATCH;
+
+  stop
+else (yes)
+endif
+
+if (\rCheck to determine if it is a medicinal product package (Kombipackung) \n Medication instance has extension:type.code == 781405001\r) then (yes)
+
+  #Pink:Return error **OperationOutcome**
+  with code processing and details
+  MEDICATIONSCV_MEDICINAL_PRODUCT_PACKAGE_NOT_ALLOWED;
+
+  stop
+
+else (no)
+endif
+
+partition transaction {
+
+  #APPLICATION:Initialize the Provenance Instance Based on the Input-Parameters;
+  note right
+
+    __Link for detailed description__
+    __is below the diagram__;
+
+  end note
+
+  :<< Create >>
+  **MedicationStatement**
+  //from **Input-Parameters**.parameter:**medicationStatement** //
+  ====
+  medicationReference = Reference(**Medication** instance)
+  **Set all other elements with given resource instance**;
+
+  if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType performer.\r) then (yes)
+    :Reference the PractitionerRole instance \n with the MedicationStatement.informationSource.;
+  else (no)
+    :Reference the Organization instance for \n ProvenanceParticipantType performer \n with MedicationStatement.informationSource.;
+  endif
+
+  #APPLICATION:Reference the **MedicationStatement** in the Provenance
+  in the target parameter with a specific version;
+
+  #APPLICATION:Save the Provenance-Instance with the activity **CREATE**;
+
+  #PaleGreen:Add New **MedicationStatement**-Instance to **Output-Parameters**;
+
+  #PaleGreen:Add information **OperationOutcome**
+  with details MEDICATIONSVC_OPERATION_SUCCESS
+  to **Output-Parameters**;
+
+}
+
+#PaleGreen:Return **Output-Parameters**;
+
+stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

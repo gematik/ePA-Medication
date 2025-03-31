@@ -1,0 +1,133 @@
+@startuml operation.provide-dispensation
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title $provide-dispensation
+
+start
+
+    :Validate all <b>Medication</b>, <b>Organization</b> and <b>MedicationDispense</b> from <b>Input-Parameters</b>[x].<b>Dispensation</b>.part;
+
+    if (\rValidation successful\r) then (yes)
+
+
+      if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n **Input-Parameters**[x].**performerInstitution** \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst)\n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+        #Pink:Return error **OperationOutcome**
+        with code forbidden and details
+        SVC_IDENTITY_MISMATCH;
+
+        stop
+
+      else (yes)
+
+        :Check for existing <b>Organization</b> in Medication Service with TelematikID from \n <b>Input-Parameters</b>[x].<b>performerInstitution</b>;
+
+        if (<b>Organization</b> exists?) then (yes)
+
+          :<< Update >>
+          <b>Organization</b>
+          <i>from <b>Input-Parameters</b>[x].<b>performerInstitution</b></i>
+          identifier[TelematikID] = Value(TelematikID)
+          <i>Replace all other elements with given resource instance</i>;
+
+        else (no)
+
+          :<< Create >>
+          <b>Organization</b>
+          <i>from <b>Input-Parameters</b>[x].<b>performerInstitution</b></i>
+          identifier[TelematikID] = Value(TelematikID)
+          <i>Set all other elements with given resource instance</i>;
+
+        endif
+
+        repeat:Get next <b>Dispensation</b> from <b>Input-Parameters</b>;
+          partition transaction {
+
+            :\rGet <b>Medication</b> resource referenced by  <b>MedicationDispense</b> \n from <b>Input-Parameters</b>[x].<b>Dispensation</b>.part\r;
+
+
+            :Generate the <b>EPAMedicationUniqueIdentifier</b>
+            from the Medication resource
+            provided in the <b>Input-Parameters</b>[x].<b>Medication</b>;
+            note right
+
+              __Link for detailed description__
+              __is below the diagram__
+
+            end note
+
+            :Generate for <b>EPADispensationIdentifier</b> from a new generated UUID;
+
+            :<< Create >>
+            <b>Medication</b>
+            <i>from <b>Input-Parameters</b>[x].<b>Dispensation</b>.part.<b>Medication</b></i>
+            ====
+            identifier[<b>EPAMedicationUniqueIdentifier</b>] = Value(EPAMedicationUniqueIdentifier)
+            extension[<b>EPADispensationIdentifier</b>] = Value(EPADispensationIdentifier)
+            status = <b>active</b>
+            <i>Set all other elements with given resource instance</i>;
+
+            #PaleGreen:Add created <b>Medication</b> to <b>Output-Parameters</b>;
+
+            :<< Create >>
+            <b>MedicationDispense</b>
+            <i>from <b>Input-Parameters</b>[x].<b>Dispensation</b>.part.<b>MedicationDispense</b></i>
+            =====
+            identifier[<b>EPADispensationIdentifier</b>] = Value(EPADispensationIdentifier)
+            medicationReference = Reference(<b>Medication</b>)
+            performer.actor = Reference(<b>Organization</b>)
+            status = <b>completed</b>
+            <i>Set all other elements with given resource instance</i>;
+
+            #PaleGreen:Add created <b>MedicationDispense</b> to <b>Output-Parameters</b>;
+
+            #APPLICATION:<< Create >>
+            <b>Provenance</b>
+            =====
+            target = [version specific Reference(<b>Medication</b>), version specific References(<b>MedicationDispense</b>)] 
+            agent.type = <b>#performer</b>
+            agent.who = Reference(<b>Organization</b>)
+            activity = <b>#CREATE</b>;
+
+
+          #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to <b>Output-Parameters</b>;
+        }
+        repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)
+
+        #PaleGreen:Return <b>Output-Parameters</b>;
+        stop
+
+      endif
+
+
+    else (no)
+      #Pink:Return error <b>OperationOutcome</b>
+      MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+      stop
+    endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

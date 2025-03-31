@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="586px" preserveAspectRatio="none" style="width:1532px;height:586px;background:#FFFFFF;" version="1.1" viewBox="0 0 1532 586" width="1532px" zoomAndPan="magnify"><defs/><g><g id="elem_Practitioner"><rect fill="#696969" height="47.9375" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="163" x="7" y="533"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="71" x="53" y="546.1387">&lt;&lt; Arzt &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="149" x="14" y="560.1074">PractitionerDirectory</text><line style="stroke:#000000;stroke-width:0.5;" x1="8" x2="169" y1="564.9375" y2="564.9375"/></g><g id="elem_Organization"><rect fill="#696969" height="47.9375" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="172" x="347.5" y="533"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="128" x="369.5" y="546.1387">&lt;&lt; Organisation &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="158" x="354.5" y="560.1074">OrganizationDirectory</text><line style="stroke:#000000;stroke-width:0.5;" x1="348.5" x2="518.5" y1="564.9375" y2="564.9375"/></g><g id="elem_DispenserOrganization"><rect fill="#8FBC8F" height="47.9375" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="172" x="1084.5" y="408"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="108" x="1116.5" y="421.1387">&lt;&lt; Apotheke &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="158" x="1091.5" y="435.1074">OrganizationDirectory</text><line style="stroke:#000000;stroke-width:0.5;" x1="1085.5" x2="1255.5" y1="439.9375" y2="439.9375"/></g><g id="elem_PractitionerRole"><rect fill="#696969" height="33.9688" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="114" x="376.5" y="415"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="100" x="383.5" y="428.1387">PractitionerRole</text><line style="stroke:#000000;stroke-width:0.5;" x1="377.5" x2="489.5" y1="432.9688" y2="432.9688"/></g><g id="elem_Medication"><rect fill="#8FBC8F" height="47.9375" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="207" x="1319" y="155"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="193" x="1326" y="168.1387">&lt;&lt; verordnete Arzneimittel &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="104" x="1370.5" y="182.1074">EPAMedication</text><line style="stroke:#000000;stroke-width:0.5;" x1="1320" x2="1525" y1="186.9375" y2="186.9375"/></g><g id="elem_MedicationRequest"><rect fill="#8FBC8F" height="53.9063" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="209" x="938" y="152"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="195" x="945" y="165.1387">&lt;&lt; Medikationsverordnung &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="163" x="961" y="179.1074">EPAMedicationRequest</text><line style="stroke:#000000;stroke-width:0.5;" x1="939" x2="1146" y1="183.9375" y2="183.9375"/><ellipse cx="949" cy="196.4219" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="173" x="958" y="199.0762">subject: Reference(Patient)</text></g><g id="elem_MedicationDispense"><rect fill="#8FBC8F" height="47.9375" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="184" x="1078.5" y="283"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="138" x="1101.5" y="296.1387">&lt;&lt; Dispensierung &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="170" x="1085.5" y="310.1074">EPAMedicationDispense</text><line style="stroke:#000000;stroke-width:0.5;" x1="1079.5" x2="1261.5" y1="314.9375" y2="314.9375"/></g><g id="elem_eMPMedication"><rect fill="#20B2AA" height="47.9375" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="130" x="499.5" y="17"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="116" x="506.5" y="30.1387">&lt;&lt; Medikation &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="104" x="512.5" y="44.1074">EPAMedication</text><line style="stroke:#000000;stroke-width:0.5;" x1="500.5" x2="628.5" y1="48.9375" y2="48.9375"/></g><g id="elem_MedicationStatement"><rect fill="#20B2AA" height="53.9063" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="212" x="458.5" y="152"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="198" x="465.5" y="165.1387">&lt;&lt; Medikations Information &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="188" x="470.5" y="179.1074">EPAMedicationStatemanet</text><line style="stroke:#000000;stroke-width:0.5;" x1="459.5" x2="669.5" y1="183.9375" y2="183.9375"/><ellipse cx="469.5" cy="196.4219" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="173" x="478.5" y="199.0762">subject: Reference(Patient)</text></g><g id="elem_List"><rect fill="#20B2AA" height="47.9375" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="175" x="402" y="283"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="154" x="412.5" y="296.1387">&lt;&lt; Medikations Plan &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="161" x="409" y="310.1074">EPAMedicationPlanList</text><line style="stroke:#000000;stroke-width:0.5;" x1="403" x2="576" y1="314.9375" y2="314.9375"/></g><g id="elem_Provenance"><rect fill="#20B2AA" height="53.9063" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="253" x="130" y="152"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="167" x="173" y="165.1387">&lt;&lt; Herkunftsnachweis &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="109" x="202" y="179.1074">EPAProvenance</text><line style="stroke:#000000;stroke-width:0.5;" x1="131" x2="382" y1="183.9375" y2="183.9375"/><ellipse cx="141" cy="196.4219" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="227" x="150" y="199.0762">activity = CREATE | UPDATE | DELETE</text></g><g id="elem_Verification"><rect fill="#20B2AA" height="67.875" rx="5" ry="5" style="stroke:#000000;stroke-width:0.5;" width="182" x="134.5" y="7"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="124" x="163.5" y="20.1387">&lt;&lt; Verifizierung &gt;&gt;</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="168" x="141.5" y="34.1074">EPAVerificationProvenance</text><line style="stroke:#000000;stroke-width:0.5;" x1="135.5" x2="315.5" y1="38.9375" y2="38.9375"/><ellipse cx="145.5" cy="51.4219" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="84" x="154.5" y="54.0762">activity = VRF</text><ellipse cx="145.5" cy="65.3906" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="128" x="154.5" y="68.0449">agent.type = verifier</text></g><!--MD5=[e037c5b0cf5af68b20f52b821fa27588]
+link MedicationRequest to Medication--><g id="link_MedicationRequest_Medication"><path codeLine="41" d="M1147.09,179 C1198.92,179 1261.45,179 1313.82,179 " fill="none" id="MedicationRequest-to-Medication" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="1318.85,179,1309.85,175,1313.85,179,1309.85,183,1318.85,179" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="135" x="1165.5" y="172.0669">medicationReference</text></g><!--MD5=[f63698adea01aaba1e247a24e37bdddb]
+link MedicationRequest to PractitionerRole--><g id="link_MedicationRequest_PractitionerRole"><path codeLine="42" d="M992.48,206.11 C913.64,246.58 754.96,325.28 614.5,378 C575.79,392.53 531.22,405.62 496,415.16 " fill="none" id="MedicationRequest-to-PractitionerRole" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="490.87,416.54,500.6004,418.0627,495.6981,415.2401,498.5206,410.3378,490.87,416.54" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="62" x="832.5" y="311.5669">requester</text></g><!--MD5=[00187016abf1418716e82ce6c20a6a33]
+reverse link MedicationStatement to MedicationRequest--><g id="link_MedicationStatement_MedicationRequest"><path codeLine="43" d="M675.76,179 C754.86,179 860.4,179 937.95,179 " fill="none" id="MedicationStatement-backto-MedicationRequest" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="670.58,179,679.58,183,675.58,179,679.58,175,670.58,179" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="231" x="688.75" y="157.0669">MedicationRequestLinkedStatement</text><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="72" x="768.25" y="172.1997">(Extension)</text></g><!--MD5=[7e72db1c8179a87a15b1578fb5042e40]
+link PractitionerRole to Practitioner--><g id="link_PractitionerRole_Practitioner"><path codeLine="45" d="M388.4,449.08 C329.71,470 226.59,506.77 157.9,531.26 " fill="none" id="PractitionerRole-to-Practitioner" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="153.02,533,162.8413,533.7362,157.7281,531.3165,160.1477,526.2033,153.02,533" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="73" x="283.5" y="499.0669">practitioner</text></g><!--MD5=[3a8c6dfa751c6ea53b3b9c8585ebcfcd]
+link PractitionerRole to Organization--><g id="link_PractitionerRole_Organization"><path codeLine="46" d="M433.5,449.08 C433.5,469.02 433.5,503.35 433.5,527.73 " fill="none" id="PractitionerRole-to-Organization" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="433.5,532.77,437.5,523.77,433.5,527.77,429.5,523.77,433.5,532.77" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="79" x="434.5" y="499.0669">organization</text></g><!--MD5=[3c5c0425ec93b336fbe4308777a1877f]
+reverse link Medication to MedicationDispense--><g id="link_Medication_MedicationDispense"><path codeLine="48" d="M1371.69,205.41 C1326.41,228.04 1260.72,260.89 1216.85,282.82 " fill="none" id="Medication-backto-MedicationDispense" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="1376.28,203.11,1366.4419,203.5698,1371.8107,205.3518,1370.0287,210.7206,1376.28,203.11" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="135" x="1304.5" y="249.0669">medicationReference</text></g><!--MD5=[ffea7c70ec61b81797f2f87bac41fd53]
+reverse link MedicationRequest to MedicationDispense--><g id="link_MedicationRequest_MedicationDispense"><path codeLine="49" d="M1072.6,209.63 C1095.33,232.01 1126.09,262.29 1147.03,282.89 " fill="none" id="MedicationRequest-backto-MedicationDispense" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="1069.02,206.11,1072.6298,215.2735,1072.584,209.6168,1078.2407,209.571,1069.02,206.11" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="146" x="1114.5" y="249.0669">authorizingPrescription</text></g><!--MD5=[521936c65e7d94cdfe5dba8806268c61]
+link MedicationDispense to DispenserOrganization--><g id="link_MedicationDispense_DispenserOrganization"><path codeLine="50" d="M1170.5,331.14 C1170.5,351.49 1170.5,381.19 1170.5,402.91 " fill="none" id="MedicationDispense-to-DispenserOrganization" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="1170.5,407.97,1174.5,398.97,1170.5,402.97,1166.5,398.97,1170.5,407.97" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="96" x="1171.5" y="374.0669">perfomer.actor</text></g><!--MD5=[55175a2162716867c586ed3624b5f5d4]
+reverse link eMPMedication to MedicationStatement--><g id="link_eMPMedication_MedicationStatement"><path codeLine="52" d="M564.5,70.31 C564.5,94.22 564.5,128.19 564.5,151.55 " fill="none" id="eMPMedication-backto-MedicationStatement" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="564.5,65.07,560.5,74.07,564.5,70.07,568.5,74.07,564.5,65.07" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="135" x="565.5" y="118.0669">medicationReference</text></g><!--MD5=[0db0ddf0ea56feb55d6f3f6faead4cd1]
+reverse link MedicationStatement to List--><g id="link_MedicationStatement_List"><path codeLine="54" d="M546.37,210.46 C533.1,232.75 515.37,262.54 503.25,282.89 " fill="none" id="MedicationStatement-backto-List" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="548.96,206.11,540.9218,211.801,546.4043,210.4075,547.7978,215.89,548.96,206.11" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="530.5" y="249.0669">entry[].item</text></g><!--MD5=[5f7b0058a8385e95cbf56d709cf53cb3]
+link List to PractitionerRole--><g id="link_List_PractitionerRole"><path codeLine="55" d="M478.97,331.14 C468.66,353.78 453.09,387.98 443.11,409.9 " fill="none" id="List-to-PractitionerRole" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="440.94,414.65,448.3057,408.1119,443.009,410.0982,441.0228,404.8015,440.94,414.65" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="139" x="466.5" y="374.0669">note.authorReference</text></g><!--MD5=[b7d1b1837c985c5ec890f9333aaf4da9]
+link Provenance to MedicationStatement--><g id="link_Provenance_MedicationStatement"><path codeLine="57" d="M383.11,179 C406.4,179 430.56,179 453.35,179 " fill="none" id="Provenance-to-MedicationStatement" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="458.5,179,449.5,175,453.5,179,449.5,183,458.5,179" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="39" x="401.25" y="172.0669">target</text></g><!--MD5=[4f0f3afedc3f2261a6ddb933167e4a2f]
+link Provenance to PractitionerRole--><g id="link_Provenance_PractitionerRole"><path codeLine="58" d="M260.41,206.1 C266.18,237.96 279.38,292.34 306.5,331 C330.98,365.89 371.11,394.58 399.71,412.14 " fill="none" id="Provenance-to-PractitionerRole" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="404.2,414.87,398.592,406.7737,399.929,412.2703,394.4324,413.6073,404.2,414.87" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="307.5" y="311.5669">agent[].who</text></g><!--MD5=[34ef1eaa5916956e7f23a8e645fe58db]
+link Verification to MedicationStatement--><g id="link_Verification_MedicationStatement"><path codeLine="60" d="M308,75.1 C365.16,98.03 440.45,128.23 494.65,149.98 " fill="none" id="Verification-to-MedicationStatement" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="499.5,151.92,492.6293,144.8636,494.8576,150.063,489.6581,152.2914,499.5,151.92" style="stroke:#5C7AAB;stroke-width:1.0;"/><text fill="#777777" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="39" x="416.5" y="118.0669">target</text></g><!--MD5=[f67326b034c1812c71cbdb0a2548bbcf]
+link Verification to Practitioner--><g id="link_Verification_Practitioner"><path codeLine="61" d="M153.18,75.05 C115.22,97.85 76.5,132.29 76.5,178 C76.5,178 76.5,178 76.5,433 C76.5,465.65 80.74,502.95 84.18,527.83 " fill="none" id="Verification-to-Practitioner" style="stroke:#5C7AAB;stroke-width:1.0;"/><polygon fill="#5C7AAB" points="84.9,532.94,87.6023,523.4691,84.2009,527.9891,79.6809,524.5877,84.9,532.94" style="stroke:#5C7AAB;stroke-width:1.0;"/></g><!--MD5=[5fe335d85bcdab74aaab020a26ac3489]
+@startuml medication.fhir.list.model
+skinparam fixCircleLabelOverlapping false
+skinparam roundcorner 10
+skinparam object {
+    BackgroundColor DimGrey
+    BorderColor Black
+    ArrowColor #5c7aab
+    FontSize 12
+    FontColor White
+    NoteBackgroundColor #3483eb
+    ArrowFontColor #777777
+}
+skinparam LegendBackgroundColor White
+ 
+object "<< Arzt >>\n**PractitionerDirectory**" as Practitioner
+object "<< Organisation >>\n**OrganizationDirectory**" as Organization
+object "<< Apotheke >>\n**OrganizationDirectory**" as DispenserOrganization #DarkSeaGreen
+object "PractitionerRole" as PractitionerRole
+ 
+object "<< verordnete Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen
+object "<< Medikationsverordnung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen {
+    + subject: Reference(Patient)
+}
+object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen
+ 
+object "<< Medikation >>\n**EPAMedication**" as eMPMedication #LightSeaGreen {
+}
+object "<< Medikations Information >>\n**EPAMedicationStatemanet**" as MedicationStatement #LightSeaGreen  {
+    + subject: Reference(Patient)
+}
+
+object "<< Medikations Plan >>\n**EPAMedicationPlanList**" as List #LightSeaGreen
+
+object "<< Herkunftsnachweis >>\n**EPAProvenance**" as Provenance #LightSeaGreen {
+    + activity = CREATE | UPDATE | DELETE
+}
+object "<< Verifizierung >>\nEPAVerificationProvenance" as Verification #LightSeaGreen {
+    + activity = VRF
+    + agent.type = verifier
+}
+
+MedicationRequest -r-> Medication : medicationReference
+MedicationRequest -d-> PractitionerRole : requester
+MedicationRequest -l-> MedicationStatement : MedicationRequestLinkedStatement\n(Extension)
+ 
+PractitionerRole -d-> Practitioner : practitioner
+PractitionerRole -d-> Organization : organization
+ 
+MedicationDispense -u-> Medication : medicationReference
+MedicationDispense -l-> MedicationRequest : authorizingPrescription
+MedicationDispense -d-> DispenserOrganization : perfomer.actor
+ 
+MedicationStatement -u-> eMPMedication : medicationReference
+
+List -u-> MedicationStatement : entry[].item
+List -d-> PractitionerRole : note.authorReference
+
+Provenance -r-> MedicationStatement : target
+Provenance -d-> PractitionerRole : agent[].who
+
+Verification -d-> MedicationStatement : target
+Verification -d-> Practitioner
+
+
+' legend right
+'     | Color | Origin |
+'     |<#LightSeaGreen>|  LE |
+'     |<#DarkSeaGreen>|  eRx-FD |
+'     |<#DimGrey>|  both |
+' endlegend
+ 
+ 
+@enduml
+
+@startuml medication.fhir.list.model
+skinparam fixCircleLabelOverlapping false
+skinparam roundcorner 10
+skinparam object {
+    BackgroundColor DimGrey
+    BorderColor Black
+    ArrowColor #5c7aab
+    FontSize 12
+    FontColor White
+    NoteBackgroundColor #3483eb
+    ArrowFontColor #777777
+}
+skinparam LegendBackgroundColor White
+ 
+object "<< Arzt >>\n**PractitionerDirectory**" as Practitioner
+object "<< Organisation >>\n**OrganizationDirectory**" as Organization
+object "<< Apotheke >>\n**OrganizationDirectory**" as DispenserOrganization #DarkSeaGreen
+object "PractitionerRole" as PractitionerRole
+ 
+object "<< verordnete Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen
+object "<< Medikationsverordnung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen {
+    + subject: Reference(Patient)
+}
+object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen
+ 
+object "<< Medikation >>\n**EPAMedication**" as eMPMedication #LightSeaGreen {
+}
+object "<< Medikations Information >>\n**EPAMedicationStatemanet**" as MedicationStatement #LightSeaGreen  {
+    + subject: Reference(Patient)
+}
+
+object "<< Medikations Plan >>\n**EPAMedicationPlanList**" as List #LightSeaGreen
+
+object "<< Herkunftsnachweis >>\n**EPAProvenance**" as Provenance #LightSeaGreen {
+    + activity = CREATE | UPDATE | DELETE
+}
+object "<< Verifizierung >>\nEPAVerificationProvenance" as Verification #LightSeaGreen {
+    + activity = VRF
+    + agent.type = verifier
+}
+
+MedicationRequest -r-> Medication : medicationReference
+MedicationRequest -d-> PractitionerRole : requester
+MedicationRequest -l-> MedicationStatement : MedicationRequestLinkedStatement\n(Extension)
+ 
+PractitionerRole -d-> Practitioner : practitioner
+PractitionerRole -d-> Organization : organization
+ 
+MedicationDispense -u-> Medication : medicationReference
+MedicationDispense -l-> MedicationRequest : authorizingPrescription
+MedicationDispense -d-> DispenserOrganization : perfomer.actor
+ 
+MedicationStatement -u-> eMPMedication : medicationReference
+
+List -u-> MedicationStatement : entry[].item
+List -d-> PractitionerRole : note.authorReference
+
+Provenance -r-> MedicationStatement : target
+Provenance -d-> PractitionerRole : agent[].who
+
+Verification -d-> MedicationStatement : target
+Verification -d-> Practitioner
+
+
+ 
+ 
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 19:01:30 CEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

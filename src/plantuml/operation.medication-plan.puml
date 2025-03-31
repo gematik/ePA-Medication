@@ -1,0 +1,119 @@
+@startuml operation.get-medication-plan
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+legend {
+  backgroundColor White
+}
+</style>
+title /$medication-plan
+start
+
+
+switch (Check the \ninput parameter)
+case ( **default**)
+
+  if(\rEPAPlanComposition\ninstance exists\r) then (no)
+
+    #Pink:Return **OperationOutcome**
+    with code not-found and details
+    MSG_NO_MATCH;
+
+    stop
+
+  else (yes)
+
+    :Get latest version of
+    EPAPlanComposition instance;
+
+  endif
+
+case ( **version** is in Input-Parameters)
+
+  if (\rEPAPlanComposition instance \n with **version** exists\r) then (no)
+
+    #Pink:Return **OperationOutcome**
+    with code not-found and details
+    MSG_NO_MATCH;
+
+    stop
+
+  else (yes)
+
+    :Get EPAPlanComposition instance
+    for specific version;
+
+  endif
+
+case ( **version** is not present in the Input-Parameter but **dateTime** is )
+
+  if (\rAny EPAPlanComposition instance exists \n at or before date\r) then (yes)
+
+    :Get latest EPAPlanComposition instance
+    at or before given date;
+
+  else (no)
+
+    #Pink:Return **OperationOutcome**
+    with code not-found and details
+    MSG_NO_MATCH;
+
+    stop
+
+  endif
+
+endswitch
+
+:Generate a **Bundle** of type **document**;
+
+:Generate UUID for **Bundle.identifer**;
+
+:Add **EPAPlanComposition** to **Bundle.entry**;
+
+:Add version of **EPAPlanAllergyIntoleranceList** referenced
+by EPAPlanComposition** and their referenced versions
+of **EPAAllergyIntolerance** resources to **Bundle.entry**;
+
+:Add version of **EPAPlanObservationList** referenced by
+**EPAPlanComposition** and their referenced versions of
+**EPAObservation** resources to **Bundle.entry**;
+
+:Add version of **EPAPlanMedicationStatementList** referenced by **EPAPlanComposition**,
+their referenced versions of **EPAMedicationStatements** resources
+and their referenced **EPAMedication**s resource to **Bundle.entry**;
+
+:Add all **EPAProvenance** resources referenced
+by **EPAPlanComposition** to **Bundle.entry**;
+
+:Add all **EPAObservationMedicationManagementNote** resources
+referenced by **EPAPlanComposition** to **Bundle.entry**;
+
+:If exists, add **EPAProvenance** resource ("verify") that
+references this version of **EPAPlanComposition**;
+
+:Add **Patient** and all **Practitioner**, **PractitionerRole**,
+**RelatedPerson** and **Organization** resources referenced by
+any resource in this Bundle to **Bundle.entry**;
+
+:Replace all **fullUrl**s and references in **Bundle**
+with **urn:uuid:** and the resources ID;
+
+#PaleGreen:Return **Bundle**;
+
+stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+endlegend
+@enduml

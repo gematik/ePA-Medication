@@ -1,0 +1,182 @@
+@startuml operation.verify-medication-plan
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title $verify-medication-plan
+start
+
+:Validate <b>Input-Parameters</b>;
+if (\rValidation successful\r) then (yes)
+
+  if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst).\r) then (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code forbidden and details
+    SVC_IDENTITY_MISMATCH;
+
+    stop
+
+  else (yes)
+
+
+      if(\rCheck whether a **Composition** instance for the \n **EPAPlanComposition** exists and verify if the latest \n **Composition.Meta.versionId** matches the versionId \n from the **Input-Parameters.parameter:planVersionId**\r) then (no)
+
+        #Pink:Return error **OperationOutcome**
+        with code forbidden and details
+        MSG_OP_NOT_ALLOWED;
+
+        stop
+
+      else (yes)
+
+
+        partition transaction {
+
+          :Get the latest version of the
+          **EPAPlanComposition**-Instance;
+
+          #APPLICATION:<< Init >>
+          **Provenance**
+          =====
+          target = [version specific Reference(**Composition**)] 
+          activity = **#VRF**;
+
+          if(\rCheck whether there is a reference to a List \n **EPAPlanMedicationStatementList** in the Composition under \n **Composition.section[medicationEntries]**\r) then (yes)
+            #APPLICATION:Add the version specific Reference(**EPAPlanMedicationStatementList**) \n to the **target** array of the **Provenance**-Instance.;
+          endif
+
+          if(\rCheck whether there is a reference to a List \n **EPAPlanAllergyIntoleranceList** in the Composition under \n **Composition.section[allergyIntoleranceAMTSrZIEntries]**\r) then (yes)
+            #APPLICATION:Add the version specific Reference(**EPAPlanAllergyIntoleranceList**) \n to the **target** array of the **Provenance**-Instance.;
+          endif
+
+          if(\rCheck whether there is a reference to a List \n **EPAPlanObservationList** in the Composition under \n **Composition.section[observationsMeasurementsAMTSrZIEntries]**\r) then (yes)
+            #APPLICATION:Add the version specific Reference(**EPAPlanObservationList**) \n to the **target** array of the **Provenance**-Instance.;
+          endif
+
+          partition performer {
+
+              if(Check whether a **Organization** instance from \n **Input-Parameters**.parameter:**perfomer**.part[**organization**]\nwith TelematikID is already stored in the Medication Service.) then (yes)
+
+                  #APPLICATION:<< Update >>
+                  **Organization**
+                  <i>from **Input-Parameters**.parameter:**perfomer**.part[**organization**]</i>
+
+                  identifier[TelematikID] = Value(TelematikID)
+                  <i>Replace all other elements with given resource instance</i>;
+
+              else (no)
+
+                  #APPLICATION:<< Create >>
+                  **Organization**
+                  <i>from **Input-Parameters**.parameter:**perfomer**.part[**organization**]</i>
+
+                  identifier[TelematikID] = Value(TelematikID)
+                  <i>Set all other elements with given resource instance</i>;
+
+              endif
+
+              if(Check whether \n **Input-Parameters**.parameter:**perfomer**.part[**practitioner**] exists?) then (yes)
+
+                  if(Check whether a **Practitioner** instance from \n **Input-Parameters**.parameter:**perfomer**.part[**practitioner**]\n with TelematikID is already stored in the Medication Service.) then (yes)
+
+                      #APPLICATION:<< Update >>
+                      **Practitioner**
+                      <i>from **Input-Parameters**.parameter:**perfomer**.part[**practitioner**]</i>
+
+                      identifier[TelematikID] = Value(TelematikID)
+                      <i>Replace all other elements with given resource instance</i>;
+
+                  else (no)
+
+                      #APPLICATION:<< Create >>
+                      **Practitioner**
+                      <i>from **Input-Parameters**.parameter:**perfomer**.part[**practitioner**]</i>
+
+                      identifier[TelematikID] = Value(TelematikID)
+                      <i>Set all other elements with given resource instance</i>;
+
+                  endif
+              endif
+
+              if(Check whether \n **Input-Parameters**.parameter:**perfomer**.part[**practitionerRole**] exists?) then (yes)
+
+                  if(Check whether a **PractitionerRole** instance with the code, specialty and \n the references to specific **Organization** and **Practitioner** \n is already stored in the Medication Service.) then (yes)
+                    #APPLICATION:Get and initialize the
+                    corresponding **PractitionerRole**;
+                  else (no)
+
+                      #APPLICATION:<< Create >>
+                      <b>PractitionerRole</b>
+                      ====
+                      practitioner = Reference(<b>Practitioner</b>)
+                      organization = Reference(<b>Organization</b>)
+
+                      <i>Set all other elements with given resource instance</i>;
+
+                  endif
+
+                  #APPLICATION:Reference the PractitionerRole in the Provenance instance
+                  in agent with the ProvenanceParticipantType **performer**;
+
+
+              else (no)
+
+                  if(If perfomer Organization exists?) then (yes)
+                      #APPLICATION:Reference the Organization in the Provenance instance
+                      in agent with the ProvenanceParticipantType **performer**;
+                  endif
+                  if(If perfomer Practitioner exists?) then (yes)
+                      #APPLICATION:Reference the Practitioner in the Provenance instance
+                      in agent with the ProvenanceParticipantType **performer**;
+                  endif
+              endif
+          }
+
+          #APPLICATION:Save VRF **Provenance**-Instance;
+
+
+        }
+
+        #PaleGreen:Return information **OperationOutcome**
+        with details **MEDICATIONSVC_OPERATION_SUCCESS**;
+
+        stop
+
+      endif
+
+  endif
+
+else (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code processing and details
+    MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+    stop
+
+endif
+
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml
