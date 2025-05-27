@@ -1,0 +1,123 @@
+@startuml operation.provide-medication-plan-management-note
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title $provide-medication-plan-note
+start
+
+:Validate <b>Input-Parameters</b>;
+if (\rValidation successful\r) then (yes)
+
+  if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst) \n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code forbidden and details
+    SVC_IDENTITY_MISMATCH;
+
+    stop
+
+  else (yes)
+
+    partition transaction {
+
+        #APPLICATION:Initialize the Provenance Instance Based on the Input-Parameters;
+        note right
+
+          __Link for detailed description__
+          __is below the diagram__
+
+        end note
+
+        if(\rCheck whether a Compostion instance for the EPAPlanComposition exists?\r) then (yes)
+            :Get the EPAPlanComposition instance.;
+        else (no)
+            :Create a Compostion instance with the EPAPlanComposition profile.;
+        endif
+
+        if(\rCheck whether the **EPAPlanComposition** instance references an \nObservation in **Composition.section[noteEntries]**.\r) then (yes)
+
+            :<< UPDATE >>
+            **Observation**
+            <i>from **Input-Parameters**.parameter:**note**</i>
+            ====
+            <i>Replace all elements with given resource instance</i>;
+
+            #APPLICATION:Set the **Provenance**-Instance activity to **UPDATE**;
+
+        else (no)
+
+            :<< Create >>
+            **Observation**
+            <i>from **Input-Parameters**.parameter:**note**</i>
+            ====
+            <i>Set all elements with given resource instance</i>;
+
+            #APPLICATION:Set the **Provenance**-Instance activity to **CREATE**;
+
+        endif
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType performer.\r) then (yes)
+            :Reference the **PractitionerRole**-Instance \n with the **Observation**.performer.;
+        else (no)
+            :Reference the **Organization**-Instance for \n ProvenanceParticipantType performer \n with **Observation**.performer.;
+        endif
+
+        :Upsert the reference of the **EPAPlanComposition**-Instance in
+        Composition.section[noteEntries] with the
+        updated specific version of the **Observation**-Instance.;
+
+        #APPLICATION:Reference the **Observation**-Instance in the **Provenance** instance
+        in the target parameter with a specific version;
+
+        #APPLICATION:Reference the updated **EPAPlanComposition**-Insatnce in the Provenance
+        in the target parameter with a specific version;
+
+        #APPLICATION:Save the **Provenance**-Instance;
+
+        #PaleGreen:Add the **Observation**-Instance to **Output-Parameters**;
+
+        #PaleGreen:Add information **OperationOutcome**
+        with details MEDICATIONSVC_OPERATION_SUCCESS
+        to **Output-Parameters**;
+
+    }
+
+      #PaleGreen:Return **Output-Parameters**;
+      stop
+
+    endif
+
+else (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code processing and details
+    MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+    stop
+
+endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+
+@enduml
