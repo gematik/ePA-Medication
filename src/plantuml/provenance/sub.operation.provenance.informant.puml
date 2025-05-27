@@ -1,0 +1,145 @@
+@startuml sub.operation.provenance.informant
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.inOutStyle {
+    BackgroundColor #PaleGreen
+}
+</style>
+
+
+start
+
+
+partition informant {
+
+
+    if(\rCheck whether professionals or persons are set?\r) then (professionals)
+
+        partition professionals {
+
+            if(\rCheck whether \n **Input-Parameters**.parameter:**informant**.part[**professionals**].part[**organization**] exists?\r) then (yes)
+
+                if(\rCheck whether a **Organization** instance from \n **Input-Parameters**.parameter:**informant**.part[**professionals**].part[**organization**] \n with TelematikID is already stored in the Medication Service, \n including previously initialized instances.\r) then (yes)
+
+                    #APPLICATION:<< Update >>
+                    **Organization**
+                    <i>from **Input-Parameters**.parameter:**informant**.part[**professionals**].part[**organization**]</i>
+
+                    identifier[TelematikID] = Value(TelematikID)
+                    <i>Replace all other elements with given resource instance</i>;
+
+                else (no)
+
+                    #APPLICATION:<< Create >>
+                    **Organization**
+                    <i>from **Input-Parameters**.parameter:**informant**.part[**professionals**].part[**organization**]</i>
+
+                    identifier[TelematikID] = Value(TelematikID)
+                    <i>Set all other elements with given resource instance</i>;
+
+                endif
+            endif
+
+            if(\rCheck whether \n **Input-Parameters**.parameter:**informant**.part[**professionals**].part[**practitioner**] exists?\r) then (yes)
+
+                if(\rCheck whether a **Practitioner** instance from \n **Input-Parameters**.parameter:**informant**.part[**professionals**].part[**practitioner**] \n with TelematikID is already stored in the Medication Service, \n including previously initialized instances.\r) then (yes)
+
+                    #APPLICATION:<< Update >>
+                    **Practitioner**
+                    <i>**Input-Parameters**.parameter:**informant**.part[**professionals**].part[**practitioner**]</i>
+
+                    identifier[TelematikID] = Value(TelematikID)
+                    <i>Replace all other elements with given resource instance</i>;
+
+                else (no)
+
+                    #APPLICATION:<< Create >>
+                    **Practitioner**
+                    <i>from **Input-Parameters**.parameter:**informant**.part[**professionals**].part[**practitioner**]</i>
+
+                    identifier[TelematikID] = Value(TelematikID)
+                    <i>Set all other elements with given resource instance</i>;
+
+                endif
+            endif
+
+            if(\rCheck whether \n **Input-Parameters**.parameter:**informant**.part[**professionals**].part[**practitionerRole**]  exists?\r) then (yes)
+
+                if(\rCheck whether a **PractitionerRole** instance with the code, specialty and \n the references to specific **Organization** and **Practitioner** \n is already stored in the Medication Service, \n including previously initialized instances.\r) then (yes)
+                    #APPLICATION:Get and initialize the
+                    corresponding **PractitionerRole**;
+                else (no)
+
+                    #APPLICATION:<< Create >>
+                    <b>PractitionerRole</b>
+                    ====
+                    practitioner = Reference(<b>Practitioner</b>)
+                    organization = Reference(<b>Organization</b>)
+
+                    <i>Set all other elements with given resource instance</i>;
+
+                endif
+
+                #APPLICATION:Reference the PractitionerRole in the Provenance instance
+                in agent with the ProvenanceParticipantType **informant**;
+
+
+            else (no)
+
+                if(\rIf perfomer Organization exists?\r) then (yes)
+                    #APPLICATION:Reference the Organization in the Provenance instance
+                    in agent with the ProvenanceParticipantType **informant** and set
+                    identifier.display with corresponding ID-token.organizationName;
+                endif
+                if(\rIf perfomer Practitioner exists?\r) then (yes)
+                    #APPLICATION:Reference the Practitioner in the Provenance instance
+                    in agent with the ProvenanceParticipantType **informant** and set
+                    identifer.display with corresponding data from Practitioner instance;
+                endif
+            endif
+
+        }
+
+    else (persons)
+
+        partition persons {
+
+          if(\rCheck whether patient or relatedPerson are set?\r) then (patient)
+
+            #APPLICATION:Use the patient identifier from
+            Input-Parameters.parameter:**informant**.part[**persons**].part[**patient**] 
+            and use this identifier as a logical reference in the Provenance instance with
+            the agent of ProvenanceParticipantType informant;
+
+          else (\rrelatedPerson\r)
+
+            #APPLICATION:<< Create >>
+            **RelatedPerson**
+            <i>from **Input-Parameters**.parameter:**informant**.part[**persons**].part[**relatedPerson**] </i>
+
+            <i>Set all other elements with given resource instance</i>;
+
+            #APPLICATION:Reference the RelatedPerson in the Provenance instance
+            in agent with the ProvenanceParticipantType **informant**;
+
+          endif
+
+
+        }
+
+    endif
+
+}
+
+end
+
+@enduml

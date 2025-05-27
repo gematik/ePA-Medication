@@ -1,0 +1,72 @@
+@startuml operation.medication-list
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+legend {
+  backgroundColor White
+}
+</style>
+title /?_query=medication-list
+start
+if (**date** in Input-Parameters) then (yes)
+ :Get all **Medication**s that are referenced by any
+ **MedicationStatement** with **meta.lastUpdated**
+ fitting the providing date (range);
+
+ :Get all **Medication**s that are referenced by any
+ **MedicationRequest** with **authoredOn**
+ fitting the providing date (range);
+
+ :Get all **Medication**s that are referenced by any
+ **MedicationDispense** with **whenHandedOver**
+ fitting the providing date (range);
+
+ :Get all referenced **MedicationRequest**s,
+ **MedicationDispense**s
+ and **MedicationStatement**s;
+
+else (no)
+ :Get all **Medication**s that are referenced by any
+ **MedicationStatement**, **MedicationRequest**
+ or **MedicationDispense**;
+
+ :Get all referenced **MedicationRequest**s,
+ **MedicationDispense**s
+ and **MedicationStatement**s;
+
+endif
+
+:Get for each **MedicationStatement** the
+latest referencing **Provenance** instance;
+
+:Get all referenced **Practitioner**s,
+**Organization**s and the **Patient** itself;
+
+if (**_offset** in Input-Parameters) then (yes)
+  :Remove first **_offset**th entries;
+endif
+
+:Create empty searchset **Bundle**;
+if (**_count** in Input-Parameters) then (yes)
+  :Add first **_count** entries to **Bundle**;
+else
+  :Add all entries to **Bundle**;
+endif
+
+#PaleGreen:Return **Bundle**;
+stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Business>| Conditions |
+endlegend
+@enduml

@@ -1,0 +1,132 @@
+@startuml operation.add-amts-allergies
+skinparam defaultTextAlignment center
+
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title AllergyIntolerance/$add-amts-allergies
+start
+
+:Validate <b>Input-Parameters</b>;
+if (\rValidation successful\r) then (yes)
+
+  if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst) \n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code forbidden and details
+    SVC_IDENTITY_MISMATCH;
+
+    stop
+
+  else (yes)
+
+    partition transaction {
+
+      #APPLICATION:Initialize the Provenance Instance based on the Input-Parameters;
+      note right
+
+        __Link for detailed description__
+        __is below the diagram__
+
+      end note
+
+      partition loop {
+
+        repeat:Get next <b>allergyIntolerance</b> from <b>Input-Parameters</b>;
+
+        :<< Create >>
+        <b>AllergyIntolerance</b>
+        <i>from <b>Input-Parameters</b>[x].<b>allergyIntolerance</b></i>
+        ====
+        <i>Set all other elements with given resource instance</i>;
+
+        if(\rCheck whether created AllergyIntolerance instance has\ncode = {"http://snomed.info/sct", "716186003", "No known allergy"}\r) then (yes)
+          if(\rCheck whether AllergyIntolerance instances exist with\nclinicalStatus = **#active** and\nverificationStatus = **#confirmed**\r) then (yes)
+            partition loop {
+              repeat:Get next AllergyIntolerance instance;
+                :Set **verificationStatus = #refuted**;
+              repeat while (\rIf next instance with clinicalStatus = **#active**\n and verificationStatus = **#confirmed** exists\r) is (yes) not (no)
+            }
+          else (no)
+          endif
+        else (no)
+          if(\rCheck whether AllergyIntolerance instance exist\n with code = {"http://snomed.info/sct",\n"716186003", "No known allergy"}\r) then (yes)
+            :Set AllergyIntolerance instance\nwith **verificationStatus = #refuted**;
+          else (no)
+          endif
+        endif
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType **performer**.\r) then (yes)
+          :Reference the PractitionerRole instance
+          with the AllergyIntolerance.asserter.;
+        else (no)
+          :Reference the Organization instance for
+          ProvenanceParticipantType **performer**
+          with AllergyIntolerance.asserter.;
+        endif
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType **enterer**.\r) then (yes)
+          :Reference the PractitionerRole instance
+          with the AllergyIntolerance.recorder.;
+        else (no)
+          if(\rCheck whether a Organization has been instantiated \n for the ProvenanceParticipantType **enterer**.\r) then (yes)
+            :Reference the Organization instance for
+            ProvenanceParticipantType **enterer**
+            with AllergyIntolerance.recorder.;
+          endif
+        endif
+
+        #APPLICATION:Reference the AllergyIntolerance in the Provenance
+        in the target parameter with a specific version;
+
+        #APPLICATION:Save the Provenance-Instance with the activity <b>CREATE</b>;
+
+        #PaleGreen:Add New <b>AllergyIntolerance</b>-Instance to <b>Output-Parameters</b>;
+
+        #PaleGreen:Add **AllergyIntolerance**
+        to **Output-Parameters**[allergyIntolerance][i].part[allergyIntolerance];
+
+        #PaleGreen:Add information **OperationOutcome**
+        with details MEDICATIONSVC_OPERATION_SUCCESS
+        to **Output-Parameters**[allergyIntolerance][i].part[operationOutcome];
+
+        repeat while (\rIf next <b>Input-Parameters.allergyIntolerance</b> exists\r) is (yes) not (no)
+      }
+
+    }
+
+    #PaleGreen:Return <b>Output-Parameters</b>;
+    stop
+  endif
+
+else (no)
+
+  #Pink:Return error <b>OperationOutcome</b>
+  with code processing and details
+  MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+  stop
+endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

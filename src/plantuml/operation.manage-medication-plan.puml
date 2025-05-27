@@ -1,0 +1,321 @@
+@startuml operation.manage-medication-plan
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title $manage-medication-plan
+start
+
+
+:Validate <b>Input-Parameters</b>;
+if (\rValidation successful\r) then (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code processing and details MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+    stop
+
+else (yes)
+endif
+
+
+if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst) \n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code not-found and details
+    MEDICATIONSVC_MEDICATIONPLAN_NO_EXIST;
+
+    stop
+else (yes)
+endif
+
+partition transaction {
+
+    #APPLICATION:Initialize the Provenance Instance Based on the Input-Parameters;
+    note right
+
+    __Link for detailed description__
+    __is below the diagram__
+
+    end note
+
+    if(\rCheck whether a Compostion-Instance \n for the EPAPlanComposition exists?\r) then (no)
+        :Get the latest Compostion-Instance;
+
+        if(\rCheck whether the Input-Parameters.parameter[planVersionId] \n matches the Composition.Meta.versionId of the /n EPAPlanComposition-Instance.\n) then (yes)
+
+            #Pink:Return **OperationOutcome**
+            with code not-found and details
+            MSG_NO_MATCH;
+
+            stop
+
+        else (yes)
+
+            :Use the latest Compostion-Instance;
+
+        endif
+
+    else (no)
+        :Create a Compostion instance
+        with the EPAPlanComposition profile.;
+    endif
+
+
+    fork
+
+    partition "upsert" {
+
+
+        if(**Input-Parameters**.parameter:**upsert** exists) then (yes)
+
+            :Perform the following action for the parameter.parts
+            **medicationStatement** with the
+            List-Instance from **EPAPlanMedicationStatementList**,
+            for the parameter **allergyIntolerance** with the
+            List-Instance from **AllergyIntoleranceList**
+            and for the parameters **bodyHeight**, ***bodyWeight**,
+            **creatinine**, **pregnancyStatus**, **breastfeedingStatus**,
+            **estimatedDateOfDelivery** and **glomerularFiltrationRate**
+            with the List-Instance from **EPAPlanObservationList**;
+
+            repeat:Take the next parameter.part;
+
+                if(\rCheck whether a List-Instance exists?\r) then (yes)
+                    :Get the List-Instance.;
+                else (no)
+                    :Create a List-Instance;
+                endif
+
+                if(Get Resource-Instance for the specific \n version from the Medication Service.) then (exists)
+                    if(\rCheck the List for any existing reference \n to any version of this instance.\r) then (yes)
+                        :Replace the reference of this
+                        Resource-Instance in the list
+                        with the specific version.;
+                    else (no)
+                        :Reference this Resource-Instance
+                        instance in the list
+                        with the specific version.;
+                    endif
+                else (not exists)
+
+                    :Perform a transaction rollback for all changes;
+
+                    #Pink:Return **OperationOutcome**
+                    with code not-found and details
+                    MSG_NO_MATCH;
+
+                    stop
+                endif
+
+
+            repeat while (If next parameter.part?) is (yes) not (no)
+
+        endif
+    }
+
+    fork again
+
+    partition "remove" {
+
+        if(**Input-Parameters**.parameter:**remove** exists) then (yes)
+
+            :Perform the following action for the parameter.parts
+            **medicationStatement** with the
+            List-Instance from **EPAPlanMedicationStatementList**,
+            for the parameter **allergyIntolerance** with the
+            List-Instance from **AllergyIntoleranceList**
+            and for the parameters **bodyHeight**, ***bodyWeight**,
+            **creatinine**, **pregnancyStatus**, **breastfeedingStatus**,
+            **estimatedDateOfDelivery** and **glomerularFiltrationRate**
+            with the List-Instance from **EPAPlanObservationList**;
+
+            repeat:Take the next parameter.part;
+
+                if(\rCheck whether a List-Instance exists?\r) then (yes)
+                    :Get the List-Instance.;
+                else (no)
+                    :Create a List-Instance;
+                endif
+
+
+                if(\rCheck whether the Resource-Instance \n with the specific version is already \n referenced by the List-Instance\r) then (exists)
+
+                    :Remove the reference of the Resource-Instance
+                    with the specific version from the
+                    List instance.;
+
+                else (not exists)
+                    :Perform a transaction rollback for all changes;
+
+                    #Pink:Return **OperationOutcome**
+                    with code not-found and details
+                    MSG_NO_MATCH;
+
+                    stop
+                endif
+
+
+            repeat while (If next parameter.part?) is (yes) not (no)
+
+        endif
+
+    }
+
+    end fork
+
+    partition "clear" {
+        if(**Input-Parameters**.parameter:**clear** exists) then (yes)
+
+            fork
+
+            partition "clear medicationStatement" {
+
+                if(**Input-Parameters**.parameter:**clear**.part[**medicationStatement**] exists) then (yes)
+
+                    if(\rCheck whether a List instance for the EPAPlanMedicationStatementList exists?\r) then (yes)
+                        :Get the List instance.;
+                    else (no)
+                        :Perform a transaction rollback for all changes;
+
+                        #Pink:Return **OperationOutcome**
+                        with code not-found and details
+                        MSG_NO_MATCH;
+
+                        stop
+                    endif
+
+                    :Clear all references from the List (EPAPlanMedicationStatementList).;
+
+
+                    if(**Input-Parameters**.parameter:**clear**.part[**medicationStatement**].part[**emptyReason**] exists) then (yes)
+
+                        :Set the value of List.emptyReason with
+                        **Input-Parameters**.parameter:**clear**.part[**medicationStatement**].part[**emptyReason**].valueCode.;
+                    endif
+
+                endif
+
+            }
+
+            fork again
+
+            partition "clear allergyIntolerance" {
+
+                if(**Input-Parameters**.parameter:**clear**.part[**allergyIntolerance**] exists) then (yes)
+
+                    if(\rCheck whether a List instance for the EPAPlanAllergyIntoleranceList exists?\r) then (yes)
+                        :Get the List instance.;
+                    else (no)
+                        :Perform a transaction rollback for all changes;
+
+                        #Pink:Return **OperationOutcome**
+                        with code not-found and details
+                        MSG_NO_MATCH;;
+
+                        stop
+                    endif
+
+                    :clear all references from the List (EPAPlanAllergyIntoleranceList).;
+
+
+                    if(**Input-Parameters**.parameter:**clear**.part[**allergyIntolerance**].part[**emptyReason**] exists) then (yes)
+
+                        :Set the value of List.emptyReason with
+                        **Input-Parameters**.parameter:**clear**.part[**allergyIntolerance**].part[**emptyReason**].valueCode.;
+
+                    endif
+
+                endif
+
+            }
+
+            end fork
+        endif
+    }
+
+        if(If the EPAPlanMedicationStatementList instance has changed?) then (yes)
+
+            :Save the EPAPlanMedicationStatementList instance;
+
+            :Upsert the reference of the EPAPlanComposition instance in
+            Composition.section[medicationEntries] with the updated
+            specific version of the EPAPlanMedicationStatementList instance.;
+
+        endif
+
+        if(If the EPAPlanAllergyIntoleranceList instance has changed?) then (yes)
+
+            :Save the EPAPlanAllergyIntoleranceList instance;
+
+            :Upsert the reference of the EPAPlanComposition instance in
+            Composition.section[allergyIntoleranceAMTSrZIEntries] with the
+            updated specific version of the EPAPlanAllergyIntoleranceList instance.;
+
+        endif
+
+        if(If the EPAPlanObservationList instance has changed?) then (yes)
+
+            :Save the EPAPlanObservationList instance;
+
+            :Upsert the reference of the EPAPlanComposition instance in
+            Composition.section[observationsMeasurementsAMTSrZIEntries] with the
+            updated specific version of the EPAPlanObservationList instance.;
+
+        endif
+
+        if(If the EPAPlanComposition instance has changed?) then (yes)
+
+            :Save the EPAPlanComposition instance;
+
+        endif
+
+    #APPLICATION:Reference the updated **EPAPlanComposition** in the Provenance
+    in the target parameter with a specific version;
+
+    #APPLICATION:Reference the updated **EPAPlanMedicationStatementList** in the Provenance
+    in the target parameter with a specific version;
+
+    #APPLICATION:Reference the updated **EPAPlanAllergyIntoleranceList** in the Provenance
+    in the target parameter with a specific version;
+
+    #APPLICATION:Reference the updated **EPAPlanObservationList** in the Provenance
+    in the target parameter with a specific version;
+
+    #APPLICATION:Save the Provenance-Instance with the activity **UPDATE**;
+
+}
+
+#PaleGreen:Add the **Composition.Meta.versionId** and **Composition.Meta.lastUpdated***
+from the **EPAPlanComposition** instance to the **Output-Parameters**.;
+
+#PaleGreen:Add information **OperationOutcome**
+witdh details MEDICATIONSVC_OPERATION_SUCCESS
+to **Output-Parameters**;
+
+#PaleGreen:Return **Output-Parameters**;
+
+stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

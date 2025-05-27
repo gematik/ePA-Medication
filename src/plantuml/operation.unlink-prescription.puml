@@ -1,0 +1,185 @@
+@startuml operation.unlink-prescription
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title MedicationStatement/[id]/$unlink-prescription
+start
+
+if (MedicationStatment instance exists?) then (yes)
+
+  :Validate <b>Input-Parameters</b>;
+
+  if (\rValidation successful\r) then (yes)
+
+
+    if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst).\r) then (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code forbidden and details
+      SVC_IDENTITY_MISMATCH;
+
+      stop
+
+    else (yes)
+
+
+        :Verify if a **MedicationRequest** instance exists with a **MedicationRequest.id** 
+        matching the **Input-Parameters**.parameter:**medicationRequestId**, and if the 
+        **MedicationRequestLinkedStatement** (extension) references the current 
+        **MedicationStatement** instance in the Medication Service;
+
+        if(\rIf MedicationRequest instances exist\r) then (no)
+            #Pink:Return **OperationOutcome**
+            with code not-found
+            and details MSG_RESOURCE_ID_FAILD;
+            stop
+        else (yes)
+
+            partition transaction {
+
+                :Retrieve the **MedicationRequest** instance with the corresponding **ResourceId**;
+
+                :Remove the reference from the **MedicationRequestLinkedStatement** extension that 
+                points to the current **MedicationStatement** instance;
+
+
+                #APPLICATION:<< Init >>
+                <b>Provenance</b>
+                =====
+                target = [version specific Reference(**MedicationRequest**)] 
+                activity = **#UPDATE**;
+
+                partition performer {
+
+                    if(Check whether a **Organization** instance from \n **Input-Parameters**.parameter:**perfomer**.part[**organization**]\nwith TelematikID is already stored in the Medication Service.) then (yes)
+
+                        #APPLICATION:<< Update >>
+                        **Organization**
+                        <i>from **Input-Parameters**.parameter:**perfomer**.part[**organization**]</i>
+
+                        identifier[TelematikID] = Value(TelematikID)
+                        <i>Replace all other elements with given resource instance</i>;
+
+                    else (no)
+
+                        #APPLICATION:<< Create >>
+                        **Organization**
+                        <i>from **Input-Parameters**.parameter:**perfomer**.part[**organization**]</i>
+
+                        identifier[TelematikID] = Value(TelematikID)
+                        <i>Set all other elements with given resource instance</i>;
+
+                    endif
+
+                    if(Check whether \n **Input-Parameters**.parameter:**perfomer**.part[**practitioner**] exists?) then (yes)
+
+                        if(Check whether a **Practitioner** instance from \n **Input-Parameters**.parameter:**perfomer**.part[**practitioner**]\n with TelematikID is already stored in the Medication Service.) then (yes)
+
+                            #APPLICATION:<< Update >>
+                            **Practitioner**
+                            <i>from **Input-Parameters**.parameter:**perfomer**.part[**practitioner**]</i>
+
+                            identifier[TelematikID] = Value(TelematikID)
+                            <i>Replace all other elements with given resource instance</i>;
+
+                        else (no)
+
+                            #APPLICATION:<< Create >>
+                            **Practitioner**
+                            <i>from **Input-Parameters**.parameter:**perfomer**.part[**practitioner**]</i>
+
+                            identifier[TelematikID] = Value(TelematikID)
+                            <i>Set all other elements with given resource instance</i>;
+
+                        endif
+                    endif
+
+                    if(Check whether \n **Input-Parameters**.parameter:**perfomer**.part[**practitionerRole**] exists?) then (yes)
+
+                        if(Check whether a **PractitionerRole** instance with the code, specialty and \n the references to specific **Organization** and **Practitioner** \n is already stored in the Medication Service.) then (yes)
+                        #APPLICATION:Get and initialize the
+                        corresponding **PractitionerRole**;
+                        else (no)
+
+                        #APPLICATION:<< Create >>
+                        <b>PractitionerRole</b>
+                        ====
+                        practitioner = Reference(<b>Practitioner</b>)
+                        organization = Reference(<b>Organization</b>)
+
+                        <i>Set all other elements with given resource instance</i>;
+
+                        endif
+                        
+                        #APPLICATION:Reference the PractitionerRole in the **Provenance** instance
+                        in agent with the corresponding ProvenanceParticipantType code;
+
+                    else (no)
+                        if(\rIf **Organization** for the \n corresponding **ProvenanceParticipantType** code exists?\r) then (yes)
+                            #APPLICATION:Reference the **Organization** in the **Provenance** instance in agent
+                            with the corresponding **ProvenanceParticipantType** code and set
+                            identifier.display with corresponding ID-Token.organizationName;
+                        endif
+                        if(\rIf **Practitioner** for the \n corresponding **ProvenanceParticipantType** code exists?\r) then (yes)
+                            #APPLICATION:Reference the **Practitioner** in the **Provenance** instance in agent
+                            with the corresponding **ProvenanceParticipantType** code and set
+                            identifer.display with corresponding data from **Practitioner** instance;
+                        endif
+                    endif
+
+                }
+                #APPLICATION:Save the **Provenance** instance;
+            }
+
+            #PaleGreen:Return information **OperationOutcome**
+            witdh details MEDICATIONSVC_OPERATION_SUCCESS;
+
+            stop
+        endif
+
+    endif
+
+  else (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code processing and details
+    MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+    stop
+
+  endif
+
+else (no)
+
+  #Pink:Return **OperationOutcome**
+  with code not-found
+  and details MSG_RESOURCE_ID_FAILD;
+
+  stop
+
+endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+
+@enduml

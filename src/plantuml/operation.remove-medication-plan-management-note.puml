@@ -1,0 +1,121 @@
+@startuml operation.remove-medication-plan-management-note
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+legend {
+  backgroundColor White
+}
+.iDTokenCheck {
+
+}
+</style>
+title $remove-medication-plan-note
+start
+
+:Validate <b>Input-Parameters</b>;
+if (\rValidation successful\r) then (yes)
+
+  if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst).\r) then (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code forbidden and details
+    SVC_IDENTITY_MISMATCH;
+
+    stop
+
+  else (yes)
+
+    partition transaction {
+
+      if(\rCheck whether a Compostion-Instance for the EPAPlanComposition exists?\r) then (yes)
+          :Get the latest version of the
+          **EPAPlanComposition**-Instance.;
+      else (no)
+          #Pink:Return **OperationOutcome**
+          with code not-found and details
+          MSG_NO_MATCH;
+          stop
+      endif
+
+      if(\rCheck whether the Input-Parameters.parameter[planVersionId] \n matches the Composition.Meta.versionId of the\nEPAPlanComposition-Instance.\n) then (yes)
+
+          #Pink:Return **OperationOutcome**
+          with code not-found and details
+          MSG_VERSION_AWARE_CONFLICT;
+
+          stop
+
+      else (yes)
+      endif
+
+      #APPLICATION:Initialize the Provenance Instance Based on the Input-Parameters;
+      note right
+
+        __Link for detailed description__
+        __is below the diagram__
+
+      end note
+
+      if(\rCheck whether the **EPAPlanComposition**-Instance references an \nObservation in **Composition.section[noteEntries]**.\r) then (yes)
+
+          :Remove the reference of the
+          **Observation**-Instance from the
+          **EPAPlanComposition**-Instance
+          in the field Composition.section[noteEntries].;
+
+          :Delete the previously referenced
+          **Observation**-Instance;
+
+          #APPLICATION:Reference the updated **EPAPlanComposition**-Instance in the Provenance
+          in the target parameter with a specific version;
+
+          #APPLICATION:Set the **Provenance**-Instance activity to **UPDATE**;
+
+          #APPLICATION:Save the **Provenance**-Instance;
+
+      else (no)
+
+
+          #Pink:Return **OperationOutcome**
+          with code not-found and details
+          MSG_RESOURCE_ID_FAIL;
+          stop
+
+      endif
+
+    }
+
+    #PaleGreen:Return information **OperationOutcome**
+    with details MEDICATIONSVC_OPERATION_SUCCESS;
+
+    stop
+
+  endif
+
+else (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code processing and details
+    MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+    stop
+
+endif
+
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml
