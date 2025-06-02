@@ -1,0 +1,83 @@
+@startuml sub.operation.provenance
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.inOutStyle {
+    BackgroundColor #PaleGreen
+}
+</style>
+
+
+<<inOutStyle>>:IN: Input-Parameters;
+
+#APPLICATION:Initialize a new Provenance instance with the EPAProvenance profile;
+
+#APPLICATION:Process the **Input-Parameters**.parameter:**performer**
+for agent type **performer**;
+note
+
+    Detailed diagram is shown separately
+    
+end note
+
+
+if(\rCheck whether \n **Input-Parameters**.parameter:**enterer** exists?\r) then (yes) 
+    #APPLICATION:Process the **Input-Parameters**.parameter:**enterer**
+    for agent type **enterer**;
+    note
+
+        Detailed diagram is shown separately
+        
+    end note
+endif
+
+
+
+if(\rCheck whether \n **Input-Parameters**.parameter:**author** exists?\r) then (yes) 
+    #APPLICATION:Process the **Input-Parameters**.parameter:**author**
+    for agent type **author**;
+    note
+
+        Detailed diagram is shown separately
+        
+    end note
+endif
+
+
+if(\rCheck whether \n **Input-Parameters**.parameter:**unconfirmedAuthor** exists?\r) then (yes) 
+    #APPLICATION:Process the **Input-Parameters**.parameter:**unconfirmedAuthor**
+    for agent type **unconfirmedAuthor**;
+    note
+
+        Detailed diagram is shown separately
+        
+    end note
+endif
+
+
+if(\rCheck whether \n **Input-Parameters**.parameter:**informant** exists?\r) then (yes) 
+
+    #APPLICATION:Process the **Input-Parameters**.parameter:**informant**
+    for agent type **informant**;
+    note
+
+        Detailed diagram is shown separately
+        
+    end note
+
+endif
+
+
+<<inOutStyle>>:OUT: Provenance instance;
+
+@enduml
+
+

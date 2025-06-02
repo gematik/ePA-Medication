@@ -1,47 +1,78 @@
 @startuml operation.cancel-prescription-erp
 skinparam defaultTextAlignment center
-skinparam title {
+<style>
+title {
   backgroundColor SkyBlue
   borderColor Gray
-} 
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
 title $cancel-prescription-erp
 
 start
 
   repeat:Get next <b>RxPrescription</b> from the <b>Input-Parameters</b>;
 
-    :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of 
-    <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and the 
+    :Generate <b>RxPrescriptionProcessIdentifier</b> from the values of
+    <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>authoredOn</b> and the
     <b>Input-Parameters</b>[x].<b>RxPrescription</b>.part.<b>PrescriptionId</b>;
+    note right
 
-    if(\rCheck if there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> and the status <b>active</b> already in the Medication Service\r) then (yes)
-      
+      The generation of the value for
+      the **RxPrescriptionProcessIdentifier**
+      is described below the diagram.
+
+    end note
+
+    if(\rCheck whether there is a <b>MedicationRequest</b> with the <b>RxPrescriptionProcessIdentifier</b> and the status <b>active</b> already in the Medication Service\r) then (yes)
+
       partition transaction {
 
-        :Set <b>MedicationRequest</b> with the 
+        :Set <b>MedicationRequest</b> with the
         identifier[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
         to Status <b>cancelled</b>;
 
-        :Set all <b>MedicationDispense</b> with the 
+        :Set all <b>MedicationDispense</b> with the
         extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
         to Status <b>cancelled</b>;
 
-        :Set all <b>Medication</b> with the 
+        :Set all <b>Medication</b> with the
         extension[RxPrescriptionProcessIdentifier] equal to <b>RxPrescriptionProcessIdentifier</b>
         to Status <b>inactive</b>;
 
-        #PaleGreen:Add information <b>OperationOutcome</b> (MEDICATIONSVC_OPERATION_SUCCESS) to the <b>Output-Parameters</b>;
+        #PaleGreen:Add information <b>OperationOutcome</b>
+        with details MEDICATIONSVC_OPERATION_SUCCESS
+        to the <b>Output-Parameters</b>;
 
       }
 
     else (no)
-    
-      #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_PRESCRIPTION_NO_EXIST) or (MEDICATIONSVC_PRESCRIPTION_STATUS) \n to the <b>Output-Parameters</b>; 
+
+      #Pink:Add error <b>OperationOutcome</b>
+      with details MEDICATIONSVC_PRESCRIPTION_NO_EXIST or MEDICATIONSVC_PRESCRIPTION_STATUS
+      to the <b>Output-Parameters</b>;
 
     endif
 
   repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)
 
-:Return "<b>Output-Parameters</b>";
+#PaleGreen:Return <b>Output-Parameters</b>;
 stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+endlegend
 @enduml
