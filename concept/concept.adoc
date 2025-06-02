@@ -105,10 +105,16 @@ endif::[]
 |Veröffentlichung - abgekündigt
 |gematik
 
-|3.1.2 Pre-Release Review
+|3.1.2 RC
 |31.03.2025
 |2.3.3
-|Unterstützung vorläufiger Dispensierungen; Operation für eML-Abruf
+|Unterstützung vorläufiger Dispensierungen; Operation für eML-Abruf; Vorveröffentlichung zur Kommentierung
+|gematik
+
+|3.1.2
+|28.05.2025
+|
+|Veröffentlichung
 |gematik
 
 |===
