@@ -3,6 +3,9 @@
 # Release Notes ePA Medication
 ## information
 This version 3.1.2 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.0.
+## Release 3.1.2 RC.1
+### changes
+- removed disclaimer
 ## Release 3.1.2 RC
 ### changes
 - reduced content to concept and tools only for ePA-3.1.2
