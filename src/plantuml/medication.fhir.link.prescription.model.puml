@@ -1,0 +1,46 @@
+@startuml medication.fhir.link.prescription.model
+
+skinparam fixCircleLabelOverlapping false
+skinparam roundcorner 10
+skinparam object {
+    BackgroundColor DimGrey
+    BorderColor Black
+    ArrowColor #5c7aab
+    FontSize 12
+    FontColor White
+    NoteBackgroundColor #3483eb
+    ArrowFontColor #777777
+    ArrowFontSize 11
+}
+skinparam LegendBackgroundColor White
+ 
+object "<< Medikamentzusatzinformation >>\n**MedicationStatement**" as MedicationStatement #LightSeaGreen  {
+    + subject: Reference(EPAPatient)
+}
+object "<< Medikament >>\n**EPAMedication**" as PlanMedication #LightSeaGreen
+object "<< Verschriebenes Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen
+object "<< Arzneimittelverschreibung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen {
+    + subject: Reference(EPAPatient)
+    + requester: Reference(EPAPractitionerRole)
+}
+object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen {
+    + perfomer.actor: Reference(OrganizationDirectory)
+}
+
+MedicationStatement -d-> PlanMedication : "medicationReference"
+
+MedicationRequest -d-> Medication : "medicationReference"
+MedicationRequest -d-> MedicationStatement : "MedicationRequestLinkedStatement\n(Extension)"
+
+MedicationDispense -d-> Medication : "medicationReference"
+MedicationDispense -d-> MedicationRequest : "authorizingPrescription"
+
+legend left
+    | Color | Data |
+    |<#DarkSeaGreen>| Prescription Data |
+    |<#LightSeaGreen>| Plan Data |
+    |<#DimGrey>| Actor |
+endlegend
+ 
+ 
+@enduml

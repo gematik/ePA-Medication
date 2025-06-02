@@ -1,0 +1,114 @@
+@startuml operation.manage-note-amts-observation
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title Observation/[id]/$manage-note
+start
+
+:Check whether Observation instance exists;
+
+if (Observation instance exists?) then (yes)
+
+  :Validate <b>Input-Parameters</b>;
+  if (\rValidation successful\r) then (yes)
+
+    if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst) \n AND KVNR-based logical reference(s) correspond(s) to x-insurantid.\r) then (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code forbidden and details
+      SVC_IDENTITY_MISMATCH;
+
+      stop
+
+    else (yes)
+
+      partition transaction {
+
+        if (\nInput-Parameters.parameter:resourceVersionId\nmatches the latest version of Observation\n) then (yes)
+        else (no)
+
+          #Pink:Return error **OperationOutcome**
+          with code processing and details
+          MSG_VERSION_AWARE_CONFLICT;
+
+          stop
+
+        endif
+
+        #APPLICATION:Initialize the Provenance Instance Based on the Input-Parameters;
+        note right
+
+          __Link for detailed description__
+          __is below the diagram__
+
+        end note
+
+        :<< UPDATE >>
+        **Observation** instance
+        ====
+        note = **Input-Parameters.parameter:note**;
+
+        #PaleGreen:Add **Observation** instance to **Output-Parameters**;
+
+        if(\rCheck whether a PractitionerRole has been instantiated \n for the ProvenanceParticipantType performer.\r) then (yes)
+          :Reference the PractitionerRole instance \n with the Observation.performer.;
+        else (no)
+          :Reference the Organization instance for \n ProvenanceParticipantType performer \n with Observation.performer.;
+        endif
+
+        #APPLICATION:Reference the updated **Observation** in the Provenance
+        in the target parameter with a specific version;
+
+        #APPLICATION:Save the Provenance-Instance with the activity **UPDATE**;
+
+        #PaleGreen:Add information **OperationOutcome**
+        witdh details MEDICATIONSVC_OPERATION_SUCCESS
+        to **Output-Parameters**;
+
+      }
+
+      #PaleGreen:Return **Output-Parameters**;
+
+      stop
+
+    endif
+
+  else (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code processing and details
+      MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+      stop
+  endif
+
+else (no)
+  #Pink:Return **OperationOutcome**
+  with code not-found and details MSG_RESOURCE_ID_FAIL;
+
+ stop
+endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

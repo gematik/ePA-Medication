@@ -1,0 +1,126 @@
+@startuml operation.cancel-dispensation
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title $cancel-dispensation
+
+start
+    :Validate all <b>Identifier</b>, <b>Code</b> and <b>Organization</b> - Resources from <b>Input-Parameters</b>[x].<b>Dispensation</b>.part;
+
+    if (\rValidation successful\r) then (yes)
+
+    if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n **Input-Parameters**[x].**performerInstitution** \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst).\r) then (no)
+
+      #Pink:Return error **OperationOutcome**
+      with code forbidden and details
+      SVC_IDENTITY_MISMATCH;
+
+      stop
+
+    else
+
+        :Check for existing <b>Organization</b> in Medication Service with TelematikID from \n <b>Input-Parameters</b>[x].<b>performerInstitution</b>;
+
+        if (<b>Organization</b> exists?) then (yes)
+
+          :<< Update >>
+          <b>Organization</b>
+          <i>from <b>Input-Parameters</b>[x].<b>performerInstitution</b></i>
+                    identifier[TelematikID] = Value(TelematikID)
+          <i>Replace all other elements with given resource instance</i>;
+
+        else (no)
+
+          :<< Create >>
+          <b>Organization</b>
+          <i>from <b>Input-Parameters</b>[x].<b>performerInstitution</b></i>
+                    identifier[TelematikID] = Value(TelematikID)
+          <i>Set all other elements with given resource instance</i>;
+
+        endif
+
+        repeat:Get next <b>Dispensation</b> from <b>Input-Parameters</b>;
+          partition transaction {
+
+              if (<b>MedicationDispense</b> with identifier[<b>EPADispensationIdentifier</b>] exists?) then (yes)
+
+                :Set **Medication** with
+                extension[**EPADispensationIdentifier**] equals
+                Value(**Input-Parameters**[x].**EPADispensationIdentifier**)
+                to status <b>#inactive</b>;
+
+                #PaleGreen:Add updated <b>Medication</b> to
+                <b>Output-Parameters</b>;
+
+                :Set <b>MedicationDispense</b> with 
+                identifier[<b>EPADispensationIdentifier</b>] 
+                equals Value(<b>Input-Parameters</b>[x].<b>EPADispensationIdentifier</b>) 
+                to status <b>#cancelled</b>; 
+
+                if (Input-Parameters[<b>dispensation</b>].part[<b>reason</b>] exists?) then (yes)
+
+                  :Set <b>MedicationDispense</b>.<b>statusReasonCodeableConcept</b>
+                  to Input-Parameters[<b>dispensation</b>].part[<b>reason</b>];
+
+                endif
+
+                #PaleGreen:Add updated <b>MedicationDispense</b>
+                to <b>Output-Parameters</b>;
+
+                #APPLICATION:<< Create >>
+                <b>Provenance</b>
+                =====
+                target = [version specific Reference(<b>Medication</b>), version specific Reference(<b>MedicationDispense</b>)] 
+                agent.type = <b>#performer</b> 
+                agent.who = Reference(<b>Organization</b>) 
+                activity = <b>#UPDATE</b>;
+
+                #PaleGreen:Add information <b>OperationOutcome</b>
+                (MEDICATIONSVC_OPERATION_SUCCESS)
+                and  <b>EPADispensationIdentifier</b>
+                to <b>Output-Parameters</b>;
+
+              else (no)
+                #Pink:Add error <b>OperationOutcome</b> (MEDICATIONSVC_DISPENSATION_NO_EXIST)
+                and  <b>EPADispensationIdentifier</b> to <b>Output-Parameters</b>;
+
+              endif
+
+          }
+        repeat while (If next <b>Input-Parameters</b> exists) is (yes) not (no)
+
+        #PaleGreen:Return **Output-Parameters**;
+
+        stop
+
+      endif
+
+    else (no)
+      #Pink:Return error **OperationOutcome**
+      MEDICATIONSVC_NO_VALID_STRUCTURE;
+      stop
+    endif
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

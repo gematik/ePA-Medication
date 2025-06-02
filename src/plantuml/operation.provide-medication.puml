@@ -1,0 +1,148 @@
+@startuml operation.provide-medication
+skinparam defaultTextAlignment center
+<style>
+title {
+  backgroundColor SkyBlue
+  borderColor Gray
+}
+activityDiagram {
+  diamond {
+    BackgroundColor #Business
+  }
+}
+.iDTokenCheck {
+
+}
+legend {
+  backgroundColor White
+}
+</style>
+title Medication/$provide
+start
+
+:Validate <b>Input-Parameters</b>;
+if (\rValidation successful\r) then (yes)
+else (no)
+
+    #Pink:Return error **OperationOutcome**
+    with code processing and details
+    MEDICATIONSVC_NO_VALID_STRUCTURE;
+
+    stop
+
+endif
+
+if <<iDTokenCheck>>(\rThe TelematikID of the Organization instance in \n Input-Parameters.parameter:performer.part[organization] \n matches the TelematikID of the ID-Token from the Identity Provider (i.e., IDP-Dienst).\r) then (no)
+
+  #Pink:Return error **OperationOutcome**
+  with code forbidden and details
+  SVC_IDENTITY_MISMATCH ;
+
+  stop
+
+else (yes)
+endif
+
+partition transaction {
+
+  :Get main medication from
+  Input-Parameters.parameter:**medication**.resource;
+
+  #APPLICATION:Initialize Provenance Instance for main medication
+  based on the Input-Parameters;
+  note right
+
+    __Link for detailed description__
+    __is below the diagram__
+
+  end note
+
+  :Generate the <b>EPAMedicationUniqueIdentifier</b>
+  from main medication;
+  note right
+
+    __Link for detailed description__
+    __is below the diagram__
+
+  end note
+
+  :<< Initialize >>
+  **Medication** from main medication
+  ====
+  identifier[<b>EPAMedicationUniqueIdentifier</b>] = Value(EPAMedicationUniqueIdentifier)
+  <i>Set all other elements with given resource instance</i>
+  <i>Remove all contained entries</i>;
+
+  if (\nInput-Parameters.parameter:**medication**.resource.**contained**\n**exists**\n) then (no)
+  else (yes)
+
+    partition loop {
+
+    repeat:Get next contained entry from\nInput-Parameters.parameter:**medication**.resource.**contained**;
+
+      #APPLICATION:Initialize the Provenance Instance based on the Input-Parameters;
+      note right
+
+        __Link for detailed description__
+        __is below the diagram__
+
+      end note
+
+      :Generate the <b>EPAMedicationUniqueIdentifier</b>
+      from entry;
+      note right
+
+        __Link for detailed description__
+        __is below the diagram__
+
+      end note
+
+      :<< Create >>
+      **Medication** from entry
+      ====
+      identifier[<b>EPAMedicationUniqueIdentifier</b>] = Value(EPAMedicationUniqueIdentifier)
+      <i>Set all other elements with given resource instance</i>;
+
+      #APPLICATION:Reference the Medication in the Provenance
+      in the target parameter with a specific version;
+
+      #APPLICATION:Save the Provenance-Instance with the activity <b>CREATE</b>;
+
+      :Add medication in main Medication
+      as ingredient.itemReference;
+
+      #PaleGreen:Add New <b>Medication</b>-Instance to
+      **Output-Parameters**.parameter:**product**;
+
+    repeat while (\nInput-Parameters.parameter:**medication**.resource.**contained**\nhas next entry\n) is (yes) not (no)
+    
+    }
+
+  endif
+
+  :Save main Medication;
+
+  #APPLICATION:Reference the main Medication in the Provenance for main
+  Medication in the target parameter with a specific version;
+
+  #APPLICATION:Save the Provenance-Instance with the activity <b>CREATE</b>;
+
+  #PaleGreen:Add New <b>Medication</b>-Instance to
+  **Output-Parameters**.parameter:**medication**;
+
+  #PaleGreen:Add information <b>OperationOutcome</b>
+  with details MEDICATIONSVC_OPERATION_SUCCESS
+  to <b>Output-Parameters</b>;
+
+}
+  #PaleGreen:Return <b>Output-Parameters</b>;
+  stop
+
+legend right
+    | Color | Activity type |
+    |<#PaleGreen>| Successful output |
+    |<#Pink>| Error output |
+    |<#Business>| Conditions |
+    |<#APPLICATION>| For Provenance |
+endlegend
+@enduml

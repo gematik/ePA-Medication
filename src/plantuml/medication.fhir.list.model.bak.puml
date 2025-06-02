@@ -1,0 +1,126 @@
+@startuml medication.fhir.list.bak.model
+skinparam fixCircleLabelOverlapping false
+skinparam roundcorner 10
+skinparam object {
+    BackgroundColor DimGrey
+    BorderColor Black
+    ArrowColor #5c7aab
+    FontSize 12
+    FontColor White
+    NoteBackgroundColor #3483eb
+    ArrowFontColor #777777
+}
+skinparam LegendBackgroundColor White
+ 
+object "<< Arzt >>\n**PractitionerDirectory**" as Practitioner
+object "<< Organisation >>\n**OrganizationDirectory**" as Organization
+object "<< Apotheke >>\n**OrganizationDirectory**" as DispenserOrganization #DarkSeaGreen
+object "PractitionerRole" as PractitionerRole
+ 
+object "<< verordnete Arzneimittel >>\n**EPAMedication**" as Medication #DarkSeaGreen
+object "<< Medikationsverordnung >>\n**EPAMedicationRequest**" as MedicationRequest #DarkSeaGreen {
+    + subject: Reference(Patient)
+}
+object "<< Dispensierung >>\n**EPAMedicationDispense**" as MedicationDispense #DarkSeaGreen
+ 
+object "<< Medikation >>\n**EPAMedication**" as eMPMedication #LightSeaGreen {
+}
+object "<< Medikations Information >>\n**MedicationStatemanet**" as MedicationStatement #LightSeaGreen  {
+    + subject: Reference(Patient)
+}
+object "<< Herkunftsnachweis >>\n**Provenance**" as Provenance #LightSeaGreen {
+    + activity = CREATE | UPDATE | DELETE
+}
+object "<< Verifizierung >>\n**Provenance**" as Verification #LightSeaGreen {
+    + activity = VRF
+    + agent.type = verifier
+}
+
+object "<< Interne Management-Liste für Medikations Information >>\n**List**" as MedicationList #LightSeaGreen
+object "<< Interne Management-Liste für Allergien/Unverträglichkeiten >>\n**List**" as AllergyIntoleranceList #LightSeaGreen
+object "<< Interne Management-Liste für Beobachtungen >>\n**List**" as ObservationList #LightSeaGreen
+
+object "<< Interne Versionskontrolle für die eMP-Ausgabe >>\n**Composition**" as Composition #LightSeaGreen
+
+' object "<< Körpergröße >>\n**Observation**" as BodyHeight #LightSeaGreen
+' object "<< Körpergewicht >>\n**Observation**" as BodyWeight #LightSeaGreen
+' object "<< Stillstatus >>\n**Observation**" as Breastfeeding #LightSeaGreen
+' object "<< Serumkreatinin-Wert >>\n**Observation**" as Creatinine #LightSeaGreen
+' object "<< Schwangerschaftsstatus >>\n**Observation**" as PregnancyStatus #LightSeaGreen
+' object "<< Voraussichtliches Entbindungstermin >>\n**Observation**" as EstimatedDateDelivery #LightSeaGreen
+' object "<< Glomeruläre Filtrationsrate (GFR) >>\n**Observation**" as GFR #LightSeaGreen
+' object "<< Übergreifender Hinweis >>\n**Observation**" as ManagementNote #LightSeaGreen
+object "<< Körpergröße >>\n<< Körpergewicht >>\n<< Stillstatus >>\n<< Serumkreatinin-Wert >>\n<< Schwangerschaftsstatus >>\n<< Voraussichtliches Entbindungstermin >>\n<< Glomeruläre Filtrationsrate (GFR) >>\n**Observation**" as Observation #LightSeaGreen
+object "<< Übergreifender Hinweis >>\n**Observation**" as ManagementNote #LightSeaGreen
+
+object "<< Allergie oder Intoleranz >>\n**AllergyIntolerance**" as AllergyIntolerance #LightSeaGreen {
+    + subject: Reference(Patient)
+}
+
+
+
+MedicationRequest -r-> Medication : medicationReference
+MedicationRequest -d-> PractitionerRole : requester
+MedicationRequest -l-> MedicationStatement : MedicationRequestLinkedStatement\n(Extension)
+ 
+PractitionerRole -d-> Practitioner : practitioner
+PractitionerRole -d-> Organization : organization
+ 
+MedicationDispense -u-> Medication : medicationReference
+MedicationDispense -l-> MedicationRequest : authorizingPrescription
+MedicationDispense -d-> DispenserOrganization : perfomer.actor
+ 
+MedicationStatement -u-> eMPMedication : medicationReference
+
+MedicationList -u-> MedicationStatement : entry[].item
+AllergyIntoleranceList --> AllergyIntolerance : entry[].item
+' ObservationList --> BodyHeight : entry[].item
+' ObservationList --> BodyWeight : entry[].item
+' ObservationList --> Breastfeeding : entry[].item
+' ObservationList --> Creatinine : entry[].item
+' ObservationList --> PregnancyStatus : entry[].item
+' ObservationList --> EstimatedDateDelivery : entry[].item
+ObservationList --> Observation : entry[].item
+ObservationList --> ManagementNote : entry[].item
+
+Provenance --> PractitionerRole : agent[].who
+Provenance --> MedicationStatement : target
+' Provenance --> BodyHeight : target
+' Provenance --> BodyWeight : target
+' Provenance --> Breastfeeding : target
+' Provenance --> Creatinine : target
+' Provenance --> PregnancyStatus : target
+' Provenance --> EstimatedDateDelivery : target
+' Provenance --> GFR : target
+Provenance --> ManagementNote : target
+Provenance --> Observation : target
+Provenance --> AllergyIntolerance : target
+
+Verification --> Practitioner : agent[].who
+Verification --> MedicationStatement : target
+' Verification --> BodyHeight : target
+' Verification --> BodyWeight : target
+' Verification --> Breastfeeding : target
+' Verification --> Creatinine : target
+' Verification --> PregnancyStatus : target
+' Verification --> EstimatedDateDelivery : target
+' Verification --> GFR : target
+Verification --> Observation : target
+Verification --> ManagementNote : target
+Verification --> AllergyIntolerance : target
+
+Composition --> MedicationList : section[].entry
+Composition --> AllergyIntoleranceList : section[].entry
+Composition --> ObservationList : section[].entry
+Composition --> PractionerRole : author
+
+
+legend right
+    | Color | Data Origin |
+    |<#DarkSeaGreen>| Prescription data |
+    |<#DimGrey>|  Actors |
+    |<#LightSeaGreen>|  eMP |
+endlegend
+ 
+ 
+@enduml
