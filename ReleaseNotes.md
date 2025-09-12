@@ -3,6 +3,9 @@
 # Release Notes ePA Medication
 ## information
 This version 3.1.3 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.2.
+## Release 3.1.3
+### changes
+- no changes
 ## Release 3.1.3 RC
 ### changes
 - removed concept (now integrated in concept in epa-basic)
