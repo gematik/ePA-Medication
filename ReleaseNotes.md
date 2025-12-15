@@ -1,6 +1,9 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
+## Release 3.1.3-1
+### changes
+- no changes compared to Release 3.1.3
 ## information
 This version 3.1.3 is the logically subsequent version of version 3.0.5 and incorporates the latest fixes and maintenance changes and also selected changes published for the intermediate release 3.1.2.
 ## Release 3.1.3
