@@ -1,0 +1,113 @@
+{
+  "resourceType": "MedicationDispense",
+  "id": "c4a9b1e2-5d3f-4a7c-9b6e-1f2a3b4c5d6e",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-03-05T14:15:00.000Z",
+    "profile": [
+      "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense"
+    ]
+  },
+  "contained": [
+    {
+      "resourceType": "Medication",
+      "id": "med0",
+      "meta": {
+        "profile": [
+          "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication"
+        ]
+      },
+      "extension": [
+        {
+          "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension",
+          "valueCoding": {
+            "code": "781405001",
+            "system": "http://snomed.info/sct",
+            "display": "Medicinal product package"
+          }
+        }
+      ],
+      "code": {
+        "coding": [
+          {
+            "system": "http://fhir.de/CodeSystem/ifa/pzn",
+            "code": "08545331",
+            "display": "IBU-ratiopharm 800mg akut Schmerztabletten"
+          }
+        ]
+      },
+      "status": "active",
+      "form": {
+        "coding": [
+          {
+            "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_DARREICHUNGSFORM",
+            "code": "TAB",
+            "display": "Tabletten"
+          }
+        ]
+      }
+    }
+  ],
+  "extension": [
+    {
+      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension",
+      "valueIdentifier": {
+        "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
+        "value": "160.112.925.848.156.74_20251019"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-MedicationDispense.renderedDosageInstruction",
+      "valueMarkdown": "3x täglich 1 Tablette"
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/epa-dispense-unique-identifier",
+      "value": "3014C3A38006A8BEFEFEDDD536731F4FCE32F48CFD37ECBE060EEC40813CBB2E"
+    },
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier",
+      "value": "d6932eb6-5760-4b19-9d89-ee254d273df6_160.112.925.848.156.74"
+    }
+  ],
+  "status": "in-progress",
+  "category": {
+    "coding": [
+      {
+        "system": "https://gematik.de/fhir/terminology/CodeSystem/ti-medication-dispense-category-cs",
+        "code": "prescription",
+        "display": "Verschreibungspflichtige Abgabe"
+      }
+    ]
+  },
+  "medicationReference": {
+    "reference": "#med0"
+  },
+  "subject": {
+    "identifier": {
+      "system": "http://fhir.de/sid/gkv/kvid-10",
+      "value": "X110411319"
+    }
+  },
+  "performer": [
+    {
+      "actor": {
+        "identifier": {
+          "system": "https://gematik.de/fhir/sid/telematik-id",
+          "value": "9-2.58.00000023"
+        },
+        "display": "gematik Apotheke"
+      }
+    }
+  ],
+  "authorizingPrescription": [
+    {
+      "reference": "MedicationRequest/f14498f0-4932-490a-91a2-9de8616e133b"
+    }
+  ],
+  "whenHandedOver": "2026-03-05",
+  "substitution": {
+    "wasSubstituted": false
+  }
+}

@@ -12,13 +12,35 @@ IDENTIFIER_SYSTEM = (
 )
 TYPE_EXTENSION_URL = "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension"
 MEDICATION_MANUFACTURING_INSTRUCTIONS_EXTENSION_URL = "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-manufacturing-instructions-extension"
+MEDICATION_FORMULATION_PACKAGING_EXTENSION_URL = "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-formulation-packaging-extension"
+MEDICATION_TOTAL_QUANTITY_FORMULATION_EXTENSION_URL = "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-total-quantity-formulation-extension"
+MEDICATION_PACKAGING_SIZE_EXTENSION_URL = "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-packaging-size-extension"
+MEDICATION_INGREDIENT_DARREICHUNGSFORM_EXTENSION_URL = "https://gematik.de/fhir/epa-medication/StructureDefinition/medication-ingredient-darreichungsform-extension"
 DATA_ABSENT_REASON_EXT = "http://hl7.org/fhir/StructureDefinition/data-absent-reason"
 
 
-def generate_subhash(value):
-    h = hashlib.sha256()
-    h.update(str(value).encode())
-    return str(h.hexdigest()).upper()
+def _is_marked_absent(primitive_ext):
+    return (
+        primitive_ext is not None
+        and primitive_ext.extension is not None
+        and any(ext.url == DATA_ABSENT_REASON_EXT for ext in primitive_ext.extension)
+    )
+
+
+def quantity_hash_value(quantity):
+    ####
+    # Numeric value (value) as well as unit as coding (code and system).
+    ###
+    result = ""
+    if quantity is None:
+        return result
+    if quantity.value is not None:
+        result += str(quantity.value)
+    if quantity.code is not None:
+        result += str(quantity.code)
+    if quantity.system is not None:
+        result += str(quantity.system)
+    return result
 
 
 def generate_hash(medication):
@@ -48,12 +70,49 @@ def generate_hash(medication):
         form = "".join(str(f.code) + str(f.system) for f in medication.form.coding)
 
     ####
+    # Manufacturer = Medication.manufacturer.display
+    # IF present: Trim + ToLower
+    ###
+    manufacturer = ""
+    if medication.manufacturer and medication.manufacturer.display:
+        manufacturer = medication.manufacturer.display.replace(" ", "").lower()
+
+    ####
+    # Amount = Medication.amount (Ratio)
+    #   numerator (value, code, system)
+    #   denominator (value, code, system)
+    #   MedicationTotalQuantityFormulationExtension on amount.numerator
+    #   MedicationPackagingSizeExtension on amount.numerator
+    ###
+    amount = ""
+    if medication.amount:
+        amount += quantity_hash_value(medication.amount.numerator)
+        amount += quantity_hash_value(medication.amount.denominator)
+        numerator = medication.amount.numerator
+        if numerator and numerator.extension:
+            for ext in numerator.extension:
+                if (
+                    ext.url == MEDICATION_TOTAL_QUANTITY_FORMULATION_EXTENSION_URL
+                    and ext.valueString
+                ):
+                    amount += ext.valueString.replace(" ", "").lower()
+            for ext in numerator.extension:
+                if (
+                    ext.url == MEDICATION_PACKAGING_SIZE_EXTENSION_URL
+                    and ext.valueString
+                ):
+                    amount += ext.valueString.replace(" ", "").lower()
+
+    ####
     # Extensions
     ###
     extensions = []
     if medication.extension:
         for ext in medication.extension:
-            if ext.url == MEDICATION_MANUFACTURING_INSTRUCTIONS_EXTENSION_URL:
+            if ext.url in (
+                MEDICATION_MANUFACTURING_INSTRUCTIONS_EXTENSION_URL,
+                MEDICATION_FORMULATION_PACKAGING_EXTENSION_URL,
+            ):
                 if ext.valueCoding:
                     ext_value = ext.valueCoding.system + ext.valueCoding.code
                 elif ext.valueString:
@@ -63,8 +122,7 @@ def generate_hash(medication):
                 else:
                     continue
 
-                subhash = generate_subhash(ext_value)
-                extensions.append(subhash)
+                extensions.append(ext_value)
 
     extensions.sort()
 
@@ -82,12 +140,7 @@ def generate_hash(medication):
             ingredient_strength = ""
 
             if ing.itemReference:
-                if not any(
-                    [
-                        ext.url == DATA_ABSENT_REASON_EXT
-                        for ext in ing.itemReference.extension
-                    ]
-                ):
+                if not _is_marked_absent(ing.itemReference):
                     references.append(ing.itemReference.reference)
                 continue
 
@@ -101,45 +154,45 @@ def generate_hash(medication):
 
             if ing.strength and ing.strength.numerator:
                 numerator = ing.strength.numerator
-                if numerator.system__ext is None or not any(
-                    [
-                        ext.url == DATA_ABSENT_REASON_EXT
-                        for ext in numerator.system__ext.extension
-                    ]
-                ):
+                if numerator.system is not None:
                     ingredient_strength += str(numerator.system)
 
-                if numerator.code__ext is None or not any(
-                    [
-                        ext.url == DATA_ABSENT_REASON_EXT
-                        for ext in numerator.code__ext.extension
-                    ]
-                ):
+                if numerator.code is not None:
                     ingredient_strength += str(numerator.code)
 
                 ingredient_strength += str(numerator.value)
                 if ing.strength.denominator:
                     denominator = ing.strength.denominator
 
-                    if denominator.system__ext is None or not any(
-                        [
-                            ext.url == DATA_ABSENT_REASON_EXT
-                            for ext in denominator.system__ext.extension
-                        ]
-                    ):
+                    if denominator.system is not None:
                         ingredient_strength += str(denominator.system)
 
-                    if denominator.code__ext is None or not any(
-                        [
-                            ext.url == DATA_ABSENT_REASON_EXT
-                            for ext in denominator.code__ext.extension
-                        ]
-                    ):
+                    if denominator.code is not None:
                         ingredient_strength += str(denominator.code)
 
                     ingredient_strength += str(denominator.value)
 
-            ingredient_value = ingredient_code + ingredient_text + ingredient_strength
+            ####
+            # MedicationIngredientDarreichungsformExtension on ingredient
+            # IF present: Trim + ToLower
+            ###
+            ingredient_darreichungsform = ""
+            if ing.extension:
+                for ext in ing.extension:
+                    if (
+                        ext.url == MEDICATION_INGREDIENT_DARREICHUNGSFORM_EXTENSION_URL
+                        and ext.valueString
+                    ):
+                        ingredient_darreichungsform += (
+                            ext.valueString.replace(" ", "").lower()
+                        )
+
+            ingredient_value = (
+                ingredient_code
+                + ingredient_text
+                + ingredient_strength
+                + ingredient_darreichungsform
+            )
             ingredients.append(ingredient_value)
 
     # Sort the ingredients to ensure consistent order
@@ -156,12 +209,17 @@ def generate_hash(medication):
     sub_hashes.sort()
 
     ###
-    # EPAMedicationUniqueIdentifier = hash.sha256(Code, CodeText, Form, Ingredient_1 + Strength_1, Ingredient_2 + Strength_2, ..., Ingredient_N + Strength_N, Extensions)
+    # EPAMedicationUniqueIdentifier = hash.sha256(
+    #   Code, CodeText, Form, Manufacturer, Amount,
+    #   Ingredient_1 + Strength_1, ..., Ingredient_N + Strength_N,
+    #   Contained, Extensions)
     ###
     value_for_hash = (
         code
         + code_text
         + form
+        + manufacturer
+        + amount
         + "".join(ingredients)
         + "".join(sub_hashes)
         + "".join(extensions)

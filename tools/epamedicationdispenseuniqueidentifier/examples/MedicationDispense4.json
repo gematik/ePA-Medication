@@ -1,0 +1,69 @@
+{
+  "resourceType": "MedicationDispense",
+  "id": "d1e2f3a4-6b7c-4d8e-9f0a-1b2c3d4e5f60",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-04-10T11:45:00.000Z",
+    "profile": [
+      "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense"
+    ]
+  },
+  "extension": [
+    {
+      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension",
+      "valueIdentifier": {
+        "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
+        "value": "160.100.000.000.007.24_20261101"
+      }
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/epa-dispense-unique-identifier",
+      "value": "50A45E127543A935CCA8025C2513541A6678E9D107029C3A2F1296488D191DED"
+    },
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier",
+      "value": "1da91bd3-d5cb-459b-a270-32fad7d5d5d5_160.100.000.000.007.24"
+    }
+  ],
+  "status": "completed",
+  "category": {
+    "coding": [
+      {
+        "system": "https://gematik.de/fhir/terminology/CodeSystem/ti-medication-dispense-category-cs",
+        "code": "prescription",
+        "display": "Verschreibungspflichtige Abgabe"
+      }
+    ]
+  },
+  "medicationReference": {
+    "reference": "Medication/fc7b28e8-05ac-4ac8-86d7-7677d9c6134e"
+  },
+  "subject": {
+    "identifier": {
+      "system": "http://fhir.de/sid/gkv/kvid-10",
+      "value": "X110411319"
+    }
+  },
+  "performer": [
+    {
+      "actor": {
+        "identifier": {
+          "system": "https://gematik.de/fhir/sid/telematik-id",
+          "value": "9-2.58.00000023"
+        },
+        "display": "gematik Apotheke"
+      }
+    }
+  ],
+  "authorizingPrescription": [
+    {
+      "reference": "MedicationRequest/4dd6f19d-002c-44ac-ae2f-3c9d08ad35b8"
+    }
+  ],
+  "whenHandedOver": "2026-04-10",
+  "substitution": {
+    "wasSubstituted": false
+  }
+}

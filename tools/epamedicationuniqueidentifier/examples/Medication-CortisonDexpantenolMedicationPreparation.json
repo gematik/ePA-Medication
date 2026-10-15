@@ -9,7 +9,7 @@
   "identifier": [
     {
       "system": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier",
-      "value": "180291C4D2C98958D3D43DB15EE990C1D9271B32C109C02BB96A3305DE317B9F"
+      "value": "DFAEA584823BCBACC97BF7B14B81E9696C7D9001DC7E79712AE09E83BBA3AF73"
     }
   ],
   "extension": [
