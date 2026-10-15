@@ -1,0 +1,76 @@
+{
+  "resourceType": "MedicationDispense",
+  "id": "b7d2e6f4-3c8a-4b1d-8f2e-6a9c0d1e2f3a",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-02-20T09:30:00.000Z",
+    "profile": [
+      "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-dispense"
+    ]
+  },
+  "extension": [
+    {
+      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/rx-prescription-process-identifier-extension",
+      "valueIdentifier": {
+        "system": "https://gematik.de/fhir/epa-medication/sid/rx-prescription-process-identifier",
+        "value": "160.100.000.000.019.82_20251202"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-MedicationDispense.renderedDosageInstruction",
+      "valueMarkdown": "1-0-1-0, zu den Mahlzeiten mit ausreichend Flüssigkeit einnehmen"
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/epa-dispense-unique-identifier",
+      "value": "1D393765707249524A3A7B84CC8D94E23DFC3EFA67E67FC8C8598DAD18CB239A"
+    },
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/rx-originator-process-identifier",
+      "value": "ad9696d3-bc6b-4033-bdd7-14b934dc4426_160.100.000.000.019.82"
+    }
+  ],
+  "status": "completed",
+  "category": {
+    "coding": [
+      {
+        "system": "https://gematik.de/fhir/terminology/CodeSystem/ti-medication-dispense-category-cs",
+        "code": "non-prescription",
+        "display": "Rezeptfreie Abgabe"
+      }
+    ]
+  },
+  "medicationReference": {
+    "identifier": {
+      "system": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier",
+      "value": "ED05C006106C2567C77201B750E0BC503C09EA7DDEDBAAEF20F58992867BAE12"
+    }
+  },
+  "subject": {
+    "identifier": {
+      "system": "http://fhir.de/sid/gkv/kvid-10",
+      "value": "X110411319"
+    }
+  },
+  "performer": [
+    {
+      "actor": {
+        "identifier": {
+          "system": "https://gematik.de/fhir/sid/telematik-id",
+          "value": "9-2.58.00000023"
+        },
+        "display": "gematik Apotheke"
+      }
+    }
+  ],
+  "authorizingPrescription": [
+    {
+      "reference": "MedicationRequest/0e7f16e4-d879-4a2c-8292-41c55201bbdd"
+    }
+  ],
+  "whenHandedOver": "2026-02-20",
+  "substitution": {
+    "wasSubstituted": true
+  }
+}

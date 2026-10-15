@@ -1,0 +1,46 @@
+{
+  "resourceType": "Medication",
+  "id": "fc7b28e8-05ac-4ac8-86d7-7677d9c6134e",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2026-04-10T08:00:00.000Z",
+    "profile": [
+      "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication"
+    ]
+  },
+  "extension": [
+    {
+      "url": "https://gematik.de/fhir/epa-medication/StructureDefinition/epa-medication-type-extension",
+      "valueCoding": {
+        "code": "781405001",
+        "system": "http://snomed.info/sct",
+        "display": "Medicinal product package"
+      }
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://gematik.de/fhir/epa-medication/sid/epa-medication-unique-identifier",
+      "value": "8F11F48B66792950F131CA10E5A059EC4E7CCD9F07B3AA6B2DBE8FC1CBFD605E"
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/ifa/pzn",
+        "code": "03879429",
+        "display": "Sumatriptan-1A Pharma 100mg Tabletten"
+      }
+    ]
+  },
+  "status": "active",
+  "form": {
+    "coding": [
+      {
+        "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_DARREICHUNGSFORM",
+        "code": "TAB",
+        "display": "Tabletten"
+      }
+    ]
+  }
+}

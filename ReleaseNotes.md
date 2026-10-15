@@ -1,6 +1,10 @@
 <img align="right" width="250" height="47" src="images/Gematik_Logo_Flag_With_Background.png"/> <br/>    
  
 # Release Notes ePA Medication
+## Release ePA-27 3.2.0-0
+ePA 27 RC
+### changes
+- added examples and extended hash algorithm in ./tools
 ## Release 3.1.3-4
 ### changes
 - no changes compared to Release 3.1.3-3
